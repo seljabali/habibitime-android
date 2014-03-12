@@ -1,0 +1,7 @@
+Set A PLUS Set B(SS)*P*S, 19$7778
+Set A EQ Set B(EBE)*P*S, 24$257
+Set A AC Set B+(EBE)*P*S, 24$691
+Boolean A EQ Boolean B(EBE)*P*S, 24$1964
+Boolean A NE Boolean B(EC)*P*S, 94$2902
+Date A LT Date B(EBE)*P*S, 24$4123
+Date A LE Date B(EBE)*P*S, 24$4713

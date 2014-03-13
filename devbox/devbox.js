@@ -36,17 +36,17 @@ function copy(str) {
         document.execCommand('SelectAll');
         document.execCommand('copy', false, null);
         document.body.removeChild(copyDiv);
+        window.close();
 }
 
 
 function handleCopyClick(iDiv, i, id, name) {
-    var innerDiv = document.createElement('div');
+    var innerDiv = document.createElement('button');
     innerDiv.innerHTML = name;
     innerDiv.addEventListener("click", function() {
       copy(id);
     });
 
-    // The variable iDiv is still good... Just append to it.
     iDiv.appendChild(innerDiv); 
 }
 

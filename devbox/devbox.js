@@ -39,6 +39,17 @@ function copy(str) {
 }
 
 
+function handleCopyClick(iDiv, i, id, name) {
+    var innerDiv = document.createElement('div');
+    innerDiv.innerHTML = name;
+    innerDiv.addEventListener("click", function() {
+      copy(id);
+    });
+
+    // The variable iDiv is still good... Just append to it.
+    iDiv.appendChild(innerDiv); 
+}
+
 function loadPage() {
   var xoMethods = loadXOMethods();
   for (var i=0; i<xoMethods.length;i++) {
@@ -48,19 +59,14 @@ function loadPage() {
     iDiv.id = 'block'+i.toString();
     iDiv.className = 'block';
 
-    // Create the inner div before appending to the body
-    var innerDiv = document.createElement('div');
-    innerDiv.className = 'block-2';
-    innerDiv.innerHTML = name;
-    innerDiv.addEventListener("click", function(){copy(id)});
+    handleCopyClick(iDiv, i, id, name);
 
-    // The variable iDiv is still good... Just append to it.
-    iDiv.appendChild(innerDiv); 
-
+    
     // Then append the whole thing onto the body
     document.getElementsByTagName('body')[0].appendChild(iDiv);
   }
 }
+
 
 document.addEventListener('DOMContentLoaded', function () {
   loadPage();

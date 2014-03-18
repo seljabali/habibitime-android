@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "DevBox",
-  "description": "Easy access to common library XO functions.",
+  "description": "Provides easy access to common library XO functions.",
   // "homepage_url": "https://confluence.workday.com/TBD",
   "version": "1.0",
   "icons": {

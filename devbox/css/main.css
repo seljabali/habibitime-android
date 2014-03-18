@@ -1,4 +1,5 @@
 body {
-    min-width: 700px;
-    overflow-x: hidden;
+    min-width: 600px;
+    background:lightblue !important;
 }
+/*rgb(245,160,26)*/

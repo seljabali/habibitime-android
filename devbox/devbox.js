@@ -106,6 +106,7 @@ function handleCopyClick(iDiv, id, name) {
     innerDiv.addEventListener("click", function() {
       copy(id);
     });
+    innerDiv.setAttribute("style", "margin-left:5px; margin-bottom:2px");
     iDiv.appendChild(innerDiv);
 }
 

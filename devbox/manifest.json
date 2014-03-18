@@ -1,26 +1,14 @@
 {
   "manifest_version": 2,
-
   "name": "DevBox",
   "description": "DevBox",
   "version": "1.0",
-  
- //  "commands": {
-	// "_execute_browser_action": {
-	// 	"suggested_key": {
-	// 		"default": "Alt+W"
-	// 	}
-	// }
- //  },
-
   "permissions": [
 	"cookies",
 	"tabs",
 	"notifications",
   "clipboardRead",
   "clipboardWrite",
-  "https://api-suv-test.megaleo.com/",
-	"https://suv.megaleo.com/*",
 	"http://ajax.googleapis.com/ajax/*"
   ],
   "browser_action": {

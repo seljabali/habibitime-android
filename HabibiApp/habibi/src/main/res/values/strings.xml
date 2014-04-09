@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">HabibiApp</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="app_name">7abibiApp</string>
+    <string name="title_section_flirt">Flirt</string>
+    <string name="title_section_meetup">Meetup</string>
+    <string name="title_section_mood">Mood</string>
+    <string name="title_section_answers">Answers</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>

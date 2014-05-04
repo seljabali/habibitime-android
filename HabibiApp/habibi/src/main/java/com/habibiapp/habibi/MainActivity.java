@@ -8,10 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 import com.habibiapp.habibi.fragments.*;
-
-
 import com.habibiapp.habibi.fragments.NavigationDrawerFragment;
-
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
@@ -25,14 +22,17 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
         navigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         title = getTitle();
-
-        // Set up the drawer.
         navigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        loadPhrases();
+    }
+
+    public void loadPhrases(){
+
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))

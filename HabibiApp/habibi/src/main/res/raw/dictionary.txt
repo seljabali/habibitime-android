@@ -1,0 +1,34 @@
+Flirt, I, I want you, Ana beddiyak, , , all, m, all
+Flirt, I, I admire you, Ana mo'jabeh feek, Ana mo3jabeh feek, , f, m, all
+Flirt, I, I love you
+Flirt, I, I'm in love with you
+Flirt, You, You're cute
+Flirt, You, You're hot
+Flirt, Question, Why are you so cute?
+Flirt, Question, Why aren't we kissing now?
+Flirt, Question, How are you this pretty?
+Flirt, Question, How are you single?
+Meetup, I, I want to see you
+Meetup, I, I can't wait to see you
+Meetup, I, I would love to see you
+Meetup, I, I want to call you
+Meetup, I, We should meet up!
+Meetup, You, You should call me
+Meetup, Question, You want to meetup?
+Meetup, Question, Do you want to see my place?
+Mood, I, I'm sad
+Mood, I, I'm missing you
+Mood, I, I'm lonley
+Mood, I, I'm really happy
+Mood, I, I'm so glad you came!
+Mood, You, You're happy
+Mood, You, You're a cool
+Mood, Question, How are you feeling?
+Mood, Question, How are you today?
+Mood, Question, How was this weekend?
+Answer, Yes
+Answer, Of course
+Answer, No
+Answer, Maybe
+Answer, Definitely
+Answer, You bet!

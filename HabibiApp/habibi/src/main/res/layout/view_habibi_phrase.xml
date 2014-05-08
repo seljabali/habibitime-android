@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/arabic_phrase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/string_size_xlarge"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/arabizi_phrase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/string_size_xlarge"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/properbizi_phrase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/string_size_xlarge"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

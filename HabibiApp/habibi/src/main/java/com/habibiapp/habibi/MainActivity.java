@@ -1,91 +1,63 @@
 package com.habibiapp.habibi;
 
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.support.v4.widget.DrawerLayout;
-import com.habibiapp.habibi.fragments.*;
-import com.habibiapp.habibi.fragments.NavigationDrawerFragment;
+import com.habibiapp.habibi.fragments.ViewFirstCategoriesFragment;
+import com.habibiapp.habibi.fragments.ViewListOfPhrasesFragment;
+import com.habibiapp.habibi.fragments.ViewPhraseFragment;
+import com.habibiapp.habibi.fragments.ViewSecondCategoriesFragment;
+import com.habibiapp.habibi.models.HabibiPhrase;
 
-public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
-
-    private NavigationDrawerFragment navigationDrawerFragment;
-    private CharSequence title;
+public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        navigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        title = getTitle();
-        navigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+        setHeaderTitle(null, null, null);
 
-        loadPhrases();
+        ViewFirstCategoriesFragment fragment = ViewFirstCategoriesFragment.newInstance();
+        getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.fragmentLayoutContainer, fragment, ViewFirstCategoriesFragment.TAG)
+                                    .commit();
     }
 
-    public void loadPhrases(){
-
-    }
-
-    @Override
-    public void onNavigationDrawerItemSelected(int position) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+    public void launchSecondaryCategoryFragment(HabibiPhrase.CategoryFirst categoryFirst) {
+        ViewSecondCategoriesFragment fragment = ViewSecondCategoriesFragment.newInstance(categoryFirst);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentLayoutContainer, fragment, ViewFirstCategoriesFragment.TAG)
+                .addToBackStack(ViewFirstCategoriesFragment.TAG)
                 .commit();
     }
 
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                title = getString(R.string.title_section_flirt);
-                break;
-            case 2:
-                title = getString(R.string.title_section_meetup);
-                break;
-            case 3:
-                title = getString(R.string.title_section_mood);
-                break;
-            case 4:
-                title = getString(R.string.title_section_answers);
-                break;
+    public void launchListOfPhrasesFragment(HabibiPhrase.CategoryFirst categoryFirst, HabibiPhrase.CategorySecond categorySecond) {
+        ViewListOfPhrasesFragment fragment = ViewListOfPhrasesFragment.newInstance(categoryFirst, categorySecond);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentLayoutContainer, fragment, ViewListOfPhrasesFragment.TAG)
+                .addToBackStack(ViewListOfPhrasesFragment.TAG)
+                .commit();
+    }
+
+    public void launchPhraseViewFragment(HabibiPhrase habibiPhrase) {
+        ViewPhraseFragment fragment = ViewPhraseFragment.newInstance(habibiPhrase);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentLayoutContainer, fragment, ViewPhraseFragment.TAG)
+                .addToBackStack(ViewPhraseFragment.TAG)
+                .commit();
+    }
+
+    public void setHeaderTitle(HabibiPhrase.CategoryFirst categoryFirst, HabibiPhrase.CategorySecond categorySecond, String phrase){
+        this.setTitle(getResources().getString(R.string.app_name));
+        if (categoryFirst != null) {
+            this.setTitle(this.getTitle() + ">" + categoryFirst.name());
+        }
+        if (categorySecond != null) {
+            this.setTitle(this.getTitle() + ">" + categorySecond.name());
+        }
+        if (phrase != null) {
+            this.setTitle(this.getTitle() + ">" + phrase);
         }
     }
 
-    public void restoreActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(title);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (!navigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.main, menu);
-            restoreActionBar();
-            return true;
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

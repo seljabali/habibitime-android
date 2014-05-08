@@ -1,91 +1,47 @@
 package com.habibiapp.habibi.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by samsoom on 4/9/14.
  */
-public class EnglishPhrase extends Phrase {
-    private ArabicPhrase arabicPhrase;
-    private ProperBiziPhrase properBiziPhrase;
-    private ArabiziPhrase arabiziPhrase;
-    private CategoryFirst categoryFirst;
-    private CategorySecond categorySecond;
-    private Person fromPerson;
-    private Person toPerson;
-    private Dialect dialect;
-
-    public EnglishPhrase (String arabicPhrase, String properBiziPhrase,
-                            String arabiziPhrase, String phrase,
-                            CategoryFirst firstCategory, CategorySecond secondCategory) {
-        super(phrase);
-        this.arabicPhrase = new ArabicPhrase(arabicPhrase);
-        this.properBiziPhrase = new ProperBiziPhrase(properBiziPhrase);
-        this.arabiziPhrase = new ArabiziPhrase(arabiziPhrase);
-        this.categoryFirst = firstCategory;
-        this.categorySecond = secondCategory;
-    }
-
-    public EnglishPhrase (String phrase, CategoryFirst categoryFirst) {
-        super(phrase);
-        this.categoryFirst = categoryFirst;
-    }
+public class EnglishPhrase implements Parcelable {
+    private String phrase;
 
     public EnglishPhrase (String phrase) {
-        super(phrase);
+        this.phrase = phrase;
     }
 
-    public String getArabicPhrase(){
-        return arabicPhrase.getPhrase();
+    public String getPhrase() {
+        return phrase;
     }
 
-    public String getArabiziPhrase(){
-        return arabiziPhrase.getPhrase();
+
+    protected EnglishPhrase(Parcel in) {
+        phrase = in.readString();
     }
 
-    public String getProperPhrase() { return properBiziPhrase.getPhrase();}
-
-    public CategoryFirst getCategoryFirst() { return this.categoryFirst; }
-
-    public CategorySecond getCategorySecond() { return this.categorySecond; }
-
-    public void setArabicPhrase(ArabicPhrase arabicPhrase) {
-        this.arabicPhrase = arabicPhrase;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public void setArabiziPhrase(ArabiziPhrase arabiziPhrase) { this.arabiziPhrase = arabiziPhrase; }
-
-    public void setProperBiziPhrase(ProperBiziPhrase properBiziPhrase) { this.properBiziPhrase = properBiziPhrase; }
-
-    public void setAdresserPerson(Person fromPerson) {
-        this.fromPerson = fromPerson;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(phrase);
     }
 
-    public void setAdresseePerson(Person toPerson) {
-        this.toPerson = toPerson;
-    }
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<EnglishPhrase> CREATOR = new Parcelable.Creator<EnglishPhrase>() {
+        @Override
+        public EnglishPhrase createFromParcel(Parcel in) {
+            return new EnglishPhrase(in);
+        }
 
-    public void setDialect(Dialect dialect) {
-        this.dialect = dialect;
-    }
-
-    public boolean isEqualFirstCategory(CategoryFirst categoryFirst) { return this.categoryFirst == categoryFirst; }
-    public boolean isEqualSecondCategory(CategorySecond categorySecond) { return this.categorySecond == categorySecond; }
-    public boolean isEqualFromGender(Person fromGender) { return this.fromPerson == fromGender; }
-    public boolean isEqualToGender(Person toGender) { return this.toPerson == toGender; }
-
-    public enum
-    {
-        Flirt, Meetup, Mood, Answers
-    }
-
-    public enum CategorySecond {
-        I, You, Question
-    }
-
-    public enum Person {
-        All, Male, Female, MalePlural, FemalePlural
-    }
-
-    public enum Dialect {
-        All, Jordanian, Saudi, Egyptian, Lebanese
-    }
+        @Override
+        public EnglishPhrase[] newArray(int size) {
+            return new EnglishPhrase[size];
+        }
+    };
 }

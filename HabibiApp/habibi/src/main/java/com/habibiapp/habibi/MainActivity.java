@@ -48,15 +48,14 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void setHeaderTitle(HabibiPhrase.CategoryFirst categoryFirst, HabibiPhrase.CategorySecond categorySecond, String phrase){
-        this.setTitle(getResources().getString(R.string.app_name));
         if (categoryFirst != null) {
-            this.setTitle(this.getTitle() + ">" + categoryFirst.name());
+            this.setTitle(">" + categoryFirst.name());
         }
         if (categorySecond != null) {
             this.setTitle(this.getTitle() + ">" + categorySecond.name());
         }
         if (phrase != null) {
-            this.setTitle(this.getTitle() + ">" + phrase);
+            this.setTitle(phrase);
         }
     }
 

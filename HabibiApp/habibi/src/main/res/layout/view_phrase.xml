@@ -8,6 +8,10 @@
         android:id="@+id/phrase_view_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="@dimen/string_size_large"/>
+        android:textSize="@dimen/string_size_large"
+        android:paddingLeft="@dimen/single_space"
+        android:paddingRight="@dimen/single_space"
+        android:paddingTop="@dimen/double_space"
+        android:paddingBottom="@dimen/double_space"/>
 
 </LinearLayout>

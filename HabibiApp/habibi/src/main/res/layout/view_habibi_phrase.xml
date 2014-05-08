@@ -10,20 +10,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/string_size_xlarge"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:paddingLeft="@dimen/single_space"
+        android:paddingRight="@dimen/single_space"
+        android:paddingTop="@dimen/double_space"
+        android:paddingBottom="@dimen/double_space"/>
 
     <TextView
         android:id="@+id/arabizi_phrase"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/string_size_xlarge"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:paddingLeft="@dimen/single_space"
+        android:paddingBottom="@dimen/double_space"/>
 
     <TextView
         android:id="@+id/properbizi_phrase"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/string_size_xlarge"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:paddingLeft="@dimen/single_space"
+        android:paddingBottom="@dimen/double_space"/>
 
 </LinearLayout>

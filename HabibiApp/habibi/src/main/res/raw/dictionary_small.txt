@@ -1,0 +1,3 @@
+Flirt, I, I want you., Ana beddiyak, , أنا بدياك , All, Male, All
+Flirt, I, I admire you., Ana mo'jabeh feek, Ana mo3jabeh feek, أنا معجبه فيك, Female, Male, All
+Flirt, You, You're cute., Inta ikteer helo, Inta ikteer 7elo, إنت إكتير حلو, All, Male, All

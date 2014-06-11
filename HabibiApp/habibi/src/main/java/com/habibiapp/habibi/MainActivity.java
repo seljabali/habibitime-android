@@ -1,6 +1,6 @@
 package com.habibiapp.habibi;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -8,7 +8,7 @@ import com.habibiapp.habibi.models.HabibiPhrase;
 
 import java.util.List;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     private HabibiPhraseDataSource habibiPhraseDataSource;
 
@@ -36,3 +36,11 @@ public class MainActivity extends ActionBarActivity {
     }
 
 }
+
+//    public void launchSecondaryCategoryFragment(HabibiPhrase.CategoryFirst categoryFirst) {
+//        ViewSecondCategoriesFragment fragment = ViewSecondCategoriesFragment.newInstance(categoryFirst);
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.fragmentLayoutContainer, fragment, ViewFirstCategoriesFragment.TAG)
+//                .addToBackStack(ViewFirstCategoriesFragment.TAG)
+//                .commit();
+//    }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/phrase_view_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/string_size_large"
+        android:paddingLeft="@dimen/single_space"
+        android:paddingRight="@dimen/single_space"
+        android:paddingTop="@dimen/double_space"
+        android:paddingBottom="@dimen/double_space"/>
+
+</LinearLayout>

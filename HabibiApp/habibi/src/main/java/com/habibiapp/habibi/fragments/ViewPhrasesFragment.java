@@ -8,25 +8,22 @@
 //import android.widget.ListView;
 //
 //import com.habibiapp.habibi.MainActivity;
-//import com.habibiapp.habibi.PhraseBuilder;
-//import com.habibiapp.habibi.PhraseManager;
-//import com.habibiapp.habibi.PhrasesAdapter;
 //import com.habibiapp.habibi.R;
 //import com.habibiapp.habibi.models.HabibiPhrase;
 //
 //import java.util.List;
 //
 ///**
-// * Created by habibi on 5/8/14.
-// */
-//public class ViewListOfPhrasesFragment extends Fragment {
-//    public static String TAG = ViewListOfPhrasesFragment.class.getSimpleName();
+//* Created by habibi on 5/8/14.
+//*/
+//public class ViewPhrasesFragment extends Fragment {
+//    public static String TAG = ViewPhrasesFragment.class.getSimpleName();
 //    private static final String CATEGORY_FIRST_KEY = "category_first";
 //    private static final String CATEGORY_SECOND_KEY = "category_second";
 //    private MainActivity mainActivity;
 //
-//    public static ViewListOfPhrasesFragment newInstance(HabibiPhrase.CategoryFirst categoryFirst, HabibiPhrase.CategorySecond categorySecond) {
-//        ViewListOfPhrasesFragment fragment = new ViewListOfPhrasesFragment();
+//    public static ViewPhrasesFragment newInstance(HabibiPhrase.CategoryFirst categoryFirst, HabibiPhrase.CategorySecond categorySecond) {
+//        ViewPhrasesFragment fragment = new ViewPhrasesFragment();
 //        Bundle args = new Bundle();
 //        args.putSerializable(CATEGORY_FIRST_KEY, categoryFirst);
 //        args.putSerializable(CATEGORY_SECOND_KEY, categorySecond);

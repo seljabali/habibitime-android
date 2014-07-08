@@ -12,8 +12,8 @@ import com.habibiapp.habibi.MySQLHelper;
  * Created by habibi on 6/12/14.
  */
 public class GenderDataSource {
-    public static final int MALE = 0;
-    public static final int FEMALE = 1;
+    public static final int MALE = 1;
+    public static final int FEMALE = 2;
 
 
     // Database fields
@@ -38,7 +38,8 @@ public class GenderDataSource {
         ContentValues values = new ContentValues();
         values.put(MySQLHelper.COLUMN_GENDER_NAME, genderName);
         try {
-            database.insert(MySQLHelper.TABLE_GENDER, null, values);
+            long insertId = database.insert(MySQLHelper.TABLE_GENDER, null, values);
+            Log.v("Gender", genderName + " ID: " + Integer.toString((int)insertId));
         } catch (Exception e) {
             Log.e("SQL", "Gender: Error inserting " + values, e);
         }

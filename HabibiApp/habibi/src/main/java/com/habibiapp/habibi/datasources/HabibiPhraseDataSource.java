@@ -48,8 +48,11 @@ public class HabibiPhraseDataSource {
         long id = -1;
         try {
             id = database.insert(MySQLHelper.TABLE_HABIBI_PHRASE, null, values);
+            if (id == -1) {
+                Log.e("Add Habibi Phrase", "Couldn't add phrase for category: " + category.toString());
+            }
         } catch (Exception e) {
-            Log.e("SQL", "Habibi Phrase: Error inserting " + values, e);
+            Log.e("Add Habibi Phrase", "Habibi Phrase: Error inserting " + values, e);
         }
         return id;
     }

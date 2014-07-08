@@ -26,8 +26,8 @@ Questions, Do you love me?, بتحبني؟ , Bit-hib-ny? , Bit7ibny? , بتحب�
 Questions, Do you miss me?, مشتألي؟ , Mish-taa-ly? , Mishta2ly? , مشتائيلي؟ , Mish-taa-eely? , Mishta2eely? 
 Questions, Seriously?, عن جد؟ , Aan Jad? , 3an Jad? , عن جد؟ , Aan Jad? , 3an Jad? 
 Questions, What are you wearing?, شو لابس؟ , Shoo La-bis? , Shoo Labis? , شو لابسه؟ , Shoo Lab-seh? , Shoo Labseh? 
-Question, Do you want to be my lover?, بدك تكون حبيبي؟ , Bid-ak Ta-koon Habibi? , Biddak tkoon 7abibi? , بدك تكوني حبيبتي؟ , Bid-ik Ta-koony Habeebty? , Biddik Tkoony 7abeebty? 
-Questions, Will you marry me?, تتزوجني؟ , Tit-za-waj-ny?  Titzawajny? , تتزوجيني؟ , Tit-za-wa-jeeny? , Titzawajeeny? 
+Questions, Do you want to be my lover?, بدك تكون حبيبي؟ , Bid-ak Ta-koon Habibi? , Biddak tkoon 7abibi? , بدك تكوني حبيبتي؟ , Bid-ik Ta-koony Habeebty? , Biddik Tkoony 7abeebty? 
+Questions, Will you marry me?, تتزوجني؟ , Tit-za-waj-ny?,  Titzawajny? , تتزوجيني؟ , Tit-za-wa-jeeny? , Titzawajeeny? 
 Responses, Yes, نعم , Na-am , Na3am , نعم , Na-am , Na3am 
 Responses, No, لأ , Laah , La2 , لأ , Laah , La2 
 Responses, Definitely Not, طبعاً لأ , Tab-ahn Laah , Tab3an La2 , طبعاً لأ , Tab-ahn Laah , Tab3an La2 

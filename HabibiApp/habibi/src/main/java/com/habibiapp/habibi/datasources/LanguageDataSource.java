@@ -12,8 +12,8 @@ import com.habibiapp.habibi.MySQLHelper;
  * Created by habibi on 6/12/14.
  */
 public class LanguageDataSource {
-    public static final int ARABIC = 0;
-    public static final int ENGLISH = 1;
+    public static final int ARABIC = 1;
+    public static final int ENGLISH = 2;
 
 
     // Database fields
@@ -37,7 +37,8 @@ public class LanguageDataSource {
         ContentValues values = new ContentValues();
         values.put(MySQLHelper.COLUMN_LANGUAGE_NAME, languageName);
         try {
-            database.insert(MySQLHelper.TABLE_LANGUAGE, null, values);
+            long insertId = database.insert(MySQLHelper.TABLE_LANGUAGE, null, values);
+            Log.v("LanguageName", languageName + " ID: " + Integer.toString((int)insertId));
         } catch (Exception e) {
             Log.e("SQL", "Language: Error inserting " + values, e);
         }

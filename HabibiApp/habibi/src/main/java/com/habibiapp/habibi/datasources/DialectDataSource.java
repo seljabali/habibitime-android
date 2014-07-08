@@ -13,7 +13,7 @@ import com.habibiapp.habibi.models.Dialect;
  * Created by habibi on 6/12/14.
  */
 public class DialectDataSource {
-    public static final int JORDAN = 0;
+    public static final int JORDAN = 1;
 
     // Database fields
     private SQLiteDatabase database;
@@ -36,7 +36,8 @@ public class DialectDataSource {
         ContentValues values = new ContentValues();
         values.put(MySQLHelper.COLUMN_DIALECT_NAME, dialectName);
         try {
-            database.insert(MySQLHelper.TABLE_DIALECT, null, values);
+            long insertId = database.insert(MySQLHelper.TABLE_DIALECT, null, values);
+            Log.v("Dialect", dialectName + " ID: " + Integer.toString((int)insertId));
         } catch (Exception e) {
             Log.e("SQL", "Dialect: Error inserting " + values, e);
         }

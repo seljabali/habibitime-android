@@ -19,6 +19,7 @@ import com.habibiapp.habibi.models.Gender;
 import com.habibiapp.habibi.models.Language;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -31,8 +32,10 @@ public class MySQLHelper extends SQLiteOpenHelper {
 
     //HABIBI PHRASE
     public static final String TABLE_HABIBI_PHRASE = "habibi_phrase";
+    public static final String COLUMN_CATEGORY = "category";
+    public static final String COLUMN_CATEGORY_INSERT = "category text";
 
-    //HABIBI PHRASE
+    //PHRASE
     public static final String TABLE_PHRASE = "phrase";
     public static final String COLUMN_HABIBI_PHRASE = "habibi_phrase_id";
     public static final String COLUMN_HABIBI_PHRASE_INSERT = "habibi_phrase_id integer, ";
@@ -50,8 +53,6 @@ public class MySQLHelper extends SQLiteOpenHelper {
     public static final String COLUMN_PHONETIC_SPELLING_INSERT = "phonetic_spelling text, ";
     public static final String COLUMN_PROPER_PHONTETIC_SPELLING = "proper_phonetic_spelling";
     public static final String COLUMN_PROPER_PHONTETIC_SPELLING_INSERT = "proper_phonetic_spelling text";
-    public static final String COLUMN_CATEGORY = "category";
-    public static final String COLUMN_CATEGORY_INSERT = "category text";
 
     //LANGUAGE
     public static final String TABLE_LANGUAGE = "language";
@@ -111,7 +112,7 @@ public class MySQLHelper extends SQLiteOpenHelper {
             + "("
             +       COLUMN_ID_INSERT
             +       COLUMN_GENDER_NAME_INSERT
-            +");";
+            + ");";
 
     private static final String CREATE_CATEGORY =
             CREATE_TABLE + TABLE_CATEGORY
@@ -224,10 +225,12 @@ public class MySQLHelper extends SQLiteOpenHelper {
                 line = buffreader.readLine();
                 addPhrase(habibiPhraseDataSource, phraseDataSource, line);
             } while (line != null);
+            inputreader.close();
+            buffreader.close();
             habibiPhraseDataSource.close();
             phraseDataSource.close();
         } catch (Exception e) {
-            Log.v("SQL", "Adding words, fack!");
+            Log.e("Loading Database", "Couldn't add words: " + e.toString());
         } finally {
             habibiPhraseDataSource.close();
             phraseDataSource.close();
@@ -237,26 +240,35 @@ public class MySQLHelper extends SQLiteOpenHelper {
     private void addPhrase(HabibiPhraseDataSource habibiPhraseDataSource, PhraseDataSource phraseDataSource, String csvLine){
         String[] line = csvLine.split(", ");
 
-        //Create Habibi Phrase
-        Category category = Category.getCategoryFromName(line[CATEGORY].trim());
-        long habibiId = habibiPhraseDataSource.createHabibiPhrase(category);
-
-        if (habibiId == -1) {
+        if (line.length != 8) {
+            Log.e("add phrase",  "we've got a problem: " + line.length + " with: " + csvLine);
+            for (int i = 0; i < line.length; i++) {
+                Log.e("add phrase", line[i]);
+            }
             return;
         }
-        //Create English Phrase
-        phraseDataSource.createPhrase(habibiId, Language.ENGLISH.getId(),
-                -1, -1, -1, line[ENGLISH], null, null);
 
-        //Create Arabic Phrase Male
-        phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
-                Dialect.JORDAN.getId(), Gender.MALE.getId(), Gender.MALE.getId(),
-                line[ARABIC_M], line[BIZI_M], line[BIZIPROPER_M]);
+        try {
+            //Create Habibi Phrase
+            Category category = Category.getCategoryFromName(line[CATEGORY].trim());
+            long habibiId = habibiPhraseDataSource.createHabibiPhrase(category);
 
-        //Create Arabic Phrase Female
-        phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
-                Dialect.JORDAN.getId(), Gender.FEMALE.getId(), Gender.FEMALE.getId(),
-                line[ARABIC_F], line[BIZI_F], line[BIZIPROPER_F]);
+            //Create English Phrase
+            phraseDataSource.createPhrase(habibiId, Language.ENGLISH.getId(),
+                    -1, -1, -1, line[ENGLISH], null, null);
+
+            //Create Arabic Phrase Male
+            phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
+                    Dialect.JORDAN.getId(), Gender.MALE.getId(), Gender.MALE.getId(),
+                    line[ARABIC_M], line[BIZI_M], line[BIZIPROPER_M]);
+
+            //Create Arabic Phrase Female
+            phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
+                    Dialect.JORDAN.getId(), Gender.FEMALE.getId(), Gender.FEMALE.getId(),
+                    line[ARABIC_F], line[BIZI_F], line[BIZIPROPER_F]);
+        } catch (Exception e) {
+            Log.e("Add phrase", "Phrase add fail!" + e.toString());
+        }
 
     }
 

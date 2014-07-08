@@ -1,5 +1,7 @@
 package com.habibiapp.habibi.models;
 
+import android.util.Log;
+
 import com.habibiapp.habibi.datasources.CategoryDataSource;
 
 /**
@@ -7,8 +9,8 @@ import com.habibiapp.habibi.datasources.CategoryDataSource;
  */
 public class Category {
     public static final Category MOOD = new Category(CategoryDataSource.MOOD, "Mood");
-    public static final Category QUESTION = new Category(CategoryDataSource.QUESTION, "Question");
-    public static final Category ANSWER = new Category(CategoryDataSource.ANSWER, "Answer");
+    public static final Category QUESTION = new Category(CategoryDataSource.QUESTION, "Questions");
+    public static final Category ANSWER = new Category(CategoryDataSource.ANSWER, "Responses");
     public static final Category FLIRT = new Category(CategoryDataSource.FLIRT, "Flirt");
 
     private int id;
@@ -21,7 +23,7 @@ public class Category {
         this.categoryName = name;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
     public void setId(int id) {
@@ -47,6 +49,7 @@ public class Category {
             case CategoryDataSource.FLIRT:
                 return FLIRT;
             default:
+                Log.e("Category", "Couldn't getCategoryFromColumn()");
                 return null;
         }
     }
@@ -64,6 +67,7 @@ public class Category {
         if (FLIRT.getCategoryName().equals(name)) {
             return FLIRT;
         }
+        Log.e("Category", "Couldn't find category: " + name);
         return null;
     }
 

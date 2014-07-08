@@ -8,36 +8,38 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.habibiapp.habibi.fragments.ViewPhraseFragment;
 import com.habibiapp.habibi.fragments.ViewPhrasesFragment;
-import com.habibiapp.habibi.models.Category;
+import com.habibiapp.habibi.models.Phrase;
+
 import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by habibi on 6/22/14.
  */
-public class CategoryAdapter extends ArrayAdapter<Category> {
+public class PhraseAdapter extends ArrayAdapter<Phrase> {
 
-    HashMap<Category, Integer> idMap = new HashMap<Category, Integer>();
+    HashMap<Phrase, Integer> idMap = new HashMap<Phrase, Integer>();
     private Activity activity;
 
-    public CategoryAdapter(Context context, int resource, List<Category> categories) {
-        super(context, resource, categories);
+    public PhraseAdapter(Context context, int resource, List<Phrase> phrases) {
+        super(context, resource, phrases);
         this.activity = (Activity)context;
-        for (int i = 0; i < categories.size(); i++) {
-            idMap.put(categories.get(i), i);
+        for (int i = 0; i < phrases.size(); i++) {
+            idMap.put(phrases.get(i), i);
         }
     }
 
     @Override
     public long getItemId(int position) {
-        Category item = getItem(position);
+        Phrase item = getItem(position);
         return idMap.get(item);
     }
 
     @Override
     public boolean hasStableIds() {
-            return true;
+        return true;
     }
 
     @Override
@@ -45,20 +47,20 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
         View view = convertView;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.view_category, null);
+            view = inflater.inflate(R.layout.view_phrase, null);
         }
 
-        final Category category = getItem(position);
-        if (category!= null) {
-            TextView itemView = (TextView) view.findViewById(R.id.category_view_text);
+        final Phrase phrase = getItem(position);
+        if (phrase!= null) {
+            TextView itemView = (TextView) view.findViewById(R.id.phrase_view_text);
             if (itemView != null) {
-                itemView.setText(category.getCategoryName());
+                itemView.setText(phrase.getNativePhraseSpelling());
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ViewPhrasesFragment fragment = ViewPhrasesFragment.newInstance(category);
+                        ViewPhraseFragment fragment = ViewPhraseFragment.newInstance(activity, phrase);
                         activity.getFragmentManager().beginTransaction()
-                                .replace(R.id.fragmentLayoutContainer, fragment, ViewPhrasesFragment.TAG)
+                                .replace(R.id.fragmentLayoutContainer, fragment, ViewPhraseFragment.TAG)
                                 .addToBackStack(ViewPhrasesFragment.TAG)
                                 .commit();
                     }

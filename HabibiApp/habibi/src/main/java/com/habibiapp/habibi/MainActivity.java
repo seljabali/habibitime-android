@@ -3,7 +3,6 @@ package com.habibiapp.habibi;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.habibiapp.habibi.datasources.CategoryDataSource;
 import com.habibiapp.habibi.fragments.ViewCategoriesFragment;
@@ -23,7 +22,7 @@ public class MainActivity extends Activity {
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         if (settings.getBoolean(FIRST_TIME, true)) {
             mySQLHelper = new MySQLHelper(this);
-//            mySQLHelper.dropTables();
+            mySQLHelper.dropTables();
             mySQLHelper.setupDatabase();
             mySQLHelper.loadDatabase();
             settings.edit().putBoolean(FIRST_TIME, false).commit();
@@ -40,5 +39,4 @@ public class MainActivity extends Activity {
                 .addToBackStack(ViewCategoriesFragment.TAG)
                 .commit();
     }
-
 }

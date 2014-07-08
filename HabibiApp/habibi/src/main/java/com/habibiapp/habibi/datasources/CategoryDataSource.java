@@ -17,10 +17,10 @@ import java.util.List;
  * Created by habibi on 6/13/14.
  */
 public class CategoryDataSource {
-    public static final int MOOD = 0;
-    public static final int QUESTION = 1;
-    public static final int ANSWER = 2;
-    public static final int FLIRT = 3;
+    public static final int MOOD = 1;
+    public static final int QUESTION = 2;
+    public static final int ANSWER = 3;
+    public static final int FLIRT = 4;
 
     // Database fields
     private SQLiteDatabase database;
@@ -48,6 +48,7 @@ public class CategoryDataSource {
         long insertId;
         try {
             insertId = database.insert(MySQLHelper.TABLE_CATEGORY, null, values);
+            Log.v("Category", categoryName + " ID: " + Integer.toString((int)insertId));
         } catch (SQLException e) {
             Log.e("SQL", "Category: Error inserting " + values, e);
             return -1;

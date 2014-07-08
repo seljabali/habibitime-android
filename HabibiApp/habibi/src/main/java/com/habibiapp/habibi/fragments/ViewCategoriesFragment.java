@@ -22,6 +22,7 @@ public class ViewCategoriesFragment extends Fragment {
 
     public static ViewCategoriesFragment newInstance(List<Category> categories) {
         ViewCategoriesFragment fragment = new ViewCategoriesFragment();
+        //TODO: move to bundle
         fragment.setCategories(categories);
         return fragment;
     }
@@ -29,16 +30,13 @@ public class ViewCategoriesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_view_categories, container, false);
-
         ListView listView = (ListView) view.findViewById(R.id.categories_list);
         CategoryAdapter categoryAdapter = new CategoryAdapter(getActivity(), R.id.category_view_text, categories);
         listView.setAdapter(categoryAdapter);
-
         return view;
     }
 
     public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
-
 }

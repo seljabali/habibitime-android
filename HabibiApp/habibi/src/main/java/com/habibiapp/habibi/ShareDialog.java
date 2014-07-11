@@ -37,7 +37,6 @@ public class ShareDialog extends DialogFragment {
                         public void onClick(DialogInterface dialog, int id) {
                             Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                             sharingIntent.setType("text/plain");
-                            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
                             sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, text);
                             startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.share_using)));
                         }

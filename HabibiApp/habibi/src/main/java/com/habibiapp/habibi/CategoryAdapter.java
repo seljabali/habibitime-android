@@ -2,10 +2,13 @@ package com.habibiapp.habibi;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.habibiapp.habibi.fragments.ViewPhrasesFragment;
@@ -44,7 +47,8 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if (view == null) {
-            LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//            LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = activity.getLayoutInflater();
             view = inflater.inflate(R.layout.view_category, null);
         }
 
@@ -53,6 +57,7 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
             TextView itemView = (TextView) view.findViewById(R.id.category_view_text);
             if (itemView != null) {
                 itemView.setText(category.getCategoryName());
+                itemView.setBackgroundColor(getColorForCategory(category));
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -67,4 +72,18 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
         }
         return view;
     }
+
+    private int getColorForCategory(Category category) {
+        if (category.getId() == Category.QUESTION.getId()) {
+            return activity.getResources().getColor(R.color.pink);
+        } else if (category.getId() == Category.ANSWER.getId()) {
+            return activity.getResources().getColor(R.color.tortoise);
+        } else if (category.getId() == Category.MOOD.getId()) {
+            return activity.getResources().getColor(R.color.green);
+        } else if (category.getId() == Category.FLIRT.getId()) {
+            return activity.getResources().getColor(R.color.light_blue);
+        }
+        return activity.getResources().getColor(R.color.pink);
+    }
+
 }

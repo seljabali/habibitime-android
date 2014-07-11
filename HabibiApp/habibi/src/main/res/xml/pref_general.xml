@@ -1,0 +1,21 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--<ListPreference-->
+        <!--android:key="from_gender"-->
+        <!--android:title="@string/from_gender"-->
+        <!--android:defaultValue="1"-->
+        <!--android:entries="@array/genders"-->
+        <!--android:entryValues="@array/gender_values"-->
+        <!--android:negativeButtonText="@null"-->
+        <!--android:positiveButtonText="@null" />-->
+
+    <ListPreference
+        android:key="to_gender"
+        android:title="@string/to_gender"
+        android:defaultValue="2"
+        android:entries="@array/genders"
+        android:entryValues="@array/gender_values"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null" />
+
+</PreferenceScreen>

@@ -1,8 +1,10 @@
 package com.habibiapp.habibi.fragments;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 
 import com.habibiapp.habibi.MainActivity;
 import com.habibiapp.habibi.R;
+import com.habibiapp.habibi.SettingsActivity;
 import com.habibiapp.habibi.datasources.PhraseDataSource;
 import com.habibiapp.habibi.models.Gender;
 import com.habibiapp.habibi.models.Language;
@@ -33,7 +36,10 @@ public class ViewPhraseFragment extends Fragment {
             PhraseDataSource phraseDataSource = new PhraseDataSource(activity);
             phraseDataSource.open();
             //TODO: GO OFF OF SETTINGS
-            List<Phrase> translatedPhrases = phraseDataSource.getPhrases(phrase.getHabibiPhraseId(),null, null, Gender.FEMALE, Language.ARABIC, null);
+
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
+            String toGender = sharedPref.getString("to_gender", "1");
+            List<Phrase> translatedPhrases = phraseDataSource.getPhrases(phrase.getHabibiPhraseId(),null, null, Gender.getGenderFromID(toGender), Language.ARABIC, null);
             phraseDataSource.close();
             if (translatedPhrases == null || translatedPhrases.size() != 1) {
                 Log.e(TAG, "We got 1 or less translations: " + translatedPhrases.size());

@@ -38,4 +38,8 @@ public class Gender {
     public void setGenderId(int id) {
         this.genderId = id;
     }
+
+    public static Gender getGenderFromID(String id) {
+        return "1".equals(id) ? MALE : FEMALE;
+    }
 }

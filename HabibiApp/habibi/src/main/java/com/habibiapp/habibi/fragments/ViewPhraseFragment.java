@@ -11,9 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.habibiapp.habibi.MainActivity;
 import com.habibiapp.habibi.R;
-import com.habibiapp.habibi.SettingsActivity;
+import com.habibiapp.habibi.ShareDialog;
 import com.habibiapp.habibi.datasources.PhraseDataSource;
 import com.habibiapp.habibi.models.Gender;
 import com.habibiapp.habibi.models.Language;
@@ -28,7 +27,6 @@ public class ViewPhraseFragment extends Fragment {
 
         public static String TAG = ViewPhraseFragment.class.getSimpleName();
         private static final String PHRASE_KEY = "phrase";
-        private MainActivity mainActivity;
         private Phrase phrase;
 
         public static ViewPhraseFragment newInstance(Activity activity, Phrase phrase) {
@@ -50,8 +48,6 @@ public class ViewPhraseFragment extends Fragment {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            mainActivity = (MainActivity) getActivity();
-
             View view = inflater.inflate(R.layout.view_habibi_phrase, container, false);
             TextView arabicTextView = (TextView) view.findViewById(R.id.arabic_phrase);
             TextView arabiziTextView = (TextView) view.findViewById(R.id.arabizi_phrase);
@@ -59,17 +55,48 @@ public class ViewPhraseFragment extends Fragment {
 
             arabicTextView.setText(phrase.getNativePhraseSpelling());
             arabicTextView.setVisibility(arabicTextView.getText().toString().equals("") ? View.GONE : View.VISIBLE);
+            arabicTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String text = ((TextView) v).getText().toString();
+//                    ((TextView) v).setBackgroundColor(getActivity().getResources().getColor(R.color.green));
+                    showShareDialog(text);
+//                    ((TextView) v).setBackgroundColor(getActivity().getResources().getColor(R.color.light_blue));
+                }
+            });
 
             arabiziTextView.setText(phrase.getPhoneticPhraseSpelling());
             arabiziTextView.setVisibility(arabiziTextView.getText().toString().equals("") ? View.GONE : View.VISIBLE);
+            arabiziTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String text = ((TextView) v).getText().toString();
+                    showShareDialog(text);
+                }
+            });
 
             properBiziTextView.setText(phrase.getProperPhoneticPhraseSpelling());
             properBiziTextView.setVisibility(properBiziTextView.getText().toString().equals("") ? View.GONE : View.VISIBLE);
-
+            properBiziTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String text = ((TextView) v).getText().toString();
+                    showShareDialog(text);
+                }
+            });
 
             return view;
         }
         private void setPhrase(Phrase phrase) {
             this.phrase = phrase;
         }
+
+    private void showShareDialog(String text) {
+        Bundle bundle = new Bundle();
+        bundle.putString(ShareDialog.TEXT, text);
+
+        ShareDialog shareDialog = new ShareDialog();
+        shareDialog.setArguments(bundle);
+        shareDialog.show(getFragmentManager(), ShareDialog.TAG);
+    }
 }

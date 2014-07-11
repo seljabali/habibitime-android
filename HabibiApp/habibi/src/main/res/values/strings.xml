@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Habibi Time</string>
+    <string name="app_name">Habibi Time!</string>
     <string name="flirt">Flirt</string>
     <string name="meetup">Meetup</string>
     <string name="mood">Mood</string>
@@ -13,6 +13,8 @@
     <string name="female">Female</string>
     <string name="male">Male</string>
     <string name="from_gender">From</string>
-    <string name="to_gender">To</string>
+    <string name="to_gender">Habibi\'s Gender</string>
+    <string name="share_using">Share using…</string>
+    <string name="copied">Copied!</string>
 
 </resources>

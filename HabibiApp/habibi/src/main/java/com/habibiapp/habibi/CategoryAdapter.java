@@ -68,7 +68,7 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
                 });
             }
         }
-        int dpHeight = (int) ViewUtil.getScreenHeightDP(activity) / (Category.CATEGORY_COUNT-1);
+        int dpHeight = Math.round(ViewUtil.getScreenHeightDP(activity) / (Category.CATEGORY_COUNT+1));
         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.category_view_layout);
         linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dpHeight));
 

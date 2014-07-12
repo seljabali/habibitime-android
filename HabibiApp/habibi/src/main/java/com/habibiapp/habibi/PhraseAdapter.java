@@ -73,7 +73,7 @@ public class PhraseAdapter extends ArrayAdapter<Phrase> {
                 });
             }
         }
-        int dpHeight = (int) ViewUtil.getScreenHeightDP(activity) / (phraseCount - 1);
+        int dpHeight = (int) ViewUtil.getScreenHeightDP(activity) / phraseCount;
         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.phrase_view_layout);
         linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dpHeight));
         return view;

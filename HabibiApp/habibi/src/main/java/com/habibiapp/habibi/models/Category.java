@@ -12,6 +12,7 @@ public class Category {
     public static final Category QUESTION = new Category(CategoryDataSource.QUESTION, "Questions");
     public static final Category ANSWER = new Category(CategoryDataSource.ANSWER, "Responses");
     public static final Category FLIRT = new Category(CategoryDataSource.FLIRT, "Flirt");
+    public static final int CATEGORY_COUNT = 4;
 
     private int id;
     private String categoryName;

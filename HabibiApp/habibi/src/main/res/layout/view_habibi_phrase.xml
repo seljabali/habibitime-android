@@ -6,10 +6,17 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/english_phrase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/string_size_large" />
+
+    <TextView
         android:id="@+id/arabic_phrase"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/string_size_xlarge"
+        android:background="@color/row_odd"
         android:layout_gravity="center"
         android:paddingLeft="@dimen/single_space"
         android:paddingRight="@dimen/single_space"
@@ -21,6 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/string_size_xlarge"
+        android:background="@color/row_even"
         android:layout_gravity="center"
         android:paddingLeft="@dimen/single_space"
         android:paddingBottom="@dimen/double_space"/>
@@ -30,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/string_size_xlarge"
+        android:background="@color/row_odd"
         android:layout_gravity="center"
         android:paddingLeft="@dimen/single_space"
         android:paddingBottom="@dimen/double_space"/>

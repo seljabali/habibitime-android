@@ -28,30 +28,34 @@ public class ViewPhraseFragment extends Fragment {
         public static String TAG = ViewPhraseFragment.class.getSimpleName();
         private static final String PHRASE_KEY = "phrase";
         private Phrase phrase;
+        private Phrase originalPhrase;
 
         public static ViewPhraseFragment newInstance(Activity activity, Phrase phrase) {
             ViewPhraseFragment fragment = new ViewPhraseFragment();
             PhraseDataSource phraseDataSource = new PhraseDataSource(activity);
             phraseDataSource.open();
-            //TODO: GO OFF OF SETTINGS
-
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
             String toGender = sharedPref.getString("to_gender", "1");
-            List<Phrase> translatedPhrases = phraseDataSource.getPhrases(phrase.getHabibiPhraseId(),null, null, Gender.getGenderFromID(toGender), Language.ARABIC, null);
+            List<Phrase> translatedPhrases = phraseDataSource.getPhrases(phrase.getHabibiPhraseId(),
+                    null, null, Gender.getGenderFromID(toGender), Language.ARABIC, null);
             phraseDataSource.close();
             if (translatedPhrases == null || translatedPhrases.size() != 1) {
                 Log.e(TAG, "We got 1 or less translations: " + translatedPhrases.size());
             }
             fragment.setPhrase(translatedPhrases.get(0));
+            fragment.setOriginalPhrase(phrase);
             return fragment;
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.view_habibi_phrase, container, false);
+            TextView englishTextView = (TextView) view.findViewById(R.id.english_phrase);
             TextView arabicTextView = (TextView) view.findViewById(R.id.arabic_phrase);
             TextView arabiziTextView = (TextView) view.findViewById(R.id.arabizi_phrase);
             TextView properBiziTextView = (TextView) view.findViewById(R.id.properbizi_phrase);
+
+            englishTextView.setText(originalPhrase.getNativePhraseSpelling());
 
             arabicTextView.setText(phrase.getNativePhraseSpelling());
             arabicTextView.setVisibility(arabicTextView.getText().toString().equals("") ? View.GONE : View.VISIBLE);
@@ -87,9 +91,13 @@ public class ViewPhraseFragment extends Fragment {
 
             return view;
         }
-        private void setPhrase(Phrase phrase) {
-            this.phrase = phrase;
-        }
+    private void setPhrase(Phrase phrase) {
+        this.phrase = phrase;
+    }
+
+    private void setOriginalPhrase(Phrase phrase) {
+        this.originalPhrase = phrase;
+    }
 
     private void showShareDialog(String text) {
         Bundle bundle = new Bundle();

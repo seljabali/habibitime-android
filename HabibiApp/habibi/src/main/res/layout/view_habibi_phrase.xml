@@ -59,6 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/play_sound"
-        android:layout_marginTop="@dimen/triple_space"/>
+        android:layout_marginTop="@dimen/triple_space"
+        android:visibility="gone"/>
 
 </LinearLayout>

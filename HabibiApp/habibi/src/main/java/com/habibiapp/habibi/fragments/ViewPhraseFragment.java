@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.media.SoundPool.OnLoadCompleteListener;
 import android.os.Bundle;
@@ -37,7 +36,9 @@ public class ViewPhraseFragment extends Fragment {
         private Phrase phrase;
         private Phrase originalPhrase;
         private SoundPool soundPool;
+        private Activity activity;
         private int soundID;
+        private int soundFile = 0;
         private boolean loaded = false;
         private static final int MAX_STREAMS = 1;
         private static final int SOURCE_QUALITY = 0;
@@ -58,23 +59,27 @@ public class ViewPhraseFragment extends Fragment {
             if (translatedPhrases == null || translatedPhrases.size() != 1) {
                 Log.e(TAG, "We got 1 or less translations: " + translatedPhrases.size());
             }
+            fragment.setActivity(activity);
             fragment.setPhrase(translatedPhrases.get(0));
             fragment.setOriginalPhrase(phrase);
+            fragment.setSoundFile(phrase);
             return fragment;
         }
 
         @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            getActivity().setVolumeControlStream(AudioManager.STREAM_MUSIC);
-            soundPool = new SoundPool(MAX_STREAMS, AudioManager.STREAM_MUSIC, SOURCE_QUALITY);
-            soundPool.setOnLoadCompleteListener(new OnLoadCompleteListener() {
-                @Override
-                public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-                    loaded = true;
-                }
-            });
-            soundID = soundPool.load(getActivity(), R.raw.sample_sound, PRIORITY);
+        public void onActivityCreated (Bundle savedInstanceState) {
+            super.onActivityCreated(savedInstanceState);
+            activity.setVolumeControlStream(AudioManager.STREAM_MUSIC);
+            if (soundFile != 0) {
+                soundPool = new SoundPool(MAX_STREAMS, AudioManager.STREAM_MUSIC, SOURCE_QUALITY);
+                soundPool.setOnLoadCompleteListener(new OnLoadCompleteListener() {
+                    @Override
+                    public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                        loaded = true;
+                    }
+                });
+                soundID = soundPool.load(activity, soundFile, PRIORITY);
+            }
         }
 
         @Override
@@ -125,27 +130,41 @@ public class ViewPhraseFragment extends Fragment {
             });
 
 
-            playSoundButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    AudioManager audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
-                    float actualVolume = (float) audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-                    float maxVolume = (float) audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-                    float volume = actualVolume / maxVolume;
-                    if (loaded) {
-                        soundPool.play(soundID, volume, volume, PRIORITY, LOOP, RATE);
+            if (soundFile != 0) {
+                playSoundButton.setVisibility(View.VISIBLE);
+                playSoundButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AudioManager audioManager = (AudioManager) activity.getSystemService(Context.AUDIO_SERVICE);
+                        float actualVolume = (float) audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                        float maxVolume = (float) audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+                        float volume = actualVolume / maxVolume;
+                        if (loaded) {
+                            soundPool.play(soundID, volume, volume, PRIORITY, LOOP, RATE);
+                        }
                     }
-                }
-            });
-
+                });
+            }
             return view;
         }
+
     private void setPhrase(Phrase phrase) {
         this.phrase = phrase;
+    }
+    private void setActivity(Activity activity) {
+        this.activity = activity;
     }
 
     private void setOriginalPhrase(Phrase phrase) {
         this.originalPhrase = phrase;
+    }
+    private void setSoundFile(Phrase originalPhrase) {
+        String fileName = originalPhrase.getNativePhraseSpelling();
+        fileName = fileName.replace(" ", "_");
+        fileName = fileName.replace("?", "");
+        fileName = fileName.replace(".", "");
+        fileName = fileName.toLowerCase();
+        soundFile = activity.getResources().getIdentifier("raw/"+fileName, "raw", activity.getPackageName());
     }
 
     private void showShareDialog(String text) {

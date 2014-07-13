@@ -5,7 +5,7 @@
     <color name="green">#ABF392</color>
     <color name="tortoise">#8FF4D6</color>
     <color name="light_blue">#89BBF7</color>
-    <color name="row_odd">#CCC</color>
+    <color name="row_odd">#CCF</color>
     <color name="row_even">#FFF</color>
 
     <color name="bright_pink">#FF007F</color>
@@ -44,8 +44,7 @@
     </array>
 
     <array name="habibi_colors_short">
-        <item>@color/green</item>
-        <item>@color/tortoise</item>
-        <item>@color/light_blue</item>
+        <item>@color/row_even</item>
+        <item>@color/row_even</item>
     </array>
 </resources>

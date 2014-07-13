@@ -1,14 +1,22 @@
 package com.habibiapp.habibi.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
+import android.media.SoundPool.OnLoadCompleteListener;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.preference.PreferenceManager;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.habibiapp.habibi.R;
@@ -17,7 +25,6 @@ import com.habibiapp.habibi.datasources.PhraseDataSource;
 import com.habibiapp.habibi.models.Gender;
 import com.habibiapp.habibi.models.Language;
 import com.habibiapp.habibi.models.Phrase;
-
 import java.util.List;
 
 /**
@@ -29,6 +36,15 @@ public class ViewPhraseFragment extends Fragment {
         private static final String PHRASE_KEY = "phrase";
         private Phrase phrase;
         private Phrase originalPhrase;
+        private SoundPool soundPool;
+        private int soundID;
+        private boolean loaded = false;
+        private static final int MAX_STREAMS = 1;
+        private static final int SOURCE_QUALITY = 0;
+        private static final int PRIORITY = 1;
+        private static final int LOOP = 0;
+        private static final float RATE = 1f;
+
 
         public static ViewPhraseFragment newInstance(Activity activity, Phrase phrase) {
             ViewPhraseFragment fragment = new ViewPhraseFragment();
@@ -48,27 +64,45 @@ public class ViewPhraseFragment extends Fragment {
         }
 
         @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            getActivity().setVolumeControlStream(AudioManager.STREAM_MUSIC);
+            soundPool = new SoundPool(MAX_STREAMS, AudioManager.STREAM_MUSIC, SOURCE_QUALITY);
+            soundPool.setOnLoadCompleteListener(new OnLoadCompleteListener() {
+                @Override
+                public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                    loaded = true;
+                }
+            });
+            soundID = soundPool.load(getActivity(), R.raw.sample_sound, PRIORITY);
+        }
+
+        @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.view_habibi_phrase, container, false);
             TextView englishTextView = (TextView) view.findViewById(R.id.english_phrase);
             TextView arabicTextView = (TextView) view.findViewById(R.id.arabic_phrase);
             TextView arabiziTextView = (TextView) view.findViewById(R.id.arabizi_phrase);
             TextView properBiziTextView = (TextView) view.findViewById(R.id.properbizi_phrase);
+            Button playSoundButton = (Button) view.findViewById(R.id.button_play_sound);
 
-            englishTextView.setText(originalPhrase.getNativePhraseSpelling());
+            //ENGLISH PHRASE
+            SpannableString content = new SpannableString(originalPhrase.getNativePhraseSpelling());
+            content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+            englishTextView.setText(content);
 
+            //ARABIC PHRASE
             arabicTextView.setText(phrase.getNativePhraseSpelling());
             arabicTextView.setVisibility(arabicTextView.getText().toString().equals("") ? View.GONE : View.VISIBLE);
             arabicTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     String text = ((TextView) v).getText().toString();
-//                    ((TextView) v).setBackgroundColor(getActivity().getResources().getColor(R.color.green));
                     showShareDialog(text);
-//                    ((TextView) v).setBackgroundColor(getActivity().getResources().getColor(R.color.light_blue));
                 }
             });
 
+            //ARABIZI PHRASE
             arabiziTextView.setText(phrase.getPhoneticPhraseSpelling());
             arabiziTextView.setVisibility(arabiziTextView.getText().toString().equals("") ? View.GONE : View.VISIBLE);
             arabiziTextView.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +113,7 @@ public class ViewPhraseFragment extends Fragment {
                 }
             });
 
+            //ARABIZI PHRASE
             properBiziTextView.setText(phrase.getProperPhoneticPhraseSpelling());
             properBiziTextView.setVisibility(properBiziTextView.getText().toString().equals("") ? View.GONE : View.VISIBLE);
             properBiziTextView.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +121,20 @@ public class ViewPhraseFragment extends Fragment {
                 public void onClick(View v) {
                     String text = ((TextView) v).getText().toString();
                     showShareDialog(text);
+                }
+            });
+
+
+            playSoundButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AudioManager audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
+                    float actualVolume = (float) audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                    float maxVolume = (float) audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+                    float volume = actualVolume / maxVolume;
+                    if (loaded) {
+                        soundPool.play(soundID, volume, volume, PRIORITY, LOOP, RATE);
+                    }
                 }
             });
 

@@ -80,7 +80,7 @@ public class PhraseAdapter extends ArrayAdapter<Phrase> {
     }
 
     private int getColorForPhrase(int position) {
-        TypedArray colors = activity.getResources().obtainTypedArray(R.array.habibi_colors);
+        TypedArray colors = activity.getResources().obtainTypedArray(R.array.habibi_colors_short);
         return colors.getColor(position % colors.length(), 0);
     }
 }

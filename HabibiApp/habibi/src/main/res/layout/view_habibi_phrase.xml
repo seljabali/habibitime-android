@@ -9,7 +9,11 @@
         android:id="@+id/english_phrase"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/string_size_large" />
+        android:gravity="center"
+        android:textSize="@dimen/string_size_large"
+        android:layout_marginTop="@dimen/single_space"
+        android:layout_marginBottom="@dimen/single_space"/>
+
 
     <TextView
         android:id="@+id/arabic_phrase"
@@ -18,20 +22,23 @@
         android:textSize="@dimen/string_size_xlarge"
         android:background="@color/row_odd"
         android:layout_gravity="center"
-        android:paddingLeft="@dimen/single_space"
-        android:paddingRight="@dimen/single_space"
-        android:paddingTop="@dimen/double_space"
-        android:paddingBottom="@dimen/double_space"/>
+        android:paddingLeft="@dimen/double_space"
+        android:paddingRight="@dimen/double_space"
+        android:paddingTop="@dimen/single_space"
+        android:paddingBottom="@dimen/single_space"
+        android:layout_marginTop="@dimen/triple_space"/>
 
     <TextView
         android:id="@+id/arabizi_phrase"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/string_size_xlarge"
-        android:background="@color/row_even"
         android:layout_gravity="center"
-        android:paddingLeft="@dimen/single_space"
-        android:paddingBottom="@dimen/double_space"/>
+        android:paddingLeft="@dimen/double_space"
+        android:paddingRight="@dimen/double_space"
+        android:paddingTop="@dimen/single_space"
+        android:paddingBottom="@dimen/single_space"
+        android:layout_marginTop="@dimen/double_space"/>
 
     <TextView
         android:id="@+id/properbizi_phrase"
@@ -40,7 +47,18 @@
         android:textSize="@dimen/string_size_xlarge"
         android:background="@color/row_odd"
         android:layout_gravity="center"
-        android:paddingLeft="@dimen/single_space"
-        android:paddingBottom="@dimen/double_space"/>
+        android:paddingLeft="@dimen/double_space"
+        android:paddingRight="@dimen/double_space"
+        android:paddingTop="@dimen/single_space"
+        android:paddingBottom="@dimen/single_space"
+        android:layout_marginTop="@dimen/double_space"/>
+
+    <Button
+        android:id="@+id/button_play_sound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/play_sound"
+        android:layout_marginTop="@dimen/triple_space"/>
 
 </LinearLayout>

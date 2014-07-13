@@ -3,4 +3,5 @@
     <dimen name="string_size_xlarge">28dp</dimen>
     <dimen name="single_space">8dp</dimen>
     <dimen name="double_space">16dp</dimen>
+    <dimen name="triple_space">24dp</dimen>
 </resources>

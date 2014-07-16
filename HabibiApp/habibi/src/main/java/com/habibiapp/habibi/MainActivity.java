@@ -23,13 +23,13 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        if (settings.getBoolean(FIRST_TIME, true)) {
-            mySQLHelper = new MySQLHelper(this);
-            mySQLHelper.dropTables();
-            mySQLHelper.setupDatabase();
-            mySQLHelper.loadDatabase();
-            settings.edit().putBoolean(FIRST_TIME, false).commit();
-        }
+//        if (settings.getBoolean(FIRST_TIME, true)) {
+//            mySQLHelper = new MySQLHelper(this);
+//            mySQLHelper.dropTables();
+//            mySQLHelper.setupDatabase();
+//            mySQLHelper.loadDatabase();
+//            settings.edit().putBoolean(FIRST_TIME, false).commit();
+//        }
 
         CategoryDataSource categoryDataSource = new CategoryDataSource(this);
         categoryDataSource.open();

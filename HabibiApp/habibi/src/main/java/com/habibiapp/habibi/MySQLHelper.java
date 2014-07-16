@@ -217,7 +217,7 @@ public class MySQLHelper extends SQLiteOpenHelper {
             phraseDataSource = new PhraseDataSource(context);
             habibiPhraseDataSource.open();
             phraseDataSource.open();
-            InputStream inputStream = context.getResources().openRawResource(R.raw.dictionary);
+            InputStream inputStream = context.getResources().openRawResource(R.raw.dictionary_new);
             InputStreamReader inputreader = new InputStreamReader(inputStream);
             BufferedReader buffreader = new BufferedReader(inputreader);
             String line;

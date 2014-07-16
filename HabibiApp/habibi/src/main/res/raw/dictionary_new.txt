@@ -1,12 +1,12 @@
-Mood, Happy, مبسوط, Mabsoot , Mabsoo6 , مبسوطة , Mabsoota , Mabsoo6a 
-Mood, Excited, متحمس‬, Mit-hamis , Mit7amis , متحمسه, Miit-hamsa , Mit7amsa 
-Mood, Sad, زعلان‬, Zaa-lan , Za3lan , زعلانه‬, Zaa-lana , Za3lana 
-Mood, Lonely, وحيد‬, Waheed , Wa7eed , وحيدة, Waheeda , Wa7eeda 
-Mood, Missing you, مشتألك, Mishta-lak , Mishta2lak , مشتألك , Mishta-lik , Mishta2lik 
-Mood, Irritated, مزعوج , Maz-ooj , Maz3ooj , مزعوجه , Maz-oojah , Maz3oojah 
-Mood, Jealous, غيران , Ghay-ran , ‘3ayran , غيرانه , Ghay-raneh , ‘3ayraneh 
-Mood, Horny, ممحون , Mam-hoon , Mam7oon, ممحونه , Mam-hooneh , Mam7ooneh 
-Mood, Sick, مريض , Ma-reed , Maree’9 , مريضة , Ma-reedah , Maree’9a 
+Mood, I’m Happy, أنا مبسوط ‪, Ana Mabsoot , 2ana Mabsoo6 , أنا مبسوطة , Ana Mabsoota , 2ana Mabsoo6a 
+Mood, I’m Excited, أنا متحمس ‪, Ana Mit-hamis , 2ana Mit7amis , أنا متحمسه ‪, Ana Miit-hamsa , 2ana Mit7amsa 
+Mood, I’m Sad, أنا زعلان ‪, Ana Zaa-lan , 2ana Za3lan , أنا زعلانه ‪, Ana Zaa-lana , 2ana Za3lana 
+Mood, I’m Lonely, أنا وحيد ‪, Ana Waheed , 2ana Wa7eed , أنا وحيدة ‪‬, Ana Waheeda , 2ana Wa7eeda 
+Mood, I’m Missing you, أنا مشتألك ‪, Ana Mishta-lak , Ana Mishta2lak , أنا مشتألك , Ana Mishta-lik , 2ana Mishta2lik 
+Mood, I’m Irritated, أنا مزعوج , Ana Maz-ooj , 2ana Maz3ooj , أنا مزعوجه , Ana Maz-oojah , 2ana Maz3oojah 
+Mood, I’m Jealous, أنا غيران , Ana Ghay-ran , 2ana ‘3ayran , أنا غيرانه , Ana Ghay-raneh , 2ana ‘3ayraneh 
+Mood, I’m Horny, أنا ممحون , Ana Mam-hoon , 2ana Mam7oon, أنا ممحونه , Ana Mam-hooneh , 2ana Mam7ooneh 
+Mood, I’m Sick, أنا مريض , Ana Ma-reed , 2ana Maree’9 , أنا مريضة , Ana Ma-reedah , 2ana Maree’9a 
 Flirt, I love you, أنا بحبك , Ana Ba-hibak , 2ana Ba7ibak , أنا بحبك , Ana Ba-hibik , 2ana Ba7ibik 
 Flirt, I miss you, أنا مشتألك , Ana Mishta-lak , 2ana Mishta2lak , أنا مشتألك , Ana Mishta-lik , 2ana Mishta2lik 
 Flirt, You are beautiful, إنت حلو , Inta Hiloo , 2inta 7ilo , إنت حلوه , Inti Hil-weh , 2inti 7ilweh 
@@ -22,17 +22,19 @@ Flirt, I like your smell, حلوه ريحتك , Hil-weh Reeh-tak , 7ilweh Ree7ta
 Flirt, I like your hair, حلو شعرك , Hilo Shah-rak , 7ilo Sha3rak , حلو شعرك , Hilo Shah-rik , 7ilo Sha3rik 
 Questions, Where are you?, وينك؟ , Wain-ak? , Wainak? , وينك؟ , Wain-ik? , Wainik 
 Questions, When am I seeing you?, متى حشوفك؟ , Mata Ha-shoof-ak? , Mata 7ashoofak? , متى حشوفك؟ , Mata Ha-shoof-ik , Mata 7ashoofik 
-Questions, Do you love me?,
- , Bit-hib-ny? , Bit7ibny? , بتحبيني؟ , Bit-hib-eeny? , Bit7ibeeny?
+Questions, Do you love me?, بتحبني؟ , Bit-hib-ny? , Bit7ibny? , بتحبيني؟ , Bit-hib-eeny? , Bit7ibeeny? 
 Questions, Do you miss me?, مشتألي؟ , Mish-taa-ly? , Mishta2ly? , مشتائيلي؟ , Mish-taa-eely? , Mishta2eely? 
 Questions, Seriously?, عن جد؟ , Aan Jad? , 3an Jad? , عن جد؟ , Aan Jad? , 3an Jad? 
 Questions, What are you wearing?, شو لابس؟ , Shoo La-bis? , Shoo Labis? , شو لابسه؟ , Shoo Lab-seh? , Shoo Labseh? 
-Questions, Do you want to be my lover?, بدك تكون حبيبي؟ , Bid-ak Ta-koon Habibi? , Biddak tkoon 7abibi? , بدك تكوني حبيبتي؟ , Bid-ik Ta-koony Habeebty? , Biddik Tkoony 7abeebty? 
-Questions, Will you marry me?, تتزوجني؟ , Tit-za-waj-ny?,  Titzawajny? , تتزوجيني؟ , Tit-za-wa-jeeny? , Titzawajeeny? 
+Question, Do you want to be my lover?, بدك تكون حبيبي؟ , Bid-ak Ta-koon Habibi? , Biddak tkoon 7abibi? , بدك تكوني حبيبتي؟ , Bid-ik Ta-koony Habeebty? , Biddik Tkoony 7abeebty? 
+Questions, Will you marry me?, تتزوجني؟ , Tit-za-waj-ny?  Titzawajny? , تتزوجيني؟ , Tit-za-wa-jeeny? , Titzawajeeny? 
 Responses, Yes, نعم , Na-am , Na3am , نعم , Na-am , Na3am 
 Responses, No, لأ , Laah , La2 , لأ , Laah , La2 
 Responses, Definitely Not, طبعاً لأ , Tab-ahn Laah , Tab3an La2 , طبعاً لأ , Tab-ahn Laah , Tab3an La2 
 Responses, Definitely, طبعاً , Tab-ahn , Tab3an , طبعاً , Tab-ahn , Tab3an 
 Responses, Maybe, ممكن , Mum-kin , Momkin , ممكن , Mum-kin , Momkin 
 Responses, Let’s Go, يلا , Yala , Yalla , يلا , Yala , Yalla 
-Responses, Depends, بعتمد , Bih-timid , Bi3timid , بعتمد , Bih-timid , Bi3timid
+Responses, Depends, بعتمد , Bih-timid , Bi3timid , بعتمد , Bih-timid , Bi3timid 
+
+ 
+

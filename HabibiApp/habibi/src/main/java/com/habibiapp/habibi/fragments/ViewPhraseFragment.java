@@ -45,6 +45,7 @@ public class ViewPhraseFragment extends Fragment {
         private static final int PRIORITY = 1;
         private static final int LOOP = 0;
         private static final float RATE = 1f;
+        private static final String PATH = "raw/";
 
 
         public static ViewPhraseFragment newInstance(Activity activity, Phrase phrase) {
@@ -62,7 +63,7 @@ public class ViewPhraseFragment extends Fragment {
             fragment.setActivity(activity);
             fragment.setPhrase(translatedPhrases.get(0));
             fragment.setOriginalPhrase(phrase);
-            fragment.setSoundFile(phrase);
+            fragment.setSoundFile(phrase, translatedPhrases.get(0));
             return fragment;
         }
 
@@ -158,13 +159,20 @@ public class ViewPhraseFragment extends Fragment {
     private void setOriginalPhrase(Phrase phrase) {
         this.originalPhrase = phrase;
     }
-    private void setSoundFile(Phrase originalPhrase) {
+    private void setSoundFile(Phrase originalPhrase, Phrase toPhrase) {
         String fileName = originalPhrase.getNativePhraseSpelling();
         fileName = fileName.replace(" ", "_");
         fileName = fileName.replace("?", "");
         fileName = fileName.replace(".", "");
-        fileName = fileName.toLowerCase();
-        soundFile = activity.getResources().getIdentifier("raw/"+fileName, "raw", activity.getPackageName());
+        fileName = fileName.toLowerCase().trim();
+        soundFile = activity.getResources().getIdentifier(PATH+fileName, "raw", activity.getPackageName());
+        if (soundFile == 0) {
+            fileName += "_" + getToMaleOrFemale(toPhrase);
+            soundFile = activity.getResources().getIdentifier(PATH+fileName, "raw", activity.getPackageName());
+        }
+        if (soundFile == 0) {
+            Log.e("Loading Sound",  "Couldn't find: " + PATH + fileName);
+        }
     }
 
     private void showShareDialog(String text) {
@@ -174,5 +182,12 @@ public class ViewPhraseFragment extends Fragment {
         ShareDialog shareDialog = new ShareDialog();
         shareDialog.setArguments(bundle);
         shareDialog.show(getFragmentManager(), ShareDialog.TAG);
+    }
+
+    private String getToMaleOrFemale(Phrase phrase) {
+        if (phrase.getToGender() == Gender.MALE) {
+            return "m";
+        }
+        return "f";
     }
 }

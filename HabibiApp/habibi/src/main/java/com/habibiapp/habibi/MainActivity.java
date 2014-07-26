@@ -13,6 +13,7 @@ import com.habibiapp.habibi.fragments.ViewCategoriesFragment;
 import com.habibiapp.habibi.models.Category;
 import com.habibiapp.habibi.models.Gender;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends Activity {
@@ -39,7 +40,7 @@ public class MainActivity extends Activity {
 
         CategoryDataSource categoryDataSource = new CategoryDataSource(this);
         categoryDataSource.open();
-        List<Category> categories = categoryDataSource.getCategories();
+        ArrayList<Category> categories = new ArrayList<Category>(categoryDataSource.getCategories());
         categoryDataSource.close();
 
         ViewCategoriesFragment fragment = ViewCategoriesFragment.newInstance(categories);

@@ -1,9 +1,12 @@
 package com.habibiapp.habibi.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by samsoom on 4/9/14.
  */
-public class Phrase {
+public class Phrase implements Parcelable {
     private int id;
     private int habibiPhraseId;
     private Language language;
@@ -87,4 +90,47 @@ public class Phrase {
     public void setProperPhoneticPhraseSpelling(String properPhoneticPhraseSpelling) {
         this.properPhoneticPhraseSpelling = properPhoneticPhraseSpelling;
     }
+
+    protected Phrase(Parcel in) {
+        id = in.readInt();
+        habibiPhraseId = in.readInt();
+        language = (Language) in.readValue(Language.class.getClassLoader());
+        dialect = (Dialect) in.readValue(Dialect.class.getClassLoader());
+        fromGender = (Gender) in.readValue(Gender.class.getClassLoader());
+        toGender = (Gender) in.readValue(Gender.class.getClassLoader());
+        nativePhraseSpelling = in.readString();
+        phoneticPhraseSpelling = in.readString();
+        properPhoneticPhraseSpelling = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeInt(habibiPhraseId);
+        dest.writeValue(language);
+        dest.writeValue(dialect);
+        dest.writeValue(fromGender);
+        dest.writeValue(toGender);
+        dest.writeString(nativePhraseSpelling);
+        dest.writeString(phoneticPhraseSpelling);
+        dest.writeString(properPhoneticPhraseSpelling);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Phrase> CREATOR = new Parcelable.Creator<Phrase>() {
+        @Override
+        public Phrase createFromParcel(Parcel in) {
+            return new Phrase(in);
+        }
+
+        @Override
+        public Phrase[] newArray(int size) {
+            return new Phrase[size];
+        }
+    };
 }

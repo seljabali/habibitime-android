@@ -66,7 +66,7 @@ public class PhraseAdapter extends ArrayAdapter<Phrase> {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ViewPhraseFragment fragment = ViewPhraseFragment.newInstance(activity, phrase, category);
+                        ViewPhraseFragment fragment = ViewPhraseFragment.newInstance(phrase, category);
                         activity.getFragmentManager().beginTransaction()
                                 .replace(R.id.fragmentLayoutContainer, fragment, ViewPhraseFragment.TAG)
                                 .addToBackStack(ViewPhrasesFragment.TAG)

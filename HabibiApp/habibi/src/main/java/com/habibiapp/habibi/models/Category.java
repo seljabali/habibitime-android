@@ -1,5 +1,7 @@
 package com.habibiapp.habibi.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.habibiapp.habibi.datasources.CategoryDataSource;
@@ -9,7 +11,7 @@ import java.util.Objects;
 /**
  * Created by habibi on 6/8/14.
  */
-public class Category {
+public class Category implements Parcelable {
     public static final Category MOOD = new Category(CategoryDataSource.MOOD, "Mood");
     public static final Category QUESTION = new Category(CategoryDataSource.QUESTION, "Questions");
     public static final Category ANSWER = new Category(CategoryDataSource.ANSWER, "Responses");
@@ -89,4 +91,33 @@ public class Category {
         }
         return false;
     }
+
+    protected Category(Parcel in) {
+        id = in.readInt();
+        categoryName = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(categoryName);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Category> CREATOR = new Parcelable.Creator<Category>() {
+        @Override
+        public Category createFromParcel(Parcel in) {
+            return new Category(in);
+        }
+
+        @Override
+        public Category[] newArray(int size) {
+            return new Category[size];
+        }
+    };
 }

@@ -11,32 +11,34 @@ import com.habibiapp.habibi.CategoryAdapter;
 import com.habibiapp.habibi.R;
 import com.habibiapp.habibi.models.Category;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
 * Created by habibi on 5/7/14.
 */
 public class ViewCategoriesFragment extends Fragment {
     public static String TAG = ViewCategoriesFragment.class.getSimpleName();
-    private List<Category> categories;
+    public static String CATEGORIES_KEY = "categories";
+    private ArrayList<Category> categories;
 
-    public static ViewCategoriesFragment newInstance(List<Category> categories) {
+    public static ViewCategoriesFragment newInstance(ArrayList<Category> categories) {
         ViewCategoriesFragment fragment = new ViewCategoriesFragment();
-        //TODO: move to bundle
-        fragment.setCategories(categories);
+        Bundle args = new Bundle();
+        args.putParcelableArrayList(CATEGORIES_KEY, categories);
+        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        categories = getArguments().getParcelableArrayList(CATEGORIES_KEY);
         View view = inflater.inflate(R.layout.fragment_view_categories, container, false);
+
         ListView listView = (ListView) view.findViewById(R.id.categories_list);
         CategoryAdapter categoryAdapter = new CategoryAdapter(getActivity(), R.id.category_view_text, categories);
         listView.setAdapter(categoryAdapter);
+
         return view;
     }
 
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
-    }
 }

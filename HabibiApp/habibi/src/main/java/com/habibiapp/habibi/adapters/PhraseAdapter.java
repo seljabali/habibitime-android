@@ -24,6 +24,7 @@ import java.util.List;
  * Created by habibi on 6/22/14.
  */
 public class PhraseAdapter extends ArrayAdapter<Phrase> {
+    private static final int PHRASE_COUNT_MAX = 13;
 
     HashMap<Phrase, Integer> idMap = new HashMap<Phrase, Integer>();
     private int phraseCount;
@@ -70,6 +71,11 @@ public class PhraseAdapter extends ArrayAdapter<Phrase> {
                     public void onClick(View v) {
                         ViewPhraseFragment fragment = ViewPhraseFragment.newInstance(phrase, category);
                         activity.getFragmentManager().beginTransaction()
+//                                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out, R.anim.slide_in_left, R.anim.slide_out)
+                                .setCustomAnimations(R.anim.fragment_slide_left_enter,
+                                        R.anim.fragment_slide_left_exit,
+                                        R.anim.fragment_slide_right_enter,
+                                        R.anim.fragment_slide_right_exit)
                                 .replace(R.id.fragmentLayoutContainer, fragment, ViewPhraseFragment.TAG)
                                 .addToBackStack(ViewPhrasesFragment.TAG)
                                 .commit();
@@ -77,7 +83,12 @@ public class PhraseAdapter extends ArrayAdapter<Phrase> {
                 });
             }
         }
-        int dpHeight = (int) ViewUtil.getScreenHeightDP(activity) / phraseCount;
+        int dpHeight;
+        if (phraseCount <= PHRASE_COUNT_MAX) {
+            dpHeight = (int) ViewUtil.getScreenHeightDP(activity) / phraseCount;
+        } else {
+            dpHeight = (int) activity.getResources().getDimension(R.dimen.phrase_adapter_item_height);
+        }
         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.phrase_view_layout);
         linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dpHeight));
         return view;
@@ -87,4 +98,5 @@ public class PhraseAdapter extends ArrayAdapter<Phrase> {
         TypedArray colors = activity.getResources().obtainTypedArray(R.array.habibi_colors_short);
         return colors.getColor(position % colors.length(), 0);
     }
+
 }

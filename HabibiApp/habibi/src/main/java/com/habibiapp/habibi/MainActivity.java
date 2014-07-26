@@ -8,13 +8,8 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.habibiapp.habibi.datasources.CategoryDataSource;
 import com.habibiapp.habibi.fragments.ViewCategoriesFragment;
-import com.habibiapp.habibi.models.Category;
 import com.habibiapp.habibi.models.Gender;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends Activity {
     private MySQLHelper mySQLHelper;
@@ -29,21 +24,17 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         appSettings = PreferenceManager.getDefaultSharedPreferences(this);
-        sharedSettings = getSharedPreferences(PREFS_NAME, 0);
+//        sharedSettings = getSharedPreferences(PREFS_NAME, 0);
 //        if (settings.getBoolean(FIRST_TIME, true)) {
-            mySQLHelper = new MySQLHelper(this);
-            mySQLHelper.dropTables();
-            mySQLHelper.setupDatabase();
-            mySQLHelper.loadDatabase();
+//            mySQLHelper = new MySQLHelper(this);
+//            mySQLHelper.dropTables();
+//            mySQLHelper.setupDatabase();
+//            mySQLHelper.loadDatabase();
 //            settings.edit().putBoolean(FIRST_TIME, false).commit();
 //        }
 
-        CategoryDataSource categoryDataSource = new CategoryDataSource(this);
-        categoryDataSource.open();
-        ArrayList<Category> categories = new ArrayList<Category>(categoryDataSource.getCategories());
-        categoryDataSource.close();
 
-        ViewCategoriesFragment fragment = ViewCategoriesFragment.newInstance(categories);
+        ViewCategoriesFragment fragment = ViewCategoriesFragment.newInstance(this);
         getFragmentManager().beginTransaction()
                 .replace(R.id.fragmentLayoutContainer, fragment, ViewCategoriesFragment.TAG)
                 .commit();

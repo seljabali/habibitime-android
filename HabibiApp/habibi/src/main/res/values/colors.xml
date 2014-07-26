@@ -41,6 +41,7 @@
         <item>@color/green</item>
         <item>@color/tortoise</item>
         <item>@color/light_blue</item>
+        <item>@color/bright_pink</item>
     </array>
 
     <array name="habibi_colors_short">

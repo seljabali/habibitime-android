@@ -15,7 +15,6 @@
     <string name="from_gender">My Gender</string>
     <string name="to_gender">Habibi\'s Gender</string>
     <string name="share_using">Share using…</string>
-    <string name="copied">Copied to clipboard!</string>
-    <string name="play_sound">Play Sound</string>
+    <string name="copied">Copied to Clipboard!</string>
 
 </resources>

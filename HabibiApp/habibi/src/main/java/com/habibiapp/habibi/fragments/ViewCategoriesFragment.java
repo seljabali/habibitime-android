@@ -1,5 +1,6 @@
 package com.habibiapp.habibi.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.ListView;
 
 import com.habibiapp.habibi.adapters.CategoryAdapter;
 import com.habibiapp.habibi.R;
+import com.habibiapp.habibi.datasources.CategoryDataSource;
 import com.habibiapp.habibi.models.Category;
 
 import java.util.ArrayList;
@@ -21,8 +23,13 @@ public class ViewCategoriesFragment extends Fragment {
     public static String CATEGORIES_KEY = "categories";
     private ArrayList<Category> categories;
 
-    public static ViewCategoriesFragment newInstance(ArrayList<Category> categories) {
+    public static ViewCategoriesFragment newInstance(Activity activity) {
         ViewCategoriesFragment fragment = new ViewCategoriesFragment();
+        CategoryDataSource categoryDataSource = new CategoryDataSource(activity);
+        categoryDataSource.open();
+        ArrayList<Category> categories = new ArrayList<Category>(categoryDataSource.getCategories());
+        categoryDataSource.close();
+        categories.add(Category.ALL);
         Bundle args = new Bundle();
         args.putParcelableArrayList(CATEGORIES_KEY, categories);
         fragment.setArguments(args);

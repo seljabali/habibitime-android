@@ -15,47 +15,131 @@
         android:layout_marginBottom="@dimen/single_space"
         tools:text="Yalla!"/>
 
-
-    <TextView
-        android:id="@+id/arabic_phrase"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/habibi_phrase_english_text_size"
         android:background="@color/row_odd"
-        android:layout_gravity="center"
-        android:paddingLeft="@dimen/double_space"
-        android:paddingRight="@dimen/double_space"
-        android:paddingTop="@dimen/triple_space"
-        android:paddingBottom="@dimen/triple_space"
-        android:layout_marginTop="@dimen/triple_space"
-        tools:text="يلا"/>
+        android:layout_marginTop="@dimen/double_space">
 
-    <TextView
-        android:id="@+id/arabizi_phrase"
+        <ImageView
+            android:id="@+id/arabic_share_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/share"
+            android:layout_marginLeft="@dimen/double_space"
+            android:layout_gravity="center_vertical"
+            android:maxHeight="@dimen/clipboard_icon_height"
+            android:maxWidth="@dimen/clipboard_icon_width"/>
+
+        <ImageButton
+            android:id="@+id/arabic_copy_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/clipboard"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/double_space"
+            android:maxHeight="@dimen/clipboard_icon_height"
+            android:maxWidth="@dimen/clipboard_icon_width"/>
+
+        <TextView
+            android:id="@+id/arabic_phrase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/habibi_phrase_english_text_size"
+            android:layout_gravity="center"
+            android:paddingLeft="@dimen/double_space"
+            android:paddingRight="@dimen/double_space"
+            android:paddingTop="@dimen/triple_space"
+            android:paddingBottom="@dimen/triple_space"
+            android:layout_marginTop="@dimen/triple_space"
+            tools:text="يلا"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/habibi_phrase_arabizi_text_size"
-        android:layout_gravity="center"
-        android:paddingLeft="@dimen/double_space"
-        android:paddingRight="@dimen/double_space"
-        android:paddingTop="@dimen/triple_space"
-        android:paddingBottom="@dimen/triple_space"
-        android:layout_marginTop="@dimen/triple_space"
-        tools:text="Yalla"/>
+        android:background="@color/row_even">
 
-    <TextView
-        android:id="@+id/properbizi_phrase"
+        <TextView
+            android:id="@+id/arabizi_phrase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/habibi_phrase_arabizi_text_size"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="@dimen/double_space"
+            android:paddingTop="@dimen/triple_space"
+            android:paddingBottom="@dimen/triple_space"
+            android:layout_marginTop="@dimen/triple_space"
+            android:layout_weight="8"
+            tools:text="Yalla"/>
+
+        <ImageButton
+            android:id="@+id/arabizi_copy_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/clipboard"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/double_space"
+            android:maxHeight="@dimen/clipboard_icon_height"
+            android:maxWidth="@dimen/clipboard_icon_width"/>
+
+        <ImageView
+            android:id="@+id/arabizi_share_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/share"
+            android:layout_marginRight="@dimen/double_space"
+            android:paddingRight="@dimen/double_space"
+            android:layout_gravity="center_vertical"
+            android:maxHeight="@dimen/clipboard_icon_height"
+            android:maxWidth="@dimen/clipboard_icon_width"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/habibi_phrase_properbizi_text_size"
-        android:background="@color/row_odd"
-        android:layout_gravity="center"
-        android:paddingLeft="@dimen/double_space"
-        android:paddingRight="@dimen/double_space"
-        android:paddingTop="@dimen/triple_space"
-        android:paddingBottom="@dimen/triple_space"
-        android:layout_marginTop="@dimen/triple_space"
-        tools:text="Yallaz"/>
+        android:background="@color/row_odd">
+
+        <TextView
+            android:id="@+id/properbizi_phrase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/habibi_phrase_properbizi_text_size"
+            android:background="@color/row_odd"
+            android:paddingLeft="@dimen/double_space"
+            android:paddingTop="@dimen/triple_space"
+            android:paddingBottom="@dimen/triple_space"
+            android:layout_marginTop="@dimen/triple_space"
+            android:layout_weight="8"
+            tools:text="Yallaz"/>
+
+        <ImageButton
+            android:id="@+id/properbizi_copy_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/clipboard"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/double_space"
+            android:maxHeight="@dimen/clipboard_icon_height"
+            android:maxWidth="@dimen/clipboard_icon_width"/>
+
+        <ImageView
+            android:id="@+id/properizi_share_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/share"
+            android:layout_marginRight="@dimen/double_space"
+            android:layout_gravity="center_vertical"
+            android:maxHeight="@dimen/clipboard_icon_height"
+            android:maxWidth="@dimen/clipboard_icon_width"/>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/button_play_sound"
@@ -63,7 +147,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/play"
-        android:layout_marginTop="@dimen/triple_space"
+        android:layout_marginTop="@dimen/quadruple_space"
         android:visibility="gone"
         tools:visibility="visible"/>
 

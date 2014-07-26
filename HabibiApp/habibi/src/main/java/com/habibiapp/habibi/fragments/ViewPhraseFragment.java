@@ -1,6 +1,9 @@
 package com.habibiapp.habibi.fragments;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.media.SoundPool.OnLoadCompleteListener;
@@ -13,17 +16,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.habibiapp.habibi.AppConfig;
 import com.habibiapp.habibi.MainActivity;
 import com.habibiapp.habibi.R;
-import com.habibiapp.habibi.ShareDialog;
+import com.habibiapp.habibi.StringUtil;
 import com.habibiapp.habibi.datasources.PhraseDataSource;
 import com.habibiapp.habibi.models.Category;
 import com.habibiapp.habibi.models.Gender;
 import com.habibiapp.habibi.models.Language;
 import com.habibiapp.habibi.models.Phrase;
+
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 /**
@@ -49,6 +57,7 @@ public class ViewPhraseFragment extends Fragment {
     private static final String PATH = "raw/";
     private Gender toGender;
     private Gender fromGender;
+    private ClipboardManager clipboard;
 
     public static ViewPhraseFragment newInstance(Phrase phrase, Category category) {
         ViewPhraseFragment fragment = new ViewPhraseFragment();
@@ -65,6 +74,7 @@ public class ViewPhraseFragment extends Fragment {
         Bundle args = getArguments();
         originalPhrase = args.getParcelable(PHRASE_KEY);
         category = args.getParcelable(CATEGORY_KEY);
+        clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
 
         //GET TRANSLATION
         toGender = ((MainActivity)getActivity()).getToGenderSettings();
@@ -85,9 +95,19 @@ public class ViewPhraseFragment extends Fragment {
         //SETUP VIEW
         View view = inflater.inflate(R.layout.view_habibi_phrase, container, false);
         TextView englishTextView = (TextView) view.findViewById(R.id.english_phrase);
+
         TextView arabicTextView = (TextView) view.findViewById(R.id.arabic_phrase);
+        ImageView arabicTextShare = (ImageView) view.findViewById(R.id.arabic_share_button);
+        ImageView arabicTextCopy = (ImageView) view.findViewById(R.id.arabic_copy_button);
+
         TextView arabiziTextView = (TextView) view.findViewById(R.id.arabizi_phrase);
+        ImageView arabiziTextShare = (ImageView) view.findViewById(R.id.arabizi_share_button);
+        ImageView arabiziTextCopy = (ImageView) view.findViewById(R.id.arabizi_copy_button);
+
         TextView properBiziTextView = (TextView) view.findViewById(R.id.properbizi_phrase);
+        ImageView properBiziTextShare = (ImageView) view.findViewById(R.id.properizi_share_button);
+        ImageView properBiziTextCopy = (ImageView) view.findViewById(R.id.properbizi_copy_button);
+
         Button playSoundButton = (Button) view.findViewById(R.id.button_play_sound);
 
         //SHOW ENGLISH PHRASE
@@ -96,38 +116,67 @@ public class ViewPhraseFragment extends Fragment {
         englishTextView.setText(content);
 
         //SHOW ARABIC PHRASE
-        arabicTextView.setText(translatedPhrase.getNativePhraseSpelling());
-        arabicTextView.setVisibility(arabicTextView.getText().toString().equals("") ? View.GONE : View.VISIBLE);
-        arabicTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String text = ((TextView) v).getText().toString();
-                showShareDialog(text);
-            }
-        });
+        final String arabicText = translatedPhrase.getNativePhraseSpelling();
+        if (StringUtil.isNotEmpty(arabicText)) {
+            arabicTextView.setVisibility(View.VISIBLE);
+            arabicTextView.setText(arabicText);
+            arabicTextCopy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    copyToClipboard(arabicText);
+                }
+            });
+            arabicTextShare.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    shareText(arabicText);
+                }
+            });
+        } else {
+            arabicTextView.setVisibility(View.GONE);
+        }
 
         //SHOW ARABIZI PHRASE
-        arabiziTextView.setText(translatedPhrase.getPhoneticPhraseSpelling());
-        arabiziTextView.setVisibility(arabiziTextView.getText().toString().equals("") ? View.GONE : View.VISIBLE);
-        arabiziTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String text = ((TextView) v).getText().toString();
-                showShareDialog(text);
-            }
-        });
+        final String arabiziText = translatedPhrase.getPhoneticPhraseSpelling();
+        if (StringUtil.isNotEmpty(arabicText)) {
+            arabiziTextView.setVisibility(View.VISIBLE);
+            arabiziTextView.setText(arabiziText);
+            arabiziTextCopy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    copyToClipboard(arabiziText);
+                }
+            });
+            arabiziTextShare.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    shareText(arabiziText);
+                }
+            });
+        } else {
+            arabiziTextView.setVisibility(View.GONE);
+        }
 
-        //SHOW ARABIZI PHRASE
-        properBiziTextView.setText(translatedPhrase.getProperPhoneticPhraseSpelling());
-        properBiziTextView.setVisibility(properBiziTextView.getText().toString().equals("") ? View.GONE : View.VISIBLE);
-        properBiziTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String text = ((TextView) v).getText().toString();
-                showShareDialog(text);
-            }
-        });
-
+        //SHOW PROPERBIZI PHRASE
+        final String properBiziText = translatedPhrase.getProperPhoneticPhraseSpelling();
+        if (StringUtil.isNotEmpty(arabicText)) {
+            properBiziTextView.setVisibility(View.VISIBLE);
+            properBiziTextView.setText(properBiziText);
+            properBiziTextCopy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    copyToClipboard(properBiziText);
+                }
+            });
+            properBiziTextShare.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    shareText(properBiziText);
+                }
+            });
+        } else {
+            properBiziTextView.setVisibility(View.GONE);
+        }
 
         //PLAY SOUND
         setSoundFile(category, originalPhrase);
@@ -150,7 +199,6 @@ public class ViewPhraseFragment extends Fragment {
         }
         return view;
     }
-
 
     private void setSoundFile(Category category, Phrase originalPhrase) {
         String fileName = originalPhrase.getNativePhraseSpelling();
@@ -186,12 +234,17 @@ public class ViewPhraseFragment extends Fragment {
         });
     }
 
-    private void showShareDialog(String text) {
-        Bundle bundle = new Bundle();
-        bundle.putString(ShareDialog.TEXT, text);
+    private void copyToClipboard(String text) {
+        ClipData clip = ClipData.newPlainText("label", text);
+        clipboard.setPrimaryClip(clip);
+        String toastText = getActivity().getResources().getString(R.string.copied);
+        Toast.makeText(getActivity(), toastText, Toast.LENGTH_SHORT).show();
+    }
 
-        ShareDialog shareDialog = new ShareDialog();
-        shareDialog.setArguments(bundle);
-        shareDialog.show(getFragmentManager(), ShareDialog.TAG);
+    private void shareText(String text) {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, text);
+        startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.share_using)));
     }
 }

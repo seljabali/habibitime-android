@@ -24,10 +24,12 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
 
     HashMap<Category, Integer> idMap = new HashMap<Category, Integer>();
     private Activity activity;
+    private List<Category> categories;
 
     public CategoryAdapter(Context context, int resource, List<Category> categories) {
         super(context, resource, categories);
         this.activity = (Activity)context;
+        this.categories = categories;
         for (int i = 0; i < categories.size(); i++) {
             idMap.put(categories.get(i), i);
         }
@@ -63,6 +65,11 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
                     public void onClick(View v) {
                         ViewPhrasesFragment fragment = ViewPhrasesFragment.newInstance(category);
                         activity.getFragmentManager().beginTransaction()
+//                                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out, R.anim.slide_in_left, R.anim.slide_out)
+                                .setCustomAnimations(R.anim.fragment_slide_left_enter,
+                                        R.anim.fragment_slide_left_exit,
+                                        R.anim.fragment_slide_right_enter,
+                                        R.anim.fragment_slide_right_exit)
                                 .replace(R.id.fragmentLayoutContainer, fragment, ViewPhrasesFragment.TAG)
                                 .addToBackStack(ViewPhrasesFragment.TAG)
                                 .commit();
@@ -70,7 +77,8 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
                 });
             }
         }
-        int dpHeight = Math.round(ViewUtil.getScreenHeightDP(activity) / (Category.CATEGORY_COUNT+1));
+        int dpHeight = Math.round(ViewUtil.getScreenHeightDP(activity) / categories.size());
+        dpHeight -= 10;
         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.category_view_layout);
         linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dpHeight));
 

@@ -62,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/play_sound"
+        android:background="@drawable/play"
         android:layout_marginTop="@dimen/triple_space"
         android:visibility="gone"
         tools:visibility="visible"/>

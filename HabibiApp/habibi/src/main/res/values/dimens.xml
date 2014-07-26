@@ -1,6 +1,4 @@
 <resources>
-    <dimen name="string_size_large">20dp</dimen>
-    <dimen name="string_size_xlarge">28dp</dimen>
     <dimen name="single_space">8dp</dimen>
     <dimen name="double_space">16dp</dimen>
     <dimen name="triple_space">24dp</dimen>
@@ -10,4 +8,6 @@
     <dimen name="habibi_phrase_arabic_text_size">32sp</dimen>
     <dimen name="habibi_phrase_arabizi_text_size">32sp</dimen>
     <dimen name="habibi_phrase_properbizi_text_size">32sp</dimen>
+    <dimen name="play_icon_height">16dp</dimen>
+    <dimen name="play_icon_width">16dp</dimen>
 </resources>

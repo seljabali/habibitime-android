@@ -46,7 +46,7 @@ public class ViewPhrasesFragment extends Fragment {
         List<Phrase> phrases = phraseDataSource.getPhrases(-1, category, null, null, Language.ENGLISH, null);
         phraseDataSource.close();
 
-        PhraseAdapter phraseAdapter = new PhraseAdapter(getActivity(), R.id.category_view_text, phrases);
+        PhraseAdapter phraseAdapter = new PhraseAdapter(getActivity(), R.id.category_view_text, phrases, category);
         listView.setAdapter(phraseAdapter);
         return view;
     }

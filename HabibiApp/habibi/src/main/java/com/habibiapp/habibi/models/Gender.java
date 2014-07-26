@@ -31,6 +31,14 @@ public class Gender {
         return genderName;
     }
 
+    public String getGenderNameShortened() {
+        if (this == Gender.MALE) {
+            return "m";
+        } else {
+            return "f";
+        }
+    }
+
     public int getId() {
         return genderId;
     }

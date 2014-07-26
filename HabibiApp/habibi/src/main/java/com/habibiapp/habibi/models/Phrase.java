@@ -19,6 +19,7 @@ public class Phrase {
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -26,6 +27,7 @@ public class Phrase {
     public int getHabibiPhraseId() {
         return habibiPhraseId;
     }
+
     public void setHabibiPhraseId(int id) {
         this.habibiPhraseId = id;
     }
@@ -33,6 +35,7 @@ public class Phrase {
     public Language getLanguage() {
         return language;
     }
+
     public void setLanguage(int language) {
         this.language = Language.getLanguageFromColumn(language);
     }
@@ -40,6 +43,7 @@ public class Phrase {
     public Dialect getDialect() {
         return dialect;
     }
+
     public void setDialect(int dialect) {
         this.dialect = Dialect.getLanguageFromColumn(dialect);
     }
@@ -47,6 +51,7 @@ public class Phrase {
     public Gender getFromGender() {
         return this.fromGender;
     }
+
     public void setFromGender(int fromGender) {
         this.fromGender = Gender.getGenderFromColumn(fromGender);
     }
@@ -54,6 +59,7 @@ public class Phrase {
     public Gender getToGender() {
         return toGender;
     }
+
     public void setToGender(int toGender) {
         this.toGender = Gender.getGenderFromColumn(toGender);;
     }
@@ -61,6 +67,7 @@ public class Phrase {
     public String getNativePhraseSpelling() {
         return nativePhraseSpelling;
     }
+
     public void setNativePhraseSpelling(String nativePhraseSpelling) {
         this.nativePhraseSpelling = nativePhraseSpelling;
     }
@@ -68,6 +75,7 @@ public class Phrase {
     public String getPhoneticPhraseSpelling() {
         return phoneticPhraseSpelling;
     }
+
     public void setPhoneticPhraseSpelling(String phoneticPhraseSpelling) {
         this.phoneticPhraseSpelling = phoneticPhraseSpelling;
     }
@@ -75,8 +83,8 @@ public class Phrase {
     public String getProperPhoneticPhraseSpelling() {
         return properPhoneticPhraseSpelling;
     }
+
     public void setProperPhoneticPhraseSpelling(String properPhoneticPhraseSpelling) {
         this.properPhoneticPhraseSpelling = properPhoneticPhraseSpelling;
     }
-
 }

@@ -26,11 +26,13 @@ public class PhraseAdapter extends ArrayAdapter<Phrase> {
     HashMap<Phrase, Integer> idMap = new HashMap<Phrase, Integer>();
     private int phraseCount;
     private Activity activity;
+    private Category category;
 
-    public PhraseAdapter(Context context, int resource, List<Phrase> phrases) {
+    public PhraseAdapter(Context context, int resource, List<Phrase> phrases, Category category) {
         super(context, resource, phrases);
         this.activity = (Activity)context;
         this.phraseCount = phrases.size();
+        this.category = category;
         for (int i = 0; i < phrases.size(); i++) {
             idMap.put(phrases.get(i), i);
         }
@@ -64,7 +66,7 @@ public class PhraseAdapter extends ArrayAdapter<Phrase> {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ViewPhraseFragment fragment = ViewPhraseFragment.newInstance(activity, phrase);
+                        ViewPhraseFragment fragment = ViewPhraseFragment.newInstance(activity, phrase, category);
                         activity.getFragmentManager().beginTransaction()
                                 .replace(R.id.fragmentLayoutContainer, fragment, ViewPhraseFragment.TAG)
                                 .addToBackStack(ViewPhrasesFragment.TAG)

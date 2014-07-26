@@ -1,8 +1,8 @@
-Mood, I’m Happy, أنا مبسوط ‪, Ana Mabsoot , 2ana Mabsoo6 , أنا مبسوطة , Ana Mabsoota , 2ana Mabsoo6a 
-Mood, I’m Excited, أنا متحمس ‪, Ana Mit-hamis , 2ana Mit7amis , أنا متحمسه ‪, Ana Miit-hamsa , 2ana Mit7amsa 
-Mood, I’m Sad, أنا زعلان ‪, Ana Zaa-lan , 2ana Za3lan , أنا زعلانه ‪, Ana Zaa-lana , 2ana Za3lana 
-Mood, I’m Lonely, أنا وحيد ‪, Ana Waheed , 2ana Wa7eed , أنا وحيدة ‪‬, Ana Waheeda , 2ana Wa7eeda 
-Mood, I’m Missing you, أنا مشتألك ‪, Ana Mishta-lak , Ana Mishta2lak , أنا مشتألك , Ana Mishta-lik , 2ana Mishta2lik 
+Mood, I’m Happy, أنا مبسوط ‪, Ana Mabsoot , 2ana Mabsoo6 , أنا مبسوطة , Ana Mabsoota , 2ana Mabsoo6a ‬
+Mood, I’m Excited, أنا متحمس ‪, Ana Mit-hamis , 2ana Mit7amis , أنا متحمسه ‪, Ana Miit-hamsa , 2ana Mit7amsa ‬‬
+Mood, I’m Mad, أنا زعلان ‪, Ana Zaa-lan , 2ana Za3lan , أنا زعلانه ‪, Ana Zaa-lana , 2ana Za3lana ‬‬
+Mood, I’m Lonely, أنا وحيد ‪, Ana Waheed , 2ana Wa7eed , أنا وحيدة , Ana Waheeda , 2ana Wa7eeda ‬
+Mood, I’m Missing you, أنا مشتألك ‪, Ana Mishta-lak , Ana Mishta2lak , أنا مشتألك , Ana Mishta-lik , 2ana Mishta2lik ‬
 Mood, I’m Irritated, أنا مزعوج , Ana Maz-ooj , 2ana Maz3ooj , أنا مزعوجه , Ana Maz-oojah , 2ana Maz3oojah 
 Mood, I’m Jealous, أنا غيران , Ana Ghay-ran , 2ana ‘3ayran , أنا غيرانه , Ana Ghay-raneh , 2ana ‘3ayraneh 
 Mood, I’m Horny, أنا ممحون , Ana Mam-hoon , 2ana Mam7oon, أنا ممحونه , Ana Mam-hooneh , 2ana Mam7ooneh 
@@ -12,10 +12,10 @@ Flirt, I miss you, أنا مشتألك , Ana Mishta-lak , 2ana Mishta2lak , أن
 Flirt, You are beautiful, إنت حلو , Inta Hiloo , 2inta 7ilo , إنت حلوه , Inti Hil-weh , 2inti 7ilweh 
 Flirt, I adore you, أنا بعشأك , Ana Ba-sha-ak , 2ana Ba3sha2ak , أنا بعشئك , Ana Ba-sha-ik , 2ana Ba3sha2ik 
 Flirt, I want to hug you, أنا بدي أعبطك , Ana Bidy Ah-boo-tak , 2ana Bidy 2a3bo6ak , أنا بدي أعبطك , Ana Bidy Ah-boo-tik , 2an Bidy 2a3bo6ik 
-Flirt, I want to kiss you, أنا بدي أبوسك , Ana Bidy Aboo-sak , 2ana Bidy 2aboosak ,أنا بدي أبوسك , Ana Bidy Aboo-sik , Ana Bidy 2aboosik 
+Flirt, I want to kiss you, أنا بدي أبوسك , Ana Bidy Aboo-sak , 2ana Bidy 2aboosak , أنا بدي أبوسك , Ana Bidy Aboo-sik , Ana Bidy 2aboosik 
 Flirt, I like your eyes, أنا بحب عيونك , Ana Ba-hib Aayoonak , 2ana Ba7ib 3ayoonak , أنا بحب عيونك , Ana Ba-hib Aayoonik , Ana Ba7ib 3ayoonik 
 Flirt, I like your smile, أنا بحب ابتسامتك , Ana Ba-hib Ib-ti-sam-tak , 2ana Ba7ib 2ibtisamtak , أنا بحب ابتسامتك , 2ana Ba-hib Ib-ti-sam-tik , 2ana Ba7ib 2ibtisamtik 
-Flirt, That’s a nice dress, حلو فستانك , Hilo Fus-ta-nak , 7ilo Fustanak , حلو فستانك , Hilo Fus-ta-nik  7ilo Fustanik 
+Flirt, That’s a nice dress, حلو فستانك , Hilo Fus-ta-nak , 7ilo Fustanak , حلو فستانك , Hilo Fus-ta-nik,  7ilo Fustanik 
 Flirt, Those are cute pants, حلو بنطلونك , Hilo Ban-ta-loan-ak , 7ilo Ban6alownak , حلو بنطلونك , Hilo Ban-ta-loan-ik , 7ilo Ban6alownik
 Flirt, That’s a cute shirt, حلوه بلوزتك , Hil-weh Blooz-tak , 7ilweh Blooztak , حلوه بلوزتك , Hil-weh Blooz-tik , 7ilweh Blooztik 
 Flirt, I like your smell, حلوه ريحتك , Hil-weh Reeh-tak , 7ilweh Ree7tak , حلوه ريحتك , Hil-weh Reeh-tik , 7ilweh Ree7tik 
@@ -26,15 +26,12 @@ Questions, Do you love me?, بتحبني؟ , Bit-hib-ny? , Bit7ibny? , بتحب�
 Questions, Do you miss me?, مشتألي؟ , Mish-taa-ly? , Mishta2ly? , مشتائيلي؟ , Mish-taa-eely? , Mishta2eely? 
 Questions, Seriously?, عن جد؟ , Aan Jad? , 3an Jad? , عن جد؟ , Aan Jad? , 3an Jad? 
 Questions, What are you wearing?, شو لابس؟ , Shoo La-bis? , Shoo Labis? , شو لابسه؟ , Shoo Lab-seh? , Shoo Labseh? 
-Question, Do you want to be my lover?, بدك تكون حبيبي؟ , Bid-ak Ta-koon Habibi? , Biddak tkoon 7abibi? , بدك تكوني حبيبتي؟ , Bid-ik Ta-koony Habeebty? , Biddik Tkoony 7abeebty? 
-Questions, Will you marry me?, تتزوجني؟ , Tit-za-waj-ny?  Titzawajny? , تتزوجيني؟ , Tit-za-wa-jeeny? , Titzawajeeny? 
+Questions, Do you want to be my lover?, بدك تكون حبيبي؟ , Bid-ak Ta-koon Habibi? , Biddak tkoon 7abibi? , بدك تكوني حبيبتي؟ , Bid-ik Ta-koony Habeebty? , Biddik Tkoony 7abeebty? 
+Questions, Will you marry me?, تتزوجني؟ , Tit-za-waj-ny?,  Titzawajny? , تتزوجيني؟ , Tit-za-wa-jeeny? , Titzawajeeny? 
 Responses, Yes, نعم , Na-am , Na3am , نعم , Na-am , Na3am 
 Responses, No, لأ , Laah , La2 , لأ , Laah , La2 
 Responses, Definitely Not, طبعاً لأ , Tab-ahn Laah , Tab3an La2 , طبعاً لأ , Tab-ahn Laah , Tab3an La2 
 Responses, Definitely, طبعاً , Tab-ahn , Tab3an , طبعاً , Tab-ahn , Tab3an 
 Responses, Maybe, ممكن , Mum-kin , Momkin , ممكن , Mum-kin , Momkin 
 Responses, Let’s Go, يلا , Yala , Yalla , يلا , Yala , Yalla 
-Responses, Depends, بعتمد , Bih-timid , Bi3timid , بعتمد , Bih-timid , Bi3timid 
-
- 
-
+Responses, Depends, بعتمد , Bih-timid , Bi3timid , بعتمد , Bih-timid , Bi3timid

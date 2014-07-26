@@ -30,10 +30,10 @@ public class MainActivity extends Activity {
         appSettings = PreferenceManager.getDefaultSharedPreferences(this);
         sharedSettings = getSharedPreferences(PREFS_NAME, 0);
 //        if (settings.getBoolean(FIRST_TIME, true)) {
-//            mySQLHelper = new MySQLHelper(this);
-//            mySQLHelper.dropTables();
-//            mySQLHelper.setupDatabase();
-//            mySQLHelper.loadDatabase();
+            mySQLHelper = new MySQLHelper(this);
+            mySQLHelper.dropTables();
+            mySQLHelper.setupDatabase();
+            mySQLHelper.loadDatabase();
 //            settings.edit().putBoolean(FIRST_TIME, false).commit();
 //        }
 
@@ -67,7 +67,7 @@ public class MainActivity extends Activity {
     }
 
     public Gender getToGenderSettings() {
-        String toGender = appSettings.getString("to_gender", "1");
+        String toGender = appSettings.getString("to_gender", "2");
         return Gender.getGenderFromID(toGender);
     }
 }

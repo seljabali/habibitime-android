@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.habibiapp.habibi.datasources.CategoryDataSource;
 
+import java.util.Objects;
+
 /**
  * Created by habibi on 6/8/14.
  */
@@ -76,5 +78,15 @@ public class Category {
     @Override
     public String toString() {
         return categoryName;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Category) {
+            if (this.getId() == ((Category) object).getId()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

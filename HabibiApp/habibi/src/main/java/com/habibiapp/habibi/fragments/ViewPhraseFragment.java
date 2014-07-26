@@ -18,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.habibiapp.habibi.AppConfig;
+import com.habibiapp.habibi.BuildConfig;
 import com.habibiapp.habibi.MainActivity;
 import com.habibiapp.habibi.R;
 import com.habibiapp.habibi.ShareDialog;
@@ -58,9 +60,9 @@ public class ViewPhraseFragment extends Fragment {
         Gender toGender = ((MainActivity)activity).getToGenderSettings();
         Gender fromGender = ((MainActivity)activity).getFromGenderSettings();
         List<Phrase> translatedPhrases = phraseDataSource.getPhrases(phrase.getHabibiPhraseId(), null,
-                null, toGender, Language.ARABIC, null);
+                fromGender, toGender, Language.ARABIC, null);
         phraseDataSource.close();
-
+        fragment.setGenders(toGender, fromGender);
         fragment.setSettings(activity);
         fragment.setActivity(activity);
         fragment.setPhrase(translatedPhrases.get(0));
@@ -163,24 +165,28 @@ public class ViewPhraseFragment extends Fragment {
         this.originalPhrase = phrase;
     }
 
+    private void setGenders(Gender toGender, Gender fromGender) {
+        this.toGender = toGender;
+        this.fromGender = fromGender;
+    }
+
     private void setSoundFile(Category category, Phrase originalPhrase, Phrase toPhrase) {
         String fileName = originalPhrase.getNativePhraseSpelling();
-        fileName = fileName.replace(" ", "_");
-        fileName = fileName.replace("?", "");
-        fileName = fileName.replace(".", "");
-        fileName = fileName.replace("'", "");
-        fileName = fileName.toLowerCase().trim();
-        soundFile = activity.getResources().getIdentifier(PATH+fileName, "raw", activity.getPackageName());
+        fileName = fileName.replaceAll("[^a-zA-Z\\_\\ ]", "");
+        fileName = fileName.replace(" ", "_").toLowerCase().trim();
+        fileName = PATH + fileName;
+        soundFile = activity.getResources().getIdentifier(fileName, "raw", activity.getPackageName());
         if (soundFile == 0) {
-            if (category == Category.MOOD) {
+            if (Category.MOOD.equals(category)) {
                 fileName += "_" + fromGender.getGenderNameShortened();
             } else {
                 fileName += "_" + toGender.getGenderNameShortened();
             }
-            soundFile = activity.getResources().getIdentifier(PATH+fileName, "raw", activity.getPackageName());
+            soundFile = activity.getResources().getIdentifier(fileName, "raw", activity.getPackageName());
         }
-        if (soundFile == 0) {
-            Log.e("Loading Sound",  "Couldn't find: " + PATH + fileName);
+        if (AppConfig.DEBUG) {
+            Log.e("Loading Sound",  "Loaded: " + fileName);
+            assert soundFile != 0;
         }
     }
 

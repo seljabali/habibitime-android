@@ -229,8 +229,8 @@ public class MySQLHelper extends SQLiteOpenHelper {
             buffreader.close();
             habibiPhraseDataSource.close();
             phraseDataSource.close();
-        } catch (Exception e) {
-            Log.e("Loading Database", "Couldn't add words: " + e.toString());
+        } catch (Throwable throwable) {
+            Log.e("Loading Database", "Couldn't add words: " + throwable.toString());
         } finally {
             habibiPhraseDataSource.close();
             phraseDataSource.close();
@@ -257,15 +257,49 @@ public class MySQLHelper extends SQLiteOpenHelper {
             phraseDataSource.createPhrase(habibiId, Language.ENGLISH.getId(),
                     -1, -1, -1, line[ENGLISH], null, null);
 
-            //Create Arabic Phrase Male
-            phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
-                    Dialect.JORDAN.getId(), Gender.MALE.getId(), Gender.MALE.getId(),
-                    line[ARABIC_M], line[BIZI_M], line[BIZIPROPER_M]);
+            if (Category.MOOD.equals(category)) {
+                //Create Arabic Phrase M->M
+                phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
+                        Dialect.JORDAN.getId(), Gender.MALE.getId(), Gender.MALE.getId(),
+                        line[ARABIC_M], line[BIZI_M], line[BIZIPROPER_M]);
 
-            //Create Arabic Phrase Female
-            phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
-                    Dialect.JORDAN.getId(), Gender.FEMALE.getId(), Gender.FEMALE.getId(),
-                    line[ARABIC_F], line[BIZI_F], line[BIZIPROPER_F]);
+                //Create Arabic Phrase M->F
+                phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
+                        Dialect.JORDAN.getId(), Gender.MALE.getId(), Gender.FEMALE.getId(),
+                        line[ARABIC_M], line[BIZI_M], line[BIZIPROPER_M]);
+
+                //Create Arabic Phrase F->F
+                phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
+                        Dialect.JORDAN.getId(), Gender.FEMALE.getId(), Gender.FEMALE.getId(),
+                        line[ARABIC_F], line[BIZI_F], line[BIZIPROPER_F]);
+
+                //Create Arabic Phrase F->M
+                phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
+                        Dialect.JORDAN.getId(), Gender.FEMALE.getId(), Gender.MALE.getId(),
+                        line[ARABIC_F], line[BIZI_F], line[BIZIPROPER_F]);
+            } else {
+                //Create Arabic Phrase M->M
+                phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
+                        Dialect.JORDAN.getId(), Gender.MALE.getId(), Gender.MALE.getId(),
+                        line[ARABIC_M], line[BIZI_M], line[BIZIPROPER_M]);
+
+                //Create Arabic Phrase F->M
+                phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
+                        Dialect.JORDAN.getId(), Gender.FEMALE.getId(), Gender.MALE.getId(),
+                        line[ARABIC_M], line[BIZI_M], line[BIZIPROPER_M]);
+
+                //Create Arabic Phrase F->F
+                phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
+                        Dialect.JORDAN.getId(), Gender.FEMALE.getId(), Gender.FEMALE.getId(),
+                        line[ARABIC_F], line[BIZI_F], line[BIZIPROPER_F]);
+
+                //Create Arabic Phrase M->F
+                phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
+                        Dialect.JORDAN.getId(), Gender.MALE.getId(), Gender.FEMALE.getId(),
+                        line[ARABIC_F], line[BIZI_F], line[BIZIPROPER_F]);
+            }
+
+
         } catch (Exception e) {
             Log.e("Add phrase", "Phrase add fail!" + e.toString());
         }

@@ -32,7 +32,7 @@ public class Gender {
     }
 
     public String getGenderNameShortened() {
-        if (this == Gender.MALE) {
+        if (Gender.MALE.equals(this)) {
             return "m";
         } else {
             return "f";
@@ -49,5 +49,15 @@ public class Gender {
 
     public static Gender getGenderFromID(String id) {
         return "1".equals(id) ? MALE : FEMALE;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Gender) {
+            if (this.getId() == ((Gender) object).getId()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

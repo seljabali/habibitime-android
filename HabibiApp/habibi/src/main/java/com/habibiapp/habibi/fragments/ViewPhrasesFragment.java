@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.habibiapp.habibi.PhraseAdapter;
+import com.habibiapp.habibi.adapters.PhraseAdapter;
 import com.habibiapp.habibi.R;
 import com.habibiapp.habibi.datasources.PhraseDataSource;
 import com.habibiapp.habibi.models.Category;

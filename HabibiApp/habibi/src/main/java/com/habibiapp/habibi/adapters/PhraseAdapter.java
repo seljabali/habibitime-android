@@ -1,4 +1,4 @@
-package com.habibiapp.habibi;
+package com.habibiapp.habibi.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.habibiapp.habibi.R;
+import com.habibiapp.habibi.ViewUtil;
 import com.habibiapp.habibi.fragments.ViewPhraseFragment;
 import com.habibiapp.habibi.fragments.ViewPhrasesFragment;
 import com.habibiapp.habibi.models.Category;
@@ -54,7 +56,7 @@ public class PhraseAdapter extends ArrayAdapter<Phrase> {
         View view = convertView;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.view_phrase, null);
+            view = inflater.inflate(R.layout.adapter_phrase_item, null);
         }
 
         final Phrase phrase = getItem(position);

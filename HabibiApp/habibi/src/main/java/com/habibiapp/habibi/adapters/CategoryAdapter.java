@@ -1,4 +1,4 @@
-package com.habibiapp.habibi;
+package com.habibiapp.habibi.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.habibiapp.habibi.R;
+import com.habibiapp.habibi.ViewUtil;
 import com.habibiapp.habibi.fragments.ViewPhrasesFragment;
 import com.habibiapp.habibi.models.Category;
 import java.util.HashMap;

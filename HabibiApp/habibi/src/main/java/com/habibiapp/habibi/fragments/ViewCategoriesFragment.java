@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.habibiapp.habibi.CategoryAdapter;
+import com.habibiapp.habibi.adapters.CategoryAdapter;
 import com.habibiapp.habibi.R;
 import com.habibiapp.habibi.models.Category;
 

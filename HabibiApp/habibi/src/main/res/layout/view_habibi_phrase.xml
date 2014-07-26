@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/habibi_phrase_english_text_size"
-            android:layout_gravity="center"
+            android:layout_gravity="center_horizontal"
             android:paddingLeft="@dimen/double_space"
             android:paddingRight="@dimen/double_space"
             android:paddingTop="@dimen/triple_space"
@@ -69,7 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/habibi_phrase_arabizi_text_size"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center_horizontal"
             android:paddingLeft="@dimen/double_space"
             android:paddingTop="@dimen/triple_space"
             android:paddingBottom="@dimen/triple_space"
@@ -108,8 +108,9 @@
 
         <TextView
             android:id="@+id/properbizi_phrase"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:textSize="@dimen/habibi_phrase_properbizi_text_size"
             android:background="@color/row_odd"
             android:paddingLeft="@dimen/double_space"
@@ -147,7 +148,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/play"
-        android:layout_marginTop="@dimen/quadruple_space"
+        android:layout_marginTop="@dimen/double_space"
+        android:layout_marginBottom="@dimen/single_space"
         android:visibility="gone"
         tools:visibility="visible"/>
 

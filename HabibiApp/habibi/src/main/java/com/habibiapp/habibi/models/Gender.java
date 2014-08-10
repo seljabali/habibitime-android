@@ -45,6 +45,9 @@ public class Gender implements Parcelable {
     public int getId() {
         return genderId;
     }
+    public String getIdAsString() {
+        return Integer.toString(genderId);
+    }
 
     public void setGenderId(int id) {
         this.genderId = id;

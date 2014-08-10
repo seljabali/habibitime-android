@@ -18,6 +18,12 @@
             android:name="com.habibiapp.habibi.SettingsActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name="com.habibiapp.habibi.installation.InstallationActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label=""
+            android:theme="@style/FullscreenTheme" >
+        </activity>
     </application>
 
 </manifest>

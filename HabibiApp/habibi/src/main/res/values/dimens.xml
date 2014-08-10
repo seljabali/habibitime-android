@@ -9,10 +9,14 @@
     <dimen name="habibi_phrase_arabic_text_size">28sp</dimen>
     <dimen name="habibi_phrase_arabizi_text_size">28sp</dimen>
     <dimen name="habibi_phrase_properbizi_text_size">28sp</dimen>
+
     <dimen name="play_icon_height">16dp</dimen>
     <dimen name="play_icon_width">16dp</dimen>
     <dimen name="clipboard_icon_height">16dp</dimen>
     <dimen name="clipboard_icon_width">16dp</dimen>
     <dimen name="phrase_adapter_item_height">34dp</dimen>
+    <dimen name="gender_icon_height">30dp</dimen>
+    <dimen name="gender_icon_width">30dp</dimen>
+
     <integer name="time">300</integer>
 </resources>

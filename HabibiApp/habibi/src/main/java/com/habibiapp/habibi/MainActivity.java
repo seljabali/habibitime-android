@@ -9,20 +9,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.habibiapp.habibi.fragments.ViewCategoriesFragment;
+import com.habibiapp.habibi.installation.InstallationActivity;
+import com.habibiapp.habibi.installation.fragments.WelcomePageFragment;
 import com.habibiapp.habibi.models.Gender;
 
 public class MainActivity extends Activity {
     private MySQLHelper mySQLHelper;
-    private final String PREFS_NAME = "MyPrefsFile";
-    private final String FIRST_TIME = "my_first_time";
+    public static final String PREFS_NAME = "MyPrefsFile";
+    public static final String FIRST_TIME = "my_first_time";
+    public static final String FROM_GENDER = "from_gender";
+    public static final String TO_GENDER = "to_gender";
     private SharedPreferences sharedSettings;
     private SharedPreferences appSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
         appSettings = PreferenceManager.getDefaultSharedPreferences(this);
         sharedSettings = getSharedPreferences(PREFS_NAME, 0);
         if (sharedSettings.getBoolean(FIRST_TIME, true)) {
@@ -30,14 +32,22 @@ public class MainActivity extends Activity {
             mySQLHelper.dropTables();
             mySQLHelper.setupDatabase();
             mySQLHelper.loadDatabase();
-            sharedSettings.edit().putBoolean(FIRST_TIME, false).commit();
+            Intent intent = new Intent(this, InstallationActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            setContentView(R.layout.activity_main);
+            ViewCategoriesFragment fragment = ViewCategoriesFragment.newInstance(this);
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentLayoutContainer, fragment, ViewCategoriesFragment.TAG)
+                    .commit();
         }
-
-
-        ViewCategoriesFragment fragment = ViewCategoriesFragment.newInstance(this);
-        getFragmentManager().beginTransaction()
-                .replace(R.id.fragmentLayoutContainer, fragment, ViewCategoriesFragment.TAG)
-                .commit();
+//            mySQLHelper = new MySQLHelper(this);
+//            mySQLHelper.dropTables();
+//            mySQLHelper.setupDatabase();
+//            mySQLHelper.loadDatabase();
+//            sharedSettings.edit().putBoolean(FIRST_TIME, false).commit();
+//        }
     }
 
     @Override
@@ -54,12 +64,12 @@ public class MainActivity extends Activity {
     }
 
     public Gender getFromGenderSettings() {
-        String fromGender = appSettings.getString("from_gender", "1");
+        String fromGender = appSettings.getString(FROM_GENDER, "1");
         return Gender.getGenderFromID(fromGender);
     }
 
     public Gender getToGenderSettings() {
-        String toGender = appSettings.getString("to_gender", "2");
+        String toGender = appSettings.getString(TO_GENDER, "2");
         return Gender.getGenderFromID(toGender);
     }
 }

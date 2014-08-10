@@ -25,6 +25,9 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        startService(new Intent(this, BubbleService.class));
+
         appSettings = PreferenceManager.getDefaultSharedPreferences(this);
         sharedSettings = getSharedPreferences(PREFS_NAME, 0);
         if (sharedSettings.getBoolean(FIRST_TIME, true)) {

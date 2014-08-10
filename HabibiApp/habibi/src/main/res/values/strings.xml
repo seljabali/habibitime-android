@@ -2,10 +2,10 @@
 <resources>
 
     <string name="app_name">Habibi Time!</string>
-    <string name="flirt">Flirt</string>
-    <string name="meetup">Meetup</string>
-    <string name="mood">Mood</string>
-    <string name="answers">Answers</string>
+    <string name="flirt">FLIRT</string>
+    <string name="meetup">MEETUP</string>
+    <string name="mood">MOOD</string>
+    <string name="answers">ANSWERS</string>
     <string name="i">I</string>
     <string name="you">You</string>
     <string name="question">Question</string>
@@ -22,5 +22,7 @@
     <string name="gender_select_habibi_title">Please select your habibi\'s gender...</string>
     <string name="about_app">Habibi Time is about loving your habibi, bibi!</string>
     <string name="thank_you">THANK YOU!!</string>
+    <string name="ar_thank_you">شكراً</string>
+    <string name="swipe_to_start">Swipe to start flirting!</string>
 
 </resources>

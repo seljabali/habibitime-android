@@ -24,7 +24,7 @@ public class WelcomePageFragment extends Fragment {
         view.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
             @Override
             public void onSwipeLeft() {
-                AboutPageFragment fragment = new AboutPageFragment();
+                GenderSelectFragment fragment = new GenderSelectFragment();
                 getFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.fragment_slide_left_enter,
                                 R.anim.fragment_slide_left_exit,

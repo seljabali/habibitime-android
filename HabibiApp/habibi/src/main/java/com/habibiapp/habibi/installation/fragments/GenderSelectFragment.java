@@ -40,7 +40,7 @@ public class GenderSelectFragment extends Fragment {
 
             @Override
             public void onSwipeRight() {
-                AboutPageFragment fragment = new AboutPageFragment();
+                WelcomePageFragment fragment = new WelcomePageFragment();
                 getFragmentManager().beginTransaction()
                         .setCustomAnimations(
                                 R.anim.fragment_slide_right_enter,

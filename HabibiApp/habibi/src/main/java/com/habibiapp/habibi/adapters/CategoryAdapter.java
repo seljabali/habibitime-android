@@ -58,7 +58,7 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
         if (category!= null) {
             TextView itemView = (TextView) view.findViewById(R.id.category_view_text);
             if (itemView != null) {
-                itemView.setText(category.getCategoryName());
+                itemView.setText(category.getCategoryName().toUpperCase());
                 itemView.setBackgroundColor(getColorForCategory(position));
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override

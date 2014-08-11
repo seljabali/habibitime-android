@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.habibiapp.habibi.BubbleService;
 import com.habibiapp.habibi.MainActivity;
 import com.habibiapp.habibi.OnSwipeTouchListener;
 import com.habibiapp.habibi.R;

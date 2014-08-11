@@ -1,6 +1,7 @@
 package com.habibiapp.habibi.installation.fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.habibiapp.habibi.MainActivity;
 import com.habibiapp.habibi.OnSwipeTouchListener;
@@ -24,18 +26,21 @@ public class GenderSelectFragment extends Fragment {
         if (view == null) {
             return null;
         }
+
         view.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
             @Override
             public void onSwipeLeft() {
-                ThankYouFragment fragment = new ThankYouFragment();
-                getFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.fragment_slide_left_enter,
-                                R.anim.fragment_slide_left_exit,
-                                R.anim.fragment_slide_right_enter,
-                                R.anim.fragment_slide_right_exit)
-                        .replace(R.id.fragmentLayoutContainer_installation, fragment)
-                        .addToBackStack(null)
-                        .commit();
+                //TODO: Have defined default values
+                SharedPreferences sharedSettings = getActivity().getSharedPreferences(MainActivity.PREFS_NAME, 0);
+                sharedSettings.edit().putBoolean(MainActivity.FIRST_TIME, false).commit();
+
+                String arThankYou = getActivity().getResources().getString(R.string.ar_thank_you);
+                String enThankYou = getActivity().getResources().getString(R.string.thank_you);
+                String toastText = enThankYou + " ~ " + arThankYou;
+                Toast.makeText(getActivity(), toastText, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+                getActivity().finish();
             }
 
             @Override

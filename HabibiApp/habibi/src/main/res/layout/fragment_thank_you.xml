@@ -23,4 +23,10 @@
         android:gravity="center"
         android:text="@string/swipe_to_start"/>
 
+    <Button
+        android:id="@+id/start_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_service"/>
+
 </LinearLayout>

@@ -11,8 +11,8 @@ import android.view.Display;
  */
 public class ViewUtil {
 
-    public static float getScreenHeightDP(Activity context) {
-        Display display = context.getWindowManager().getDefaultDisplay();
+    public static float getScreenHeightDP(Activity activity) {
+        Display display = activity.getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
         return size.y;

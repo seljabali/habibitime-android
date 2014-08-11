@@ -9,6 +9,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <service android:name="com.habibiapp.habibi.BubbleService" />
         <activity android:name="com.habibiapp.habibi.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

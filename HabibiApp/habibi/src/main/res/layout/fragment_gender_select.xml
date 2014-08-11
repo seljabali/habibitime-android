@@ -24,13 +24,13 @@
             android:layout_width="@dimen/gender_icon_width"
             android:layout_height="@dimen/gender_icon_height"
             android:paddingRight="@dimen/single_space"
-            android:src="@drawable/gender_male"/>
+            android:src="@drawable/male"/>
 
         <ImageView
             android:id="@+id/gender_select_self_f_image_view"
             android:layout_width="@dimen/gender_icon_width"
             android:layout_height="@dimen/gender_icon_height"
-            android:src="@drawable/gender_male"/>
+            android:src="@drawable/female"/>
 
     </LinearLayout>
 
@@ -58,13 +58,13 @@
             android:layout_width="@dimen/gender_icon_width"
             android:layout_height="@dimen/gender_icon_height"
             android:paddingRight="@dimen/single_space"
-            android:src="@drawable/gender_male"/>
+            android:src="@drawable/male"/>
 
         <ImageView
             android:id="@+id/gender_select_habibi_f_image_view"
             android:layout_width="@dimen/gender_icon_width"
             android:layout_height="@dimen/gender_icon_height"
-            android:src="@drawable/gender_male"/>
+            android:src="@drawable/female"/>
 
     </LinearLayout>
 

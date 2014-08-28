@@ -22,39 +22,40 @@
         android:background="@color/row_odd"
         android:layout_marginTop="@dimen/double_space">
 
-        <ImageView
-            android:id="@+id/arabic_share_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/share"
-            android:layout_marginLeft="@dimen/double_space"
-            android:layout_gravity="center_vertical"
-            android:maxHeight="@dimen/clipboard_icon_height"
-            android:maxWidth="@dimen/clipboard_icon_width"/>
-
-        <ImageButton
-            android:id="@+id/arabic_copy_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/clipboard"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/double_space"
-            android:maxHeight="@dimen/clipboard_icon_height"
-            android:maxWidth="@dimen/clipboard_icon_width"/>
-
         <TextView
             android:id="@+id/arabic_phrase"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/habibi_phrase_english_text_size"
+            android:textSize="@dimen/habibi_phrase_arabizi_text_size"
             android:layout_gravity="center_horizontal"
             android:paddingLeft="@dimen/double_space"
-            android:paddingRight="@dimen/double_space"
             android:paddingTop="@dimen/triple_space"
             android:paddingBottom="@dimen/triple_space"
             android:layout_marginTop="@dimen/triple_space"
-            tools:text="يلا"/>
+            android:layout_weight="8"
+            tools:text="يلا"
+            android:gravity="left" />
 
+        <ImageButton
+            android:id="@+id/arabic_share_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/clipboard"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/double_space"
+            android:maxHeight="@dimen/clipboard_icon_height"
+            android:maxWidth="@dimen/clipboard_icon_width"/>
+
+        <ImageView
+            android:id="@+id/arabic_copy_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/share"
+            android:layout_marginRight="@dimen/double_space"
+            android:paddingRight="@dimen/double_space"
+            android:layout_gravity="center_vertical"
+            android:maxHeight="@dimen/clipboard_icon_height"
+            android:maxWidth="@dimen/clipboard_icon_width"/>
 
     </LinearLayout>
 

@@ -16,7 +16,7 @@ public class Category implements Parcelable {
     public static final Category QUESTION = new Category(CategoryDataSource.QUESTION, "Questions");
     public static final Category ANSWER = new Category(CategoryDataSource.ANSWER, "Responses");
     public static final Category FLIRT = new Category(CategoryDataSource.FLIRT, "Flirt");
-    public static final Category ALL = new Category(-1, "All");
+    public static final Category SETTINGS = new Category(-1, "Settings");
     public static final int CATEGORY_COUNT = 4;
 
     private int id;

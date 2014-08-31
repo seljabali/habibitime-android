@@ -1,6 +1,7 @@
 package com.habibiapp.habibi;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,6 +21,8 @@ public class MainActivity extends Activity {
     public static final String FIRST_TIME = "my_first_time";
     public static final String FROM_GENDER = "from_gender";
     public static final String TO_GENDER = "to_gender";
+    public static final String MINI_BIBI = "mini_habibi_time";
+
     public static final String COPY_TYPE = "copy_type";
     private SharedPreferences sharedSettings;
     private SharedPreferences appSettings;
@@ -39,7 +42,7 @@ public class MainActivity extends Activity {
             startActivity(intent);
             finish();
         } else {
-            startService(new Intent(this, BubbleService.class));
+            setUpBubble();
             setContentView(R.layout.activity_main);
             ViewCategoriesFragment fragment = ViewCategoriesFragment.newInstance(this);
             getFragmentManager().beginTransaction()
@@ -51,7 +54,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume () {
         super.onResume();
-        startService(new Intent(this, BubbleService.class));
+        setUpBubble();
     }
 
     @Override
@@ -94,6 +97,14 @@ public class MainActivity extends Activity {
 //        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
 //        String toGender = appSettings.getString(TO_GENDER, "2");
 //        return Gender.getGenderFromID(toGender);
+    }
+
+    private void setUpBubble() {
+        if (appSettings.getBoolean(MINI_BIBI, false)) {
+            startService(new Intent(this, BubbleService.class));
+        } else {
+            stopService(new Intent(this, BubbleService.class));
+        }
     }
 
 }

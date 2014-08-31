@@ -19,9 +19,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListPopupWindow;
 import android.widget.Toast;
 
-import com.habibiapp.habibi.adapters.CategoryAdapter;
 import com.habibiapp.habibi.adapters.CategoryPopUpAdapter;
-import com.habibiapp.habibi.adapters.PhraseAdapter;
 import com.habibiapp.habibi.adapters.PhrasePopUpAdapter;
 import com.habibiapp.habibi.datasources.CategoryDataSource;
 import com.habibiapp.habibi.datasources.PhraseDataSource;
@@ -147,7 +145,7 @@ public class BubbleService extends Service {
         PhraseDataSource phraseDataSource = new PhraseDataSource(getApplicationContext());
         phraseDataSource.open();
         final List<Phrase> phrases;
-        if (Category.ALL.equals(category)) {
+        if (Category.SETTINGS.equals(category)) {
             phrases = phraseDataSource.getPhrases(-1, null, null, null, Language.ENGLISH, null);
         } else {
             phrases = phraseDataSource.getPhrases(-1, category, null, null, Language.ENGLISH, null);

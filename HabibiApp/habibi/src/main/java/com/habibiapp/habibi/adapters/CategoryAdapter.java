@@ -2,6 +2,7 @@ package com.habibiapp.habibi.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.habibiapp.habibi.R;
+import com.habibiapp.habibi.SettingsActivity;
 import com.habibiapp.habibi.ViewUtil;
 import com.habibiapp.habibi.fragments.ViewPhrasesFragment;
 import com.habibiapp.habibi.models.Category;
@@ -53,34 +55,38 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
             LayoutInflater inflater = activity.getLayoutInflater();
             view = inflater.inflate(R.layout.view_category, null);
         }
-
         final Category category = getItem(position);
         if (category!= null) {
             TextView itemView = (TextView) view.findViewById(R.id.category_view_text);
             if (itemView != null) {
                 itemView.setText(category.getCategoryName().toUpperCase());
-                itemView.setBackgroundColor(getColorForCategory(position));
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ViewPhrasesFragment fragment = ViewPhrasesFragment.newInstance(category);
-                        activity.getFragmentManager().beginTransaction()
+                        if (Category.SETTINGS.equals(category)) {
+                            Intent intent = new Intent(getContext(), SettingsActivity.class);
+                            getContext().startActivity(intent);
+                        } else {
+                            ViewPhrasesFragment fragment = ViewPhrasesFragment.newInstance(category);
+                            activity.getFragmentManager().beginTransaction()
 //                                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out, R.anim.slide_in_left, R.anim.slide_out)
-                                .setCustomAnimations(R.anim.fragment_slide_left_enter,
-                                        R.anim.fragment_slide_left_exit,
-                                        R.anim.fragment_slide_right_enter,
-                                        R.anim.fragment_slide_right_exit)
-                                .replace(R.id.fragmentLayoutContainer, fragment, ViewPhrasesFragment.TAG)
-                                .addToBackStack(ViewPhrasesFragment.TAG)
-                                .commit();
+                                    .setCustomAnimations(R.anim.fragment_slide_left_enter,
+                                            R.anim.fragment_slide_left_exit,
+                                            R.anim.fragment_slide_right_enter,
+                                            R.anim.fragment_slide_right_exit)
+                                    .replace(R.id.fragmentLayoutContainer, fragment, ViewPhrasesFragment.TAG)
+                                    .addToBackStack(ViewPhrasesFragment.TAG)
+                                    .commit();
+                        }
+
                     }
                 });
             }
         }
         int dpHeight = Math.round(ViewUtil.getScreenHeightDP(activity) / categories.size());
         dpHeight -= 10;
-        LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.category_view_layout);
-        linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dpHeight));
+        view.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dpHeight));
+        view.setBackgroundColor(getColorForCategory(position));
 
         return view;
     }

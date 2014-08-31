@@ -29,7 +29,7 @@ public class ViewCategoriesFragment extends Fragment {
         categoryDataSource.open();
         ArrayList<Category> categories = new ArrayList<Category>(categoryDataSource.getCategories());
         categoryDataSource.close();
-        categories.add(Category.ALL);
+        categories.add(Category.SETTINGS);
         Bundle args = new Bundle();
         args.putParcelableArrayList(CATEGORIES_KEY, categories);
         fragment.setArguments(args);

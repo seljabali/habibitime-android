@@ -42,7 +42,7 @@ public class ViewPhrasesFragment extends Fragment {
         PhraseDataSource phraseDataSource = new PhraseDataSource(getActivity());
         phraseDataSource.open();
         List<Phrase> phrases;
-        if (Category.ALL.equals(category)) {
+        if (Category.SETTINGS.equals(category)) {
             phrases = phraseDataSource.getPhrases(-1, null, null, null, Language.ENGLISH, null);
         } else {
             phrases = phraseDataSource.getPhrases(-1, category, null, null, Language.ENGLISH, null);

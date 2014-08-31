@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.habibiapp.habibi" >
+    package="com.codingcamels.habibitime" >
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
@@ -9,8 +9,8 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <service android:name="com.habibiapp.habibi.BubbleService" />
-        <activity android:name="com.habibiapp.habibi.MainActivity" >
+        <service android:name="com.codingcamels.habibitime.BubbleService" />
+        <activity android:name="com.codingcamels.habibitime.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,11 +18,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.habibiapp.habibi.SettingsActivity"
+            android:name="com.codingcamels.habibitime.SettingsActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.habibiapp.habibi.installation.InstallationActivity"
+            android:name="com.codingcamels.habibitime.installation.InstallationActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label=""
             android:theme="@style/FullscreenTheme" >

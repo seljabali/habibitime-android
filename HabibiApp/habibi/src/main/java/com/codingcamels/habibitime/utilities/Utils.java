@@ -1,23 +1,24 @@
-package com.habibiapp.habibi;
+package com.codingcamels.habibitime.utilities;
 
-import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.codingcamels.habibitime.R;
+
 /**
  * Created by habibi on 8/27/14.
  */
 public class Utils {
 
-    public static void copyToClipboard(Activity activity, String text) {
-        ClipboardManager clipboard = (ClipboardManager) activity.getSystemService(Context.CLIPBOARD_SERVICE);
+    public static void copyToClipboard(Context context, String text) {
+        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("label", text);
         clipboard.setPrimaryClip(clip);
-        String toastText = activity.getResources().getString(R.string.copied);
-        Toast.makeText(activity, toastText, Toast.LENGTH_SHORT).show();
+        String toastText = context.getResources().getString(R.string.copied);
+        Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
     }
 
     public static void shareText(Context context, String text) {

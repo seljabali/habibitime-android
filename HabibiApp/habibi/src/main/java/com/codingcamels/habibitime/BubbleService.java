@@ -82,7 +82,7 @@ public class BubbleService extends Service {
                             initialTouchX = event.getRawX();
                             initialTouchY = event.getRawY();
                         case MotionEvent.ACTION_UP:
-                            return false;
+
                         case MotionEvent.ACTION_MOVE:
                             params.x = initialX + (int) (event.getRawX() - initialTouchX);
                             params.y = initialY + (int) (event.getRawY() - initialTouchY);

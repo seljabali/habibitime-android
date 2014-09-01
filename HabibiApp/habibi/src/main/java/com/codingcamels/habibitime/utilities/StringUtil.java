@@ -1,4 +1,4 @@
-package com.habibiapp.habibi;
+package com.codingcamels.habibitime.utilities;
 
 import android.widget.TextView;
 

@@ -34,10 +34,6 @@ public class GenderSelectFragment extends Fragment {
                 SharedPreferences sharedSettings = getActivity().getSharedPreferences(MainActivity.PREFS_NAME, 0);
                 sharedSettings.edit().putBoolean(MainActivity.FIRST_TIME, false).commit();
 
-                String arThankYou = getActivity().getResources().getString(R.string.ar_thank_you);
-                String enThankYou = getActivity().getResources().getString(R.string.thank_you);
-                String toastText = enThankYou + " ~ " + arThankYou;
-                Toast.makeText(getActivity(), toastText, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
                 getActivity().finish();

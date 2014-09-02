@@ -21,6 +21,8 @@
     <color name="violet">#7F00FF</color>
     <color name="magenta">#FF00FF</color>
     <color name="white">#FFFF</color>
+    <color name="border_color_1">#FFFF</color>
+    <color name="border_color_2">#89BBF7</color>
 
     <array name="rainbow">
         <item>@color/bright_pink</item>

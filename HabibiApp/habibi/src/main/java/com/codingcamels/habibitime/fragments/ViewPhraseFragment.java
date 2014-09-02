@@ -95,8 +95,7 @@ public class ViewPhraseFragment extends Fragment {
         init(fromGender, toGender);
 
         if (category.equals(Category.MOOD) || category.equals(Category.ANSWER)) {
-            toMaleButton.setVisibility(View.GONE);
-            toFemaleButton.setVisibility(View.GONE);
+            init(fromGender, null);
         } else {
             toMaleButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -128,7 +127,10 @@ public class ViewPhraseFragment extends Fragment {
     }
 
     private void setGenderButtons(Gender toGender) {
-        if (Gender.MALE.equals(toGender)) {
+        if (toGender == null) {
+            toMaleButton.setBackground(getActivity().getResources().getDrawable(R.drawable.border));
+            toFemaleButton.setBackground(getActivity().getResources().getDrawable(R.drawable.border));
+        } else if (Gender.MALE.equals(toGender)) {
             toMaleButton.setBackground(getActivity().getResources().getDrawable(R.drawable.border));
             toFemaleButton.setBackgroundColor(android.R.color.transparent);
         } else {

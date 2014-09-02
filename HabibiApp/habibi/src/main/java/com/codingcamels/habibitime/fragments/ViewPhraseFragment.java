@@ -57,7 +57,7 @@ public class ViewPhraseFragment extends Fragment {
     private ImageView properBiziTextCopy;
     private ImageView toMaleButton;
     private ImageView toFemaleButton;
-    private Button playSoundButton;
+    private ImageView playSoundButton;
 
     public static ViewPhraseFragment newInstance(Phrase phrase, Category category) {
         ViewPhraseFragment fragment = new ViewPhraseFragment();
@@ -87,7 +87,7 @@ public class ViewPhraseFragment extends Fragment {
         properBiziTextCopy = (ImageView) view.findViewById(R.id.properbizi_copy_button);
         toMaleButton = (ImageView) view.findViewById(R.id.switch_to_male);
         toFemaleButton = (ImageView) view.findViewById(R.id.switch_to_female);
-        playSoundButton = (Button) view.findViewById(R.id.button_play_sound);
+        playSoundButton = (ImageView) view.findViewById(R.id.button_play_sound);
 
         final Gender fromGender = ((MainActivity)getActivity()).getFromGenderSettings();
         Gender toGender = ((MainActivity)getActivity()).getToGenderSettings();
@@ -122,8 +122,19 @@ public class ViewPhraseFragment extends Fragment {
         setArabicText(translatedPhrase);
         setArabiziText(translatedPhrase);
         setProperBiziText(translatedPhrase);
+        setGenderButtons(toGender);
         setPlaySound(fromGender, toGender);
 
+    }
+
+    private void setGenderButtons(Gender toGender) {
+        if (Gender.MALE.equals(toGender)) {
+            toMaleButton.setBackground(getActivity().getResources().getDrawable(R.drawable.border));
+            toFemaleButton.setBackgroundColor(android.R.color.transparent);
+        } else {
+            toMaleButton.setBackgroundColor(android.R.color.transparent);
+            toFemaleButton.setBackground(getActivity().getResources().getDrawable(R.drawable.border));
+        }
     }
 
     private void setPlaySound(Gender fromGender, Gender toGender) {

@@ -146,21 +146,21 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:paddingTop="@dimen/half_space">
+        android:layout_height="60dp"
+        android:layout_marginTop="@dimen/triple_space">
 
         <ImageView
             android:id="@+id/switch_to_male"
             android:layout_width="@dimen/clipboard_icon_width"
             android:layout_height="match_parent"
-            android:background="@drawable/gender_male"
+            android:src="@drawable/gender_male"
             android:layout_weight="1"/>
 
-        <Button
+        <ImageView
             android:id="@+id/button_play_sound"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/play"
+            android:src="@drawable/play"
             android:layout_weight="1"
             android:visibility="gone"
             tools:visibility="visible" />
@@ -170,7 +170,7 @@
             android:layout_width="@dimen/clipboard_icon_width"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/gender_male"/>
+            android:src="@drawable/gender_female"/>
     </LinearLayout>
 
 

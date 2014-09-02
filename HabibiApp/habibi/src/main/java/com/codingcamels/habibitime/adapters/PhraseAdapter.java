@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.codingcamels.habibitime.OnSwipeTouchListener;
 import com.codingcamels.habibitime.R;
 import com.codingcamels.habibitime.ViewUtil;
 import com.codingcamels.habibitime.fragments.ViewPhraseFragment;
@@ -66,21 +67,22 @@ public class PhraseAdapter extends ArrayAdapter<Phrase> {
             if (itemView != null) {
                 itemView.setText(phrase.getNativePhraseSpelling());
                 itemView.setBackgroundColor(getColorForPhrase(position));
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ViewPhraseFragment fragment = ViewPhraseFragment.newInstance(phrase, category);
-                        activity.getFragmentManager().beginTransaction()
-//                                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out, R.anim.slide_in_left, R.anim.slide_out)
-                                .setCustomAnimations(R.anim.fragment_slide_left_enter,
-                                        R.anim.fragment_slide_left_exit,
-                                        R.anim.fragment_slide_right_enter,
-                                        R.anim.fragment_slide_right_exit)
-                                .replace(R.id.fragmentLayoutContainer, fragment, ViewPhraseFragment.TAG)
-                                .addToBackStack(ViewPhrasesFragment.TAG)
-                                .commit();
-                    }
-                });
+                itemView.setOnTouchListener(
+                        new OnSwipeTouchListener(activity) {
+                            @Override
+                            public void onSwipeLeft() {
+                                init(phrase);
+                            }
+                            @Override
+                            public void onSwipeRight() {
+                                activity.onBackPressed();
+                            }
+
+                            @Override
+                            public void onClick() {
+                                init(phrase);
+                            }
+                        });
             }
         }
         int dpHeight;
@@ -97,6 +99,19 @@ public class PhraseAdapter extends ArrayAdapter<Phrase> {
     private int getColorForPhrase(int position) {
         TypedArray colors = activity.getResources().obtainTypedArray(R.array.habibi_colors_short);
         return colors.getColor(position % colors.length(), 0);
+    }
+
+    private void init(Phrase phrase) {
+        ViewPhraseFragment fragment = ViewPhraseFragment.newInstance(phrase, category);
+        activity.getFragmentManager().beginTransaction()
+//                                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out, R.anim.slide_in_left, R.anim.slide_out)
+                .setCustomAnimations(R.anim.fragment_slide_left_enter,
+                        R.anim.fragment_slide_left_exit,
+                        R.anim.fragment_slide_right_enter,
+                        R.anim.fragment_slide_right_exit)
+                .replace(R.id.fragmentLayoutContainer, fragment, ViewPhraseFragment.TAG)
+                .addToBackStack(ViewPhrasesFragment.TAG)
+                .commit();
     }
 
 }

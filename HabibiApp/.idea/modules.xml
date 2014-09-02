@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Habibi Time!.iml" filepath="$PROJECT_DIR$/Habibi Time!.iml" />
-      <module fileurl="file://$PROJECT_DIR$/habibi/codingcamels.iml" filepath="$PROJECT_DIR$/habibi/codingcamels.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HabibiApp.iml" filepath="$PROJECT_DIR$/HabibiApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/habibi/habibi.iml" filepath="$PROJECT_DIR$/habibi/habibi.iml" />
     </modules>
   </component>
 </project>

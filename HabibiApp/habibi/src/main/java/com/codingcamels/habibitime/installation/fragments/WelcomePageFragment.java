@@ -24,17 +24,26 @@ public class WelcomePageFragment extends Fragment {
         view.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
             @Override
             public void onSwipeLeft() {
-                GenderSelectFragment fragment = new GenderSelectFragment();
-                getFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.fragment_slide_left_enter,
-                                R.anim.fragment_slide_left_exit,
-                                R.anim.fragment_slide_right_enter,
-                                R.anim.fragment_slide_right_exit)
-                        .replace(R.id.fragmentLayoutContainer_installation, fragment)
-                        .addToBackStack(null)
-                        .commit();
+                nextFragment();
             }
+
+           @Override
+           public void onClick() {
+               nextFragment();
+           }
         });
         return view;
+    }
+
+    private void nextFragment() {
+        GenderSelectFragment fragment = new GenderSelectFragment();
+        getFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.fragment_slide_left_enter,
+                        R.anim.fragment_slide_left_exit,
+                        R.anim.fragment_slide_right_enter,
+                        R.anim.fragment_slide_right_exit)
+                .replace(R.id.fragmentLayoutContainer_installation, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 }

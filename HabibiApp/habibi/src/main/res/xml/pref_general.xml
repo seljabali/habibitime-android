@@ -20,7 +20,7 @@
 
     <CheckBoxPreference
         android:key="mini_habibi_time"
-        android:title="Enable Mini HabibiTime"
+        android:title="@string/enable_mini_view"
         android:defaultValue="false"/>
 
 </PreferenceScreen>

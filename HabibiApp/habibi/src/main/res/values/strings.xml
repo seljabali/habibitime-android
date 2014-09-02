@@ -17,13 +17,10 @@
     <string name="share_using">Share using…</string>
     <string name="copied">Copied to Clipboard!</string>
     <string name="title_activity_installation">InstallationActivity</string>
-    <string name="gender_select_self_title">Please select your gender...</string>
-    <string name="gender_select_subtitle">Excuse my Arabic: We only have 2!</string>
-    <string name="gender_select_habibi_title">Please select your habibi\'s gender...</string>
-    <string name="about_app">Habibi Time is about loving your habibi, bibi!</string>
-    <string name="thank_you">Thank you</string>
-    <string name="ar_thank_you">شكراً</string>
-    <string name="swipe_to_start">Swipe to start flirting!</string>
-    <string name="start_service">Enable Habibi Widget!</string>
+    <string name="gender_select_self_title">Please select your gender:</string>
+    <string name="gender_select_subtitle">There\'s only two in Arabic! ;)</string>
+    <string name="gender_select_habibi_title">Please select your habibi\'s gender:</string>
+    <string name="enable_mini_view">Enable mini-view</string>
+
 
 </resources>

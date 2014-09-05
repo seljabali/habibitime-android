@@ -28,33 +28,34 @@ public class OnSwipeTouchListener implements View.OnTouchListener {
 
     private final class GestureListener extends GestureDetector.SimpleOnGestureListener {
 
-        private static final int SWIPE_DISTANCE_THRESHOLD = 65;
+        private static final int SWIPE_DISTANCE_THRESHOLD = 100;
         private static final int SWIPE_VELOCITY_THRESHOLD = 65;
 
 
+//        @Override
+//        public boolean onSingleTapConfirmed(MotionEvent e) {
+//            onClick();
+//            return true;
+//        }
+
         @Override
-        public boolean onSingleTapConfirmed(MotionEvent e) {
+        public boolean onDown(MotionEvent e) {
             onClick();
             return true;
         }
 
-        @Override
-        public boolean onDown(MotionEvent e) {
-            return true;
-        }
-
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            float distanceX = e2.getX() - e1.getX();
-            float distanceY = e2.getY() - e1.getY();
-            if (Math.abs(distanceX) > Math.abs(distanceY) && Math.abs(distanceX) > SWIPE_DISTANCE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
-                if (distanceX > 0)
-                    onSwipeRight();
-                else
-                    onSwipeLeft();
-                return true;
-            }
-            return false;
-        }
+//        @Override
+//        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+//            float distanceX = e2.getX() - e1.getX();
+//            float distanceY = e2.getY() - e1.getY();
+//            if (Math.abs(distanceX) > Math.abs(distanceY) && Math.abs(distanceX) > SWIPE_DISTANCE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+//                if (distanceX > 0)
+//                    onSwipeRight();
+//                else
+//                    onSwipeLeft();
+//                return true;
+//            }
+//            return false;
+//        }
     }
 }

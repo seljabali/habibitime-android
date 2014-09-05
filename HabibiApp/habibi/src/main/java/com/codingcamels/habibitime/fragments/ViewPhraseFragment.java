@@ -138,8 +138,8 @@ public class ViewPhraseFragment extends Fragment {
 
     private void setGenderButtons(Gender toGender) {
         if (toGender == null) {
-            toMaleButton.setBackground(getActivity().getResources().getDrawable(R.drawable.border));
-            toFemaleButton.setBackground(getActivity().getResources().getDrawable(R.drawable.border));
+            toMaleButton.setVisibility(View.GONE);
+            toFemaleButton.setVisibility(View.GONE);
         } else if (Gender.MALE.equals(toGender)) {
             toMaleButton.setBackground(getActivity().getResources().getDrawable(R.drawable.border));
             toFemaleButton.setBackgroundColor(android.R.color.transparent);

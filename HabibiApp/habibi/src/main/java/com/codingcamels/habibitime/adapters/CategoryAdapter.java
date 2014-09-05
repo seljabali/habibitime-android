@@ -1,6 +1,7 @@
 package com.codingcamels.habibitime.adapters;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -15,6 +16,7 @@ import com.codingcamels.habibitime.OnSwipeTouchListener;
 import com.codingcamels.habibitime.R;
 import com.codingcamels.habibitime.SettingsActivity;
 import com.codingcamels.habibitime.ViewUtil;
+import com.codingcamels.habibitime.fragments.SettingsFragment;
 import com.codingcamels.habibitime.fragments.ViewPhrasesFragment;
 import com.codingcamels.habibitime.models.Category;
 import java.util.HashMap;
@@ -84,25 +86,27 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
     }
 
     private void init(Category category) {
+        Fragment fragment;
         if (Category.SETTINGS.equals(category)) {
-            Intent intent = new Intent(getContext(), SettingsActivity.class);
-            getContext().startActivity(intent);
+            fragment = SettingsFragment.newInstance();
         } else {
-            ViewPhrasesFragment fragment = ViewPhrasesFragment.newInstance(category);
-            activity.getFragmentManager().beginTransaction()
-//                                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out, R.anim.slide_in_left, R.anim.slide_out)
-                    .setCustomAnimations(R.anim.fragment_slide_left_enter,
-                            R.anim.fragment_slide_left_exit,
-                            R.anim.fragment_slide_right_enter,
-                            R.anim.fragment_slide_right_exit)
-                    .replace(R.id.fragmentLayoutContainer, fragment, ViewPhrasesFragment.TAG)
-                    .addToBackStack(ViewPhrasesFragment.TAG)
-                    .commit();
+            fragment = ViewPhrasesFragment.newInstance(category);
         }
+        activity.getFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.fragment_slide_left_enter,
+                        R.anim.fragment_slide_left_exit,
+                        R.anim.fragment_slide_right_enter,
+                        R.anim.fragment_slide_right_exit)
+                .replace(R.id.fragmentLayoutContainer, fragment, ViewPhrasesFragment.TAG)
+                .addToBackStack(ViewPhrasesFragment.TAG)
+                .commit();
     }
+
     private int getColorForCategory(int position) {
         TypedArray colors = activity.getResources().obtainTypedArray(R.array.habibi_colors);
         return colors.getColor(position % colors.length(), 0);
     }
 
 }
+
+//                                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out, R.anim.slide_in_left, R.anim.slide_out)

@@ -34,21 +34,12 @@ public class GenderSelectFragment extends Fragment {
         final ImageView habibiGenderMale = (ImageView) view.findViewById(R.id.gender_select_habibi_m_image_view);
         final ImageView habibiGenderFemale = (ImageView) view.findViewById(R.id.gender_select_habibi_f_image_view);
 
-        view.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
-            @Override
-            public void onSwipeLeft() {
-                nextPage();
-            }
-
-            @Override
-            public void onSwipeRight() {
-                previousPage();
-            }
-
-            @Override
-            public void onClick() {
-                nextPage();
-            }
+        view.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        nextPage();
+                    }
         });
 
         final SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(getActivity());

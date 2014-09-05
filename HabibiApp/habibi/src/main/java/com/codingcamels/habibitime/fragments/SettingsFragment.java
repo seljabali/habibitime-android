@@ -72,7 +72,7 @@ public class SettingsFragment extends Fragment {
         });
 
         final CheckBox enableMiniView = (CheckBox) view.findViewById(R.id.enable_mini_view);
-        enableMiniView.setChecked(MainActivity.isMiniViewEnabled(getActivity()));
+        enableMiniView.setChecked(MainActivity.isBibiEnabled(getActivity()));
         enableMiniView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

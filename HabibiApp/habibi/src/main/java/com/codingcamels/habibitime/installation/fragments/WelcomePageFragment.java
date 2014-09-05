@@ -21,16 +21,11 @@ public class WelcomePageFragment extends Fragment {
         if (view == null) {
             return null;
         }
-        view.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSwipeLeft() {
+            public void onClick(View v) {
                 nextFragment();
             }
-
-           @Override
-           public void onClick() {
-               nextFragment();
-           }
         });
         return view;
     }

@@ -63,18 +63,14 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
             TextView itemView = (TextView) view.findViewById(R.id.category_view_text);
             if (itemView != null) {
                 itemView.setText(category.getCategoryName().toUpperCase());
-                itemView.setOnTouchListener(
-                        new OnSwipeTouchListener(activity) {
+                itemView.setOnClickListener(
+                        new View.OnClickListener() {
                             @Override
-                            public void onSwipeLeft() {
+                            public void onClick(View v) {
                                 init(category);
                             }
-
-                            @Override
-                            public void onClick() {
-                                init(category);
-                            }
-                        });
+                        }
+                );
             }
         }
         int dpHeight = Math.round(ViewUtil.getScreenHeightDP(activity) / categories.size());

@@ -39,10 +39,16 @@ public class OnSwipeTouchListener implements View.OnTouchListener {
 //        }
 
         @Override
-        public boolean onDown(MotionEvent e) {
+        public boolean onSingleTapUp(MotionEvent e) {
             onClick();
-            return true;
+            return false;
         }
+
+//        @Override
+//        public boolean onDown(MotionEvent e) {
+//            onClick();
+//            return true;
+//        }
 
 //        @Override
 //        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {

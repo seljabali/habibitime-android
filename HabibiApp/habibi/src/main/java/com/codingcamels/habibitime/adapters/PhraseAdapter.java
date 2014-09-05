@@ -67,19 +67,10 @@ public class PhraseAdapter extends ArrayAdapter<Phrase> {
             if (itemView != null) {
                 itemView.setText(phrase.getNativePhraseSpelling());
                 itemView.setBackgroundColor(getColorForPhrase(position));
-                itemView.setOnTouchListener(
-                        new OnSwipeTouchListener(activity) {
+                itemView.setOnClickListener(
+                        new View.OnClickListener() {
                             @Override
-                            public void onSwipeLeft() {
-                                init(phrase);
-                            }
-                            @Override
-                            public void onSwipeRight() {
-                                activity.onBackPressed();
-                            }
-
-                            @Override
-                            public void onClick() {
+                            public void onClick(View v) {
                                 init(phrase);
                             }
                         });
@@ -104,7 +95,6 @@ public class PhraseAdapter extends ArrayAdapter<Phrase> {
     private void init(Phrase phrase) {
         ViewPhraseFragment fragment = ViewPhraseFragment.newInstance(phrase, category);
         activity.getFragmentManager().beginTransaction()
-//                                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out, R.anim.slide_in_left, R.anim.slide_out)
                 .setCustomAnimations(R.anim.fragment_slide_left_enter,
                         R.anim.fragment_slide_left_exit,
                         R.anim.fragment_slide_right_enter,

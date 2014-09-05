@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
             startActivity(intent);
             finish();
         } else {
-            setUpBubble();
+            setUpBubble(this);
             setContentView(R.layout.activity_main);
             ViewCategoriesFragment fragment = ViewCategoriesFragment.newInstance(this);
             getFragmentManager().beginTransaction()
@@ -47,14 +47,14 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume () {
         super.onResume();
-        setUpBubble();
+        setUpBubble(this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 0, 0, R.string.settings);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        menu.add(0, 0, 0, R.string.settings);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -92,12 +92,17 @@ public class MainActivity extends Activity {
 //        return Gender.getGenderFromID(toGender);
     }
 
-    private void setUpBubble() {
-        if (appSettings.getBoolean(MINI_BIBI, false)) {
-            startService(new Intent(this, BubbleService.class));
+    public static void setUpBubble(Activity activity) {
+        if (isBibiEnabled(activity)) {
+            activity.startService(new Intent(activity, BubbleService.class));
         } else {
-            stopService(new Intent(this, BubbleService.class));
+            activity.stopService(new Intent(activity, BubbleService.class));
         }
+    }
+
+    public static boolean isBibiEnabled(Context context) {
+        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
+        return appSettings.getBoolean(MINI_BIBI, false);
     }
 
 }

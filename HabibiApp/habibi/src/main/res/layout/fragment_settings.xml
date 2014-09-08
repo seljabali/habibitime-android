@@ -14,11 +14,19 @@
         <include layout="@layout/gender_select"/>
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/double_space"
+        android:background="@android:color/darker_gray"/>
+
     <CheckBox
         android:id="@+id/enable_mini_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/double_space"
+        android:button="@null"
+        android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
         android:text="@string/enable_mini_view"/>
 
 </LinearLayout>

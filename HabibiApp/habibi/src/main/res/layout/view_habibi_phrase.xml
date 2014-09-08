@@ -147,7 +147,9 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="@dimen/triple_space">
+        android:layout_marginTop="@dimen/triple_space"
+        android:paddingRight="@dimen/half_space"
+        android:paddingLeft="@dimen/half_space">
 
         <ImageView
             android:id="@+id/switch_to_male"
@@ -158,7 +160,7 @@
 
         <ImageView
             android:id="@+id/button_play_sound"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/play_icon_width"
             android:layout_height="match_parent"
             android:src="@drawable/play"
             android:layout_weight="1"

@@ -8,7 +8,7 @@
     <!--SELF GENDER SELECT-->
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
@@ -38,44 +38,5 @@
                 android:src="@drawable/gender_female"/>
         </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/double_space">
-
-        <!--HABIBI GENDER SELECT-->
-        <TextView
-            android:id="@+id/gender_select_habibi_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="@string/gender_select_habibi_title"/>
-
-        <LinearLayout
-            android:id="@+id/gender_select_habibi_linear_layout"
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/double_space">
-
-            <ImageView
-                android:id="@+id/gender_select_habibi_m_image_view"
-                android:layout_width="@dimen/gender_icon_width"
-                android:layout_height="@dimen/gender_icon_height"
-                android:layout_gravity="start"
-                android:src="@drawable/gender_male"/>
-
-            <ImageView
-                android:id="@+id/gender_select_habibi_f_image_view"
-                android:layout_width="@dimen/gender_icon_width"
-                android:layout_height="@dimen/gender_icon_height"
-                android:layout_gravity="end"
-                android:layout_marginLeft="@dimen/double_space"
-                android:src="@drawable/gender_female"/>
-        </LinearLayout>
-    </LinearLayout>
-
 
 </LinearLayout>

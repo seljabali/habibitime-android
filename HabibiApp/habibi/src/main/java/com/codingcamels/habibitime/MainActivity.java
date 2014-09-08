@@ -50,19 +50,6 @@ public class MainActivity extends Activity {
         setUpBubble(this);
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        menu.add(0, 0, 0, R.string.settings);
-//        return true;
-//    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent = new Intent(this, SettingsActivity.class);
-        startActivity(intent);
-        return true;
-    }
-
     public Gender getFromGenderSettings() {
         String fromGender = appSettings.getString(FROM_GENDER, "1");
         return Gender.getGenderFromID(fromGender);

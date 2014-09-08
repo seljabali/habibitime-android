@@ -23,8 +23,6 @@ public class SettingsFragment extends Fragment {
     private SharedPreferences appSettings;
     private ImageView selfGenderMale;
     private ImageView selfGenderFemale;
-    private ImageView habibiGenderMale;
-    private ImageView habibiGenderFemale;
     private Drawable selectedBorder;
     private int transparent;
 
@@ -38,14 +36,11 @@ public class SettingsFragment extends Fragment {
 
         selfGenderMale = (ImageView) view.findViewById(R.id.gender_select_self_m_image_view);
         selfGenderFemale = (ImageView) view.findViewById(R.id.gender_select_self_f_image_view);
-        habibiGenderMale = (ImageView) view.findViewById(R.id.gender_select_habibi_m_image_view);
-        habibiGenderFemale = (ImageView) view.findViewById(R.id.gender_select_habibi_f_image_view);
         appSettings = PreferenceManager.getDefaultSharedPreferences(getActivity());
         selectedBorder = getActivity().getResources().getDrawable(R.drawable.border);
         transparent = android.R.color.transparent;
 
         setFromGender(MainActivity.getFromGenderSettings(getActivity()));
-        setToGender(MainActivity.getToGenderSettings(getActivity()));
         selfGenderMale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,18 +51,6 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 setFromGender(Gender.FEMALE);
-            }
-        });
-        habibiGenderMale.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setToGender(Gender.MALE);
-            }
-        });
-        habibiGenderFemale.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setToGender(Gender.FEMALE);
             }
         });
 
@@ -91,17 +74,6 @@ public class SettingsFragment extends Fragment {
         } else {
             selfGenderFemale.setBackground(selectedBorder);
             selfGenderMale.setBackgroundColor(transparent);
-        }
-    }
-
-    private void setToGender(Gender gender) {
-        appSettings.edit().putString(MainActivity.TO_GENDER, gender.getIdAsString()).commit();
-        if (Gender.MALE.equals(gender)) {
-            habibiGenderMale.setBackground(selectedBorder);
-            habibiGenderFemale.setBackgroundColor(transparent);
-        } else {
-            habibiGenderFemale.setBackground(selectedBorder);
-            habibiGenderMale.setBackgroundColor(transparent);
         }
     }
 }

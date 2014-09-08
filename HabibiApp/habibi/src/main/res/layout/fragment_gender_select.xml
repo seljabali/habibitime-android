@@ -7,14 +7,33 @@
     android:padding="@dimen/double_space"
     android:gravity="center_horizontal">
 
-
-    <include layout="@layout/gender_select"/>
-
     <TextView
         android:id="@+id/gender_select_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/single_space"
-        android:text="@string/gender_select_subtitle"/>
+        android:text="@string/gender_select_info"
+        android:textColor="@android:color/darker_gray"/>
+
+    <LinearLayout
+        android:id="@+id/gender_select_self_linear_layout"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/double_space">
+
+        <ImageView
+            android:id="@+id/gender_select_self_m_image_view"
+            android:layout_width="@dimen/installation_gender_icon_width"
+            android:layout_height="@dimen/installation_gender_icon_width"
+            android:src="@drawable/gender_male"/>
+
+        <ImageView
+            android:id="@+id/gender_select_self_f_image_view"
+            android:layout_width="@dimen/installation_gender_icon_width"
+            android:layout_height="@dimen/installation_gender_icon_width"
+            android:layout_marginLeft="@dimen/triple_space"
+            android:src="@drawable/gender_female"/>
+    </LinearLayout>
 
 </LinearLayout>

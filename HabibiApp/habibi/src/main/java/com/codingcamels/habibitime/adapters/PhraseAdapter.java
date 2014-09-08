@@ -10,9 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.codingcamels.habibitime.OnSwipeTouchListener;
 import com.codingcamels.habibitime.R;
-import com.codingcamels.habibitime.ViewUtil;
+import com.codingcamels.habibitime.utilities.ViewUtil;
 import com.codingcamels.habibitime.fragments.ViewPhraseFragment;
 import com.codingcamels.habibitime.fragments.ViewPhrasesFragment;
 import com.codingcamels.habibitime.models.Category;
@@ -73,7 +72,8 @@ public class PhraseAdapter extends ArrayAdapter<Phrase> {
                             public void onClick(View v) {
                                 init(phrase);
                             }
-                        });
+                        }
+                );
             }
         }
         int dpHeight;

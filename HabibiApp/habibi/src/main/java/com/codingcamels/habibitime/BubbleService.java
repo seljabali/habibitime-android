@@ -24,6 +24,7 @@ import com.codingcamels.habibitime.models.Category;
 import com.codingcamels.habibitime.models.Gender;
 import com.codingcamels.habibitime.models.Language;
 import com.codingcamels.habibitime.models.Phrase;
+import com.codingcamels.habibitime.utilities.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,10 +50,10 @@ public class BubbleService extends Service {
 
             chatHead = new ImageView(this);
             chatHead.setImageResource(R.drawable.ic_launcher);
-
+            int size = (int) getApplicationContext().getResources().getDimension(R.dimen.bibi_icon_size);
             final WindowManager.LayoutParams params = new WindowManager.LayoutParams(
-                    WindowManager.LayoutParams.WRAP_CONTENT,
-                    WindowManager.LayoutParams.WRAP_CONTENT,
+                    size,
+                    size,
                     WindowManager.LayoutParams.TYPE_PHONE,
                     WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                     PixelFormat.TRANSLUCENT);
@@ -123,6 +124,8 @@ public class BubbleService extends Service {
                     }
                 }
             });
+            //TODO: Set the window to be to the left once on the right hand side.
+//            currentPopUp.setHorizontalOffset(+100);
             currentPopUp.show();
         } catch (Exception e) {
             e.printStackTrace();

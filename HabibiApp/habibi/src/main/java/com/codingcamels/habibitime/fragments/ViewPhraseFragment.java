@@ -11,14 +11,12 @@ import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.codingcamels.habibitime.MainActivity;
-import com.codingcamels.habibitime.OnSwipeTouchListener;
 import com.codingcamels.habibitime.R;
-import com.codingcamels.habibitime.StringUtil;
-import com.codingcamels.habibitime.Utils;
+import com.codingcamels.habibitime.utilities.StringUtil;
+import com.codingcamels.habibitime.utilities.Utils;
 import com.codingcamels.habibitime.datasources.PhraseDataSource;
 import com.codingcamels.habibitime.models.Category;
 import com.codingcamels.habibitime.models.Gender;
@@ -113,14 +111,6 @@ public class ViewPhraseFragment extends Fragment {
                 }
             });
         }
-
-        view.setOnTouchListener(
-            new OnSwipeTouchListener(getActivity()) {
-                @Override
-                public void onSwipeRight() {
-                    getActivity().onBackPressed();
-                }
-        });
 
         return view;
     }

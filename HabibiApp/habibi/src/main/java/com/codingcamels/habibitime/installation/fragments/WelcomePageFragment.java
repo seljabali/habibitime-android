@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.codingcamels.habibitime.OnSwipeTouchListener;
 import com.codingcamels.habibitime.R;
 
 /**

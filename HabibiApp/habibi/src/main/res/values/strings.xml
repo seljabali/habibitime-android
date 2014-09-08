@@ -16,11 +16,9 @@
     <string name="to_gender">Habibi\'s Gender</string>
     <string name="share_using">Share using…</string>
     <string name="copied">Copied to Clipboard!</string>
-    <string name="title_activity_installation">InstallationActivity</string>
-    <string name="gender_select_self_title">Your Gender:</string>
-    <string name="gender_select_subtitle">There\'s only two in Arabic! ;)</string>
-    <string name="gender_select_habibi_title">Your Habibi\'s Gender:</string>
+    <string name="gender_select_self_title">My Gender:</string>
+    <string name="gender_select_info">Please select your gender. We\'ll use it to conjugate your phrases accordingly.
+         You can change your selection later in the Settings page.</string>
     <string name="enable_mini_view">Enable Bibi!</string>
-
 
 </resources>

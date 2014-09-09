@@ -53,7 +53,7 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
         View view = convertView;
         if (view == null) {
             LayoutInflater inflater = activity.getLayoutInflater();
-            view = inflater.inflate(R.layout.view_category, null);
+            view = inflater.inflate(R.layout.adapter_category_item, null);
         }
         final Category category = getItem(position);
         if (category!= null) {
@@ -101,5 +101,3 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
     }
 
 }
-
-//                                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out, R.anim.slide_in_left, R.anim.slide_out)

@@ -8,8 +8,12 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 
 import com.codingcamels.habibitime.MainActivity;
 import com.codingcamels.habibitime.R;
@@ -18,12 +22,17 @@ import com.codingcamels.habibitime.models.Gender;
 /**
  * Created by samsoom on 9/4/14.
  */
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private SharedPreferences appSettings;
     private ImageView selfGenderMale;
     private ImageView selfGenderFemale;
+    private ImageView habibiGenderMale;
+    private ImageView habibiGenderFemale;
+    private Spinner bibiPasteSelection;
     private Drawable selectedBorder;
+    private LinearLayout bibiPasteSelectionLayout;
+    private CheckBox enableBibiView;
     private int transparent;
 
     public static SettingsFragment newInstance() {
@@ -36,10 +45,17 @@ public class SettingsFragment extends Fragment {
 
         selfGenderMale = (ImageView) view.findViewById(R.id.gender_select_self_m_image_view);
         selfGenderFemale = (ImageView) view.findViewById(R.id.gender_select_self_f_image_view);
+        habibiGenderMale = (ImageView) view.findViewById(R.id.gender_select_habibi_m_image_view);
+        habibiGenderFemale = (ImageView) view.findViewById(R.id.gender_select_habibi_f_image_view);
+        bibiPasteSelectionLayout = (LinearLayout) view.findViewById(R.id.bibi_paste_selection_layout);
+        bibiPasteSelection = (Spinner) view.findViewById(R.id.bibi_paste_selection);
+        enableBibiView = (CheckBox) view.findViewById(R.id.enable_bibi_view);
+
         appSettings = PreferenceManager.getDefaultSharedPreferences(getActivity());
         selectedBorder = getActivity().getResources().getDrawable(R.drawable.border);
         transparent = android.R.color.transparent;
 
+        //FROM GENDER
         setFromGender(MainActivity.getFromGenderSettings(getActivity()));
         selfGenderMale.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,20 +70,55 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        final CheckBox enableMiniView = (CheckBox) view.findViewById(R.id.enable_mini_view);
-        enableMiniView.setChecked(MainActivity.isBibiEnabled(getActivity()));
-        enableMiniView.setOnClickListener(new View.OnClickListener() {
+        //TO GENDER
+        setToGender(MainActivity.getToGenderSettings(getActivity()));
+        habibiGenderMale.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                appSettings.edit().putBoolean(MainActivity.MINI_BIBI, enableMiniView.isChecked()).commit();
-                MainActivity.setUpBubble(getActivity());
+            public void onClick(View v) {
+                setToGender(Gender.MALE);
             }
         });
+        habibiGenderFemale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setToGender(Gender.FEMALE);
+            }
+        });
+
+        //ENABLE BIBI
+        setBibiEnabled(MainActivity.isBibiEnabled(getActivity()));
+        enableBibiView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setBibiEnabled(enableBibiView.isChecked());
+            }
+        });
+
+        //BIBI PASTE SELECTION
+        ArrayAdapter<CharSequence> pasteSelectionAdapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.bibi_paste_selection, android.R.layout.simple_spinner_item);
+        pasteSelectionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        bibiPasteSelection.setAdapter(pasteSelectionAdapter);
+        bibiPasteSelection.setOnItemSelectedListener(this);
+
         return view;
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view,
+                               int pos, long id) {
+        String selected = (String) parent.getItemAtPosition(pos);
+        MainActivity.setPasteTypeSetting(getActivity(), selected);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        String selected = getString(R.string.arabizi);
+        MainActivity.setPasteTypeSetting(getActivity(), selected);
+    }
+
     private void setFromGender(Gender gender) {
-        appSettings.edit().putString(MainActivity.FROM_GENDER, gender.getIdAsString()).commit();
+        MainActivity.setFromGender(getActivity(), gender);
         if (Gender.MALE.equals(gender)) {
             selfGenderMale.setBackground(selectedBorder);
             selfGenderFemale.setBackgroundColor(transparent);
@@ -75,5 +126,23 @@ public class SettingsFragment extends Fragment {
             selfGenderFemale.setBackground(selectedBorder);
             selfGenderMale.setBackgroundColor(transparent);
         }
+    }
+
+    private void setToGender(Gender gender) {
+        MainActivity.setToGender(getActivity(), gender);
+        if (Gender.MALE.equals(gender)) {
+            habibiGenderMale.setBackground(selectedBorder);
+            habibiGenderFemale.setBackgroundColor(transparent);
+        } else {
+            habibiGenderFemale.setBackground(selectedBorder);
+            habibiGenderMale.setBackgroundColor(transparent);
+        }
+    }
+
+    private void setBibiEnabled(boolean enabled) {
+        MainActivity.setBibiEnabled(getActivity(), enabled);
+        MainActivity.setUpBibi(getActivity(), enabled);
+        enableBibiView.setChecked(enabled);
+        bibiPasteSelectionLayout.setVisibility(enabled ? View.VISIBLE : View.GONE);
     }
 }

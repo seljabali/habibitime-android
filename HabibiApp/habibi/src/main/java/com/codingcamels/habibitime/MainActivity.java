@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.codingcamels.habibitime.fragments.ViewCategoriesFragment;
 import com.codingcamels.habibitime.installation.InstallationActivity;
@@ -18,9 +16,9 @@ public class MainActivity extends Activity {
     public static final String FIRST_TIME = "my_first_time";
     public static final String FROM_GENDER = "from_gender";
     public static final String TO_GENDER = "to_gender";
-    public static final String MINI_BIBI = "mini_habibi_time";
+    public static final String BIBI = "mini_habibi_time";
+    public static final String PASTE_TYPE = "paste_type";
 
-    public static final String COPY_TYPE = "copy_type";
     private SharedPreferences sharedSettings;
     private SharedPreferences appSettings;
 
@@ -35,19 +33,13 @@ public class MainActivity extends Activity {
             startActivity(intent);
             finish();
         } else {
-            setUpBubble(this);
+            setUpBibi(this, isBibiEnabled(this));
             setContentView(R.layout.activity_main);
             ViewCategoriesFragment fragment = ViewCategoriesFragment.newInstance(this);
             getFragmentManager().beginTransaction()
                     .replace(R.id.fragmentLayoutContainer, fragment, ViewCategoriesFragment.TAG)
                     .commit();
         }
-    }
-
-    @Override
-    protected void onResume () {
-        super.onResume();
-        setUpBubble(this);
     }
 
     public Gender getFromGenderSettings() {
@@ -72,24 +64,42 @@ public class MainActivity extends Activity {
         return Gender.getGenderFromID(toGender);
     }
 
-    public static int getCopyTypeSettings(Context context) {
-        return 1;
-//        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
-//        String toGender = appSettings.getString(TO_GENDER, "2");
-//        return Gender.getGenderFromID(toGender);
+    public static void setPasteTypeSetting(Context context, String type) {
+        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
+        appSettings.edit().putString(MainActivity.PASTE_TYPE, type).commit();
     }
 
-    public static void setUpBubble(Activity activity) {
-        if (isBibiEnabled(activity)) {
-            activity.startService(new Intent(activity, BubbleService.class));
+    public static String getPasteTypeSetting(Context context) {
+        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
+        return appSettings.getString(MainActivity.PASTE_TYPE, "");
+    }
+
+    public static void setToGender(Context context, Gender toGender) {
+        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
+        appSettings.edit().putString(MainActivity.TO_GENDER, toGender.getIdAsString()).commit();
+    }
+
+    public static void setFromGender(Context context, Gender fromGender) {
+        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
+        appSettings.edit().putString(MainActivity.FROM_GENDER, fromGender.getIdAsString()).commit();
+    }
+
+    public static void setUpBibi(Activity activity, boolean enabled) {
+        if (enabled) {
+            activity.startService(new Intent(activity, BibiService.class));
         } else {
-            activity.stopService(new Intent(activity, BubbleService.class));
+            activity.stopService(new Intent(activity, BibiService.class));
         }
+    }
+
+    public static void setBibiEnabled(Context context, boolean enabled) {
+        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
+        appSettings.edit().putBoolean(MainActivity.BIBI, enabled).commit();
     }
 
     public static boolean isBibiEnabled(Context context) {
         SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
-        return appSettings.getBoolean(MINI_BIBI, false);
+        return appSettings.getBoolean(BIBI, false);
     }
 
 }

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.codingcamels.habibitime.MainActivity;
 import com.codingcamels.habibitime.R;
@@ -19,10 +20,11 @@ import com.codingcamels.habibitime.models.Gender;
  * Created by habibi on 8/3/14.
  */
 public class GenderSelectFragment extends Fragment {
+    public static final String TAG = GenderSelectFragment.class.getSimpleName();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_gender_select, null);
+        View view = inflater.inflate(R.layout.fragment_install_gender_select, null);
         if (view == null) {
             return null;
         }
@@ -33,6 +35,7 @@ public class GenderSelectFragment extends Fragment {
         selfGenderMale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getActivity().getApplicationContext(), getActivity().getResources().getString(R.string.thank_you), Toast.LENGTH_LONG);
                 appSettings.edit().putString(MainActivity.FROM_GENDER, Gender.MALE.getIdAsString()).commit();
                 setGenderSelect(selfGenderMale, selfGenderFemale);
                 nextPage();
@@ -41,6 +44,7 @@ public class GenderSelectFragment extends Fragment {
         selfGenderFemale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getActivity().getApplicationContext(), getActivity().getResources().getString(R.string.thank_you), Toast.LENGTH_LONG);
                 appSettings.edit().putString(MainActivity.FROM_GENDER, Gender.FEMALE.getIdAsString()).commit();
                 setGenderSelect(selfGenderFemale, selfGenderMale);
                 nextPage();

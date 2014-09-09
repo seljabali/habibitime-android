@@ -49,7 +49,7 @@ public class CategoryPopUpAdapter extends ArrayAdapter<Category> {
             View view = convertView;
             if (view == null) {
                 LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                view = inflater.inflate(R.layout.view_category, null);
+                view = inflater.inflate(R.layout.adapter_category_item, null);
             }
 
             final Category category = getItem(position);
@@ -58,13 +58,8 @@ public class CategoryPopUpAdapter extends ArrayAdapter<Category> {
                 if (itemView != null) {
                     itemView.setText(category.getCategoryName().toUpperCase());
                     itemView.setBackgroundColor(getColorForCategory(position));
-//                    itemView.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            ViewPhrasesFragment fragment = ViewPhrasesFragment.newInstance(category);
-//                        }
-//                    });
                 }
+
             }
             LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.category_view_layout);
             linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));

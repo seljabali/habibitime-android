@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--Main-->
     <string name="app_name">Habibi Time!</string>
     <string name="flirt">FLIRT</string>
     <string name="meetup">MEETUP</string>
@@ -12,13 +13,28 @@
     <string name="settings">Settings</string>
     <string name="female">Female</string>
     <string name="male">Male</string>
-    <string name="from_gender">My Gender</string>
-    <string name="to_gender">Habibi\'s Gender</string>
+
+    <!--Settings-->
+    <string name="gender_select_self_title">My Gender:</string>
+    <string name="gender_select_habibi_title">Default To Gender:</string>
+    <string name="enable_bibi_view">Enable Bibi!</string>
+    <string-array name="bibi_paste_selection">
+        <item>@string/arabic</item>
+        <item>@string/arabizi</item>
+    </string-array>
+    <string name="bibi_paste_selection">Paste Type</string>
+
+    <!--Habibi Phrase-->
     <string name="share_using">Share using…</string>
     <string name="copied">Copied to Clipboard!</string>
-    <string name="gender_select_self_title">My Gender:</string>
-    <string name="gender_select_info">Please select your gender. We\'ll use it to conjugate your phrases accordingly.
-         You can change your selection later in the Settings page.</string>
-    <string name="enable_mini_view">Enable Bibi!</string>
+    <string name="arabic">Arabic</string>
+    <string name="phonetic">Phonetic</string>
+    <string name="arabizi">Arabizi</string>
+    <string name="to_gender">To Gender:</string>
+
+    <!--Installation-->
+    <string name="select_gender">Please select your gender:</string>
+    <string name="gender_select_info">to conjugate your phrases.</string>
+    <string name="thank_you">Thank You!</string>
 
 </resources>

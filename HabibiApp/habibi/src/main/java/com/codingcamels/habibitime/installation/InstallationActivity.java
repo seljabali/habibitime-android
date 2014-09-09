@@ -14,7 +14,6 @@ public class InstallationActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupDatabase();
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -25,15 +24,15 @@ public class InstallationActivity extends Activity {
         WelcomePageFragment fragment = new WelcomePageFragment();
         getFragmentManager().beginTransaction()
                 .replace(R.id.fragmentLayoutContainer_installation, fragment)
-                .addToBackStack(null)
+                .addToBackStack(WelcomePageFragment.TAG)
                 .commit();
     }
 
-    private void setupDatabase() {
-        MySQLHelper mySQLHelper = new MySQLHelper(this);
-        mySQLHelper.dropTables();
-        mySQLHelper.setupDatabase();
-        mySQLHelper.loadDatabase();
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() == 1) {
+            finish();
+        }
+        super.onBackPressed();
     }
-
 }

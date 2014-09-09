@@ -4,21 +4,33 @@
     <dimen name="double_space">16dp</dimen>
     <dimen name="triple_space">24dp</dimen>
     <dimen name="quadruple_space">32dp</dimen>
+
+    <!--Main-->
+    <dimen name="phrase_adapter_item_height">34dp</dimen>
     <dimen name="category_text_size">26sp</dimen>
     <dimen name="phrases_text_size">20sp</dimen>
+
+    <!--Installation-->
+    <dimen name="installation_gender_icon_width">100dp</dimen>
+    <dimen name="install_text_size">20sp</dimen>
+    <dimen name="install_subtitle_text_size">18sp</dimen>
+
+    <!--Settings-->
+
+    <!--Bibi-->
+    <dimen name="bibi_icon_size">24dp</dimen>
+
+    <!--Habibi Phrase-->
+    <dimen name="clipboard_icon_height">16dp</dimen>
+    <dimen name="clipboard_icon_width">16dp</dimen>
+    <dimen name="play_icon_height">24dp</dimen>
+    <dimen name="play_icon_width">20dp</dimen>
+    <dimen name="gender_icon_height">60dp</dimen>
+    <dimen name="gender_icon_width">60dp</dimen>
     <dimen name="habibi_phrase_english_text_size">24sp</dimen>
+    <dimen name="habibi_phrase_arabic_label_size">12sp</dimen>
     <dimen name="habibi_phrase_arabic_text_size">28sp</dimen>
     <dimen name="habibi_phrase_arabizi_text_size">28sp</dimen>
     <dimen name="habibi_phrase_properbizi_text_size">28sp</dimen>
-
-    <dimen name="bibi_icon_size">24dp</dimen>
-    <dimen name="play_icon_height">24dp</dimen>
-    <dimen name="play_icon_width">20dp</dimen>
-    <dimen name="clipboard_icon_height">16dp</dimen>
-    <dimen name="clipboard_icon_width">16dp</dimen>
-    <dimen name="phrase_adapter_item_height">34dp</dimen>
-    <dimen name="gender_icon_height">60dp</dimen>
-    <dimen name="gender_icon_width">60dp</dimen>
-    <dimen name="installation_gender_icon_width">100dp</dimen>
 
 </resources>

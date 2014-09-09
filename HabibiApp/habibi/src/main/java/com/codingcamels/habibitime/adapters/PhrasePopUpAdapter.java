@@ -22,8 +22,6 @@ import java.util.List;
  * Created by habibi on 8/10/14.
  */
 public class PhrasePopUpAdapter extends ArrayAdapter<Phrase> {
-    private static final int PHRASE_COUNT_MAX = 13;
-
     HashMap<Phrase, Integer> idMap = new HashMap<Phrase, Integer>();
     private int phraseCount;
     private Context context;

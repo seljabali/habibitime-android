@@ -6,12 +6,38 @@
     android:layout_height="match_parent"
     android:padding="@dimen/double_space">
 
+    <!--MY GENDER SELECT-->
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content">
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <include layout="@layout/gender_select"/>
+        <TextView
+            android:id="@+id/gender_select_self_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gender_select_self_title"/>
+
+        <LinearLayout
+            android:id="@+id/gender_select_self_linear_layout"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/double_space">
+
+            <ImageView
+                android:id="@+id/gender_select_self_m_image_view"
+                android:layout_width="@dimen/gender_icon_width"
+                android:layout_height="@dimen/gender_icon_height"
+                android:src="@drawable/gender_male"/>
+
+            <ImageView
+                android:id="@+id/gender_select_self_f_image_view"
+                android:layout_width="@dimen/gender_icon_width"
+                android:layout_height="@dimen/gender_icon_height"
+                android:layout_marginLeft="@dimen/double_space"
+                android:src="@drawable/gender_female"/>
+        </LinearLayout>
     </LinearLayout>
 
     <View
@@ -20,13 +46,74 @@
         android:layout_marginTop="@dimen/double_space"
         android:background="@android:color/darker_gray"/>
 
+    <!--HABIBI GENDER SELECT-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/double_space">
+
+        <TextView
+            android:id="@+id/gender_select_habibi_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gender_select_habibi_title"/>
+
+        <LinearLayout
+            android:id="@+id/gender_select_habibi_linear_layout"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/double_space">
+
+            <ImageView
+                android:id="@+id/gender_select_habibi_m_image_view"
+                android:layout_width="@dimen/gender_icon_width"
+                android:layout_height="@dimen/gender_icon_height"
+                android:src="@drawable/gender_male"/>
+
+            <ImageView
+                android:id="@+id/gender_select_habibi_f_image_view"
+                android:layout_width="@dimen/gender_icon_width"
+                android:layout_height="@dimen/gender_icon_height"
+                android:layout_marginLeft="@dimen/double_space"
+                android:src="@drawable/gender_female"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/double_space"
+        android:background="@android:color/darker_gray"/>
+
+    <!--ENABLE BIBI-->
     <CheckBox
-        android:id="@+id/enable_mini_view"
+        android:id="@+id/enable_bibi_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/double_space"
         android:button="@null"
         android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-        android:text="@string/enable_mini_view"/>
+        android:text="@string/enable_bibi_view"/>
+
+    <!--BIBI PASTE SELECT-->
+    <LinearLayout
+        android:id="@+id/bibi_paste_selection_layout"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/double_space">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bibi_paste_selection"/>
+
+        <Spinner
+            android:id="@+id/bibi_paste_selection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
 </LinearLayout>

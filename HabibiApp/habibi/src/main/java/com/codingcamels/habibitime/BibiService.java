@@ -32,77 +32,78 @@ import java.util.List;
 /**
  * Created by habibi on 8/9/14.
  */
-public class BubbleService extends Service {
+public class BibiService extends Service {
 
-        private WindowManager windowManager;
-        private ImageView chatHead;
-        private ListPopupWindow currentPopUp;
+    private WindowManager windowManager;
+    private ImageView chatHead;
+    private ListPopupWindow currentPopUp;
 
-        @Override
-        public IBinder onBind(Intent intent) {
-            return null;
-        }
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
 
-        @Override public void onCreate() {
-            super.onCreate();
+    @Override public void onCreate() {
+        super.onCreate();
 
-            windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
+        windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
 
-            chatHead = new ImageView(this);
-            chatHead.setImageResource(R.drawable.ic_launcher);
-            int size = (int) getApplicationContext().getResources().getDimension(R.dimen.bibi_icon_size);
-            final WindowManager.LayoutParams params = new WindowManager.LayoutParams(
-                    size,
-                    size,
-                    WindowManager.LayoutParams.TYPE_PHONE,
-                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-                    PixelFormat.TRANSLUCENT);
+        chatHead = new ImageView(this);
+        chatHead.setImageResource(R.drawable.ic_launcher);
+        int size = (int) getApplicationContext().getResources().getDimension(R.dimen.bibi_icon_size);
+        final WindowManager.LayoutParams params = new WindowManager.LayoutParams(
+                size,
+                size,
+                WindowManager.LayoutParams.TYPE_PHONE,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                PixelFormat.TRANSLUCENT);
 
-            params.gravity = Gravity.TOP | Gravity.LEFT;
-            params.x = 0;
-            params.y = 0;
+        params.gravity = Gravity.TOP | Gravity.LEFT;
+        params.x = 0;
+        params.y = 0;
 
-            chatHead.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    initiatePopupWindow(chatHead);
-                }
-            });
-
-            chatHead.setOnTouchListener(new View.OnTouchListener() {
-                private int initialX;
-                private int initialY;
-                private float initialTouchX;
-                private float initialTouchY;
-
-                @Override public boolean onTouch(View v, MotionEvent event) {
-                    switch (event.getAction()) {
-                        case MotionEvent.ACTION_DOWN:
-                            initialX = params.x;
-                            initialY = params.y;
-                            initialTouchX = event.getRawX();
-                            initialTouchY = event.getRawY();
-                        case MotionEvent.ACTION_UP:
-
-                        case MotionEvent.ACTION_MOVE:
-                            params.x = initialX + (int) (event.getRawX() - initialTouchX);
-                            params.y = initialY + (int) (event.getRawY() - initialTouchY);
-                            windowManager.updateViewLayout(chatHead, params);
-                            return false;
-                    }
-                    return false;
-                }
-            });
-
-            windowManager.addView(chatHead, params);
-        }
-        @Override
-        public void onDestroy() {
-            super.onDestroy();
-            if (chatHead != null) {
-                windowManager.removeView(chatHead);
+        chatHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initiatePopupWindow(chatHead);
             }
+        });
+
+        chatHead.setOnTouchListener(new View.OnTouchListener() {
+            private int initialX;
+            private int initialY;
+            private float initialTouchX;
+            private float initialTouchY;
+
+            @Override public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        initialX = params.x;
+                        initialY = params.y;
+                        initialTouchX = event.getRawX();
+                        initialTouchY = event.getRawY();
+                    case MotionEvent.ACTION_UP:
+
+                    case MotionEvent.ACTION_MOVE:
+                        params.x = initialX + (int) (event.getRawX() - initialTouchX);
+                        params.y = initialY + (int) (event.getRawY() - initialTouchY);
+                        windowManager.updateViewLayout(chatHead, params);
+                        return false;
+                }
+                return false;
+            }
+        });
+
+        windowManager.addView(chatHead, params);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (chatHead != null) {
+            windowManager.removeView(chatHead);
         }
+    }
 
     private void initiatePopupWindow(final View anchor) {
         try {
@@ -170,12 +171,10 @@ public class BubbleService extends Service {
                 fromGender, toGender, Language.ARABIC, null);
         phraseDataSource.close();
         Phrase arabicTranslatedPhrase = translatedPhrases.get(0);
-        int copyType = MainActivity.getCopyTypeSettings(context);
-        if (copyType == 1) {
+        String pasteType = MainActivity.getPasteTypeSetting(context);
+        if (getString(R.string.arabic).equals(pasteType)) {
             Utils.copyToClipboard(getApplicationContext(), arabicTranslatedPhrase.getNativePhraseSpelling());
-        } else if (copyType == 2) {
-            Utils.copyToClipboard(getApplicationContext(), arabicTranslatedPhrase.getPhoneticPhraseSpelling());
-        } else if (copyType == 3) {
+        } else if (getString(R.string.arabizi).equals(pasteType)) {
             Utils.copyToClipboard(getApplicationContext(), (arabicTranslatedPhrase.getProperPhoneticPhraseSpelling()));
         }
         popup.dismiss();

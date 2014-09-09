@@ -56,6 +56,7 @@ public class ViewPhraseFragment extends Fragment {
     private ImageView properBiziTextCopy;
     private ImageView toMaleButton;
     private ImageView toFemaleButton;
+    private TextView toGenderLabel;
     private ImageView playSoundButton;
 
     public static ViewPhraseFragment newInstance(Phrase phrase, Category category) {
@@ -72,7 +73,8 @@ public class ViewPhraseFragment extends Fragment {
         Bundle args = getArguments();
         originalPhrase = args.getParcelable(PHRASE_KEY);
         category = args.getParcelable(CATEGORY_KEY);
-
+        final Gender fromGender = ((MainActivity)getActivity()).getFromGenderSettings();
+        Gender toGender = ((MainActivity)getActivity()).getToGenderSettings();
         final View view = inflater.inflate(R.layout.view_habibi_phrase, container, false);
         englishTextView = (TextView) view.findViewById(R.id.english_phrase);
         arabicTextView = (TextView) view.findViewById(R.id.arabic_phrase);
@@ -86,10 +88,9 @@ public class ViewPhraseFragment extends Fragment {
         properBiziTextCopy = (ImageView) view.findViewById(R.id.properbizi_copy_button);
         toMaleButton = (ImageView) view.findViewById(R.id.switch_to_male);
         toFemaleButton = (ImageView) view.findViewById(R.id.switch_to_female);
+        toGenderLabel = (TextView) view.findViewById(R.id.to_gender_label);
         playSoundButton = (ImageView) view.findViewById(R.id.button_play_sound);
 
-        final Gender fromGender = ((MainActivity)getActivity()).getFromGenderSettings();
-        Gender toGender = ((MainActivity)getActivity()).getToGenderSettings();
 
         init(fromGender, toGender);
 
@@ -111,7 +112,6 @@ public class ViewPhraseFragment extends Fragment {
                 }
             });
         }
-
         return view;
     }
 
@@ -128,6 +128,7 @@ public class ViewPhraseFragment extends Fragment {
 
     private void setGenderButtons(Gender toGender) {
         if (toGender == null) {
+            toGenderLabel.setVisibility(View.GONE);
             toMaleButton.setVisibility(View.GONE);
             toFemaleButton.setVisibility(View.GONE);
         } else if (Gender.MALE.equals(toGender)) {

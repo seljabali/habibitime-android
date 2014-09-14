@@ -74,8 +74,8 @@ public class ViewPhraseFragment extends Fragment {
         Bundle args = getArguments();
         originalPhrase = args.getParcelable(PHRASE_KEY);
         category = args.getParcelable(CATEGORY_KEY);
-        final Gender fromGender = ((MainActivity)getActivity()).getFromGenderSettings();
-        Gender toGender = ((MainActivity)getActivity()).getToGenderSettings();
+        final Gender fromGender = MainActivity.getFromGenderSettings(getActivity());
+        Gender toGender = MainActivity.getToGenderSettings(getActivity());
         final View view = inflater.inflate(R.layout.view_habibi_phrase, container, false);
         englishTextView = (TextView) view.findViewById(R.id.english_phrase);
         arabicTextView = (TextView) view.findViewById(R.id.arabic_phrase);

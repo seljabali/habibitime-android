@@ -42,28 +42,29 @@ public class MainActivity extends Activity {
         }
     }
 
-    public Gender getFromGenderSettings() {
-        String fromGender = appSettings.getString(FROM_GENDER, "1");
-        return Gender.getGenderFromID(fromGender);
-    }
-
-    public Gender getToGenderSettings() {
-        String toGender = appSettings.getString(TO_GENDER, "2");
-        return Gender.getGenderFromID(toGender);
-    }
-
+    //FROM GENDER
     public static Gender getFromGenderSettings(Context context) {
         SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
         String fromGender = appSettings.getString(FROM_GENDER, "1");
         return Gender.getGenderFromID(fromGender);
     }
+    public static void setFromGender(Context context, Gender fromGender) {
+        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
+        appSettings.edit().putString(MainActivity.FROM_GENDER, fromGender.getIdAsString()).commit();
+    }
 
+    //TO GENDER
     public static Gender getToGenderSettings(Context context) {
         SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
         String toGender = appSettings.getString(TO_GENDER, "2");
         return Gender.getGenderFromID(toGender);
     }
+    public static void setToGender(Context context, Gender toGender) {
+        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
+        appSettings.edit().putString(MainActivity.TO_GENDER, toGender.getIdAsString()).commit();
+    }
 
+    //PASTE SETTINGS
     public static void setPasteTypeSetting(Context context, String type) {
         SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
         appSettings.edit().putString(MainActivity.PASTE_TYPE, type).commit();
@@ -74,16 +75,8 @@ public class MainActivity extends Activity {
         return appSettings.getString(MainActivity.PASTE_TYPE, "");
     }
 
-    public static void setToGender(Context context, Gender toGender) {
-        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
-        appSettings.edit().putString(MainActivity.TO_GENDER, toGender.getIdAsString()).commit();
-    }
 
-    public static void setFromGender(Context context, Gender fromGender) {
-        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
-        appSettings.edit().putString(MainActivity.FROM_GENDER, fromGender.getIdAsString()).commit();
-    }
-
+    //BIBI SETTINGS
     public static void setUpBibi(Activity activity, boolean enabled) {
         if (enabled) {
             activity.startService(new Intent(activity, BibiService.class));

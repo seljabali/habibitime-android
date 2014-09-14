@@ -44,7 +44,7 @@ public class WelcomePageFragment extends Fragment {
     }
 
     private void nextFragment() {
-        GenderSelectFragment fragment = new GenderSelectFragment();
+        FromGenderSelectFragment fragment = new FromGenderSelectFragment();
         FragmentManager fragmentManager = getFragmentManager();
         if (fragmentManager != null) {
             fragmentManager.beginTransaction()
@@ -53,7 +53,7 @@ public class WelcomePageFragment extends Fragment {
                         R.anim.fragment_slide_right_enter,
                         R.anim.fragment_slide_right_exit)
                 .replace(R.id.fragmentLayoutContainer_installation, fragment)
-                .addToBackStack(GenderSelectFragment.TAG)
+                .addToBackStack(FromGenderSelectFragment.TAG)
                 .commit();
         }
     }

@@ -1,16 +1,12 @@
 package com.codingcamels.habibitime.installation.fragments;
 
-import android.app.Activity;
 import android.app.Fragment;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.app.FragmentManager;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.codingcamels.habibitime.MainActivity;
 import com.codingcamels.habibitime.R;
@@ -19,8 +15,8 @@ import com.codingcamels.habibitime.models.Gender;
 /**
  * Created by habibi on 8/3/14.
  */
-public class GenderSelectFragment extends Fragment {
-    public static final String TAG = GenderSelectFragment.class.getSimpleName();
+public class FromGenderSelectFragment extends Fragment {
+    public static final String TAG = FromGenderSelectFragment.class.getSimpleName();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,13 +26,11 @@ public class GenderSelectFragment extends Fragment {
         }
         final ImageView selfGenderMale = (ImageView) view.findViewById(R.id.gender_select_self_m_image_view);
         final ImageView selfGenderFemale = (ImageView) view.findViewById(R.id.gender_select_self_f_image_view);
-        final SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         selfGenderMale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity().getApplicationContext(), getActivity().getResources().getString(R.string.thank_you), Toast.LENGTH_LONG);
-                appSettings.edit().putString(MainActivity.FROM_GENDER, Gender.MALE.getIdAsString()).commit();
+                MainActivity.setFromGender(getActivity(), Gender.MALE);
                 setGenderSelect(selfGenderMale, selfGenderFemale);
                 nextPage();
             }
@@ -44,8 +38,7 @@ public class GenderSelectFragment extends Fragment {
         selfGenderFemale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity().getApplicationContext(), getActivity().getResources().getString(R.string.thank_you), Toast.LENGTH_LONG);
-                appSettings.edit().putString(MainActivity.FROM_GENDER, Gender.FEMALE.getIdAsString()).commit();
+                MainActivity.setFromGender(getActivity(), Gender.FEMALE);
                 setGenderSelect(selfGenderFemale, selfGenderMale);
                 nextPage();
             }
@@ -56,16 +49,21 @@ public class GenderSelectFragment extends Fragment {
 
     private void setGenderSelect(View selectedGender, View unselectedGender) {
         selectedGender.setBackground(getActivity().getResources().getDrawable(R.drawable.border));
-        unselectedGender.setBackgroundColor(android.R.color.transparent);
+        unselectedGender.setBackgroundColor(getActivity().getResources().getColor(android.R.color.transparent));
     }
 
     private void nextPage() {
-        Activity activity = getActivity();
-        SharedPreferences sharedSettings = activity.getSharedPreferences(MainActivity.PREFS_NAME, 0);
-        sharedSettings.edit().putBoolean(MainActivity.FIRST_TIME, false).commit();
-
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        startActivity(intent);
-        activity.finish();
+        ToGenderSelectFragment fragment = new ToGenderSelectFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        if (fragmentManager != null) {
+            fragmentManager.beginTransaction()
+                    .setCustomAnimations(R.anim.fragment_slide_left_enter,
+                            R.anim.fragment_slide_left_exit,
+                            R.anim.fragment_slide_right_enter,
+                            R.anim.fragment_slide_right_exit)
+                    .replace(R.id.fragmentLayoutContainer_installation, fragment)
+                    .addToBackStack(ToGenderSelectFragment.TAG)
+                    .commit();
+        }
     }
 }

@@ -37,8 +37,9 @@
     <string name="select_to_gender_title">Now select your habibi\'s gender:</string>
     <string name="subtitle">This is to conjugate your phrases. You can change this later.</string>
     <string name="thank_you">Thank You!</string>
-    <string name="bibi_enable">Almost ready to flirt with your habibi!
-        Bibi remains on top of others apps providing ability to paste in phrases more quickly.
+    <string name="bibi_enable">Bibi remains on top of others apps providing ability to paste in phrases more quickly.
         You can later disable it in the Settings page.</string>
+    <string name="skip">Skip</string>
+    <string name="bibi">Bibi</string>
 
 </resources>

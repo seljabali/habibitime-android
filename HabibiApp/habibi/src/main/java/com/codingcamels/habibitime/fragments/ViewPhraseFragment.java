@@ -92,12 +92,10 @@ public class ViewPhraseFragment extends Fragment {
         toGenderLabel = (TextView) view.findViewById(R.id.to_gender_label);
         playSoundButton = (ImageView) view.findViewById(R.id.button_play_sound);
 
-
-        init(fromGender, toGender);
-
         if (category.equals(Category.MOOD) || category.equals(Category.ANSWER)) {
             init(fromGender, null);
         } else {
+            init(fromGender, toGender);
             toMaleButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -113,7 +111,6 @@ public class ViewPhraseFragment extends Fragment {
                 }
             });
         }
-
         return view;
     }
 
@@ -128,7 +125,6 @@ public class ViewPhraseFragment extends Fragment {
         setTextOnClick(properBiziTextView);
         setGenderButtons(toGender);
         setPlaySound(fromGender, toGender);
-
     }
 
     private void setGenderButtons(Gender toGender) {
@@ -137,11 +133,11 @@ public class ViewPhraseFragment extends Fragment {
             toMaleButton.setVisibility(View.GONE);
             toFemaleButton.setVisibility(View.GONE);
         } else if (Gender.MALE.equals(toGender)) {
-            toMaleButton.setBackground(getActivity().getResources().getDrawable(R.drawable.border));
-            toFemaleButton.setBackgroundColor(android.R.color.transparent);
+            toMaleButton.setBackground(getResources().getDrawable(R.drawable.border));
+            toFemaleButton.setBackgroundColor(getResources().getColor(android.R.color.transparent));
         } else {
-            toMaleButton.setBackgroundColor(android.R.color.transparent);
-            toFemaleButton.setBackground(getActivity().getResources().getDrawable(R.drawable.border));
+            toMaleButton.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+            toFemaleButton.setBackground(getResources().getDrawable(R.drawable.border));
         }
     }
 
@@ -287,5 +283,4 @@ public class ViewPhraseFragment extends Fragment {
             }
         });
     }
-
 }

@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.codingcamels.habibitime.MainActivity;
@@ -20,6 +23,10 @@ import com.codingcamels.habibitime.R;
  */
 public class BibiEnableFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     public static final String TAG = BibiEnableFragment.class.getSimpleName();
+    private Button skipButton;
+    private Spinner bibiPasteSelection;
+    private CheckBox enableBibi;
+    private LinearLayout bibiPasteSelectionLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -27,20 +34,36 @@ public class BibiEnableFragment extends Fragment implements AdapterView.OnItemSe
         if (view == null) {
             return null;
         }
+        skipButton = (Button) view.findViewById(R.id.skip_button);
+        bibiPasteSelectionLayout = (LinearLayout) view.findViewById(R.id.bibi_paste_selection_layout);
+        bibiPasteSelection = (Spinner) view.findViewById(R.id.bibi_paste_selection);
+        enableBibi = (CheckBox) view.findViewById(R.id.enable_bibi_view);
+
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedStateInstance) {
+        super.onActivityCreated(savedStateInstance);
+
         ArrayAdapter<CharSequence> pasteSelectionAdapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.bibi_paste_selection, android.R.layout.simple_spinner_item);
         pasteSelectionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner bibiPasteSelection = (Spinner) view.findViewById(R.id.bibi_paste_selection);
         bibiPasteSelection.setAdapter(pasteSelectionAdapter);
         bibiPasteSelection.setOnItemSelectedListener(this);
-
-        view.setOnClickListener(new View.OnClickListener() {
+        enableBibi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setBibiEnabled(enableBibi.isChecked());
+            }
+        });
+        bibiPasteSelection.setSelection(1);
+        skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 nextPage();
             }
         });
-        return view;
     }
 
     @Override
@@ -50,19 +73,23 @@ public class BibiEnableFragment extends Fragment implements AdapterView.OnItemSe
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view,
-                               int pos, long id) {
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         String selected = (String) parent.getItemAtPosition(pos);
         MainActivity.setPasteTypeSetting(getActivity(), selected);
     }
 
+
     private void nextPage() {
         Activity activity = getActivity();
-        SharedPreferences sharedSettings = activity.getSharedPreferences(MainActivity.PREFS_NAME, 0);
-        sharedSettings.edit().putBoolean(MainActivity.FIRST_TIME, false).commit();
-
         Intent intent = new Intent(getActivity(), MainActivity.class);
         startActivity(intent);
         activity.finish();
+    }
+
+    private void setBibiEnabled(boolean enabled) {
+        MainActivity.setBibiEnabled(getActivity(), enabled);
+        MainActivity.setUpBibi(getActivity(), enabled);
+        enableBibi.setChecked(enabled);
+        bibiPasteSelectionLayout.setVisibility(enabled ? View.VISIBLE : View.GONE);
     }
 }

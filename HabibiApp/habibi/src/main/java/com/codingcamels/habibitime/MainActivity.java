@@ -27,8 +27,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         appSettings = PreferenceManager.getDefaultSharedPreferences(this);
-        sharedSettings = getSharedPreferences(PREFS_NAME, 0);
-        if (sharedSettings.getBoolean(FIRST_TIME, true)) {
+
+        if (isFirstTimeUser(this)) {
             Intent intent = new Intent(this, InstallationActivity.class);
             startActivity(intent);
             finish();
@@ -42,7 +42,18 @@ public class MainActivity extends Activity {
         }
     }
 
-    //FROM GENDER
+    //first time user
+    public static boolean isFirstTimeUser(Context context) {
+        SharedPreferences sharedSettings = context.getSharedPreferences(PREFS_NAME, 0);
+        return sharedSettings.getBoolean(FIRST_TIME, true);
+    }
+
+    public static void setFirstTimeUser(Context context, boolean firstTime) {
+        SharedPreferences sharedSettings = context.getSharedPreferences(MainActivity.PREFS_NAME, 0);
+        sharedSettings.edit().putBoolean(MainActivity.FIRST_TIME, firstTime).commit();
+    }
+
+    //from gender
     public static Gender getFromGenderSettings(Context context) {
         SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
         String fromGender = appSettings.getString(FROM_GENDER, "1");
@@ -53,7 +64,7 @@ public class MainActivity extends Activity {
         appSettings.edit().putString(MainActivity.FROM_GENDER, fromGender.getIdAsString()).commit();
     }
 
-    //TO GENDER
+    //to gender
     public static Gender getToGenderSettings(Context context) {
         SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
         String toGender = appSettings.getString(TO_GENDER, "2");
@@ -64,7 +75,7 @@ public class MainActivity extends Activity {
         appSettings.edit().putString(MainActivity.TO_GENDER, toGender.getIdAsString()).commit();
     }
 
-    //PASTE SETTINGS
+    //paste settings
     public static void setPasteTypeSetting(Context context, String type) {
         SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
         appSettings.edit().putString(MainActivity.PASTE_TYPE, type).commit();
@@ -76,7 +87,7 @@ public class MainActivity extends Activity {
     }
 
 
-    //BIBI SETTINGS
+    //bibi settings
     public static void setUpBibi(Activity activity, boolean enabled) {
         if (enabled) {
             activity.startService(new Intent(activity, BibiService.class));

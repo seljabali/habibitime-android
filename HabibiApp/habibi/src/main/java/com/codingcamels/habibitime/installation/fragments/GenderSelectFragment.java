@@ -18,6 +18,13 @@ import com.codingcamels.habibitime.models.Gender;
  */
 public class GenderSelectFragment extends Fragment {
     public static final String TAG = GenderSelectFragment.class.getSimpleName();
+    private boolean selfGenderSelected;
+    private boolean habibiGenderSelected;
+    private ImageView selfGenderMale;
+    private ImageView selfGenderFemale;
+    private ImageView toGenderMale;
+    private ImageView toGenderFemale;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -25,12 +32,23 @@ public class GenderSelectFragment extends Fragment {
         if (view == null) {
             return null;
         }
+        selfGenderMale = (ImageView) view.findViewById(R.id.gender_select_self_m_image_view);
+        selfGenderFemale = (ImageView) view.findViewById(R.id.gender_select_self_f_image_view);
+        toGenderMale = (ImageView) view.findViewById(R.id.gender_select_habibi_m_image_view);
+        toGenderFemale = (ImageView) view.findViewById(R.id.gender_select_habibi_f_image_view);
+
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
         //From Gender
-        final ImageView selfGenderMale = (ImageView) view.findViewById(R.id.gender_select_self_m_image_view);
-        final ImageView selfGenderFemale = (ImageView) view.findViewById(R.id.gender_select_self_f_image_view);
         selfGenderMale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selfGenderSelected = true;
                 MainActivity.setFromGender(getActivity(), Gender.MALE);
                 setGenderSelect(selfGenderMale, selfGenderFemale);
                 nextPage();
@@ -39,6 +57,7 @@ public class GenderSelectFragment extends Fragment {
         selfGenderFemale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selfGenderSelected = true;
                 MainActivity.setFromGender(getActivity(), Gender.FEMALE);
                 setGenderSelect(selfGenderFemale, selfGenderMale);
                 nextPage();
@@ -46,15 +65,10 @@ public class GenderSelectFragment extends Fragment {
         });
 
         //To Gender
-        final TextView titleTextView = (TextView) view.findViewById(R.id.title);
-        final TextView subTitleTextView = (TextView) view.findViewById(R.id.subtitle);
-        final ImageView toGenderMale = (ImageView) view.findViewById(R.id.gender_select_self_m_image_view);
-        final ImageView toGenderFemale = (ImageView) view.findViewById(R.id.gender_select_self_f_image_view);
-        titleTextView.setText(getActivity().getResources().getString(R.string.select_to_gender_title));
-        subTitleTextView.setText(getActivity().getResources().getString(R.string.select_to_gender_subtitle));
         toGenderMale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                habibiGenderSelected = true;
                 MainActivity.setToGender(getActivity(), Gender.MALE);
                 setGenderSelect(toGenderMale, toGenderFemale);
                 nextPage();
@@ -63,32 +77,34 @@ public class GenderSelectFragment extends Fragment {
         toGenderFemale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                habibiGenderSelected = true;
                 MainActivity.setToGender(getActivity(), Gender.FEMALE);
                 setGenderSelect(toGenderFemale, toGenderMale);
                 nextPage();
             }
         });
-
-        return view;
     }
 
     private void setGenderSelect(View selectedGender, View unselectedGender) {
-        selectedGender.setBackground(getActivity().getResources().getDrawable(R.drawable.border));
-        unselectedGender.setBackgroundColor(getActivity().getResources().getColor(android.R.color.transparent));
+        selectedGender.setBackground(getResources().getDrawable(R.drawable.border));
+        unselectedGender.setBackgroundColor(getResources().getColor(android.R.color.transparent));
     }
 
     private void nextPage() {
-        BibiEnableFragment fragment = new BibiEnableFragment();
-        FragmentManager fragmentManager = getFragmentManager();
-        if (fragmentManager != null) {
-            fragmentManager.beginTransaction()
-                    .setCustomAnimations(R.anim.fragment_slide_left_enter,
-                            R.anim.fragment_slide_left_exit,
-                            R.anim.fragment_slide_right_enter,
-                            R.anim.fragment_slide_right_exit)
-                    .replace(R.id.fragmentLayoutContainer_installation, fragment)
-                    .addToBackStack(BibiEnableFragment.TAG)
-                    .commit();
+        if (selfGenderSelected && habibiGenderSelected) {
+            MainActivity.setFirstTimeUser(getActivity(), false);
+            BibiEnableFragment fragment = new BibiEnableFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            if (fragmentManager != null) {
+                fragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.fragment_slide_left_enter,
+                                R.anim.fragment_slide_left_exit,
+                                R.anim.fragment_slide_right_enter,
+                                R.anim.fragment_slide_right_exit)
+                        .replace(R.id.fragmentLayoutContainer_installation, fragment)
+                        .addToBackStack(BibiEnableFragment.TAG)
+                        .commit();
+            }
         }
     }
 }

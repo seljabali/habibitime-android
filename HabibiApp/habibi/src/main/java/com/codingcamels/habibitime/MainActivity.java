@@ -72,7 +72,7 @@ public class MainActivity extends Activity {
 
     public static String getPasteTypeSetting(Context context) {
         SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
-        return appSettings.getString(MainActivity.PASTE_TYPE, "");
+        return appSettings.getString(MainActivity.PASTE_TYPE, "Arabizi");
     }
 
 

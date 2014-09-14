@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.codingcamels.habibitime.MainActivity;
 import com.codingcamels.habibitime.R;
@@ -15,8 +16,8 @@ import com.codingcamels.habibitime.models.Gender;
 /**
  * Created by habibi on 8/3/14.
  */
-public class FromGenderSelectFragment extends Fragment {
-    public static final String TAG = FromGenderSelectFragment.class.getSimpleName();
+public class GenderSelectFragment extends Fragment {
+    public static final String TAG = GenderSelectFragment.class.getSimpleName();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -24,9 +25,9 @@ public class FromGenderSelectFragment extends Fragment {
         if (view == null) {
             return null;
         }
+        //From Gender
         final ImageView selfGenderMale = (ImageView) view.findViewById(R.id.gender_select_self_m_image_view);
         final ImageView selfGenderFemale = (ImageView) view.findViewById(R.id.gender_select_self_f_image_view);
-
         selfGenderMale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,6 +45,30 @@ public class FromGenderSelectFragment extends Fragment {
             }
         });
 
+        //To Gender
+        final TextView titleTextView = (TextView) view.findViewById(R.id.title);
+        final TextView subTitleTextView = (TextView) view.findViewById(R.id.subtitle);
+        final ImageView toGenderMale = (ImageView) view.findViewById(R.id.gender_select_self_m_image_view);
+        final ImageView toGenderFemale = (ImageView) view.findViewById(R.id.gender_select_self_f_image_view);
+        titleTextView.setText(getActivity().getResources().getString(R.string.select_to_gender_title));
+        subTitleTextView.setText(getActivity().getResources().getString(R.string.select_to_gender_subtitle));
+        toGenderMale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.setToGender(getActivity(), Gender.MALE);
+                setGenderSelect(toGenderMale, toGenderFemale);
+                nextPage();
+            }
+        });
+        toGenderFemale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.setToGender(getActivity(), Gender.FEMALE);
+                setGenderSelect(toGenderFemale, toGenderMale);
+                nextPage();
+            }
+        });
+
         return view;
     }
 
@@ -53,7 +78,7 @@ public class FromGenderSelectFragment extends Fragment {
     }
 
     private void nextPage() {
-        ToGenderSelectFragment fragment = new ToGenderSelectFragment();
+        BibiEnableFragment fragment = new BibiEnableFragment();
         FragmentManager fragmentManager = getFragmentManager();
         if (fragmentManager != null) {
             fragmentManager.beginTransaction()
@@ -62,7 +87,7 @@ public class FromGenderSelectFragment extends Fragment {
                             R.anim.fragment_slide_right_enter,
                             R.anim.fragment_slide_right_exit)
                     .replace(R.id.fragmentLayoutContainer_installation, fragment)
-                    .addToBackStack(ToGenderSelectFragment.TAG)
+                    .addToBackStack(BibiEnableFragment.TAG)
                     .commit();
         }
     }

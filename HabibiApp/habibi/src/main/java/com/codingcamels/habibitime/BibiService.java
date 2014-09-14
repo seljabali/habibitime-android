@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.app.Service;
 import android.widget.AdapterView;
@@ -25,6 +26,7 @@ import com.codingcamels.habibitime.models.Gender;
 import com.codingcamels.habibitime.models.Language;
 import com.codingcamels.habibitime.models.Phrase;
 import com.codingcamels.habibitime.utilities.Utils;
+import com.codingcamels.habibitime.utilities.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +52,8 @@ public class BibiService extends Service {
 
         chatHead = new ImageView(this);
         chatHead.setImageResource(R.drawable.ic_launcher);
+
+        chatHead.setAnimation(ViewUtil.inFromLeftAnimation());
         int size = (int) getApplicationContext().getResources().getDimension(R.dimen.bibi_icon_size);
         final WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                 size,

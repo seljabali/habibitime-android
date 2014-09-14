@@ -18,11 +18,13 @@
     <!--Settings-->
 
     <!--Bibi-->
-    <dimen name="bibi_icon_size">24dp</dimen>
+    <dimen name="bibi_icon_size">30dp</dimen>
 
     <!--Habibi Phrase-->
     <dimen name="clipboard_icon_height">16dp</dimen>
     <dimen name="clipboard_icon_width">16dp</dimen>
+    <dimen name="share_icon_height">16dp</dimen>
+    <dimen name="share_icon_width">16dp</dimen>
     <dimen name="play_icon_height">24dp</dimen>
     <dimen name="play_icon_width">20dp</dimen>
     <dimen name="gender_icon_height">60dp</dimen>

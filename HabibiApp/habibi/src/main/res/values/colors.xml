@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <color name="pink">#D98DF1</color>
     <color name="black">#000000</color>
     <color name="green">#ABF392</color>
@@ -24,6 +23,28 @@
     <color name="border_color_1">#FFFF</color>
     <color name="border_color_2">#89BBF7</color>
 
+    <!--Cute-->
+    <color name="cute_green">#A8BF12</color>
+    <color name="cute_yellow">#FBD506</color>
+    <color name="cute_pink">#D51B80</color>
+    <color name="cute_blue">#00AAB5</color>
+    <color name="cute_orange">#FF9F00</color>
+
+    <!--Beach Bums-->
+    <color name="bums_blue">#2A3A48</color>
+    <color name="bums_blue2">#3E6372</color>
+    <color name="bums_white">#FAFAFF</color>
+    <color name="bums_red">#BE1623</color>
+    <color name="bums_gray">#B2D4DC</color>
+
+    <!--Alternative-->
+    <color name="alternative_gray">#3D4851</color>
+    <color name="alternative_blue">#1EA3AD</color>
+    <color name="alternative_green">#8FC269</color>
+    <color name="alternative_yellow">#FCD96C</color>
+    <color name="alternative_red">#FC745F</color>
+
+    <!--Rainbow-->
     <array name="rainbow">
         <item>@color/bright_pink</item>
         <item>@color/red</item>
@@ -38,13 +59,44 @@
         <item>@color/violet</item>
         <item>@color/magenta</item>
     </array>
-    <array name="habibi_colors">
+
+    <!--YO-->
+    <array name="habibi_colors12">
         <item>@color/pink</item>
         <item>@color/green</item>
         <item>@color/tortoise</item>
         <item>@color/light_blue</item>
         <item>@color/bright_pink</item>
     </array>
+
+    <!--Cute-->
+    <array name="habibi_colors23">
+        <item>@color/cute_blue</item>
+        <item>@color/cute_orange</item>
+        <item>@color/cute_yellow</item>
+        <item>@color/cute_green</item>
+        <item>@color/cute_pink</item>
+    </array>
+
+    <!--Beach Bums-->
+    <array name="habibi_colors2">
+        <item>@color/bums_blue</item>
+        <item>@color/bums_blue2</item>
+        <item>@color/bums_white</item>
+        <item>@color/bums_red</item>
+        <item>@color/bums_gray</item>
+    </array>
+
+    <!--Alternative-->
+    <array name="habibi_colors">
+        <item>@color/alternative_red</item>
+        <item>@color/alternative_yellow</item>
+        <item>@color/alternative_green</item>
+        <item>@color/alternative_blue</item>
+        <item>@color/bums_blue2</item>
+    </array>
+
+
     <array name="habibi_colors_short">
         <item>@color/row_even</item>
         <item>@color/row_even</item>

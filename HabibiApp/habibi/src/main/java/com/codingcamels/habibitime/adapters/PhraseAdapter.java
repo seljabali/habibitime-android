@@ -30,6 +30,7 @@ public class PhraseAdapter extends ArrayAdapter<Phrase> {
     private int phraseCount;
     private Activity activity;
     private Category category;
+    private TextView itemView;
 
     public PhraseAdapter(Context context, int resource, List<Phrase> phrases, Category category) {
         super(context, resource, phrases);
@@ -53,7 +54,7 @@ public class PhraseAdapter extends ArrayAdapter<Phrase> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -62,15 +63,15 @@ public class PhraseAdapter extends ArrayAdapter<Phrase> {
 
         final Phrase phrase = getItem(position);
         if (phrase!= null) {
-            TextView itemView = (TextView) view.findViewById(R.id.phrase_view_text);
+            itemView = (TextView) view.findViewById(R.id.phrase_view_text);
             if (itemView != null) {
+                final View superView = view;
                 itemView.setText(phrase.getNativePhraseSpelling());
-                itemView.setBackgroundColor(getColorForPhrase(position));
                 itemView.setOnClickListener(
                         new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                init(phrase);
+                                init(phrase, position, superView);
                             }
                         }
                 );
@@ -88,11 +89,12 @@ public class PhraseAdapter extends ArrayAdapter<Phrase> {
     }
 
     private int getColorForPhrase(int position) {
-        TypedArray colors = activity.getResources().obtainTypedArray(R.array.habibi_colors_short);
+        TypedArray colors = activity.getResources().obtainTypedArray(R.array.habibi_colors);
         return colors.getColor(position % colors.length(), 0);
     }
 
-    private void init(Phrase phrase) {
+    private void init(Phrase phrase, int position, View view) {
+        view.setBackgroundColor(getColorForPhrase(position));
         ViewPhraseFragment fragment = ViewPhraseFragment.newInstance(phrase, category);
         activity.getFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.fragment_slide_left_enter,

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.codingcamels.habibitime.MainActivity;
 import com.codingcamels.habibitime.R;
+import com.codingcamels.habibitime.utilities.ShareDialog;
 import com.codingcamels.habibitime.utilities.StringUtil;
 import com.codingcamels.habibitime.utilities.Utils;
 import com.codingcamels.habibitime.datasources.PhraseDataSource;
@@ -112,6 +113,7 @@ public class ViewPhraseFragment extends Fragment {
                 }
             });
         }
+
         return view;
     }
 
@@ -121,6 +123,9 @@ public class ViewPhraseFragment extends Fragment {
         setArabicText(translatedPhrase);
         setArabiziText(translatedPhrase);
         setProperBiziText(translatedPhrase);
+        setTextOnClick(arabicTextView);
+        setTextOnClick(arabiziTextView);
+        setTextOnClick(properBiziTextView);
         setGenderButtons(toGender);
         setPlaySound(fromGender, toGender);
 
@@ -272,6 +277,15 @@ public class ViewPhraseFragment extends Fragment {
         } else {
             properBiziTextView.setVisibility(View.GONE);
         }
+    }
+
+    private void setTextOnClick(final TextView textView) {
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShareDialog.show(getActivity(), textView.getText().toString());
+            }
+        });
     }
 
 }

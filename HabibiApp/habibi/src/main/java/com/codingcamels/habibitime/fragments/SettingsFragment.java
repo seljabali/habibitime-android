@@ -105,6 +105,16 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstance) {
+        super.onActivityCreated(savedInstance);
+        if (MainActivity.getPasteTypeSetting(getActivity()).equals("Arabic")) {
+            bibiPasteSelection.setSelection(0);
+        } else {
+            bibiPasteSelection.setSelection(1);
+        }
+    }
+
+    @Override
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
         String selected = (String) parent.getItemAtPosition(pos);

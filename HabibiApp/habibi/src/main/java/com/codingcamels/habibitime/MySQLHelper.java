@@ -2,9 +2,13 @@ package com.codingcamels.habibitime;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.codingcamels.habibitime.datasources.CategoryDataSource;
 import com.codingcamels.habibitime.datasources.DialectDataSource;
@@ -16,12 +20,16 @@ import com.codingcamels.habibitime.models.Category;
 import com.codingcamels.habibitime.models.Dialect;
 import com.codingcamels.habibitime.models.Gender;
 import com.codingcamels.habibitime.models.Language;
+import com.codingcamels.habibitime.utilities.ViewUtil;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class MySQLHelper extends SQLiteOpenHelper {
+import javax.xml.validation.Schema;
+
+public class MySQLHelper extends SQLiteOpenHelper implements DatabaseErrorHandler {
     private static final String DATABASE_NAME = "habibi_phrases.db";
     private static final int DATABASE_VERSION = 1;
     public static final String CREATE_TABLE = "create table ";
@@ -134,7 +142,11 @@ public class MySQLHelper extends SQLiteOpenHelper {
     public MySQLHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
+//        File sdcard = Environment.getExternalStorageDirectory();
+//        String dbfile = sdcard.getAbsolutePath() + File.separator+ "external_sd" + File.separator + "db";
         this.db = this.getWritableDatabase();
+//        String path = "android.resource://com.codingcamels.habibitime/raw/SQL.db";
+//        this.db = this.db.openOrCreateDatabase(dbfile, null , this);
     }
 
     @Override
@@ -174,6 +186,11 @@ public class MySQLHelper extends SQLiteOpenHelper {
         } catch  (Exception ex) {
             Log.e("SQL", "Couldn't write initial DB: " + ex.toString());
         }
+    }
+
+    @Override
+    public void onCorruption(SQLiteDatabase dbObj) {
+        ViewUtil.toast(context, "Cheers! You broke the db!");
     }
 
     public void loadDatabase() {

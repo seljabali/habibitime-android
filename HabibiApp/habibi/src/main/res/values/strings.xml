@@ -15,8 +15,8 @@
     <string name="male">Male</string>
 
     <!--Settings-->
-    <string name="gender_select_self_title">My Gender:</string>
-    <string name="gender_select_habibi_title">Default To Gender:</string>
+    <string name="gender_select_self_title">From Gender:</string>
+    <string name="gender_select_habibi_title">To Gender:</string>
     <string name="enable_bibi_view">Enable Bibi!</string>
     <string-array name="bibi_paste_selection">
         <item>@string/arabic</item>

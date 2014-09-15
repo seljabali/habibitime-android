@@ -19,14 +19,9 @@ public class MainActivity extends Activity {
     public static final String BIBI = "mini_habibi_time";
     public static final String PASTE_TYPE = "paste_type";
 
-    private SharedPreferences sharedSettings;
-    private SharedPreferences appSettings;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        appSettings = PreferenceManager.getDefaultSharedPreferences(this);
 
         if (isFirstTimeUser(this)) {
             Intent intent = new Intent(this, InstallationActivity.class);

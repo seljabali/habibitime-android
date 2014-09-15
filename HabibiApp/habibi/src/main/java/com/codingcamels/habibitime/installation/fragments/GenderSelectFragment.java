@@ -1,13 +1,13 @@
 package com.codingcamels.habibitime.installation.fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.codingcamels.habibitime.MainActivity;
 import com.codingcamels.habibitime.R;
@@ -93,18 +93,10 @@ public class GenderSelectFragment extends Fragment {
     private void nextPage() {
         if (selfGenderSelected && habibiGenderSelected) {
             MainActivity.setFirstTimeUser(getActivity(), false);
-            BibiEnableFragment fragment = new BibiEnableFragment();
-            FragmentManager fragmentManager = getFragmentManager();
-            if (fragmentManager != null) {
-                fragmentManager.beginTransaction()
-                        .setCustomAnimations(R.anim.fragment_slide_left_enter,
-                                R.anim.fragment_slide_left_exit,
-                                R.anim.fragment_slide_right_enter,
-                                R.anim.fragment_slide_right_exit)
-                        .replace(R.id.fragmentLayoutContainer_installation, fragment)
-                        .addToBackStack(BibiEnableFragment.TAG)
-                        .commit();
-            }
+            Activity activity = getActivity();
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+            activity.finish();
         }
     }
 }

@@ -23,6 +23,7 @@ public class ViewPhrasesFragment extends Fragment {
     public static String TAG = ViewPhrasesFragment.class.getSimpleName();
     public static String CATEGORY_KEY = "category";
     private Category category;
+    private ListView listView;
 
     public static ViewPhrasesFragment newInstance(Category category) {
         ViewPhrasesFragment fragment = new ViewPhrasesFragment();
@@ -34,11 +35,18 @@ public class ViewPhrasesFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        category = getArguments().getParcelable(CATEGORY_KEY);
-
         View view = inflater.inflate(R.layout.fragment_view_phrases, container, false);
-        ListView listView = (ListView) view.findViewById(R.id.phrases_listview);
+        if (view == null) {
+            return null;
+        }
+        listView = (ListView) view.findViewById(R.id.phrases_listview);
+        category = getArguments().getParcelable(CATEGORY_KEY);
+        return view;
+    }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         PhraseDataSource phraseDataSource = new PhraseDataSource(getActivity());
         phraseDataSource.open();
         List<Phrase> phrases;
@@ -47,10 +55,8 @@ public class ViewPhrasesFragment extends Fragment {
         } else {
             phrases = phraseDataSource.getPhrases(-1, category, null, null, Language.ENGLISH, null);
         }
-
         phraseDataSource.close();
         PhraseAdapter phraseAdapter = new PhraseAdapter(getActivity(), R.id.category_view_text, phrases, category);
         listView.setAdapter(phraseAdapter);
-        return view;
     }
 }

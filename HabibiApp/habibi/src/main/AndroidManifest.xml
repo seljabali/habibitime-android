@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.codingcamels.habibitime" >
-
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>-->
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -27,6 +26,7 @@
             android:label=""
             android:theme="@style/FullscreenTheme">
         </activity>
+        <meta-data android:name="com.crashlytics.ApiKey" android:value="ceb927cdd2213e59c2c1a98bbed6dac7be0f3fbe"/>
     </application>
 
 </manifest>

@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import com.codingcamels.habibitime.fragments.ViewCategoriesFragment;
 import com.codingcamels.habibitime.installation.InstallationActivity;
 import com.codingcamels.habibitime.models.Gender;
+import com.crashlytics.android.Crashlytics;
 
 public class MainActivity extends Activity {
     public static final String PREFS_NAME = "MyPrefsFile";
@@ -22,6 +23,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Crashlytics.start(this);
 
         if (isFirstTimeUser(this)) {
             Intent intent = new Intent(this, InstallationActivity.class);

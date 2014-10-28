@@ -12,6 +12,7 @@ import com.codingcamels.habibitime.adapters.CategoryAdapter;
 import com.codingcamels.habibitime.R;
 import com.codingcamels.habibitime.datasources.CategoryDataSource;
 import com.codingcamels.habibitime.models.Category;
+import com.codingcamels.habibitime.models.Phrase;
 
 import java.util.ArrayList;
 
@@ -22,6 +23,7 @@ public class ViewCategoriesFragment extends Fragment {
     public static String TAG = ViewCategoriesFragment.class.getSimpleName();
     public static String CATEGORIES_KEY = "categories";
     private ArrayList<Category> categories;
+    private ListView listView;
 
     public static ViewCategoriesFragment newInstance(Activity activity) {
         ViewCategoriesFragment fragment = new ViewCategoriesFragment();
@@ -38,14 +40,19 @@ public class ViewCategoriesFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        categories = getArguments().getParcelableArrayList(CATEGORIES_KEY);
         View view = inflater.inflate(R.layout.fragment_view_categories, container, false);
-
-        ListView listView = (ListView) view.findViewById(R.id.categories_list);
-        CategoryAdapter categoryAdapter = new CategoryAdapter(getActivity(), R.id.category_view_text, categories);
-        listView.setAdapter(categoryAdapter);
-
+        if (view == null) {
+            return null;
+        }
+        categories = getArguments().getParcelableArrayList(CATEGORIES_KEY);
+        listView = (ListView) view.findViewById(R.id.categories_list);
         return view;
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        CategoryAdapter categoryAdapter = new CategoryAdapter(getActivity(), R.id.category_view_text, categories);
+        listView.setAdapter(categoryAdapter);
+    }
 }

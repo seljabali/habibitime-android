@@ -1,10 +1,8 @@
 package com.codingcamels.habibitime.fragments;
 
 import android.app.Fragment;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +22,6 @@ import com.codingcamels.habibitime.models.Gender;
  */
 public class SettingsFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    private SharedPreferences appSettings;
     private ImageView selfGenderMale;
     private ImageView selfGenderFemale;
     private ImageView habibiGenderMale;
@@ -42,7 +39,9 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
-
+        if (view == null) {
+            return null;
+        }
         selfGenderMale = (ImageView) view.findViewById(R.id.gender_select_self_m_image_view);
         selfGenderFemale = (ImageView) view.findViewById(R.id.gender_select_self_f_image_view);
         habibiGenderMale = (ImageView) view.findViewById(R.id.gender_select_habibi_m_image_view);
@@ -50,10 +49,15 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         bibiPasteSelectionLayout = (LinearLayout) view.findViewById(R.id.bibi_paste_selection_layout);
         bibiPasteSelection = (Spinner) view.findViewById(R.id.bibi_paste_selection);
         enableBibiView = (CheckBox) view.findViewById(R.id.enable_bibi_view);
-
-        appSettings = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        selectedBorder = getActivity().getResources().getDrawable(R.drawable.border);
         transparent = android.R.color.transparent;
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstance) {
+        super.onActivityCreated(savedInstance);
+
+        selectedBorder = getResources().getDrawable(R.drawable.border);
 
         //FROM GENDER
         setFromGender(MainActivity.getFromGenderSettings(getActivity()));
@@ -100,13 +104,6 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         pasteSelectionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         bibiPasteSelection.setAdapter(pasteSelectionAdapter);
         bibiPasteSelection.setOnItemSelectedListener(this);
-
-        return view;
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstance) {
-        super.onActivityCreated(savedInstance);
         if (MainActivity.getPasteTypeSetting(getActivity()).equals("Arabic")) {
             bibiPasteSelection.setSelection(0);
         } else {

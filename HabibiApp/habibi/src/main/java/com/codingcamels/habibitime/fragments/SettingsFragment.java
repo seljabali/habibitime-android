@@ -48,7 +48,6 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         habibiGenderFemale = (ImageView) view.findViewById(R.id.gender_select_habibi_f_image_view);
         bibiPasteSelectionLayout = (LinearLayout) view.findViewById(R.id.bibi_paste_selection_layout);
         bibiPasteSelection = (Spinner) view.findViewById(R.id.bibi_paste_selection);
-        enableBibiView = (CheckBox) view.findViewById(R.id.enable_bibi_view);
         transparent = android.R.color.transparent;
         return view;
     }
@@ -86,15 +85,6 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
             @Override
             public void onClick(View v) {
                 setToGender(Gender.FEMALE);
-            }
-        });
-
-        //ENABLE BIBI
-        setBibiEnabled(MainActivity.isBibiEnabled(getActivity()));
-        enableBibiView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setBibiEnabled(enableBibiView.isChecked());
             }
         });
 
@@ -144,12 +134,5 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
             habibiGenderFemale.setBackground(selectedBorder);
             habibiGenderMale.setBackgroundColor(transparent);
         }
-    }
-
-    private void setBibiEnabled(boolean enabled) {
-        MainActivity.setBibiEnabled(getActivity(), enabled);
-        MainActivity.setUpBibi(getActivity(), enabled);
-        enableBibiView.setChecked(enabled);
-        bibiPasteSelectionLayout.setVisibility(enabled ? View.VISIBLE : View.GONE);
     }
 }

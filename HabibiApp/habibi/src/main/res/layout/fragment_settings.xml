@@ -94,15 +94,6 @@
         android:layout_marginTop="@dimen/double_space"
         android:text="@string/about_bibi"/>
 
-    <CheckBox
-        android:id="@+id/enable_bibi_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/single_space"
-        android:button="@null"
-        android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-        android:text="@string/enable_bibi_view"/>
-
     <!--BIBI PASTE SELECT-->
     <LinearLayout
         android:id="@+id/bibi_paste_selection_layout"

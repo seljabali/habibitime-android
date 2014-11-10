@@ -6,7 +6,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
+import com.codingcamels.habibitime.bibi.BibiService;
 import com.codingcamels.habibitime.fragments.ViewCategoriesFragment;
 import com.codingcamels.habibitime.installation.InstallationActivity;
 import com.codingcamels.habibitime.models.Gender;
@@ -30,13 +34,34 @@ public class MainActivity extends Activity {
             startActivity(intent);
             finish();
         } else {
-            setUpBibi(this, isBibiEnabled(this));
             setContentView(R.layout.activity_main);
             ViewCategoriesFragment fragment = ViewCategoriesFragment.newInstance(this);
             getFragmentManager().beginTransaction()
                     .replace(R.id.fragmentLayoutContainer, fragment, ViewCategoriesFragment.TAG)
                     .commit();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.clear();
+        final MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.settings_menu, menu);
+        final MenuItem minimizeItem = menu.findItem(R.id.minimize);
+        minimizeItem.setIcon(R.drawable.minimize);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        super.onOptionsItemSelected(menuItem);
+        switch (menuItem.getItemId()) {
+            case R.id.minimize:
+                MainActivity.setUpBibi(this, true);
+                MainActivity.this.finish();
+                getFragmentManager().executePendingTransactions();
+        }
+        return true;
     }
 
     //first time user
@@ -87,20 +112,14 @@ public class MainActivity extends Activity {
     //bibi settings
     public static void setUpBibi(Activity activity, boolean enabled) {
         if (enabled) {
+            activity.stopService(new Intent(activity, BibiService.class));
+            activity.getFragmentManager().executePendingTransactions();
             activity.startService(new Intent(activity, BibiService.class));
+            activity.getFragmentManager().executePendingTransactions();
         } else {
             activity.stopService(new Intent(activity, BibiService.class));
+            activity.getFragmentManager().executePendingTransactions();
         }
-    }
-
-    public static void setBibiEnabled(Context context, boolean enabled) {
-        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
-        appSettings.edit().putBoolean(MainActivity.BIBI, enabled).commit();
-    }
-
-    public static boolean isBibiEnabled(Context context) {
-        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
-        return appSettings.getBoolean(BIBI, false);
     }
 
 }

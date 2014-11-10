@@ -1,4 +1,4 @@
-package com.codingcamels.habibitime.adapters;
+package com.codingcamels.habibitime.bibi;
 
 
 import android.content.Context;

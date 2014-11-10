@@ -13,17 +13,18 @@
     <string name="settings">Settings</string>
     <string name="female">Female</string>
     <string name="male">Male</string>
+    <string name="minimize">Minimize</string>
 
     <!--Settings-->
     <string name="gender_select_self_title">From Gender:</string>
     <string name="gender_select_habibi_title">To Gender:</string>
-    <string name="about_bibi">Bibi remains on top of others apps providing the ability to paste in phrases quickly.</string>
+    <string name="about_bibi">When minimized, select the form of the phrase type:</string>
     <string name="enable_bibi_view">Enable Bibi!</string>
     <string-array name="bibi_paste_selection">
         <item>@string/arabic</item>
         <item>@string/arabizi</item>
     </string-array>
-    <string name="bibi_paste_selection">Paste Type</string>
+    <string name="bibi_paste_selection"></string>
 
     <!--Habibi Phrase-->
     <string name="share_using">Share using…</string>

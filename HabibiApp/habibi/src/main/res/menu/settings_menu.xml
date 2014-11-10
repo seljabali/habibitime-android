@@ -2,6 +2,7 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/main_settings"
-        android:title="@string/settings"/>
+        android:id="@+id/minimize"
+        android:title="@string/minimize"
+        android:showAsAction="always"/>
 </menu>

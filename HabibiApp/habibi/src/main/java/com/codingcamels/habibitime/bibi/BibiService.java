@@ -38,6 +38,7 @@ public class BibiService extends Service {
     private WindowManager windowManager;
     private ImageView chatHead;
     private ListPopupWindow currentPopUp;
+    private boolean isShowingPhrases;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -46,112 +47,27 @@ public class BibiService extends Service {
 
     @Override public void onCreate() {
         super.onCreate();
-        currentPopUp = null;
+        clearCurrentPopUp();
+        isShowingPhrases = false;
         windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
         chatHead = new ImageView(this);
         chatHead.setAnimation(ViewUtil.inFromLeftAnimation());
-        chatHead.setImageResource(R.drawable.ic_launcher);
+        resetChatHeadIcon();
         chatHead.setOnClickListener(clickOnChatHead());
         chatHead.setOnTouchListener(tapOnChatHead(getChatHeadParams()));
         windowManager.addView(chatHead, getChatHeadParams());
     }
 
-    private void showCategories(final View anchor) {
-        try {
-            this.currentPopUp = getNewListPopupWindow(anchor);
-            CategoryDataSource categoryDataSource = new CategoryDataSource(getApplicationContext());
-            categoryDataSource.open();
-            final ArrayList<Category> categories = new ArrayList<Category>(categoryDataSource.getCategories());
-            categoryDataSource.close();
-            CategoryPopUpAdapter categoryAdapter = new CategoryPopUpAdapter(getApplicationContext(), R.id.category_view_text, categories);
-            currentPopUp.setAdapter(categoryAdapter);
-            currentPopUp.setOnItemClickListener(clickOnCategory(anchor, categories));
-            currentPopUp.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void showPhrasesForCategory(final View anchor, final Category category) {
-        currentPopUp = getNewListPopupWindow(anchor);
-        PhraseDataSource phraseDataSource = new PhraseDataSource(getApplicationContext());
-        phraseDataSource.open();
-        final List<Phrase> phrases;
-        if (Category.SETTINGS.equals(category)) {
-            phrases = phraseDataSource.getPhrases(-1, null, null, null, Language.ENGLISH, null);
-        } else {
-            phrases = phraseDataSource.getPhrases(-1, category, null, null, Language.ENGLISH, null);
-        }
-        phraseDataSource.close();
-        PhrasePopUpAdapter phraseAdapter = new PhrasePopUpAdapter(getApplicationContext(), R.id.category_view_text, phrases, category);
-        currentPopUp.setAdapter(phraseAdapter);
-        currentPopUp.setOnItemClickListener(clickOnPhrase(phrases));
-        currentPopUp.setOnDismissListener(OnDismissPopUp());
-        currentPopUp.show();
-    }
-
-    private void copyPhrase(final Phrase phrase) {
-        Context context = getApplicationContext();
-        Gender toGender = MainActivity.getToGenderSettings(context);
-        Gender fromGender = MainActivity.getFromGenderSettings(context);
-        PhraseDataSource phraseDataSource = new PhraseDataSource(context);
-        phraseDataSource.open();
-        List<Phrase> translatedPhrases = phraseDataSource.getPhrases(phrase.getHabibiPhraseId(), null,
-                fromGender, toGender, Language.ARABIC, null);
-        phraseDataSource.close();
-        Phrase arabicTranslatedPhrase = translatedPhrases.get(0);
-        String pasteType = MainActivity.getPasteTypeSetting(context);
-        if (getString(R.string.arabic).equals(pasteType)) {
-            Utils.copyToClipboard(getApplicationContext(), arabicTranslatedPhrase.getNativePhraseSpelling());
-        } else if (getString(R.string.arabizi).equals(pasteType)) {
-            Utils.copyToClipboard(getApplicationContext(), (arabicTranslatedPhrase.getProperPhoneticPhraseSpelling()));
-        }
-    }
-
-    private ListPopupWindow getNewListPopupWindow(View anchor) {
-        Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        final ListPopupWindow popup = new ListPopupWindow(this);
-        popup.setAnchorView(anchor);
-        popup.setWidth((int) (display.getWidth()/(1.5)));
-        return popup;
-    }
-
-    private WindowManager.LayoutParams getChatHeadParams() {
-        int size = (int) getApplicationContext().getResources().getDimension(R.dimen.bibi_icon_size);
-        final WindowManager.LayoutParams params = new WindowManager.LayoutParams(
-                size,
-                size,
-                WindowManager.LayoutParams.TYPE_PHONE,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-                PixelFormat.TRANSLUCENT);
-
-        params.gravity = Gravity.TOP | Gravity.LEFT;
-        params.x = 0;
-        params.y = 0;
-        return params;
-    }
-
-
-    //Figure out a way to fix dismiss on Category resetting icon
-    private android.widget.PopupWindow.OnDismissListener OnDismissPopUp() {
-        return new android.widget.PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                resetChatHeadIcon();
-                clearCurrentPopUp();
-            }
-        };
-    }
-
+    //CHAT HEAD
     private View.OnClickListener clickOnChatHead() {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentPopUp == null) {
+                if (currentPopUp != null && !isShowingPhrases) {
+                    maximizeScreen();
+                } else {
                     showCategories(chatHead);
                     chatHead.setImageResource(R.drawable.maximize);
-                } else {
-                    maximizeScreen();
                 }
             }
         };
@@ -186,11 +102,30 @@ public class BibiService extends Service {
         };
     }
 
+    //CATEGORIES
+    private void showCategories(final View anchor) {
+        try {
+            isShowingPhrases = false;
+            currentPopUp = getNewListPopupWindow(anchor);
+            CategoryDataSource categoryDataSource = new CategoryDataSource(getApplicationContext());
+            categoryDataSource.open();
+            final ArrayList<Category> categories = new ArrayList<Category>(categoryDataSource.getCategories());
+            categoryDataSource.close();
+            CategoryPopUpAdapter categoryAdapter = new CategoryPopUpAdapter(getApplicationContext(), R.id.category_view_text, categories);
+            currentPopUp.setAdapter(categoryAdapter);
+            currentPopUp.setOnItemClickListener(clickOnCategory(anchor, categories));
+            currentPopUp.setOnDismissListener(OnDismissPopUp());
+            currentPopUp.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     private OnItemClickListener clickOnCategory(final View anchor, final ArrayList<Category> categories) {
         return new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View view, int position, long id3) {
                 try {
+                    isShowingPhrases = true;
                     currentPopUp.dismiss();
                     showPhrasesForCategory(anchor, categories.get(position));
                 } catch (Throwable e) {
@@ -200,18 +135,68 @@ public class BibiService extends Service {
         };
     }
 
+    //PHRASES
+    private void showPhrasesForCategory(final View anchor, final Category category) {
+        chatHead.setImageResource(R.drawable.maximize);
+        currentPopUp = getNewListPopupWindow(anchor);
+        PhraseDataSource phraseDataSource = new PhraseDataSource(getApplicationContext());
+        phraseDataSource.open();
+        final List<Phrase> phrases;
+        if (Category.SETTINGS.equals(category)) {
+            phrases = phraseDataSource.getPhrases(-1, null, null, null, Language.ENGLISH, null);
+        } else {
+            phrases = phraseDataSource.getPhrases(-1, category, null, null, Language.ENGLISH, null);
+        }
+        phraseDataSource.close();
+        PhrasePopUpAdapter phraseAdapter = new PhrasePopUpAdapter(getApplicationContext(), R.id.category_view_text, phrases, category);
+        currentPopUp.setAdapter(phraseAdapter);
+        currentPopUp.setOnItemClickListener(clickOnPhrase(phrases));
+        currentPopUp.setOnDismissListener(OnDismissPopUp());
+        currentPopUp.show();
+    }
+
     private OnItemClickListener clickOnPhrase(final List<Phrase> phrases) {
         return new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View view, int position, long id3) {
                 try {
                     copyPhrase(phrases.get(position));
+                    currentPopUp.dismiss();
                     resetChatHeadIcon();
-                    clearCurrentPopUp();
                 } catch (Throwable e) {
                     Log.e("ERROR", e.toString());
                 }
-            };};
+            };
+        };
+    }
+
+    private void copyPhrase(final Phrase phrase) {
+        Context context = getApplicationContext();
+        Gender toGender = MainActivity.getToGenderSettings(context);
+        Gender fromGender = MainActivity.getFromGenderSettings(context);
+        PhraseDataSource phraseDataSource = new PhraseDataSource(context);
+        phraseDataSource.open();
+        List<Phrase> translatedPhrases = phraseDataSource.getPhrases(phrase.getHabibiPhraseId(), null,
+                fromGender, toGender, Language.ARABIC, null);
+        phraseDataSource.close();
+        Phrase arabicTranslatedPhrase = translatedPhrases.get(0);
+        String pasteType = MainActivity.getPasteTypeSetting(context);
+        if (getString(R.string.arabic).equals(pasteType)) {
+            Utils.copyToClipboard(getApplicationContext(), arabicTranslatedPhrase.getNativePhraseSpelling());
+        } else if (getString(R.string.arabizi).equals(pasteType)) {
+            Utils.copyToClipboard(getApplicationContext(), (arabicTranslatedPhrase.getProperPhoneticPhraseSpelling()));
+        }
+    }
+
+    private android.widget.PopupWindow.OnDismissListener OnDismissPopUp() {
+        return new android.widget.PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                if (!isShowingPhrases) {
+                    resetChatHeadIcon();
+                }
+            }
+        };
     }
 
     private void maximizeScreen() {
@@ -231,6 +216,31 @@ public class BibiService extends Service {
             currentPopUp = null;
         }
     }
+
+    //SETUP
+    private ListPopupWindow getNewListPopupWindow(View anchor) {
+        Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        final ListPopupWindow popup = new ListPopupWindow(this);
+        popup.setAnchorView(anchor);
+        popup.setWidth((int) (display.getWidth()/(1.5)));
+        return popup;
+    }
+
+    private WindowManager.LayoutParams getChatHeadParams() {
+        int size = (int) getApplicationContext().getResources().getDimension(R.dimen.bibi_icon_size);
+        final WindowManager.LayoutParams params = new WindowManager.LayoutParams(
+                size,
+                size,
+                WindowManager.LayoutParams.TYPE_PHONE,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                PixelFormat.TRANSLUCENT);
+
+        params.gravity = Gravity.TOP | Gravity.LEFT;
+        params.x = 0;
+        params.y = 0;
+        return params;
+    }
+
 
     @Override
     public void onDestroy() {

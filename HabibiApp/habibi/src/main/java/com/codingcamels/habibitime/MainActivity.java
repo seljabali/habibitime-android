@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
         if (isFirstTimeUser(this)) {
             Intent intent = new Intent(this, InstallationActivity.class);
             startActivity(intent);
-            finish();
+            MainActivity.this.finish();
         } else {
             setContentView(R.layout.activity_main);
             ViewCategoriesFragment fragment = ViewCategoriesFragment.newInstance(this);
@@ -64,52 +64,6 @@ public class MainActivity extends Activity {
         return true;
     }
 
-    //first time user
-    public static boolean isFirstTimeUser(Context context) {
-        SharedPreferences sharedSettings = context.getSharedPreferences(PREFS_NAME, 0);
-        return sharedSettings.getBoolean(FIRST_TIME, true);
-    }
-
-    public static void setFirstTimeUser(Context context, boolean firstTime) {
-        SharedPreferences sharedSettings = context.getSharedPreferences(MainActivity.PREFS_NAME, 0);
-        sharedSettings.edit().putBoolean(MainActivity.FIRST_TIME, firstTime).commit();
-    }
-
-    //from gender
-    public static Gender getFromGenderSettings(Context context) {
-        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
-        String fromGender = appSettings.getString(FROM_GENDER, "1");
-        return Gender.getGenderFromID(fromGender);
-    }
-    public static void setFromGender(Context context, Gender fromGender) {
-        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
-        appSettings.edit().putString(MainActivity.FROM_GENDER, fromGender.getIdAsString()).commit();
-    }
-
-    //to gender
-    public static Gender getToGenderSettings(Context context) {
-        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
-        String toGender = appSettings.getString(TO_GENDER, "2");
-        return Gender.getGenderFromID(toGender);
-    }
-    public static void setToGender(Context context, Gender toGender) {
-        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
-        appSettings.edit().putString(MainActivity.TO_GENDER, toGender.getIdAsString()).commit();
-    }
-
-    //paste settings
-    public static void setPasteTypeSetting(Context context, String type) {
-        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
-        appSettings.edit().putString(MainActivity.PASTE_TYPE, type).commit();
-    }
-
-    public static String getPasteTypeSetting(Context context) {
-        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
-        return appSettings.getString(MainActivity.PASTE_TYPE, "Arabizi");
-    }
-
-
-    //bibi settings
     public static void setUpBibi(Activity activity, boolean enabled) {
         if (enabled) {
             activity.stopService(new Intent(activity, BibiService.class));
@@ -120,6 +74,47 @@ public class MainActivity extends Activity {
             activity.stopService(new Intent(activity, BibiService.class));
             activity.getFragmentManager().executePendingTransactions();
         }
+    }
+
+    /**** USER SETTINGS ****/
+    public static boolean isFirstTimeUser(Context context) {
+        SharedPreferences sharedSettings = context.getSharedPreferences(PREFS_NAME, 0);
+        return sharedSettings.getBoolean(FIRST_TIME, true);
+    }
+
+    public static void setFirstTimeUser(Context context, boolean firstTime) {
+        SharedPreferences sharedSettings = context.getSharedPreferences(MainActivity.PREFS_NAME, 0);
+        sharedSettings.edit().putBoolean(MainActivity.FIRST_TIME, firstTime).commit();
+    }
+
+    public static Gender getFromGenderSettings(Context context) {
+        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
+        String fromGender = appSettings.getString(FROM_GENDER, "1");
+        return Gender.getGenderFromID(fromGender);
+    }
+    public static void setFromGender(Context context, Gender fromGender) {
+        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
+        appSettings.edit().putString(MainActivity.FROM_GENDER, fromGender.getIdAsString()).commit();
+    }
+
+    public static Gender getToGenderSettings(Context context) {
+        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
+        String toGender = appSettings.getString(TO_GENDER, "2");
+        return Gender.getGenderFromID(toGender);
+    }
+    public static void setToGender(Context context, Gender toGender) {
+        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
+        appSettings.edit().putString(MainActivity.TO_GENDER, toGender.getIdAsString()).commit();
+    }
+
+    public static void setPasteTypeSetting(Context context, String type) {
+        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
+        appSettings.edit().putString(MainActivity.PASTE_TYPE, type).commit();
+    }
+
+    public static String getPasteTypeSetting(Context context) {
+        SharedPreferences appSettings = PreferenceManager.getDefaultSharedPreferences(context);
+        return appSettings.getString(MainActivity.PASTE_TYPE, "Arabizi");
     }
 
 }

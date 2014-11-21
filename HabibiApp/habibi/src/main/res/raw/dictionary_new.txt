@@ -1,32 +1,32 @@
-Mood, I’m Happy, أنا مبسوط ‪, Ana mabsoot , Ana mabsoo6 , أنا مبسوطة , Ana mabsoota , Ana mabsoo6a ‬
-Mood, I’m Excited, أنا متحمس ‪, Ana mit-hamis , Ana mit7amis , أنا متحمسه ‪, Ana miit-hamsa , Ana mit7amsa ‬‬
+Mood, I’m Happy, أنا مبسوط ‪, Ana mab-soot , Ana mabsoo6 , أنا مبسوطة , Ana mab-soota , Ana mabsoo6a ‬
+Mood, I’m Excited, أنا متحمس ‪, Ana mit-hamis , Ana mit7amis , أنا متحمسه ‪, Ana mit-hamsa , Ana mit7amsa ‬‬
 Mood, I’m Mad, أنا زعلان ‪, Ana zaa-lan , Ana za3lan , أنا زعلانه ‪, Ana zaa-lana , Ana za3lana ‬‬
-Mood, I’m Lonely, أنا وحيد ‪, Ana waheed , Ana wa7eed , أنا وحيدة , Ana waheeda , Ana wa7eeda ‬
-Mood, I’m Missing you, أنا مشتألك ‪, Ana mishta-lak , Ana mishta2lak , أنا مشتألك , Ana mishta-lik , Ana mishta2lik ‬
-Mood, I’m Irritated, أنا مزعوج , Ana maz-ooj , Ana maz3ooj , أنا مزعوجه , Ana maz-oojah , Ana maz3oojah 
-Mood, I’m Jealous, أنا غيران , Ana ghay-ran , Ana ‘3ayran , أنا غيرانه , Ana ghay-raneh , Ana ‘3ayraneh 
-Mood, I’m Horny, أنا ممحون , Ana mam-hoon , Ana mam7oon, أنا ممحونه , Ana mam-hooneh , Ana mam7ooneh 
-Mood, I’m Sick, أنا مريض , Ana ma-reed , Ana maree’9 , أنا مريضة , Ana ma-reedah , Ana maree’9a 
-Flirt, I love you, أنا بحبك , Ana ba-hibak , Ana ba7ibak , أنا بحبك , Ana ba-hibik , Ana ba7ibik 
+Mood, I’m Lonely, أنا وحيد ‪, Ana waheed , Ana wa7eed , أنا وحيدة , Ana waheed-da , Ana wa7eeda ‬
+Mood, I’m Missing you, أنا مشتألك ‪, Ana mish-ta-lak , Ana mishta2lak , أنا مشتألك , Ana mish-ta-lik , Ana mishta2lik ‬
+Mood, I’m Irritated, أنا مزعوج , Ana maz-ooj , Ana maz3ooj , أنا مزعوجه , Ana maz-oo-jah , Ana maz3oojah
+Mood, I’m Jealous, أنا غيران , Ana ghay-ran , Ana ‘3ayran , أنا غيرانه , Ana ghay-ra-neh , Ana ‘3ayraneh
+Mood, I’m Horny, أنا ممحون , Ana mam-hoon , Ana mam7oon, أنا ممحونه , Ana mam-hoo-neh , Ana mam7ooneh
+Mood, I’m Sick, أنا مريض , Ana ma-reed , Ana maree’9 , أنا مريضة , Ana ma-reedah , Ana maree’9a
+Flirt, I love you, أنا بحبك , Ana ba-hib-ak , Ana ba7ibak , أنا بحبك , Ana ba-hib-bik , Ana ba7ibik
 Flirt, I miss you, أنا مشتألك , Ana mishta-lak , Ana mishta2lak , أنا مشتألك , Ana mishta-lik , Ana mishta2lik 
-Flirt, You are beautiful, إنت حلو , Inta hiloo , Inta 7ilo , إنت حلوه , Inti hil-weh , Inti 7ilweh 
-Flirt, I adore you, أنا بعشأك , Ana ba-sha-ak , Ana ba3sha2ak , أنا بعشئك , Ana ba-sha-ik , Ana ba3sha2ik 
-Flirt, I want to hug you, أنا بدي أعبطك , Ana bidy ah-boo-tak , Ana bidy 2a3bo6ak , أنا بدي أعبطك , Ana bidy ah-boo-tik , Ana bidy 2a3bo6ik 
-Flirt, I want to kiss you, أنا بدي أبوسك , Ana bidy aboo-sak , Ana bidy 2aboosak , أنا بدي أبوسك , Ana bidy aboo-sik , Ana bidy 2aboosik 
-Flirt, I like your eyes, أنا بحب عيونك , Ana ba-hib ayoonak , Ana ba7ib 3ayoonak , أنا بحب عيونك , Ana ba-hib ayoonik , Ana ba7ib 3ayoonik 
+Flirt, You are beautiful, إنت حلو , In-ta hil-loo , Inta 7ilo , إنت حلوه , In-ti hil-weh , Inti 7ilweh
+Flirt, I adore you, أنا بعشأك , Ana ba-sha-ak , Ana ba3sha2ak , أنا بعشئك , Ana ba-sha-ik , Ana ba3sha2ik
+Flirt, I want to hug you, أنا بدي أعبطك , Ana bid-dy ah-boo-tak , Ana bidy 2a3bo6ak , أنا بدي أعبطك , Ana bid-dy ah-boo-tik , Ana bidy 2a3bo6ik
+Flirt, I want to kiss you, أنا بدي أبوسك , Ana bid-dy aboo-sak , Ana bidy 2aboosak , أنا بدي أبوسك , Ana bid-dy a-boo-sik , Ana bidy 2aboosik
+Flirt, I like your eyes, أنا بحب عيونك , Ana ba-hib a-yoon-ak , Ana ba7ib 3ayoonak , أنا بحب عيونك , Ana ba-hib a-yoo-nik , Ana ba7ib 3ayoonik
 Flirt, I like your smile, أنا بحب ابتسامتك , Ana ba-hib ib-ti-sam-tak , Ana ba7ib 2ibtisamtak , أنا بحب ابتسامتك , Ana ba-hib ib-ti-sam-tik , Ana ba7ib 2ibtisamtik 
-Flirt, That’s a nice dress, حلو فستانك , Hilo fus-ta-nak , 7ilo fustanak , حلو فستانك , Hilo fus-ta-nik,  7ilo fustanik 
-Flirt, Those are cute pants, حلو بنطلونك , Hilo ban-ta-loan-ak , 7ilo ban6alownak , حلو بنطلونك , Hilo ban-ta-loan-ik , 7ilo ban6alownik
+Flirt, That’s a nice dress, حلو فستانك , Hil-lo fus-ta-nak , 7ilo fustanak , حلو فستانك , Hil-lo fus-ta-nik,  7ilo fustanik
+Flirt, Those are cute pants, حلو بنطلونك , Hil-lo ban-ta-loan-ak , 7ilo ban6alownak , حلو بنطلونك , Hil-lo ban-ta-loan-ik , 7ilo ban6alownik
 Flirt, That’s a cute shirt, حلوه بلوزتك , Hil-weh blooz-tak , 7ilweh blooztak , حلوه بلوزتك , Hil-weh blooz-tik , 7ilweh blooztik 
 Flirt, I like your smell, حلوه ريحتك , Hil-weh reeh-tak , 7ilweh ree7tak , حلوه ريحتك , Hil-weh reeh-tik , 7ilweh ree7tik 
-Flirt, I like your hair, حلو شعرك , Hilo shah-rak , 7ilo sha3rak , حلو شعرك , Hilo shah-rik , 7ilo sha3rik 
+Flirt, I like your hair, حلو شعرك , Hil-lo shah-rak , 7ilo sha3rak , حلو شعرك , Hil-lo shah-rik , 7ilo sha3rik
 Questions, Where are you?, وينك؟ , Wain-ak? , Wainak? , وينك؟ , Wain-ik? , Wainik 
-Questions, When am I seeing you?, متى حشوفك؟ , Mata ha-shoof-ak? , Mata 7ashoofak? , متى حشوفك؟ , Mata ha-shoof-ik , Mata 7ashoofik 
-Questions, Do you love me?, بتحبني؟ , Bit-hib-ny? , Bit7ibny? , بتحبيني؟ , Bit-hib-eeny? , Bit7ibeeny? 
+Questions, When am I seeing you?, متى حشوفك؟ , Mat-ta ha-shoof-ak? , Mata 7ashoofak? , متى حشوفك؟ , Mat-ta ha-shoof-ik , Mata 7ashoofik
+Questions, Do you love me?, بتحبني؟ , Bit-hib-bny? , Bit7ibny? , بتحبيني؟ , Bit-hib-eeny? , Bit7ibeeny?
 Questions, Do you miss me?, مشتألي؟ , Mish-taa-ly? , Mishta2ly? , مشتائيلي؟ , Mish-taa-eely? , Mishta2eely? 
 Questions, Seriously?, عن جد؟ , Aan jad? , 3an jad? , عن جد؟ , Aan jad? , 3an jad? 
 Questions, What are you wearing?, شو لابس؟ , Shoo la-bis? , Shoo labis? , شو لابسه؟ , Shoo lab-seh? , Shoo labseh? 
-Questions, Do you want to be my lover?, بدك تكون حبيبي؟ , Bid-ak ta-koon habibi? , Biddak tkoon 7abibi? , بدك تكوني حبيبتي؟ , Bid-ik ta-koony habeebty? , Biddik tkoony 7abeebty? 
+Questions, Do you want to be my lover?, بدك تكون حبيبي؟ , Bid-ak ta-koon ha-bib-bi? , Biddak tkoon 7abibi? , بدك تكوني حبيبتي؟ , Bid-ik ta-koo-ny habeebty? , Biddik tkoony 7abeebty?
 Questions, Will you marry me?, تتزوجني؟ , Tit-za-waj-ny?,  Titzawajny? , تتزوجيني؟ , Tit-za-wa-jeeny? , Titzawajeeny? 
 Responses, Yes, نعم , Na-am , Na3am , نعم , Na-am , Na3am 
 Responses, No, لأ , Laah , La2 , لأ , Laah , La2 

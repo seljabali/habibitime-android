@@ -2,8 +2,12 @@ package com.codingcamels.habibitime.fragments;
 
 import android.app.Fragment;
 import android.graphics.drawable.Drawable;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -21,21 +25,26 @@ import com.codingcamels.habibitime.models.Gender;
  * Created by samsoom on 9/4/14.
  */
 public class SettingsFragment extends Fragment implements AdapterView.OnItemSelectedListener {
-
+    private static final int EASTER_TAP_COUNT = 5;
     private ImageView selfGenderMale;
     private ImageView selfGenderFemale;
     private ImageView habibiGenderMale;
     private ImageView habibiGenderFemale;
     private Spinner bibiPasteSelection;
     private Drawable selectedBorder;
-    private LinearLayout bibiPasteSelectionLayout;
-    private CheckBox enableBibiView;
     private int transparent;
+    private int femaleTapCount;
 
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
     }
 
+    @Override
+    public void onCreate(Bundle savedInstance) {
+        super.onCreate(savedInstance);
+        setHasOptionsMenu(true);
+        femaleTapCount = 0;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
@@ -46,7 +55,6 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         selfGenderFemale = (ImageView) view.findViewById(R.id.gender_select_self_f_image_view);
         habibiGenderMale = (ImageView) view.findViewById(R.id.gender_select_habibi_m_image_view);
         habibiGenderFemale = (ImageView) view.findViewById(R.id.gender_select_habibi_f_image_view);
-        bibiPasteSelectionLayout = (LinearLayout) view.findViewById(R.id.bibi_paste_selection_layout);
         bibiPasteSelection = (Spinner) view.findViewById(R.id.bibi_paste_selection);
         transparent = android.R.color.transparent;
         return view;
@@ -69,6 +77,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         selfGenderFemale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onFemaleButtonPressed();
                 setFromGender(Gender.FEMALE);
             }
         });
@@ -84,6 +93,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         habibiGenderFemale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onFemaleButtonPressed();
                 setToGender(Gender.FEMALE);
             }
         });
@@ -133,6 +143,21 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         } else {
             habibiGenderFemale.setBackground(selectedBorder);
             habibiGenderMale.setBackgroundColor(transparent);
+        }
+    }
+
+    private void onFemaleButtonPressed() {
+        if (++femaleTapCount >= EASTER_TAP_COUNT) {
+            try {
+                femaleTapCount = 0;
+                SoundPool soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+                String fileName = "raw/" + "laugh_f";
+                int soundFile = getActivity().getResources().getIdentifier(fileName, "raw", getActivity().getPackageName());
+                int soundID = soundPool.load(getActivity(), soundFile, 1);
+                soundPool.play(soundID, 30, 30, 1, 0, 1f);
+            } catch (Throwable throwable) {
+                // Do nothing
+            }
         }
     }
 }

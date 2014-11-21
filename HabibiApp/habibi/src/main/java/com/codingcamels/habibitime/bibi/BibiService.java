@@ -55,6 +55,7 @@ public class BibiService extends Service {
         resetChatHeadIcon();
         chatHead.setOnClickListener(clickOnChatHead());
         chatHead.setOnTouchListener(tapOnChatHead(getChatHeadParams()));
+        chatHead.setOnLongClickListener(longClickChatHeadListener());
         windowManager.addView(chatHead, getChatHeadParams());
     }
 
@@ -63,12 +64,24 @@ public class BibiService extends Service {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentPopUp != null && !isShowingPhrases) {
-                    maximizeScreen();
+                if (currentPopUp != null) {
+                    clearCurrentPopUp();
                 } else {
                     showCategories(chatHead);
                     chatHead.setImageResource(R.drawable.maximize);
                 }
+            }
+        };
+    }
+
+    private View.OnLongClickListener longClickChatHeadListener() {
+        return new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (currentPopUp != null) {
+                    maximizeScreen();
+                }
+                return true;
             }
         };
     }
@@ -95,7 +108,6 @@ public class BibiService extends Service {
                         params.x = initialX + (int) (event.getRawX() - initialTouchX);
                         params.y = initialY + (int) (event.getRawY() - initialTouchY);
                         windowManager.updateViewLayout(chatHead, params);
-                        return false;
                 }
                 return false;
             }

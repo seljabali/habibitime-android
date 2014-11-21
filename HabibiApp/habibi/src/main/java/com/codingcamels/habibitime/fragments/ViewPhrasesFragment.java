@@ -3,6 +3,8 @@ package com.codingcamels.habibitime.fragments;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -24,6 +26,12 @@ public class ViewPhrasesFragment extends Fragment {
     public static String CATEGORY_KEY = "category";
     private Category category;
     private ListView listView;
+
+    @Override
+    public void onCreate(Bundle savedInstance) {
+        super.onCreate(savedInstance);
+        setHasOptionsMenu(false);
+    }
 
     public static ViewPhrasesFragment newInstance(Category category) {
         ViewPhrasesFragment fragment = new ViewPhrasesFragment();

@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -24,6 +26,7 @@ public class ViewCategoriesFragment extends Fragment {
     public static String CATEGORIES_KEY = "categories";
     private ArrayList<Category> categories;
     private ListView listView;
+    private Menu menu;
 
     public static ViewCategoriesFragment newInstance(Activity activity) {
         ViewCategoriesFragment fragment = new ViewCategoriesFragment();
@@ -36,6 +39,18 @@ public class ViewCategoriesFragment extends Fragment {
         args.putParcelableArrayList(CATEGORIES_KEY, categories);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstance) {
+        super.onCreate(savedInstance);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+//        setHasOptionsMenu(false);
     }
 
     @Override
@@ -55,4 +70,7 @@ public class ViewCategoriesFragment extends Fragment {
         CategoryAdapter categoryAdapter = new CategoryAdapter(getActivity(), R.id.category_view_text, categories);
         listView.setAdapter(categoryAdapter);
     }
+
+
+
 }

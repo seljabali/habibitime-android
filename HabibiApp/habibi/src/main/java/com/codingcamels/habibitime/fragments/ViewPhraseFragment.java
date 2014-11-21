@@ -9,6 +9,8 @@ import android.app.Fragment;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -67,6 +69,12 @@ public class ViewPhraseFragment extends Fragment {
         args.putParcelable(CATEGORY_KEY, category);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstance) {
+        super.onCreate(savedInstance);
+        setHasOptionsMenu(false);
     }
 
     @Override

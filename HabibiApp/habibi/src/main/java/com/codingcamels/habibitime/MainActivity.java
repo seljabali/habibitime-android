@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.codingcamels.habibitime.bibi.BibiService;
+import com.codingcamels.habibitime.fragments.AddPhraseFragment;
 import com.codingcamels.habibitime.fragments.ViewCategoriesFragment;
 import com.codingcamels.habibitime.installation.InstallationActivity;
 import com.codingcamels.habibitime.models.Gender;
@@ -23,6 +24,8 @@ public class MainActivity extends Activity {
     public static final String TO_GENDER = "to_gender";
     public static final String BIBI = "mini_habibi_time";
     public static final String PASTE_TYPE = "paste_type";
+
+    public static final boolean BIBI_ENABLED = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +50,13 @@ public class MainActivity extends Activity {
         menu.clear();
         final MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.settings_menu, menu);
+
+        final MenuItem addItem = menu.findItem(R.id.add);
+        addItem.setIcon(R.drawable.plus);
+
         final MenuItem minimizeItem = menu.findItem(R.id.minimize);
         minimizeItem.setIcon(R.drawable.minimize);
+        minimizeItem.setVisible(BIBI_ENABLED);
         return true;
     }
 
@@ -57,9 +65,14 @@ public class MainActivity extends Activity {
         super.onOptionsItemSelected(menuItem);
         switch (menuItem.getItemId()) {
             case R.id.minimize:
-                MainActivity.setUpBibi(this, true);
-                MainActivity.this.finish();
-                getFragmentManager().executePendingTransactions();
+                if (BIBI_ENABLED) {
+                    MainActivity.setUpBibi(this, true);
+                    MainActivity.this.finish();
+                    getFragmentManager().executePendingTransactions();
+                }
+                break;
+            case R.id.add:
+                showAddPhraseFragment();
         }
         return true;
     }
@@ -74,6 +87,13 @@ public class MainActivity extends Activity {
             activity.stopService(new Intent(activity, BibiService.class));
             activity.getFragmentManager().executePendingTransactions();
         }
+    }
+
+    private void showAddPhraseFragment() {
+        AddPhraseFragment fragment = AddPhraseFragment.newInstance();
+        getFragmentManager().beginTransaction()
+                .replace(R.id.fragmentLayoutContainer, fragment, AddPhraseFragment.TAG)
+                .commit();
     }
 
     /**** USER SETTINGS ****/

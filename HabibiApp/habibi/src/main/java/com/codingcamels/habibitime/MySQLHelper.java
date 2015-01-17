@@ -142,12 +142,15 @@ public class MySQLHelper extends SQLiteOpenHelper implements DatabaseErrorHandle
     public MySQLHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
-//        File sdcard = Environment.getExternalStorageDirectory();
-//        String dbfile = sdcard.getAbsolutePath() + File.separator+ "external_sd" + File.separator + "db";
         this.db = this.getWritableDatabase();
-//        String path = "android.resource://com.codingcamels.habibitime/raw/SQL.db";
-//        this.db = this.db.openOrCreateDatabase(dbfile, null , this);
     }
+
+    public MySQLHelper(Context context, boolean sdCardIt) {
+        super(context, Environment.getExternalStorageDirectory() + File.separator + DATABASE_NAME, null, DATABASE_VERSION);
+        String pathB = Environment.getExternalStorageDirectory() + File.separator + DATABASE_NAME;
+        this.db = SQLiteDatabase.openDatabase(pathB, null, SQLiteDatabase.CREATE_IF_NECESSARY);
+    }
+
 
     @Override
     public void onCreate(SQLiteDatabase database) {

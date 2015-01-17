@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/double_space"
+    android:weightSum="1">
+
+    <TextView
+        android:id="@+id/englishTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/english"/>
+
+    <EditText
+        android:id="@+id/englishEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.07" />
+
+    <LinearLayout
+        android:id="@+id/fromGenderToGenderCopyViewGroup"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/copyMaleToMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/copyMaleToMale"
+            android:checked="true"/>
+
+        <CheckBox
+            android:id="@+id/copyFemaleToFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/copyFemaleToFemale"
+            android:checked="true"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fromGenderToGenderPhraseViewGroup"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

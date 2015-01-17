@@ -15,6 +15,8 @@
     <string name="male">Male</string>
     <string name="minimize">Minimize</string>
     <string name="add">Add</string>
+    <string name="record">Record</string>
+    <string name="play">Play</string>
 
     <!--Settings-->
     <string name="gender_select_self_title">From Gender:</string>
@@ -33,7 +35,12 @@
     <string name="arabic">Arabic</string>
     <string name="phonetic">Phonetic</string>
     <string name="arabizi">Arabizi</string>
+    <string name="english">English</string>
     <string name="to_gender">To Gender:</string>
+    <string name="sound">Sound:</string>
+
+    <string name="copyMaleToMale">F->M = M->M</string>
+    <string name="copyFemaleToFemale">M->F = F->F</string>
 
     <!--Installation-->
     <string name="select_from_gender_title">Please select your gender:</string>

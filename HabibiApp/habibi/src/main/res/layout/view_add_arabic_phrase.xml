@@ -7,8 +7,11 @@
     <TextView
         android:id="@+id/fromGenderToGenderTitle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        style="@style/H4"/>
 
+    <!--Arabic-->
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -17,15 +20,18 @@
             android:id="@+id/arabicTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/arabic"/>
+            android:text="@string/arabic"
+            style="@style/H6"/>
 
         <EditText
             android:id="@+id/arabicEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.07" />
+            android:layout_weight="0.07"
+            style="@style/H5"/>
     </LinearLayout>
 
+    <!--Phonetic-->
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -35,16 +41,18 @@
             android:id="@+id/phoneticTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/phonetic"/>
+            android:text="@string/phonetic"
+            style="@style/H6"/>
 
         <EditText
             android:id="@+id/phoneticEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.07" />
+            android:layout_weight="0.07"
+            style="@style/H5"/>
     </LinearLayout>
 
-
+    <!--Arabizi-->
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -54,21 +62,24 @@
             android:id="@+id/arabiziTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/arabizi"/>
+            android:text="@string/arabizi"
+            style="@style/H6"/>
 
         <EditText
             android:id="@+id/arabiziEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.07" />
+            android:layout_weight="0.07"
+            style="@style/H6"/>
     </LinearLayout>
 
-
+    <!--Play / Record-->
     <LinearLayout
         android:id="@+id/soundRecordViewGroup"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/single_space">
 
         <Button
             android:id="@+id/play_back"

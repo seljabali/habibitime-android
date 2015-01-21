@@ -44,7 +44,7 @@ public class MySQLHelper extends SQLiteOpenHelper implements DatabaseErrorHandle
     //PHRASE
     public static final String TABLE_PHRASE = "phrase";
     public static final String COLUMN_HABIBI_PHRASE = "habibi_phrase_id";
-    public static final String COLUMN_HABIBI_PHRASE_INSERT = "habibi_phrase_id integer, ";
+    public static final String COLUMN_HABIBI_PHRASE_INSERT = "habibi_phrase_id unsigned integer, ";
     public static final String COLUMN_LANGUAGE = "language";
     public static final String COLUMN_LANGUAGE_INSERT = "language integer, ";
     public static final String COLUMN_DIALECT = "dialect";
@@ -58,7 +58,9 @@ public class MySQLHelper extends SQLiteOpenHelper implements DatabaseErrorHandle
     public static final String COLUMN_PHONETIC_SPELLING = "phonetic_spelling";
     public static final String COLUMN_PHONETIC_SPELLING_INSERT = "phonetic_spelling text, ";
     public static final String COLUMN_PROPER_PHONTETIC_SPELLING = "proper_phonetic_spelling";
-    public static final String COLUMN_PROPER_PHONTETIC_SPELLING_INSERT = "proper_phonetic_spelling text";
+    public static final String COLUMN_PROPER_PHONTETIC_SPELLING_INSERT = "proper_phonetic_spelling text, ";
+    public static final String COLUMN_SOUND_FILE_LOCATION = "sound_file_location";
+    public static final String COLUMN_SOUND_FILE_LOCATION_INSERT = "sound_file_location text";
 
     //LANGUAGE
     public static final String TABLE_LANGUAGE = "language";
@@ -97,6 +99,7 @@ public class MySQLHelper extends SQLiteOpenHelper implements DatabaseErrorHandle
             +       COLUMN_NATIVE_PHRASE_STRING_INSERT
             +       COLUMN_PHONETIC_SPELLING_INSERT
             +       COLUMN_PROPER_PHONTETIC_SPELLING_INSERT
+            +       COLUMN_SOUND_FILE_LOCATION_INSERT
             + ");";
 
     private static final String CREATE_LANGUAGE =
@@ -138,6 +141,16 @@ public class MySQLHelper extends SQLiteOpenHelper implements DatabaseErrorHandle
 
     private SQLiteDatabase db;
     private Context context;
+
+    public static MySQLHelper newInstance(Context context) {
+        MySQLHelper mySQLHelper;
+        if (MainActivity.USE_SD) {
+            mySQLHelper = new MySQLHelper(context, true);
+        } else {
+            mySQLHelper = new MySQLHelper(context, true);
+        }
+        return mySQLHelper;
+    }
 
     public MySQLHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -272,49 +285,59 @@ public class MySQLHelper extends SQLiteOpenHelper implements DatabaseErrorHandle
             long habibiId = habibiPhraseDataSource.createHabibiPhrase(category);
 
             //Create English Phrase
+            final String englishText = line[ENGLISH];
             phraseDataSource.createPhrase(habibiId, Language.ENGLISH.getId(),
-                    -1, -1, -1, line[ENGLISH], null, null);
+                    -1, -1, -1, englishText, null, null);
 
             if (Category.MOOD.equals(category)) {
                 //Create Arabic Phrase M->M
                 phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
                         Dialect.JORDAN.getId(), Gender.MALE.getId(), Gender.MALE.getId(),
-                        line[ARABIC_M], line[BIZI_M], line[BIZIPROPER_M]);
+                        line[ARABIC_M], line[BIZI_M], line[BIZIPROPER_M],
+                        PhraseDataSource.getPhraseSoundFileName(englishText, Language.ARABIC.getLanguageName(), null, null));
 
                 //Create Arabic Phrase M->F
                 phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
                         Dialect.JORDAN.getId(), Gender.MALE.getId(), Gender.FEMALE.getId(),
-                        line[ARABIC_M], line[BIZI_M], line[BIZIPROPER_M]);
+                        line[ARABIC_M], line[BIZI_M], line[BIZIPROPER_M],
+                        PhraseDataSource.getPhraseSoundFileName(englishText, Language.ARABIC.getLanguageName(), null, null));
 
                 //Create Arabic Phrase F->F
                 phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
                         Dialect.JORDAN.getId(), Gender.FEMALE.getId(), Gender.FEMALE.getId(),
-                        line[ARABIC_F], line[BIZI_F], line[BIZIPROPER_F]);
+                        line[ARABIC_F], line[BIZI_F], line[BIZIPROPER_F],
+                        PhraseDataSource.getPhraseSoundFileName(englishText, Language.ARABIC.getLanguageName(), null, null));
 
                 //Create Arabic Phrase F->M
                 phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
                         Dialect.JORDAN.getId(), Gender.FEMALE.getId(), Gender.MALE.getId(),
-                        line[ARABIC_F], line[BIZI_F], line[BIZIPROPER_F]);
+                        line[ARABIC_F], line[BIZI_F], line[BIZIPROPER_F],
+                        PhraseDataSource.getPhraseSoundFileName(englishText, Language.ARABIC.getLanguageName(), null, null));
             } else {
                 //Create Arabic Phrase M->M
                 phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
                         Dialect.JORDAN.getId(), Gender.MALE.getId(), Gender.MALE.getId(),
-                        line[ARABIC_M], line[BIZI_M], line[BIZIPROPER_M]);
+                        line[ARABIC_M], line[BIZI_M], line[BIZIPROPER_M],
+                        PhraseDataSource.getPhraseSoundFileName(englishText,
+                                Language.ARABIC.getLanguageName(), Gender.FEMALE.getGenderNameShortened(), Gender.MALE.getGenderNameShortened()));
 
                 //Create Arabic Phrase F->M
                 phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
                         Dialect.JORDAN.getId(), Gender.FEMALE.getId(), Gender.MALE.getId(),
-                        line[ARABIC_M], line[BIZI_M], line[BIZIPROPER_M]);
+                        line[ARABIC_M], line[BIZI_M], line[BIZIPROPER_M], PhraseDataSource.getPhraseSoundFileName(englishText,
+                                Language.ARABIC.getLanguageName(), Gender.FEMALE.getGenderNameShortened(), Gender.MALE.getGenderNameShortened()));
 
                 //Create Arabic Phrase F->F
                 phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
                         Dialect.JORDAN.getId(), Gender.FEMALE.getId(), Gender.FEMALE.getId(),
-                        line[ARABIC_F], line[BIZI_F], line[BIZIPROPER_F]);
+                        line[ARABIC_F], line[BIZI_F], line[BIZIPROPER_F], PhraseDataSource.getPhraseSoundFileName(englishText,
+                                Language.ARABIC.getLanguageName(), Gender.MALE.getGenderNameShortened(), Gender.FEMALE.getGenderNameShortened()));
 
                 //Create Arabic Phrase M->F
                 phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
                         Dialect.JORDAN.getId(), Gender.MALE.getId(), Gender.FEMALE.getId(),
-                        line[ARABIC_F], line[BIZI_F], line[BIZIPROPER_F]);
+                        line[ARABIC_F], line[BIZI_F], line[BIZIPROPER_F], PhraseDataSource.getPhraseSoundFileName(englishText,
+                                Language.ARABIC.getLanguageName(), Gender.MALE.getGenderNameShortened(), Gender.FEMALE.getGenderNameShortened()));
             }
 
 
@@ -336,6 +359,12 @@ public class MySQLHelper extends SQLiteOpenHelper implements DatabaseErrorHandle
     private boolean tableExists(String tableName) {
         Cursor cursor = db.rawQuery("select 1 from " + tableName + " LIMIT 1", null);
         return true;
+    }
+
+    //TODO 
+    public String getMySqlDump() {
+        db.execSQL("mysqldump " + DATABASE_NAME);
+        return "";
     }
 
 } 

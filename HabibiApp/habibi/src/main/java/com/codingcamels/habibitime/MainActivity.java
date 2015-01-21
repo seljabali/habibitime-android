@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,8 +15,11 @@ import com.codingcamels.habibitime.bibi.BibiService;
 import com.codingcamels.habibitime.fragments.AddPhraseFragment;
 import com.codingcamels.habibitime.fragments.ViewCategoriesFragment;
 import com.codingcamels.habibitime.installation.InstallationActivity;
-import com.codingcamels.habibitime.models.Gender;
+import com.codingcamels.habibitime.models.*;
+import com.codingcamels.habibitime.utilities.SoundUtils;
 import com.crashlytics.android.Crashlytics;
+
+import java.io.File;
 
 public class MainActivity extends Activity {
     public static final String PREFS_NAME = "MyPrefsFile";
@@ -26,6 +30,9 @@ public class MainActivity extends Activity {
     public static final String PASTE_TYPE = "paste_type";
 
     public static final boolean BIBI_ENABLED = false;
+
+    public static final boolean USE_SD = false;
+    public static final String AUDIO_RECORDER_FOLDER = "HabibiTimeAudio";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +103,34 @@ public class MainActivity extends Activity {
                 .commit();
     }
 
+    public static void playSound(Context context, String fileName) {
+        String filePath = getSoundDirectory() + fileName;
+        File file = new File(filePath);
+        if (file.exists()) {
+            SoundUtils.playSound(filePath);
+        } else {
+            SoundUtils.playSoundFromResources(context, fileName);
+        }
+    }
+
+    public static String getSoundDirectory() {
+        String filepath = Environment.getExternalStorageDirectory().getPath();
+        File file = new File(filepath, AUDIO_RECORDER_FOLDER);
+        if (!file.exists()) {
+            return "";
+        }
+        return file.getAbsolutePath() + "/";
+    }
+
+    public static void createExternalSoundDirectory() {
+        String filepath = Environment.getExternalStorageDirectory().getPath();
+        File file = new File(filepath, AUDIO_RECORDER_FOLDER);
+        if (!file.exists()){
+            file.mkdirs();
+        }
+    }
+
+    //TODO: Move to separate class
     /**** USER SETTINGS ****/
     public static boolean isFirstTimeUser(Context context) {
         SharedPreferences sharedSettings = context.getSharedPreferences(PREFS_NAME, 0);

@@ -14,6 +14,20 @@ public class StringUtil {
         return false;
     }
 
+    public static String valueOrEmpty(String string) {
+        if (isEmpty(string)) {
+            return "";
+        }
+        return string;
+    }
+
+    public static String getBIfAEmpty(String strA, String strB) {
+        if (isEmpty(strA)) {
+            return strB;
+        }
+        return strA;
+    }
+
     public static boolean isNotEmpty(String string) {
         return !isEmpty(string);
     }

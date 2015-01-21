@@ -16,10 +16,11 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.codingcamels.habibitime.MainActivity;
 import com.codingcamels.habibitime.R;
-import com.codingcamels.habibitime.models.Gender;
+import com.codingcamels.habibitime.models.*;
 
 /**
  * Created by samsoom on 9/4/14.
@@ -31,6 +32,8 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
     private ImageView habibiGenderMale;
     private ImageView habibiGenderFemale;
     private Spinner bibiPasteSelection;
+    private TextView bibiInfo;
+    private ViewGroup bibiPasteSelectionViewGroup;
     private Drawable selectedBorder;
     private int transparent;
     private int femaleTapCount;
@@ -56,6 +59,8 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         habibiGenderMale = (ImageView) view.findViewById(R.id.gender_select_habibi_m_image_view);
         habibiGenderFemale = (ImageView) view.findViewById(R.id.gender_select_habibi_f_image_view);
         bibiPasteSelection = (Spinner) view.findViewById(R.id.bibi_paste_selection);
+        bibiInfo = (TextView) view.findViewById(R.id.bibi_info);
+        bibiPasteSelectionViewGroup = (ViewGroup) view.findViewById(R.id.bibi_paste_selection_view_group);
         transparent = android.R.color.transparent;
         return view;
     }
@@ -99,15 +104,20 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         });
 
         //BIBI PASTE SELECTION
-        ArrayAdapter<CharSequence> pasteSelectionAdapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.bibi_paste_selection, android.R.layout.simple_spinner_item);
-        pasteSelectionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        bibiPasteSelection.setAdapter(pasteSelectionAdapter);
-        bibiPasteSelection.setOnItemSelectedListener(this);
-        if (MainActivity.getPasteTypeSetting(getActivity()).equals("Arabic")) {
-            bibiPasteSelection.setSelection(0);
+        if (MainActivity.BIBI_ENABLED) {
+            ArrayAdapter<CharSequence> pasteSelectionAdapter = ArrayAdapter.createFromResource(getActivity(),
+                    R.array.bibi_paste_selection, android.R.layout.simple_spinner_item);
+            pasteSelectionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            bibiPasteSelection.setAdapter(pasteSelectionAdapter);
+            bibiPasteSelection.setOnItemSelectedListener(this);
+            if (MainActivity.getPasteTypeSetting(getActivity()).equals("Arabic")) {
+                bibiPasteSelection.setSelection(0);
+            } else {
+                bibiPasteSelection.setSelection(1);
+            }
         } else {
-            bibiPasteSelection.setSelection(1);
+            bibiInfo.setVisibility(View.GONE);
+            bibiPasteSelectionViewGroup.setVisibility(View.GONE);
         }
     }
 

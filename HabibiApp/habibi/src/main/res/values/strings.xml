@@ -38,9 +38,14 @@
     <string name="english">English</string>
     <string name="to_gender">To Gender:</string>
     <string name="sound">Sound:</string>
+    <string name="savePhrase">Save</string>
 
-    <string name="copyMaleToMale">F->M = M->M</string>
-    <string name="copyFemaleToFemale">M->F = F->F</string>
+    <!--Add Habibi Phrase-->
+    <string name="addPhrase">Add Phrase</string>
+    <string name="category">Category</string>
+    <string name="copyMaleToMale">Add M->M</string>
+    <string name="copyFemaleToFemale">Add F->F</string>
+    <string name="addNoGender">No Gender</string>
 
     <!--Installation-->
     <string name="select_from_gender_title">Please select your gender:</string>

@@ -1,19 +1,33 @@
 <resources>
+
+    <!--Text Sizes-->
+    <dimen name="H1">34sp</dimen>
+    <dimen name="H2">24sp</dimen>
+    <dimen name="H3">20sp</dimen>
+    <dimen name="H4">18sp</dimen>
+    <dimen name="H5">20sp</dimen>
+    <dimen name="H6">16sp</dimen>
+    <dimen name="H7">12sp</dimen>
+    <dimen name="title">18sp</dimen>
+    <dimen name="body">14sp</dimen>
+
+    <!--Dimens-->
     <dimen name="half_space">8dp</dimen>
     <dimen name="single_space">8dp</dimen>
+    <dimen name="one_and_a_half_spacing">12dp</dimen>
     <dimen name="double_space">16dp</dimen>
     <dimen name="triple_space">24dp</dimen>
     <dimen name="quadruple_space">32dp</dimen>
 
     <!--Main-->
-    <dimen name="phrase_adapter_item_height">34dp</dimen>
-    <dimen name="category_text_size">26sp</dimen>
-    <dimen name="phrases_text_size">20sp</dimen>
+    <dimen name="phrase_adapter_item_height">@dimen/H1</dimen>
+    <dimen name="category_text_size">@dimen/H2</dimen>
+    <dimen name="phrases_text_size">@dimen/H3</dimen>
 
     <!--Installation-->
     <dimen name="installation_gender_icon_width">100dp</dimen>
-    <dimen name="install_text_size">20sp</dimen>
-    <dimen name="install_subtitle_text_size">18sp</dimen>
+    <dimen name="install_text_size">@dimen/H3</dimen>
+    <dimen name="install_subtitle_text_size">@dimen/H4</dimen>
 
     <!--Settings-->
 
@@ -29,10 +43,10 @@
     <dimen name="play_icon_width">20dp</dimen>
     <dimen name="gender_icon_height">60dp</dimen>
     <dimen name="gender_icon_width">60dp</dimen>
-    <dimen name="habibi_phrase_english_text_size">24sp</dimen>
-    <dimen name="habibi_phrase_arabic_label_size">12sp</dimen>
-    <dimen name="habibi_phrase_arabic_text_size">28sp</dimen>
-    <dimen name="habibi_phrase_arabizi_text_size">28sp</dimen>
-    <dimen name="habibi_phrase_properbizi_text_size">28sp</dimen>
+    <dimen name="habibi_phrase_english_text_size">@dimen/H2</dimen>
+    <dimen name="habibi_phrase_arabic_label_size">@dimen/H7</dimen>
+    <dimen name="habibi_phrase_arabic_text_size">@dimen/H1</dimen>
+    <dimen name="habibi_phrase_arabizi_text_size">@dimen/H1</dimen>
+    <dimen name="habibi_phrase_properbizi_text_size">@dimen/H1</dimen>
 
 </resources>

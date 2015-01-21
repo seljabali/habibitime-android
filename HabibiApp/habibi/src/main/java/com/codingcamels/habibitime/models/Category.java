@@ -15,7 +15,8 @@ public class Category implements Parcelable {
     public static final Category ANSWER = new Category(CategoryDataSource.ANSWER, "Responses");
     public static final Category FLIRT = new Category(CategoryDataSource.FLIRT, "Flirt");
     public static final Category SETTINGS = new Category(-1, "Settings");
-
+    public static final String[] CATEGORIES_STR = { MOOD.getCategoryName(), QUESTION.getCategoryName(),
+            ANSWER.getCategoryName(), FLIRT.getCategoryName()};
     private int id;
     private String categoryName;
 

@@ -89,6 +89,7 @@
 
     <!--ENABLE BIBI-->
     <TextView
+        android:id="@+id/bibi_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/double_space"
@@ -96,7 +97,7 @@
 
     <!--BIBI PASTE SELECT-->
     <LinearLayout
-        android:id="@+id/bibi_paste_selection_layout"
+        android:id="@+id/bibi_paste_selection_view_group"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

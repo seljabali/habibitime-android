@@ -13,14 +13,18 @@ import com.codingcamels.habibitime.models.Dialect;
 import com.codingcamels.habibitime.models.Gender;
 import com.codingcamels.habibitime.models.Language;
 import com.codingcamels.habibitime.models.Phrase;
+import com.codingcamels.habibitime.utilities.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 /**
  * Created by habibi on 6/12/14.
  */
 public class PhraseDataSource {
+    public static final String NA = "na";
     // Database fields
     private SQLiteDatabase database;
     private MySQLHelper dbHelper;
@@ -33,6 +37,7 @@ public class PhraseDataSource {
     public static final int  COLUMN_NATIVE_PHRASE_STRING = 6;
     public static final int  COLUMN_PHONETIC_SPELLING = 7;
     public static final int  COLUMN_PROPER_PHONTETIC_SPELLING = 8;
+    public static final int  COLUMN_SOUND_FILE_LOCATION = 9;
     private String[] allColumns = { MySQLHelper.COLUMN_ID,
                                     MySQLHelper.COLUMN_HABIBI_PHRASE,
                                     MySQLHelper.COLUMN_LANGUAGE,
@@ -41,7 +46,8 @@ public class PhraseDataSource {
                                     MySQLHelper.COLUMN_TO_GENDER,
                                     MySQLHelper.COLUMN_NATIVE_PHRASE_STRING,
                                     MySQLHelper.COLUMN_PHONETIC_SPELLING,
-                                    MySQLHelper.COLUMN_PROPER_PHONTETIC_SPELLING};
+                                    MySQLHelper.COLUMN_PROPER_PHONTETIC_SPELLING,
+                                    MySQLHelper.COLUMN_SOUND_FILE_LOCATION};
 
     public PhraseDataSource(Context context) {
         dbHelper = new MySQLHelper(context);
@@ -56,9 +62,14 @@ public class PhraseDataSource {
     }
 
     public void createPhrase(long habibiPhraseId, int language, int dialect, int from_gender,
-                               int to_gender,String nativeString, String phoneticString,
-                               String properString) {
+                             int to_gender, String nativeString, String phoneticString,
+                             String properString) {
+        createPhrase(habibiPhraseId, language, dialect, from_gender, to_gender, nativeString, phoneticString, properString, "");
+    }
 
+    public void createPhrase(long habibiPhraseId, int language, int dialect, int from_gender,
+                               int to_gender, String nativeString, String phoneticString,
+                               String properString, String fileLocation) {
         ContentValues values = new ContentValues();
         values.put(MySQLHelper.COLUMN_HABIBI_PHRASE, habibiPhraseId);
         values.put(MySQLHelper.COLUMN_LANGUAGE, language);
@@ -68,6 +79,7 @@ public class PhraseDataSource {
         values.put(MySQLHelper.COLUMN_NATIVE_PHRASE_STRING, nativeString);
         values.put(MySQLHelper.COLUMN_PHONETIC_SPELLING, phoneticString);
         values.put(MySQLHelper.COLUMN_PROPER_PHONTETIC_SPELLING ,properString);
+        values.put(MySQLHelper.COLUMN_SOUND_FILE_LOCATION, fileLocation);
 
         long result = -1;
         try {
@@ -77,7 +89,8 @@ public class PhraseDataSource {
                         " Dialect: " + dialect + " from_gender: " + from_gender);
             }
         } catch (Exception e) {
-            Log.e("SQL", "Phrase: Error inserting " + values, e);
+            Log.e("Inserting into Phrase: ", "Result: " + result + " habibiId: " + habibiPhraseId + " Language: " + language +
+                    " Dialect: " + dialect + " from_gender: " + from_gender, e);
         }
     }
 
@@ -178,6 +191,21 @@ public class PhraseDataSource {
         phrase.setNativePhraseSpelling(cursor.getString(COLUMN_NATIVE_PHRASE_STRING));
         phrase.setPhoneticPhraseSpelling(cursor.getString(COLUMN_PHONETIC_SPELLING));
         phrase.setProperPhoneticPhraseSpelling(cursor.getString(COLUMN_PROPER_PHONTETIC_SPELLING));
+        phrase.setSoundFileLocation(cursor.getString(COLUMN_SOUND_FILE_LOCATION));
         return phrase;
+    }
+
+    public static String getPhraseSoundFileName(String englishText, String language, String fromGender, String toGender) {
+        String fileName = englishText.replaceAll("[^a-zA-Z\\_\\ ]", "");
+        fileName = fileName.replace(" ", "_").toLowerCase().trim();
+        if (StringUtil.isNotEmpty(language)) {
+            fileName += "_" + language.toLowerCase();
+        }
+        fromGender = StringUtil.isEmpty(fromGender) ? "" : fromGender.toLowerCase();
+        fileName += "_" + StringUtil.getBIfAEmpty(fromGender, NA);
+
+        toGender = StringUtil.isEmpty(toGender) ? "" : toGender.toLowerCase();
+        fileName += "_" + StringUtil.getBIfAEmpty(toGender, NA);
+        return fileName.trim();
     }
 }

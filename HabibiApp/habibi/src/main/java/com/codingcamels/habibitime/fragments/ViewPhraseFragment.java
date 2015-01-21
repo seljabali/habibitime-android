@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.codingcamels.habibitime.MainActivity;
 import com.codingcamels.habibitime.R;
 import com.codingcamels.habibitime.utilities.ShareDialog;
@@ -132,7 +135,7 @@ public class ViewPhraseFragment extends Fragment {
         setTextOnClick(arabiziTextView);
         setTextOnClick(properBiziTextView);
         setGenderButtons(toGender);
-        setPlaySound(fromGender, toGender);
+        setPlaySound(translatedPhrase);
     }
 
     private void setGenderButtons(Gender toGender) {
@@ -149,26 +152,20 @@ public class ViewPhraseFragment extends Fragment {
         }
     }
 
-    private void setPlaySound(Gender fromGender, Gender toGender) {
-        int soundFile = getSoundFile(fromGender, toGender);
+    private void setPlaySound(Phrase phrase) {
+        int soundFile = getSoundFile(phrase);
         loadSoundFile(soundFile);
     }
-    private int getSoundFile(Gender fromGender, Gender toGender) {
-        int soundFile;
-        String fileName = originalPhrase.getNativePhraseSpelling();
-        fileName = fileName.replaceAll("[^a-zA-Z\\_\\ ]", "");
-        fileName = fileName.replace(" ", "_").toLowerCase().trim();
-        fileName = PATH + fileName;
-        soundFile = getActivity().getResources().getIdentifier(fileName, "raw", getActivity().getPackageName());
-        if (soundFile == 0) {
-            if (Category.MOOD.equals(category)) {
-                fileName += "_" + fromGender.getGenderNameShortened();
-            } else {
-                fileName += "_" + toGender.getGenderNameShortened();
-            }
-            soundFile = getActivity().getResources().getIdentifier(fileName, "raw", getActivity().getPackageName());
+
+    private int getSoundFile(Phrase phrase) {
+        int sound = getActivity().getResources().getIdentifier(PATH + phrase.getSoundFileLocation(), "raw", getActivity().getPackageName());
+        if (sound == 0) {
+            sound = getActivity().getResources().getIdentifier(MainActivity.AUDIO_RECORDER_FOLDER + phrase.getSoundFileLocation(), "raw", getActivity().getPackageName());
         }
-        return soundFile;
+        if (sound == 0) {
+            Log.e(ViewPhraseFragment.TAG, "Can't find: " + phrase.getSoundFileLocation());
+        }
+        return sound;
     }
 
     private void loadSoundFile(int soundFile) {

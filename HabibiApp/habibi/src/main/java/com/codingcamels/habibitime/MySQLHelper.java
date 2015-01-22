@@ -361,7 +361,7 @@ public class MySQLHelper extends SQLiteOpenHelper implements DatabaseErrorHandle
         return true;
     }
 
-    //TODO 
+    //TODO
     public String getMySqlDump() {
         db.execSQL("mysqldump " + DATABASE_NAME);
         return "";

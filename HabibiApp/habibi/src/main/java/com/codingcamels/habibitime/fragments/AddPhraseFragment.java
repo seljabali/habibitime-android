@@ -14,31 +14,39 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.codingcamels.habibitime.MainActivity;
 import com.codingcamels.habibitime.R;
+import com.codingcamels.habibitime.datasources.HabibiPhraseDataSource;
+import com.codingcamels.habibitime.datasources.PhraseDataSource;
 import com.codingcamels.habibitime.models.*;
+import com.codingcamels.habibitime.utilities.StringUtil;
 
 import java.io.File;
 import java.io.IOException;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.internal.ListenerClass;
 
 /**
  * Created by samsoom on 1/16/15.
  */
 public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+    @InjectView(R.id.englishEditText)
+    EditText englishEditText;
     @InjectView(R.id.fromGenderToGenderPhraseViewGroup)
     ViewGroup fromGenderToGenderPhraseViewGroup;
     @InjectView(R.id.copyFemaleToFemale)
     CheckBox addFemaleToFemale;
-    @InjectView(R.id.addNoGender)
-    CheckBox addNoGender;
     @InjectView(R.id.copyMaleToMale)
     CheckBox addMaleToMale;
+    @InjectView(R.id.addNoGender)
+    CheckBox addNoGender;
     @InjectView(R.id.savePhrase)
     Button btnSave;
     @InjectView(R.id.categorySpinner)
@@ -110,6 +118,7 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
                     setVisibility(FromToGender.MaleToMale, false);
                     setVisibility(FromToGender.FemaleToFemale, false);
                     setVisibility(FromToGender.None, true);
+                    addNoGender.setChecked(true);
                 } else {
                     setVisibility(FromToGender.FemaleToMale, true);
                     setVisibility(FromToGender.MaleToFemale, true);
@@ -120,7 +129,7 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                save();
             }
         });
 
@@ -238,11 +247,20 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
         if (!file.exists()){
             file.mkdirs();
         }
-        return (file.getAbsolutePath() + "/" + fromToGender.getName() + AUDIO_EXTENTION);
+        return file.getAbsolutePath() + "/" + fromToGender.getName() + AUDIO_EXTENTION;
     }
 
     private String getFilename(FromToGender fromToGender) {
         return fromToGender.getName() + AUDIO_EXTENTION;
+    }
+
+    private String getFilenameIfExists(FromToGender fromToGender) {
+        String filePath = getFilePath(fromToGender);
+        File file = new File(filePath);
+        if (!file.exists()){
+            return "";
+        }
+        return getFilename(fromToGender);
     }
 
     private MediaRecorder.OnErrorListener errorListener = new MediaRecorder.OnErrorListener() {
@@ -259,18 +277,67 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
         }
     };
 
+    private void save() {
+        final String englishText = englishEditText.getEditableText().toString();
+        if (StringUtil.isEmpty(englishText)) {
+            Toast.makeText(getActivity(), "Can't save with no English text.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        HabibiPhraseDataSource habibiPhraseDataSource = new HabibiPhraseDataSource(getActivity());
+        habibiPhraseDataSource.open();
+        long habibiId = habibiPhraseDataSource.createHabibiPhrase(selectedCategory);
+        if (habibiId == -1) {
+            Toast.makeText(getActivity(), "Error found when saving Habibi Phrase.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        habibiPhraseDataSource.close();
+
+        PhraseDataSource phraseDataSource = new PhraseDataSource(getActivity());
+        phraseDataSource.open();
+        phraseDataSource.createPhrase(habibiId, Language.ENGLISH.getId(), -1, -1, -1, englishText, null, null);
+
+        if (addNoGender.isChecked()) {
+            saveFromToGenderPhraseDb(habibiId, phraseDataSource, FromToGender.None);
+            phraseDataSource.close();
+            return;
+        }
+        if (addFemaleToFemale.isChecked()) {
+            saveFromToGenderPhraseDb(habibiId, phraseDataSource, FromToGender.FemaleToFemale);
+        }
+        if (addMaleToMale.isChecked()) {
+            saveFromToGenderPhraseDb(habibiId, phraseDataSource, FromToGender.MaleToMale);
+        }
+        saveFromToGenderPhraseDb(habibiId, phraseDataSource, FromToGender.FemaleToMale);
+        saveFromToGenderPhraseDb(habibiId, phraseDataSource, FromToGender.MaleToFemale);
+        phraseDataSource.close();
+    }
+
+    private void saveFromToGenderPhraseDb(long habibiId, PhraseDataSource phraseDataSource, FromToGender fromToGender) {
+        phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(), -1, fromToGender.getFromGenderId(),
+                fromToGender.getToGenderId(), fromToGender.getArabicText(), fromToGender.getPhoneticText(),
+                fromToGender.getArabiziText(), getFilenameIfExists(fromToGender));
+    }
+
     private enum FromToGender {
-        MaleToMale("M->M"),
-        MaleToFemale("M->F"),
-        FemaleToMale("F->M"),
-        FemaleToFemale("F->F"),
-        None("None");
+        MaleToMale(Gender.MALE, Gender.MALE),
+        MaleToFemale(Gender.MALE, Gender.FEMALE),
+        FemaleToMale(Gender.FEMALE, Gender.MALE),
+        FemaleToFemale(Gender.FEMALE, Gender.FEMALE),
+        None(Gender.NONE, Gender.NONE);
 
         private String name;
         private ViewGroup viewGroup;
+        private Gender fromGender;
+        private Gender toGender;
 
-        FromToGender(String displayName) {
-            this.name = displayName;
+        FromToGender(Gender fromGender, Gender toGender) {
+            this.fromGender = fromGender;
+            this.toGender = toGender;
+            if (fromGender == Gender.NONE) {
+                this.name = Gender.NONE.getGenderName();
+            } else {
+                this.name = fromGender.getGenderNameShortened() + "->" + toGender.getGenderNameShortened();
+            }
         }
 
         public String getName() {
@@ -294,6 +361,47 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
                     Log.e("Add Phrase", "We couldn't find title textview for " + name);
                 }
             }
+        }
+
+        public String getArabicText() {
+            String arabicText = "";
+            if (viewGroup != null) {
+                TextView arabicTitleView = (TextView) viewGroup.findViewById(R.id.arabicEditText);
+                if (arabicTitleView != null) {
+                    arabicText = arabicTitleView.getEditableText().toString();
+                }
+            }
+            return arabicText;
+        }
+
+        public String getPhoneticText() {
+            String phoneticText = "";
+            if (viewGroup != null) {
+                TextView phoneticTitleView = (TextView) viewGroup.findViewById(R.id.phoneticEditText);
+                if (phoneticTitleView != null) {
+                    phoneticText = phoneticTitleView.getEditableText().toString();
+                }
+            }
+            return phoneticText;
+        }
+
+        public String getArabiziText() {
+            String arabiziText = "";
+            if (viewGroup != null) {
+                TextView arabiziTitleView = (TextView) viewGroup.findViewById(R.id.arabiziEditText);
+                if (arabiziTitleView != null) {
+                    arabiziText = arabiziTitleView.getEditableText().toString();
+                }
+            }
+            return arabiziText;
+        }
+
+        public int getFromGenderId() {
+            return fromGender.getId();
+        }
+
+        public int getToGenderId() {
+            return toGender.getId();
         }
     }
 }

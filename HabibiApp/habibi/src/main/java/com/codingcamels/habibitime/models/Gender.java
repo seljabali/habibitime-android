@@ -11,6 +11,7 @@ import com.codingcamels.habibitime.datasources.GenderDataSource;
 public class Gender implements Parcelable {
     public static final Gender MALE = new Gender(1, "Male");
     public static final Gender FEMALE = new Gender(2, "Female");
+    public static final Gender NONE = new Gender(-1, "Genderless");
 
     private int genderId;
     private String genderName;
@@ -37,8 +38,10 @@ public class Gender implements Parcelable {
     public String getGenderNameShortened() {
         if (Gender.MALE.equals(this)) {
             return "m";
-        } else {
+        } else if (Gender.FEMALE.equals(this)) {
             return "f";
+        } else {
+            return "na";
         }
     }
 
@@ -54,7 +57,13 @@ public class Gender implements Parcelable {
     }
 
     public static Gender getGenderFromID(String id) {
-        return "1".equals(id) ? MALE : FEMALE;
+        if ("1".equals(id)) {
+            return MALE;
+        } else if ("2.".equals(id)) {
+            return FEMALE;
+        } else {
+            return NONE;
+        }
     }
 
     @Override

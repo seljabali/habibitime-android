@@ -41,16 +41,19 @@ public class ViewPhraseFragment extends Fragment {
     private TextView arabicTextView;
     private ImageView arabicTextShare;
     private ImageView arabicTextCopy;
+    private TextView phoneticTextView;
+    private ImageView phoneticTextShare;
+    private ImageView phoneticTextCopy;
     private TextView arabiziTextView;
     private ImageView arabiziTextShare;
     private ImageView arabiziTextCopy;
-    private TextView properBiziTextView;
-    private ImageView properBiziTextShare;
-    private ImageView properBiziTextCopy;
     private ImageView toMaleButton;
     private ImageView toFemaleButton;
     private TextView toGenderLabel;
     private ImageView playSoundButton;
+    private ViewGroup arabicViewGroup;
+    private ViewGroup arabiziViewGroup;
+    private ViewGroup phoneticViewGroup;
     private boolean soundOnSd;
 
     public static ViewPhraseFragment newInstance(Phrase phrase, Category category) {
@@ -72,15 +75,18 @@ public class ViewPhraseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_view_phrase, container, false);
         englishTextView = (TextView) view.findViewById(R.id.english_phrase);
+        arabicViewGroup = (ViewGroup) view.findViewById(R.id.arabic_phrase_view_group);
         arabicTextView = (TextView) view.findViewById(R.id.arabic_phrase);
         arabicTextShare = (ImageView) view.findViewById(R.id.arabic_share_button);
         arabicTextCopy = (ImageView) view.findViewById(R.id.arabic_copy_button);
-        arabiziTextView = (TextView) view.findViewById(R.id.arabizi_phrase);
-        arabiziTextShare = (ImageView) view.findViewById(R.id.arabizi_share_button);
-        arabiziTextCopy = (ImageView) view.findViewById(R.id.arabizi_copy_button);
-        properBiziTextView = (TextView) view.findViewById(R.id.properbizi_phrase);
-        properBiziTextShare = (ImageView) view.findViewById(R.id.properizi_share_button);
-        properBiziTextCopy = (ImageView) view.findViewById(R.id.properbizi_copy_button);
+        phoneticViewGroup = (ViewGroup) view.findViewById(R.id.phonetic_phrase_view_group);
+        phoneticTextView = (TextView) view.findViewById(R.id.phonetic_phrase);
+        phoneticTextShare = (ImageView) view.findViewById(R.id.phonetic_share_button);
+        phoneticTextCopy = (ImageView) view.findViewById(R.id.phonetic_copy_button);
+        arabiziViewGroup = (ViewGroup) view.findViewById(R.id.arabizi_phrase_view_group);
+        arabiziTextView = (TextView) view.findViewById(R.id.properbizi_phrase);
+        arabiziTextShare = (ImageView) view.findViewById(R.id.properizi_share_button);
+        arabiziTextCopy = (ImageView) view.findViewById(R.id.properbizi_copy_button);
         toMaleButton = (ImageView) view.findViewById(R.id.switch_to_male);
         toFemaleButton = (ImageView) view.findViewById(R.id.switch_to_female);
         toGenderLabel = (TextView) view.findViewById(R.id.to_gender_label);
@@ -122,11 +128,11 @@ public class ViewPhraseFragment extends Fragment {
         }
         setEnglishPhrase(originalPhrase);
         setArabicText(translatedPhrase);
+        setPhoneticText(translatedPhrase);
         setArabiziText(translatedPhrase);
-        setProperBiziText(translatedPhrase);
         setTextOnClick(arabicTextView);
+        setTextOnClick(phoneticTextView);
         setTextOnClick(arabiziTextView);
-        setTextOnClick(properBiziTextView);
         setGenderButtons(toGender);
         loadPlaySound(translatedPhrase);
     }
@@ -198,7 +204,7 @@ public class ViewPhraseFragment extends Fragment {
     private void setArabicText(Phrase arabicPhrase) {
         final String arabicText = arabicPhrase.getNativePhraseSpelling();
         if (StringUtils.isNotEmpty(arabicText)) {
-            arabicTextView.setVisibility(View.VISIBLE);
+            arabicViewGroup.setVisibility(View.VISIBLE);
             arabicTextView.setText(arabicText);
             arabicTextCopy.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -213,14 +219,36 @@ public class ViewPhraseFragment extends Fragment {
                 }
             });
         } else {
-            arabicTextView.setVisibility(View.GONE);
+            arabicViewGroup.setVisibility(View.GONE);
+        }
+    }
+
+    private void setPhoneticText(Phrase translatedPhrase) {
+        final String phoneticText = translatedPhrase.getPhoneticPhraseSpelling();
+        if (StringUtils.isNotEmpty(phoneticText)) {
+            phoneticViewGroup.setVisibility(View.VISIBLE);
+            phoneticTextView.setText(phoneticText);
+            phoneticTextCopy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AndroidUtils.copyToClipboard(getActivity(), phoneticText);
+                }
+            });
+            phoneticTextShare.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AndroidUtils.shareText(getActivity(), phoneticText);
+                }
+            });
+        } else {
+            phoneticViewGroup.setVisibility(View.GONE);
         }
     }
 
     private void setArabiziText(Phrase translatedPhrase) {
-        final String arabiziText = translatedPhrase.getPhoneticPhraseSpelling();
-        if (StringUtils.isNotEmpty(arabicTextView.getText().toString())) {
-            arabiziTextView.setVisibility(View.VISIBLE);
+        final String arabiziText = translatedPhrase.getProperPhoneticPhraseSpelling();
+        if (StringUtils.isNotEmpty(arabiziText)) {
+            arabiziViewGroup.setVisibility(View.VISIBLE);
             arabiziTextView.setText(arabiziText);
             arabiziTextCopy.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -235,29 +263,7 @@ public class ViewPhraseFragment extends Fragment {
                 }
             });
         } else {
-            arabiziTextView.setVisibility(View.GONE);
-        }
-    }
-
-    private void setProperBiziText(Phrase translatedPhrase) {
-        final String properBiziText = translatedPhrase.getProperPhoneticPhraseSpelling();
-        if (StringUtils.isNotEmpty(arabicTextView.getText().toString())) {
-            properBiziTextView.setVisibility(View.VISIBLE);
-            properBiziTextView.setText(properBiziText);
-            properBiziTextCopy.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    AndroidUtils.copyToClipboard(getActivity(), properBiziText);
-                }
-            });
-            properBiziTextShare.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    AndroidUtils.shareText(getActivity(), properBiziText);
-                }
-            });
-        } else {
-            properBiziTextView.setVisibility(View.GONE);
+            arabiziViewGroup.setVisibility(View.GONE);
         }
     }
 

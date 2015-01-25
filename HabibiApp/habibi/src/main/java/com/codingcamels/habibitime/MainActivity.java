@@ -100,6 +100,7 @@ public class MainActivity extends Activity {
         AddPhraseFragment fragment = AddPhraseFragment.newInstance();
         getFragmentManager().beginTransaction()
                 .replace(R.id.fragmentLayoutContainer, fragment, AddPhraseFragment.TAG)
+                .addToBackStack(AddPhraseFragment.TAG)
                 .commit();
     }
 

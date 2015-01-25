@@ -335,6 +335,7 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
         savePhraseToDb(habibiId, phraseDataSource, FromToGender.FemaleToMale, englishText);
         savePhraseToDb(habibiId, phraseDataSource, FromToGender.MaleToFemale, englishText);
         phraseDataSource.close();
+        getActivity().onBackPressed();
     }
 
     private void moveTempSoundFileToFinalSoundFile(FromToGender fromToGender, String englishText) {

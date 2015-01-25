@@ -95,7 +95,7 @@
             android:background="@color/row_even">
 
             <TextView
-                android:id="@+id/arabizi_phrase"
+                android:id="@+id/phonetic_phrase"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/habibi_phrase_arabizi_text_size"
@@ -109,7 +109,7 @@
                 tools:text="Yalla"/>
 
             <ImageButton
-                android:id="@+id/arabizi_copy_button"
+                android:id="@+id/phonetic_copy_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/clipboard"
@@ -120,7 +120,7 @@
                 android:visibility="gone"/>
 
             <ImageView
-                android:id="@+id/arabizi_share_button"
+                android:id="@+id/phonetic_share_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/share"

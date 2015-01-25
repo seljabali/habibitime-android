@@ -13,7 +13,7 @@ import com.codingcamels.habibitime.models.Dialect;
 import com.codingcamels.habibitime.models.Gender;
 import com.codingcamels.habibitime.models.Language;
 import com.codingcamels.habibitime.models.Phrase;
-import com.codingcamels.habibitime.utilities.StringUtil;
+import com.codingcamels.habibitime.utilities.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +24,7 @@ import java.util.List;
  * Created by habibi on 6/12/14.
  */
 public class PhraseDataSource {
+    public static final String TAG = PhraseDataSource.class.getSimpleName();
     public static final String NA = "na";
     // Database fields
     private SQLiteDatabase database;
@@ -65,6 +66,13 @@ public class PhraseDataSource {
                              int to_gender, String nativeString, String phoneticString,
                              String properString) {
         createPhrase(habibiPhraseId, language, dialect, from_gender, to_gender, nativeString, phoneticString, properString, "");
+    }
+
+    public void createPhrase(long habibiPhraseId, Language language, Dialect dialect, Gender fromGender,
+                             Gender toGender, String nativeString, String phoneticString,
+                             String properString, String fileLocation) {
+        createPhrase(habibiPhraseId, language.getId(), dialect.getId(), fromGender.getId(),
+                toGender.getId(), nativeString, phoneticString, properString, fileLocation);
     }
 
     public void createPhrase(long habibiPhraseId, int language, int dialect, int from_gender,
@@ -191,21 +199,30 @@ public class PhraseDataSource {
         phrase.setNativePhraseSpelling(cursor.getString(COLUMN_NATIVE_PHRASE_STRING));
         phrase.setPhoneticPhraseSpelling(cursor.getString(COLUMN_PHONETIC_SPELLING));
         phrase.setProperPhoneticPhraseSpelling(cursor.getString(COLUMN_PROPER_PHONTETIC_SPELLING));
-        phrase.setSoundFileLocation(cursor.getString(COLUMN_SOUND_FILE_LOCATION));
+        phrase.setSoundFileName(cursor.getString(COLUMN_SOUND_FILE_LOCATION));
         return phrase;
     }
 
-    public static String getPhraseSoundFileName(String englishText, String language, String fromGender, String toGender) {
+
+    public static String getPhraseSoundFileName(String englishText, Language language, Gender fromGender, Gender toGender) {
+        if (StringUtils.isEmpty(englishText)) {
+            Log.e(PhraseDataSource.TAG, "Missing englishText to get sound file name.");
+            return "";
+        }
+        return getPhraseSoundFileName(englishText, language.getLanguageName(), fromGender.getGenderNameShortened(), toGender.getGenderNameShortened());
+    }
+    private static String getPhraseSoundFileName(String englishText, String language, String fromGender, String toGender) {
         String fileName = englishText.replaceAll("[^a-zA-Z\\_\\ ]", "");
         fileName = fileName.replace(" ", "_").toLowerCase().trim();
-        if (StringUtil.isNotEmpty(language)) {
+        if (StringUtils.isNotEmpty(language)) {
             fileName += "_" + language.toLowerCase();
         }
-        fromGender = StringUtil.isEmpty(fromGender) ? "" : fromGender.toLowerCase();
-        fileName += "_" + StringUtil.getBIfAEmpty(fromGender, NA);
+        fromGender = StringUtils.isEmpty(fromGender) ? "" : fromGender.toLowerCase();
+        fileName += "_" + StringUtils.getBIfAEmpty(fromGender, NA);
 
-        toGender = StringUtil.isEmpty(toGender) ? "" : toGender.toLowerCase();
-        fileName += "_" + StringUtil.getBIfAEmpty(toGender, NA);
+        toGender = StringUtils.isEmpty(toGender) ? "" : toGender.toLowerCase();
+        fileName += "_" + StringUtils.getBIfAEmpty(toGender, NA);
         return fileName.trim();
     }
+
 }

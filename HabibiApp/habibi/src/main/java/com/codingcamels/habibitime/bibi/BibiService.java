@@ -24,8 +24,8 @@ import com.codingcamels.habibitime.models.Category;
 import com.codingcamels.habibitime.models.Gender;
 import com.codingcamels.habibitime.models.Language;
 import com.codingcamels.habibitime.models.Phrase;
-import com.codingcamels.habibitime.utilities.Utils;
-import com.codingcamels.habibitime.utilities.ViewUtil;
+import com.codingcamels.habibitime.utilities.AndroidUtils;
+import com.codingcamels.habibitime.utilities.ViewUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +51,7 @@ public class BibiService extends Service {
         isShowingPhrases = false;
         windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
         chatHead = new ImageView(this);
-        chatHead.setAnimation(ViewUtil.inFromLeftAnimation());
+        chatHead.setAnimation(ViewUtils.inFromLeftAnimation());
         resetChatHeadIcon();
         chatHead.setOnClickListener(clickOnChatHead());
         chatHead.setOnTouchListener(tapOnChatHead(getChatHeadParams()));
@@ -194,9 +194,9 @@ public class BibiService extends Service {
         Phrase arabicTranslatedPhrase = translatedPhrases.get(0);
         String pasteType = MainActivity.getPasteTypeSetting(context);
         if (getString(R.string.arabic).equals(pasteType)) {
-            Utils.copyToClipboard(getApplicationContext(), arabicTranslatedPhrase.getNativePhraseSpelling());
+            AndroidUtils.copyToClipboard(getApplicationContext(), arabicTranslatedPhrase.getNativePhraseSpelling());
         } else if (getString(R.string.arabizi).equals(pasteType)) {
-            Utils.copyToClipboard(getApplicationContext(), (arabicTranslatedPhrase.getProperPhoneticPhraseSpelling()));
+            AndroidUtils.copyToClipboard(getApplicationContext(), (arabicTranslatedPhrase.getProperPhoneticPhraseSpelling()));
         }
     }
 

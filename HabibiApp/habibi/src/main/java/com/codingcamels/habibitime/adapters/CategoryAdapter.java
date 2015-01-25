@@ -12,10 +12,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.codingcamels.habibitime.R;
-import com.codingcamels.habibitime.utilities.ViewUtil;
+import com.codingcamels.habibitime.utilities.ViewUtils;
 import com.codingcamels.habibitime.fragments.SettingsFragment;
 import com.codingcamels.habibitime.fragments.ViewPhrasesFragment;
 import com.codingcamels.habibitime.models.Category;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -70,7 +71,7 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
                 );
             }
         }
-        int dpHeight = Math.round(ViewUtil.getScreenHeightDP(activity) / categories.size());
+        int dpHeight = Math.round(ViewUtils.getScreenHeightDP(activity) / categories.size());
         dpHeight -= 10;
         view.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dpHeight));
         view.setBackgroundColor(getColorForCategory(position));

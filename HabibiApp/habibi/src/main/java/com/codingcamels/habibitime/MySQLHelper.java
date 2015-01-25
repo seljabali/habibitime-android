@@ -5,10 +5,8 @@ import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.codingcamels.habibitime.datasources.CategoryDataSource;
 import com.codingcamels.habibitime.datasources.DialectDataSource;
@@ -20,14 +18,12 @@ import com.codingcamels.habibitime.models.Category;
 import com.codingcamels.habibitime.models.Dialect;
 import com.codingcamels.habibitime.models.Gender;
 import com.codingcamels.habibitime.models.Language;
-import com.codingcamels.habibitime.utilities.ViewUtil;
+import com.codingcamels.habibitime.utilities.ViewUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
-import javax.xml.validation.Schema;
 
 public class MySQLHelper extends SQLiteOpenHelper implements DatabaseErrorHandler {
     private static final String DATABASE_NAME = "habibi_phrases.db";
@@ -206,7 +202,7 @@ public class MySQLHelper extends SQLiteOpenHelper implements DatabaseErrorHandle
 
     @Override
     public void onCorruption(SQLiteDatabase dbObj) {
-        ViewUtil.toast(context, "Cheers! You broke the db!");
+        ViewUtils.toast(context, "Cheers! You broke the db!");
     }
 
     public void loadDatabase() {
@@ -294,50 +290,50 @@ public class MySQLHelper extends SQLiteOpenHelper implements DatabaseErrorHandle
                 phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
                         Dialect.JORDAN.getId(), Gender.MALE.getId(), Gender.MALE.getId(),
                         line[ARABIC_M], line[BIZI_M], line[BIZIPROPER_M],
-                        PhraseDataSource.getPhraseSoundFileName(englishText, Language.ARABIC.getLanguageName(), null, null));
+                        PhraseDataSource.getPhraseSoundFileName(englishText, Language.ARABIC, null, null));
 
                 //Create Arabic Phrase M->F
                 phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
                         Dialect.JORDAN.getId(), Gender.MALE.getId(), Gender.FEMALE.getId(),
                         line[ARABIC_M], line[BIZI_M], line[BIZIPROPER_M],
-                        PhraseDataSource.getPhraseSoundFileName(englishText, Language.ARABIC.getLanguageName(), null, null));
+                        PhraseDataSource.getPhraseSoundFileName(englishText, Language.ARABIC, null, null));
 
                 //Create Arabic Phrase F->F
                 phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
                         Dialect.JORDAN.getId(), Gender.FEMALE.getId(), Gender.FEMALE.getId(),
                         line[ARABIC_F], line[BIZI_F], line[BIZIPROPER_F],
-                        PhraseDataSource.getPhraseSoundFileName(englishText, Language.ARABIC.getLanguageName(), null, null));
+                        PhraseDataSource.getPhraseSoundFileName(englishText, Language.ARABIC, null, null));
 
                 //Create Arabic Phrase F->M
                 phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
                         Dialect.JORDAN.getId(), Gender.FEMALE.getId(), Gender.MALE.getId(),
                         line[ARABIC_F], line[BIZI_F], line[BIZIPROPER_F],
-                        PhraseDataSource.getPhraseSoundFileName(englishText, Language.ARABIC.getLanguageName(), null, null));
+                        PhraseDataSource.getPhraseSoundFileName(englishText, Language.ARABIC, null, null));
             } else {
                 //Create Arabic Phrase M->M
                 phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
                         Dialect.JORDAN.getId(), Gender.MALE.getId(), Gender.MALE.getId(),
                         line[ARABIC_M], line[BIZI_M], line[BIZIPROPER_M],
                         PhraseDataSource.getPhraseSoundFileName(englishText,
-                                Language.ARABIC.getLanguageName(), Gender.FEMALE.getGenderNameShortened(), Gender.MALE.getGenderNameShortened()));
+                                Language.ARABIC, Gender.FEMALE, Gender.MALE));
 
                 //Create Arabic Phrase F->M
                 phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
                         Dialect.JORDAN.getId(), Gender.FEMALE.getId(), Gender.MALE.getId(),
                         line[ARABIC_M], line[BIZI_M], line[BIZIPROPER_M], PhraseDataSource.getPhraseSoundFileName(englishText,
-                                Language.ARABIC.getLanguageName(), Gender.FEMALE.getGenderNameShortened(), Gender.MALE.getGenderNameShortened()));
+                                Language.ARABIC, Gender.FEMALE, Gender.MALE));
 
                 //Create Arabic Phrase F->F
                 phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
                         Dialect.JORDAN.getId(), Gender.FEMALE.getId(), Gender.FEMALE.getId(),
                         line[ARABIC_F], line[BIZI_F], line[BIZIPROPER_F], PhraseDataSource.getPhraseSoundFileName(englishText,
-                                Language.ARABIC.getLanguageName(), Gender.MALE.getGenderNameShortened(), Gender.FEMALE.getGenderNameShortened()));
+                                Language.ARABIC, Gender.MALE, Gender.FEMALE));
 
                 //Create Arabic Phrase M->F
                 phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(),
                         Dialect.JORDAN.getId(), Gender.MALE.getId(), Gender.FEMALE.getId(),
                         line[ARABIC_F], line[BIZI_F], line[BIZIPROPER_F], PhraseDataSource.getPhraseSoundFileName(englishText,
-                                Language.ARABIC.getLanguageName(), Gender.MALE.getGenderNameShortened(), Gender.FEMALE.getGenderNameShortened()));
+                                Language.ARABIC, Gender.MALE, Gender.FEMALE));
             }
 
 

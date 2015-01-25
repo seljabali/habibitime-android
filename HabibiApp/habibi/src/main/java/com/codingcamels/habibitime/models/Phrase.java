@@ -1,5 +1,6 @@
 package com.codingcamels.habibitime.models;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -16,7 +17,7 @@ public class Phrase implements Parcelable {
     private String nativePhraseSpelling;
     private String phoneticPhraseSpelling;
     private String properPhoneticPhraseSpelling;
-    private String soundFileLocation;
+    private String soundFileName;
 
     public Phrase () {}
 
@@ -92,13 +93,14 @@ public class Phrase implements Parcelable {
         this.properPhoneticPhraseSpelling = properPhoneticPhraseSpelling;
     }
 
-    public void setSoundFileLocation(String fileLocation) {
-        this.soundFileLocation = fileLocation;
+    public void setSoundFileName(String fileLocation) {
+        this.soundFileName = fileLocation;
     }
 
-    public String getSoundFileLocation() {
-        return this.soundFileLocation;
+    public String getSoundFileName() {
+        return this.soundFileName;
     }
+
     protected Phrase(Parcel in) {
         id = in.readInt();
         habibiPhraseId = in.readInt();
@@ -109,7 +111,7 @@ public class Phrase implements Parcelable {
         nativePhraseSpelling = in.readString();
         phoneticPhraseSpelling = in.readString();
         properPhoneticPhraseSpelling = in.readString();
-        soundFileLocation = in.readString();
+        soundFileName = in.readString();
     }
 
     @Override
@@ -128,7 +130,7 @@ public class Phrase implements Parcelable {
         dest.writeString(nativePhraseSpelling);
         dest.writeString(phoneticPhraseSpelling);
         dest.writeString(properPhoneticPhraseSpelling);
-        dest.writeString(soundFileLocation);
+        dest.writeString(soundFileName);
     }
 
     @SuppressWarnings("unused")

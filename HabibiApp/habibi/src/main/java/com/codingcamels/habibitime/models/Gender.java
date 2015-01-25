@@ -59,7 +59,7 @@ public class Gender implements Parcelable {
     public static Gender getGenderFromID(String id) {
         if ("1".equals(id)) {
             return MALE;
-        } else if ("2.".equals(id)) {
+        } else if ("2".equals(id)) {
             return FEMALE;
         } else {
             return NONE;

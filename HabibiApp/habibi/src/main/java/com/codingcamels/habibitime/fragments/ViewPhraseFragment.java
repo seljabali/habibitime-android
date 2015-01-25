@@ -1,17 +1,11 @@
 package com.codingcamels.habibitime.fragments;
 
-import android.content.Context;
-import android.media.AudioManager;
-import android.media.SoundPool;
-import android.media.SoundPool.OnLoadCompleteListener;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -20,15 +14,17 @@ import android.widget.Toast;
 
 import com.codingcamels.habibitime.MainActivity;
 import com.codingcamels.habibitime.R;
+import com.codingcamels.habibitime.utilities.AndroidUtils;
 import com.codingcamels.habibitime.utilities.ShareDialog;
-import com.codingcamels.habibitime.utilities.StringUtil;
-import com.codingcamels.habibitime.utilities.Utils;
+import com.codingcamels.habibitime.utilities.SoundUtils;
+import com.codingcamels.habibitime.utilities.StringUtils;
 import com.codingcamels.habibitime.datasources.PhraseDataSource;
 import com.codingcamels.habibitime.models.Category;
 import com.codingcamels.habibitime.models.Gender;
 import com.codingcamels.habibitime.models.Language;
 import com.codingcamels.habibitime.models.Phrase;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -41,15 +37,6 @@ public class ViewPhraseFragment extends Fragment {
     private static final String CATEGORY_KEY = "category";
     private Phrase originalPhrase;
     private Category category;
-    private SoundPool soundPool;
-    private int soundID;
-    private boolean loaded = false;
-    private static final int MAX_STREAMS = 1;
-    private static final int SOURCE_QUALITY = 0;
-    private static final int PRIORITY = 1;
-    private static final int LOOP = 0;
-    private static final float RATE = 1f;
-    private static final String PATH = "raw/";
     private TextView englishTextView;
     private TextView arabicTextView;
     private ImageView arabicTextShare;
@@ -64,6 +51,7 @@ public class ViewPhraseFragment extends Fragment {
     private ImageView toFemaleButton;
     private TextView toGenderLabel;
     private ImageView playSoundButton;
+    private boolean soundOnSd;
 
     public static ViewPhraseFragment newInstance(Phrase phrase, Category category) {
         ViewPhraseFragment fragment = new ViewPhraseFragment();
@@ -82,12 +70,7 @@ public class ViewPhraseFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Bundle args = getArguments();
-        originalPhrase = args.getParcelable(PHRASE_KEY);
-        category = args.getParcelable(CATEGORY_KEY);
-        final Gender fromGender = MainActivity.getFromGenderSettings(getActivity());
-        Gender toGender = MainActivity.getToGenderSettings(getActivity());
-        final View view = inflater.inflate(R.layout.view_habibi_phrase, container, false);
+        final View view = inflater.inflate(R.layout.fragment_view_phrase, container, false);
         englishTextView = (TextView) view.findViewById(R.id.english_phrase);
         arabicTextView = (TextView) view.findViewById(R.id.arabic_phrase);
         arabicTextShare = (ImageView) view.findViewById(R.id.arabic_share_button);
@@ -102,6 +85,12 @@ public class ViewPhraseFragment extends Fragment {
         toFemaleButton = (ImageView) view.findViewById(R.id.switch_to_female);
         toGenderLabel = (TextView) view.findViewById(R.id.to_gender_label);
         playSoundButton = (ImageView) view.findViewById(R.id.button_play_sound);
+
+        Bundle args = getArguments();
+        originalPhrase = args.getParcelable(PHRASE_KEY);
+        category = args.getParcelable(CATEGORY_KEY);
+        final Gender fromGender = MainActivity.getFromGenderSettings(getActivity());
+        final Gender toGender = MainActivity.getToGenderSettings(getActivity());
 
         if (category.equals(Category.MOOD) || category.equals(Category.ANSWER)) {
             init(fromGender, null);
@@ -127,6 +116,10 @@ public class ViewPhraseFragment extends Fragment {
 
     private void init(Gender fromGender, Gender toGender) {
         Phrase translatedPhrase = getTranslatedPhrase(fromGender, toGender);
+        if (translatedPhrase == null) {
+            Toast.makeText(getActivity(), "Can't find translation!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         setEnglishPhrase(originalPhrase);
         setArabicText(translatedPhrase);
         setArabiziText(translatedPhrase);
@@ -135,11 +128,11 @@ public class ViewPhraseFragment extends Fragment {
         setTextOnClick(arabiziTextView);
         setTextOnClick(properBiziTextView);
         setGenderButtons(toGender);
-        setPlaySound(translatedPhrase);
+        loadPlaySound(translatedPhrase);
     }
 
     private void setGenderButtons(Gender toGender) {
-        if (toGender == null) {
+        if (toGender == null || toGender == Gender.NONE) {
             toGenderLabel.setVisibility(View.GONE);
             toMaleButton.setVisibility(View.GONE);
             toFemaleButton.setVisibility(View.GONE);
@@ -152,51 +145,39 @@ public class ViewPhraseFragment extends Fragment {
         }
     }
 
-    private void setPlaySound(Phrase phrase) {
-        int soundFile = getSoundFile(phrase);
-        loadSoundFile(soundFile);
-    }
-
-    private int getSoundFile(Phrase phrase) {
-        int sound = getActivity().getResources().getIdentifier(PATH + phrase.getSoundFileLocation(), "raw", getActivity().getPackageName());
+    private int getSoundId(Phrase phrase) {
+        String fileName = phrase.getSoundFileName();
+        int sound = SoundUtils.loadSoundFromResource(getActivity(), fileName);
         if (sound == 0) {
-            sound = getActivity().getResources().getIdentifier(MainActivity.AUDIO_RECORDER_FOLDER + phrase.getSoundFileLocation(), "raw", getActivity().getPackageName());
+            File externalFile = new File(MainActivity.getSoundDirectory(), fileName);
+            sound = SoundUtils.loadSound(externalFile.getAbsolutePath());
+            soundOnSd = true;
+        } else {
+            soundOnSd = false;
         }
         if (sound == 0) {
-            Log.e(ViewPhraseFragment.TAG, "Can't find: " + phrase.getSoundFileLocation());
+            Log.e(TAG, "Can't find sound: " + fileName);
         }
         return sound;
     }
 
-    private void loadSoundFile(int soundFile) {
-        if (soundFile != 0) {
-            setupSoundPool();
-            soundID = soundPool.load(getActivity(), soundFile, PRIORITY);
+    private void loadPlaySound(final Phrase phrase) {
+        final int soundId = getSoundId(phrase);
+        if (soundId != 0) {
             playSoundButton.setVisibility(View.VISIBLE);
             playSoundButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AudioManager audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
-                    float actualVolume = (float) audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-                    float maxVolume = (float) audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-                    float volume = actualVolume / maxVolume;
-                    if (loaded) {
-                        soundPool.play(soundID, volume, volume, PRIORITY, LOOP, RATE);
+                    String fileName = phrase.getSoundFileName();
+                    if (soundOnSd) {
+                        File file = new File(MainActivity.getSoundDirectory(), fileName);
+                        SoundUtils.playSound(file.getAbsolutePath());
+                    } else {
+                        SoundUtils.playSoundFromResources(getActivity(), fileName);
                     }
                 }
             });
         }
-    }
-
-    private void setupSoundPool() {
-        getActivity().setVolumeControlStream(AudioManager.STREAM_MUSIC);
-        soundPool = new SoundPool(MAX_STREAMS, AudioManager.STREAM_MUSIC, SOURCE_QUALITY);
-        soundPool.setOnLoadCompleteListener(new OnLoadCompleteListener() {
-            @Override
-            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-                loaded = true;
-            }
-        });
     }
 
     private Phrase getTranslatedPhrase(Gender fromGender, Gender toGender) {
@@ -205,7 +186,7 @@ public class ViewPhraseFragment extends Fragment {
         List<Phrase> translatedPhrases = phraseDataSource.getPhrases(originalPhrase.getHabibiPhraseId(), null,
                 fromGender, toGender, Language.ARABIC, null);
         phraseDataSource.close();
-        return translatedPhrases.get(0);
+        return translatedPhrases == null || translatedPhrases.isEmpty() ? null : translatedPhrases.get(0);
     }
 
     private void setEnglishPhrase(Phrase englishPhrase) {
@@ -216,19 +197,19 @@ public class ViewPhraseFragment extends Fragment {
 
     private void setArabicText(Phrase arabicPhrase) {
         final String arabicText = arabicPhrase.getNativePhraseSpelling();
-        if (StringUtil.isNotEmpty(arabicText)) {
+        if (StringUtils.isNotEmpty(arabicText)) {
             arabicTextView.setVisibility(View.VISIBLE);
             arabicTextView.setText(arabicText);
             arabicTextCopy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Utils.copyToClipboard(getActivity(), arabicText);
+                    AndroidUtils.copyToClipboard(getActivity(), arabicText);
                 }
             });
             arabicTextShare.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Utils.shareText(getActivity(), arabicText);
+                    AndroidUtils.shareText(getActivity(), arabicText);
                 }
             });
         } else {
@@ -238,19 +219,19 @@ public class ViewPhraseFragment extends Fragment {
 
     private void setArabiziText(Phrase translatedPhrase) {
         final String arabiziText = translatedPhrase.getPhoneticPhraseSpelling();
-        if (StringUtil.isNotEmpty(arabicTextView.getText().toString())) {
+        if (StringUtils.isNotEmpty(arabicTextView.getText().toString())) {
             arabiziTextView.setVisibility(View.VISIBLE);
             arabiziTextView.setText(arabiziText);
             arabiziTextCopy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Utils.copyToClipboard(getActivity(), arabiziText);
+                    AndroidUtils.copyToClipboard(getActivity(), arabiziText);
                 }
             });
             arabiziTextShare.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Utils.shareText(getActivity(), arabiziText);
+                    AndroidUtils.shareText(getActivity(), arabiziText);
                 }
             });
         } else {
@@ -260,19 +241,19 @@ public class ViewPhraseFragment extends Fragment {
 
     private void setProperBiziText(Phrase translatedPhrase) {
         final String properBiziText = translatedPhrase.getProperPhoneticPhraseSpelling();
-        if (StringUtil.isNotEmpty(arabicTextView.getText().toString())) {
+        if (StringUtils.isNotEmpty(arabicTextView.getText().toString())) {
             properBiziTextView.setVisibility(View.VISIBLE);
             properBiziTextView.setText(properBiziText);
             properBiziTextCopy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Utils.copyToClipboard(getActivity(), properBiziText);
+                    AndroidUtils.copyToClipboard(getActivity(), properBiziText);
                 }
             });
             properBiziTextShare.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Utils.shareText(getActivity(), properBiziText);
+                    AndroidUtils.shareText(getActivity(), properBiziText);
                 }
             });
         } else {

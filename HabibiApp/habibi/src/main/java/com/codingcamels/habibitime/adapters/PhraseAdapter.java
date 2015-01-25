@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.codingcamels.habibitime.R;
-import com.codingcamels.habibitime.utilities.ViewUtil;
+import com.codingcamels.habibitime.utilities.ViewUtils;
 import com.codingcamels.habibitime.fragments.ViewPhraseFragment;
 import com.codingcamels.habibitime.fragments.ViewPhrasesFragment;
 import com.codingcamels.habibitime.models.Category;
@@ -79,7 +79,7 @@ public class PhraseAdapter extends ArrayAdapter<Phrase> {
         }
         int dpHeight;
         if (phraseCount <= PHRASE_COUNT_MAX) {
-            dpHeight = (int) ViewUtil.getScreenHeightDP(activity) / phraseCount;
+            dpHeight = (int) ViewUtils.getScreenHeightDP(activity) / phraseCount;
         } else {
             dpHeight = (int) activity.getResources().getDimension(R.dimen.phrase_adapter_item_height);
         }

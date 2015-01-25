@@ -24,14 +24,13 @@ import com.codingcamels.habibitime.R;
 import com.codingcamels.habibitime.datasources.HabibiPhraseDataSource;
 import com.codingcamels.habibitime.datasources.PhraseDataSource;
 import com.codingcamels.habibitime.models.*;
-import com.codingcamels.habibitime.utilities.StringUtil;
+import com.codingcamels.habibitime.utilities.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.internal.ListenerClass;
 
 /**
  * Created by samsoom on 1/16/15.
@@ -185,7 +184,7 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.playSound(getActivity(), getFilename(fromToGender));
+                MainActivity.playSound(getActivity(), getTempSoundFileName(fromToGender));
             }
         });
         fromGenderToGenderPhraseViewGroup.addView(viewAddArabicPhrase);
@@ -196,7 +195,7 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
         recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         recorder.setOutputFormat(AUDIO_FORMAT);
         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-        recorder.setOutputFile(getFilePath(fromToGender));
+        recorder.setOutputFile(getTempSoundFilePath(fromToGender));
         recorder.setOnErrorListener(errorListener);
         recorder.setOnInfoListener(infoListener);
 
@@ -241,26 +240,47 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
         return fromToGender.getName();
     }
 
-    private String getFilePath(FromToGender fromToGender) {
+    private String getSoundDirectory() {
         String filepath = Environment.getExternalStorageDirectory().getPath();
         File file = new File(filepath, AUDIO_RECORDER_FOLDER);
+        return file.getAbsolutePath();
+    }
+
+    private boolean isSoundRecorded(FromToGender fromToGender) {
+        String fileName = getTempSoundFilePath(fromToGender);
+        File file = new File(fileName);
+        return file.exists();
+    }
+
+    private String getTempSoundFilePath(FromToGender fromToGender) {
+        File file = new File(getSoundDirectory());
         if (!file.exists()){
             file.mkdirs();
         }
         return file.getAbsolutePath() + "/" + fromToGender.getName() + AUDIO_EXTENTION;
     }
 
-    private String getFilename(FromToGender fromToGender) {
+    private String getTempSoundFileName(FromToGender fromToGender) {
         return fromToGender.getName() + AUDIO_EXTENTION;
     }
 
-    private String getFilenameIfExists(FromToGender fromToGender) {
-        String filePath = getFilePath(fromToGender);
+    private String getTempFilenameIfExists(FromToGender fromToGender) {
+        String filePath = getTempSoundFilePath(fromToGender);
         File file = new File(filePath);
         if (!file.exists()){
             return "";
         }
-        return getFilename(fromToGender);
+        return getTempSoundFileName(fromToGender);
+    }
+
+    private String getFinalSoundFilePath(FromToGender fromToGender, String englishText) {
+        String fileName = getFinalSoundFileName(fromToGender, englishText);
+        File file = new File(getSoundDirectory(), fileName);
+        return file.getAbsolutePath();
+    }
+
+    private String getFinalSoundFileName(FromToGender fromToGender, String englishText) {
+        return PhraseDataSource.getPhraseSoundFileName(englishText, Language.ARABIC, fromToGender.fromGender, fromToGender.toGender);
     }
 
     private MediaRecorder.OnErrorListener errorListener = new MediaRecorder.OnErrorListener() {
@@ -279,7 +299,7 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
 
     private void save() {
         final String englishText = englishEditText.getEditableText().toString();
-        if (StringUtil.isEmpty(englishText)) {
+        if (StringUtils.isEmpty(englishText)) {
             Toast.makeText(getActivity(), "Can't save with no English text.", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -288,34 +308,60 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
         long habibiId = habibiPhraseDataSource.createHabibiPhrase(selectedCategory);
         if (habibiId == -1) {
             Toast.makeText(getActivity(), "Error found when saving Habibi Phrase.", Toast.LENGTH_SHORT).show();
+            habibiPhraseDataSource.close();
             return;
         }
         habibiPhraseDataSource.close();
 
         PhraseDataSource phraseDataSource = new PhraseDataSource(getActivity());
         phraseDataSource.open();
+
         phraseDataSource.createPhrase(habibiId, Language.ENGLISH.getId(), -1, -1, -1, englishText, null, null);
 
         if (addNoGender.isChecked()) {
-            saveFromToGenderPhraseDb(habibiId, phraseDataSource, FromToGender.None);
+            moveTempSoundFileToFinalSoundFile(FromToGender.None, englishText);
+            savePhraseToDb(habibiId, phraseDataSource, FromToGender.None, englishText);
             phraseDataSource.close();
             return;
         }
         if (addFemaleToFemale.isChecked()) {
-            saveFromToGenderPhraseDb(habibiId, phraseDataSource, FromToGender.FemaleToFemale);
+            moveTempSoundFileToFinalSoundFile(FromToGender.FemaleToFemale, englishText);
+            savePhraseToDb(habibiId, phraseDataSource, FromToGender.FemaleToFemale, englishText);
         }
         if (addMaleToMale.isChecked()) {
-            saveFromToGenderPhraseDb(habibiId, phraseDataSource, FromToGender.MaleToMale);
+            moveTempSoundFileToFinalSoundFile(FromToGender.MaleToMale, englishText);
+            savePhraseToDb(habibiId, phraseDataSource, FromToGender.MaleToMale, englishText);
         }
-        saveFromToGenderPhraseDb(habibiId, phraseDataSource, FromToGender.FemaleToMale);
-        saveFromToGenderPhraseDb(habibiId, phraseDataSource, FromToGender.MaleToFemale);
+        savePhraseToDb(habibiId, phraseDataSource, FromToGender.FemaleToMale, englishText);
+        savePhraseToDb(habibiId, phraseDataSource, FromToGender.MaleToFemale, englishText);
         phraseDataSource.close();
     }
 
-    private void saveFromToGenderPhraseDb(long habibiId, PhraseDataSource phraseDataSource, FromToGender fromToGender) {
+    private void moveTempSoundFileToFinalSoundFile(FromToGender fromToGender, String englishText) {
+        if (!isSoundRecorded(fromToGender)) {
+            String exception = "Can't locate sound recorded for " + fromToGender.toString();
+            Toast.makeText(getActivity(), exception, Toast.LENGTH_SHORT).show();
+            Log.e(AddPhraseFragment.TAG, exception);
+            return;
+        }
+        String fromFileName = getTempSoundFilePath(fromToGender);
+        String toFileName = getFinalSoundFilePath(fromToGender, englishText);
+        File fromFile = new File(fromFileName);
+        File toFile = new File(toFileName);
+        boolean copied = fromFile.renameTo(toFile);
+        if (!copied) {
+            String exception = "Couldn't rename soundFileName";
+            Toast.makeText(getActivity(), exception, Toast.LENGTH_SHORT).show();
+            Log.e(AddPhraseFragment.TAG, exception);
+        }
+    }
+
+    private void savePhraseToDb(long habibiId, PhraseDataSource phraseDataSource, FromToGender fromToGender, String englishText) {
+        final String fileName = getFinalSoundFileName(fromToGender, englishText);
+        moveTempSoundFileToFinalSoundFile(fromToGender, englishText);
         phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(), -1, fromToGender.getFromGenderId(),
                 fromToGender.getToGenderId(), fromToGender.getArabicText(), fromToGender.getPhoneticText(),
-                fromToGender.getArabiziText(), getFilenameIfExists(fromToGender));
+                fromToGender.getArabiziText(), fileName);
     }
 
     private enum FromToGender {
@@ -336,7 +382,7 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
             if (fromGender == Gender.NONE) {
                 this.name = Gender.NONE.getGenderName();
             } else {
-                this.name = fromGender.getGenderNameShortened() + "->" + toGender.getGenderNameShortened();
+                this.name = fromGender.getGenderNameShortened().toUpperCase() + "->" + toGender.getGenderNameShortened().toUpperCase();
             }
         }
 

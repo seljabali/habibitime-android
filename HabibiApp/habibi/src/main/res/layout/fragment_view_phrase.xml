@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <!--English-->
+        <TextView
+            android:id="@+id/english_phrase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/habibi_phrase_english_text_size"
+            android:layout_marginTop="@dimen/double_space"
+            android:layout_marginBottom="@dimen/single_space"
+            tools:text="Yalla!"/>
+
+        <!--Arabic-->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/row_odd"
+            android:layout_marginTop="@dimen/double_space">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/habibi_phrase_arabic_label_size"
+                android:text="@string/arabic"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/row_odd">
+
+                <TextView
+                    android:id="@+id/arabic_phrase"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/habibi_phrase_arabizi_text_size"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingLeft="@dimen/double_space"
+                    android:paddingTop="@dimen/triple_space"
+                    android:paddingBottom="@dimen/triple_space"
+                    android:layout_weight="8"
+                    tools:text="يلا"
+                    android:gravity="center_horizontal" />
+
+                <ImageButton
+                    android:id="@+id/arabic_copy_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/clipboard"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/double_space"
+                    android:maxHeight="@dimen/clipboard_icon_height"
+                    android:maxWidth="@dimen/clipboard_icon_width"
+                    android:visibility="gone"/>
+
+                <ImageView
+                    android:id="@+id/arabic_share_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/share"
+                    android:layout_marginRight="@dimen/double_space"
+                    android:paddingRight="@dimen/double_space"
+                    android:layout_gravity="center_vertical"
+                    android:maxHeight="@dimen/clipboard_icon_height"
+                    android:maxWidth="@dimen/clipboard_icon_width"
+                    android:visibility="gone"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--Phonetic-->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/row_even">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/habibi_phrase_arabic_label_size"
+                android:text="@string/phonetic"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/row_even">
+
+                <TextView
+                    android:id="@+id/arabizi_phrase"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/habibi_phrase_arabizi_text_size"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingLeft="@dimen/double_space"
+                    android:paddingTop="@dimen/triple_space"
+                    android:paddingBottom="@dimen/triple_space"
+                    android:layout_marginTop="@dimen/triple_space"
+                    android:layout_weight="8"
+                    android:gravity="center_horizontal"
+                    tools:text="Yalla"/>
+
+                <ImageButton
+                    android:id="@+id/arabizi_copy_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/clipboard"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/double_space"
+                    android:maxHeight="@dimen/clipboard_icon_height"
+                    android:maxWidth="@dimen/clipboard_icon_width"
+                    android:visibility="gone"/>
+
+                <ImageView
+                    android:id="@+id/arabizi_share_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/share"
+                    android:layout_marginRight="@dimen/double_space"
+                    android:paddingRight="@dimen/double_space"
+                    android:layout_gravity="center_vertical"
+                    android:maxHeight="@dimen/clipboard_icon_height"
+                    android:maxWidth="@dimen/clipboard_icon_width"
+                    android:visibility="gone"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--Arabizi-->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/row_odd">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/habibi_phrase_arabic_label_size"
+                android:text="@string/arabizi"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/row_odd">
+
+                <TextView
+                    android:id="@+id/properbizi_phrase"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="@dimen/habibi_phrase_properbizi_text_size"
+                    android:background="@color/row_odd"
+                    android:paddingLeft="@dimen/double_space"
+                    android:paddingTop="@dimen/triple_space"
+                    android:paddingBottom="@dimen/triple_space"
+                    android:layout_marginTop="@dimen/triple_space"
+                    android:layout_weight="8"
+                    android:gravity="center_horizontal"
+                    tools:text="Yallaz"/>
+
+                <ImageButton
+                    android:id="@+id/properbizi_copy_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/clipboard"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/double_space"
+                    android:maxHeight="@dimen/clipboard_icon_height"
+                    android:maxWidth="@dimen/clipboard_icon_width"
+                    android:visibility="gone"/>
+
+                <ImageView
+                    android:id="@+id/properizi_share_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/share"
+                    android:layout_marginRight="@dimen/double_space"
+                    android:layout_gravity="center_vertical"
+                    android:maxHeight="@dimen/clipboard_icon_height"
+                    android:maxWidth="@dimen/clipboard_icon_width"
+                    android:visibility="gone"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <!--To Gender-->
+        <TextView
+            android:id="@+id/to_gender_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/habibi_phrase_arabic_label_size"
+            android:text="@string/to_gender"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingRight="@dimen/half_space"
+            android:paddingLeft="@dimen/half_space"
+            android:layout_marginTop="@dimen/double_space">
+
+            <ImageView
+                android:id="@+id/switch_to_male"
+                android:layout_width="@dimen/clipboard_icon_width"
+                android:layout_height="match_parent"
+                android:src="@drawable/gender_male"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:id="@+id/button_play_sound"
+                android:layout_width="@dimen/play_icon_width"
+                android:layout_height="match_parent"
+                android:src="@drawable/play"
+                android:layout_weight="1"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/switch_to_female"
+                android:layout_width="@dimen/clipboard_icon_width"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/gender_female"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

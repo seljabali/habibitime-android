@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/samsoom/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife/6.0.0/3a10b25b6820e19102e118711afe6a66c0bae123/butterknife-6.0.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="3a10b25b6820e19102e118711afe6a66c0bae123">
+        <dex dex="/Users/samsoom/Code/7abibiApp/HabibiApp/habibi/build/intermediates/pre-dexed/debug/butterknife-6.0.0-4899beb6569d1500ae55b359f5d50880b24caca5.jar" />
+    </item>
+    <item
+        jar="/Users/samsoom/Code/7abibiApp/HabibiApp/habibi/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28">
+        <dex dex="/Users/samsoom/Code/7abibiApp/HabibiApp/habibi/build/intermediates/pre-dexed/debug/classes-e57cc87ea06d288de5fdddab4274e16a3ec83d38.jar" />
+    </item>
+    <item
+        jar="/Users/samsoom/.gradle/caches/modules-2/files-2.1/com.crashlytics.android/crashlytics/1.1.13/e821eafa1bf489a26bdb71f95078c26785b37a1/crashlytics-1.1.13.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="0e821eafa1bf489a26bdb71f95078c26785b37a1">
+        <dex dex="/Users/samsoom/Code/7abibiApp/HabibiApp/habibi/build/intermediates/pre-dexed/debug/crashlytics-1.1.13-e68811282e10007f2db3e314c01c2a65a31c1ff1.jar" />
+    </item>
+    <item
+        jar="/Applications/Android SDK/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
+        <dex dex="/Users/samsoom/Code/7abibiApp/HabibiApp/habibi/build/intermediates/pre-dexed/debug/support-v4-19.1.0-17a288b9e4fbcfc847fdc6a2bba71f9048041aba.jar" />
+    </item>
+
+</items>

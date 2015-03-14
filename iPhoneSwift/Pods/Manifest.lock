@@ -1,0 +1,20 @@
+PODS:
+  - FMDB/common (2.5)
+  - FMDB/standalone (2.5):
+    - FMDB/common
+    - FMDB/standalone/default (= 2.5)
+  - FMDB/standalone/default (2.5):
+    - FMDB/common
+    - sqlite3
+  - sqlite3 (3.8.8.3):
+    - sqlite3/common (= 3.8.8.3)
+  - sqlite3/common (3.8.8.3)
+
+DEPENDENCIES:
+  - FMDB/standalone
+
+SPEC CHECKSUMS:
+  FMDB: 0efa188cf0dd1ce82c27a478cd5f5fa245308677
+  sqlite3: 37464204c4144633b05b5fbdbc7ad9aabcd8e0a0
+
+COCOAPODS: 0.35.0

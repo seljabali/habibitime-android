@@ -11,6 +11,9 @@ import UIKit
 class MessageListViewController: UIViewController {
 
     var appdel = AppDelegate()
+    var catID :String!
+    var catName :String!
+    var arrPhraseList = NSMutableArray()
 
     override func viewDidLoad() {
         super.viewDidLoad()

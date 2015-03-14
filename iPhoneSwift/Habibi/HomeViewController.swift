@@ -162,6 +162,14 @@ class HomeViewController: UIViewController {
         else
         {
             let messageVC = MessageListViewController(nibName : "MessageListViewController" , bundle: nil)
+//            msgVC.catID=[[self.arrCategoryList objectAtIndex:indexPath.row]objectForKey:@"id"];
+//            msgVC.catName=[[self.arrCategoryList objectAtIndex:indexPath.row]objectForKey:@"category_name"];
+//            
+
+            messageVC.catID = arrCategoryList [indexPath.row] .objectForKey("id") as String
+            messageVC.catName = arrCategoryList [indexPath.row] .objectForKey("category_name") as String
+
+            
             self.navigationController?.pushViewController(messageVC, animated: true)
         }
        /* [tableView deselectRowAtIndexPath:indexPath animated:YES];

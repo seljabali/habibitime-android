@@ -10,31 +10,31 @@
 	<string>Habibi</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>CFC6A6479B55CEA82029D48A76F9512B4234F9B7</key>
-		<string>https://bitbucket.org/aniliosrepos/habibitimes.git</string>
+		<key>3D2868EC704C29AA66D83950E4101CDCE17EC3DB</key>
+		<string>https://github.com/seljabali/HabibiTime.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Habibi.xcworkspace</string>
+	<string>iPhoneSwift/Habibi.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>CFC6A6479B55CEA82029D48A76F9512B4234F9B7</key>
-		<string>..</string>
+		<key>3D2868EC704C29AA66D83950E4101CDCE17EC3DB</key>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://bitbucket.org/aniliosrepos/habibitimes.git</string>
+	<string>https://github.com/seljabali/HabibiTime.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>CFC6A6479B55CEA82029D48A76F9512B4234F9B7</string>
+	<string>3D2868EC704C29AA66D83950E4101CDCE17EC3DB</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>CFC6A6479B55CEA82029D48A76F9512B4234F9B7</string>
+			<string>3D2868EC704C29AA66D83950E4101CDCE17EC3DB</string>
 			<key>IDESourceControlWCCName</key>
-			<string>HB-SVN</string>
+			<string>Habibi-SVN</string>
 		</dict>
 	</array>
 </dict>

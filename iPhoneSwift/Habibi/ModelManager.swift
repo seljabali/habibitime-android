@@ -67,4 +67,48 @@ class ModelManager: NSObject {
         return arrCatList!
     }
     
+  //  -(NSMutableArray *)fetchPhrases:(NSNumber *)catID
+    
+   /* func fetchPhrases(#catID : NSNumber) -> NSMutableArray
+    {
+        sharedInstance.database!.open()
+       let qry = String(format: "SELECT * FROM phrase where habibi_phrase_id in (select _id from habibi_phrase where category =%02d) and language =2", catID.intValue)
+        
+        var resultSet: FMResultSet! = sharedInstance.database!.executeQuery(qry, withArgumentsInArray: nil)
+        
+   /* NSMutableArray *arrPharseList=[[NSMutableArray alloc]init];
+    FMResultSet *results = [database executeQuery:[NSString stringWithFormat:@"SELECT * FROM phrase where habibi_phrase_id in (select _id from habibi_phrase where category =%d) and language =2",catID.intValue]];
+    
+    while([results next])
+    {
+    int catID  = [results intForColumn:@"_id"];
+    int habibi_phrase_id  = [results intForColumn:@"habibi_phrase_id"];
+    int language  = [results intForColumn:@"language"];
+    int dialect  = [results intForColumn:@"dialect"];
+    int from_gender  = [results intForColumn:@"from_gender"];
+    int to_gender  = [results intForColumn:@"to_gender"];
+    NSString *native_phrase = [results stringForColumn:@"native_phrase"];
+    NSString *phonetic_spelling = [results stringForColumn:@"phonetic_spelling"];
+    NSString *proper_phonetic_spelling = [results stringForColumn:@"proper_phonetic_spelling"];
+    
+    
+    
+    NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:
+    [NSNumber numberWithInt:catID],@"id",
+    [NSNumber numberWithInt:habibi_phrase_id],@"habibi_phrase_id",
+    [NSNumber numberWithInt:language],@"language",
+    [NSNumber numberWithInt:dialect],@"dialect",
+    [NSNumber numberWithInt:from_gender],@"from_gender",
+    [NSNumber numberWithInt:to_gender],@"to_gender",
+    native_phrase,@"native_phrase",
+    phonetic_spelling,@"phonetic_spelling",
+    proper_phonetic_spelling,@"proper_phonetic_spelling",nil];
+    
+    [arrPharseList addObject:dict];
+    
+    }
+    [database close];
+    return arrPharseList;*/
+    }*/
+    
 }

@@ -15,8 +15,12 @@ class MessageListViewController: UIViewController {
     var catName :String!
     var arrPhraseList = NSMutableArray()
 
+    @IBOutlet weak var tblMsgList: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tblMsgList.tableFooterView  = UIView(frame: CGRectZero)
         
         self.automaticallyAdjustsScrollViewInsets = false
 
@@ -25,6 +29,11 @@ class MessageListViewController: UIViewController {
         appdel = UIApplication.sharedApplication().delegate as AppDelegate
         
         self.view .addSubview(appdel.createCustomNavView(false, doneVisible: false))
+        arrPhraseList = ModelManager.instance.fetchPhrases(catID: catID)
+        println(arrPhraseList)
+        tblMsgList .reloadData()
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,14 +42,30 @@ class MessageListViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return arrPhraseList.count
+        
     }
-    */
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+    {
+        return 0
+    }
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
+        var cell : UITableViewCell? = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "SimpleTableIdentifier")
+        
+        cell?.textLabel?.text = arrPhraseList [indexPath.row] .objectForKey("native_phrase") as NSString
+        cell?.textLabel?.textAlignment = NSTextAlignment.Center
+        cell?.selectionStyle = UITableViewCellSelectionStyle(rawValue: 0)!
+        
+        return cell!
+    }
+    
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        tableView .deselectRowAtIndexPath(indexPath, animated: true)
+    }
 
 }

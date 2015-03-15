@@ -67,48 +67,65 @@ class ModelManager: NSObject {
         return arrCatList!
     }
     
-  //  -(NSMutableArray *)fetchPhrases:(NSNumber *)catID
     
-   /* func fetchPhrases(#catID : NSNumber) -> NSMutableArray
+    func fetchPhrases(#catID : NSString) -> NSMutableArray
     {
         sharedInstance.database!.open()
-       let qry = String(format: "SELECT * FROM phrase where habibi_phrase_id in (select _id from habibi_phrase where category =%02d) and language =2", catID.intValue)
+       let qry = String(format: "SELECT * FROM phrase where habibi_phrase_id in (select _id from habibi_phrase where category =%d) and language =2", catID.intValue)
         
         var resultSet: FMResultSet! = sharedInstance.database!.executeQuery(qry, withArgumentsInArray: nil)
         
-   /* NSMutableArray *arrPharseList=[[NSMutableArray alloc]init];
-    FMResultSet *results = [database executeQuery:[NSString stringWithFormat:@"SELECT * FROM phrase where habibi_phrase_id in (select _id from habibi_phrase where category =%d) and language =2",catID.intValue]];
-    
-    while([results next])
-    {
-    int catID  = [results intForColumn:@"_id"];
-    int habibi_phrase_id  = [results intForColumn:@"habibi_phrase_id"];
-    int language  = [results intForColumn:@"language"];
-    int dialect  = [results intForColumn:@"dialect"];
-    int from_gender  = [results intForColumn:@"from_gender"];
-    int to_gender  = [results intForColumn:@"to_gender"];
-    NSString *native_phrase = [results stringForColumn:@"native_phrase"];
-    NSString *phonetic_spelling = [results stringForColumn:@"phonetic_spelling"];
-    NSString *proper_phonetic_spelling = [results stringForColumn:@"proper_phonetic_spelling"];
-    
-    
-    
-    NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:
-    [NSNumber numberWithInt:catID],@"id",
-    [NSNumber numberWithInt:habibi_phrase_id],@"habibi_phrase_id",
-    [NSNumber numberWithInt:language],@"language",
-    [NSNumber numberWithInt:dialect],@"dialect",
-    [NSNumber numberWithInt:from_gender],@"from_gender",
-    [NSNumber numberWithInt:to_gender],@"to_gender",
-    native_phrase,@"native_phrase",
-    phonetic_spelling,@"phonetic_spelling",
-    proper_phonetic_spelling,@"proper_phonetic_spelling",nil];
-    
-    [arrPharseList addObject:dict];
-    
+        
+        var resultArr : NSMutableArray = NSMutableArray()
+        
+        while (resultSet .next())
+        {
+            
+            var cat = NSString(format:"%d",resultSet.intForColumn("id"))
+            var habibi_phrase_id = NSString(format:"%d",resultSet .intForColumn("habibi_phrase_id"))
+            var language = NSString(format:"%d",resultSet .intForColumn("language"))
+            var dialect = NSString(format:"%d",resultSet .intForColumn("dialect"))
+            var from_gender = NSString(format:"%d",resultSet .intForColumn("from_gender"))
+            var to_gender = NSString(format:"%d",resultSet .intForColumn("to_gender"))
+            var native_phrase = NSString(format:"%@",resultSet .stringForColumn("native_phrase"))
+            var phonetic_spelling = NSString()
+            
+            if (resultSet .stringForColumn("phonetic_spelling") != nil)
+            {
+                 phonetic_spelling = NSString(format:"%@",resultSet .stringForColumn("phonetic_spelling"))
+
+            }
+            else
+            {
+                 phonetic_spelling = ""
+            }
+            
+            var proper_phonetic_spelling = NSString()
+            
+            if (resultSet .stringForColumn("proper_phonetic_spelling") != nil)
+            {
+                proper_phonetic_spelling = NSString(format:"%@",resultSet .stringForColumn("proper_phonetic_spelling"))
+            }
+            else
+            {
+                proper_phonetic_spelling = ""
+            }
+            
+            
+
+            var dict : NSDictionary = ["_id" : cat ,
+                "habibi_phrase_id" : habibi_phrase_id ,
+                "language" :language ,
+                "dialect" : dialect ,
+                "from_gender" : from_gender ,
+                "to_gender" : to_gender ,
+                "native_phrase" : native_phrase ,
+                "phonetic_spelling" : phonetic_spelling ,
+                "proper_phonetic_spelling" : proper_phonetic_spelling,]
+            
+            resultArr.addObject(dict)
+
     }
-    [database close];
-    return arrPharseList;*/
-    }*/
-    
+        return resultArr
+   }
 }

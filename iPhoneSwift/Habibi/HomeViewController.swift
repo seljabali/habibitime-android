@@ -22,22 +22,6 @@ class HomeViewController: UIViewController {
     var arrCategoryList = NSMutableArray()
     var appdel = AppDelegate()
     
-//    [NSMutableArray arrayWithObjects:
-//    [UIColor colorWithRed:252.0f/255.0f green:116.0f/255.0f blue:95.0f/255.0f alpha:1],
-//    [UIColor colorWithRed:252.0f/255.0f green:217.0f/255.0f blue:108.0f/255.0f alpha:1],
-//    [UIColor colorWithRed:143.0f/255.0f green:194.0f/255.0f blue:204.0f/105.0f alpha:1],
-//    [UIColor colorWithRed:30.0f/255.0f green:163.0f/255.0f blue:173.0f/255.0f alpha:1],
-//    [UIColor colorWithRed:61.0f/255.0f green:72.0f/255.0f blue:81.0f/255.0f alpha:1],
-//    nil];
-    
-    
-//    @property(nonatomic,strong)UIColor *currentColor;
-//    @property(nonatomic,strong)UIColor *PurpleColor;
-//    @property(nonatomic,strong)UIColor *greenColor;
-//    @property(nonatomic,strong)UIColor *lightblueColor;
-//    @property(nonatomic,strong)UIColor *darkBlueColor;
-//    @property(nonatomic,strong)UIColor *darkGrayColor;
-   
     var currentColor:UIColor!
     var purpleColor :UIColor!
     var greenColor  :UIColor!
@@ -52,7 +36,8 @@ class HomeViewController: UIViewController {
         
       self.arrCategoryList =  ModelManager.instance.getAllCategoryList()
       self.automaticallyAdjustsScrollViewInsets = false
-        
+      self.tblCategoryList.tableFooterView  = UIView(frame: CGRectZero)
+
         println(self.arrCategoryList)
 
         self.purpleColor = UIColor(red: 252.0/255.0, green: 116.0/255.0, blue: 95.0/255.0, alpha: 1.0)
@@ -63,11 +48,9 @@ class HomeViewController: UIViewController {
         self.currentColor  = self.purpleColor!
         
         self.navigationController?.navigationBar.hidden = true
-     //   [self.view addSubview:[APPDEL createCustomNavView:YES doneBtn:NO]];
         
          appdel = UIApplication.sharedApplication().delegate as AppDelegate
 
-        // Do any additional setup after loading the view.
         
         self.view .addSubview(appdel.createCustomNavView(true, doneVisible: false))
         
@@ -93,7 +76,7 @@ class HomeViewController: UIViewController {
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        var cell : UITableViewCell? = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "cell")
+        var cell : UITableViewCell? = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "cell")
         
         if indexPath.row == arrCategoryList.count
         {
@@ -107,7 +90,7 @@ class HomeViewController: UIViewController {
             cell?.textLabel?.text = arrCategoryList [indexPath.row] .objectForKey("category_name")?.uppercaseString
 
         }
-        cell?.textLabel?.textAlignment = NSTextAlignment(rawValue: 1)!
+        cell?.textLabel?.textAlignment = NSTextAlignment.Center
         cell?.contentView.backgroundColor = self.arrColor [indexPath.row%5]
         cell?.selectionStyle = UITableViewCellSelectionStyle(rawValue: 0)!
         
@@ -162,9 +145,6 @@ class HomeViewController: UIViewController {
         else
         {
             let messageVC = MessageListViewController(nibName : "MessageListViewController" , bundle: nil)
-//            msgVC.catID=[[self.arrCategoryList objectAtIndex:indexPath.row]objectForKey:@"id"];
-//            msgVC.catName=[[self.arrCategoryList objectAtIndex:indexPath.row]objectForKey:@"category_name"];
-//            
 
             messageVC.catID = arrCategoryList [indexPath.row] .objectForKey("id") as String
             messageVC.catName = arrCategoryList [indexPath.row] .objectForKey("category_name") as String
@@ -172,42 +152,7 @@ class HomeViewController: UIViewController {
             
             self.navigationController?.pushViewController(messageVC, animated: true)
         }
-       /* [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        
-        if (indexPath.row==[self.arrCategoryList count])
-        {
-            SettingsViewController *settingsVC;
-            if (IS_IPHONE_5)
-            {
-                settingsVC=[[SettingsViewController alloc]initWithNibName:@"SettingsViewController-iPhone5" bundle:nil];
-            }
-            else
-            {
-                settingsVC=[[SettingsViewController alloc]initWithNibName:@"SettingsViewController-iPhone4" bundle:nil];
-            }
-            
-            [self.navigationController pushViewController:settingsVC animated:YES];
-        }
-        else
-        {
-            MessageListViewController *msgVC;
-            
-            if (IS_IPHONE_5)
-            {
-                msgVC=[[MessageListViewController alloc]initWithNibName:@"MessageListViewController-iPhone5" bundle:nil];
-            }
-            else
-            {
-                msgVC=[[MessageListViewController alloc]initWithNibName:@"MessageListViewController-iPhone4" bundle:nil];
-            }
-            
-            msgVC.catID=[[self.arrCategoryList objectAtIndex:indexPath.row]objectForKey:@"id"];
-            msgVC.catName=[[self.arrCategoryList objectAtIndex:indexPath.row]objectForKey:@"category_name"];
-            
-            [self.navigationController pushViewController:msgVC animated:YES];
-        }
-        
-    }*/
+      
 
     }
 

@@ -66,6 +66,18 @@ class MessageListViewController: UIViewController {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         tableView .deselectRowAtIndexPath(indexPath, animated: true)
+        
+        let phraseVC : PhraseDetailsViewController = PhraseDetailsViewController(nibName : "PhraseDetailsViewController" , bundle: nil)
+     
+phraseVC.habibiPhrase_id = self.arrPhraseList .objectAtIndex(indexPath.row) .objectForKey("habibi_phrase_id")
+         as NSString
+        
+phraseVC.strHabibiPhrase = self.arrPhraseList .objectAtIndex(indexPath.row).objectForKey("native_phrase") as NSString
+        
+        phraseVC.catName = self.catName!
+        
+        
+        self.navigationController?.pushViewController(phraseVC, animated: true)
     }
 
 }

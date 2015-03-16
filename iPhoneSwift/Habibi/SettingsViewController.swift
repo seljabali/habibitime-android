@@ -216,7 +216,6 @@ class SettingsViewController: UIViewController {
         
         if (habibiGender != nil || myGender != nil)
         {
-           // quotation == sameQuotation
            if (habibiGender == "Male")
             {
                 self.btnMale.selected = true

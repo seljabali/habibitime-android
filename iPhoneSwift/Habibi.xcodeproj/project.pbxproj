@@ -22,6 +22,10 @@
 		7EC44AAB1AB21895008CADC7 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC44AAA1AB21895008CADC7 /* libsqlite3.0.dylib */; };
 		7EC44AAF1AB21D59008CADC7 /* habibi_phrases.db in Resources */ = {isa = PBXBuildFile; fileRef = 878E1DB61AB1A9E0000A5994 /* habibi_phrases.db */; };
 		7EC44AB11AB220D1008CADC7 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC44AB01AB220D1008CADC7 /* ModelManager.swift */; };
+		8708A23C1AB728BC00A2CAEA /* PhraseDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8708A23A1AB728BC00A2CAEA /* PhraseDetailsViewController.swift */; };
+		8708A23D1AB728BC00A2CAEA /* PhraseDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8708A23B1AB728BC00A2CAEA /* PhraseDetailsViewController.xib */; };
+		8708A23F1AB7294900A2CAEA /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8708A23E1AB7294900A2CAEA /* play@2x.png */; };
+		8708A2411AB729D000A2CAEA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8708A2401AB729D000A2CAEA /* AVFoundation.framework */; };
 		8771AAC01AB3612D00B4D6D1 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8771AABF1AB3612D00B4D6D1 /* logo@2x.png */; };
 		877361101AB4AA6300F8AB3B /* MessageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8773610E1AB4AA6300F8AB3B /* MessageListViewController.swift */; };
 		877361111AB4AA6300F8AB3B /* MessageListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8773610F1AB4AA6300F8AB3B /* MessageListViewController.xib */; };
@@ -61,6 +65,10 @@
 		7EC44AAA1AB21895008CADC7 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		7EC44AAD1AB21AF1008CADC7 /* DataBaseDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DataBaseDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		7EC44AB01AB220D1008CADC7 /* ModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
+		8708A23A1AB728BC00A2CAEA /* PhraseDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhraseDetailsViewController.swift; sourceTree = "<group>"; };
+		8708A23B1AB728BC00A2CAEA /* PhraseDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhraseDetailsViewController.xib; sourceTree = "<group>"; };
+		8708A23E1AB7294900A2CAEA /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@2x.png"; sourceTree = "<group>"; };
+		8708A2401AB729D000A2CAEA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8771AABF1AB3612D00B4D6D1 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		8773610E1AB4AA6300F8AB3B /* MessageListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListViewController.swift; sourceTree = "<group>"; };
 		8773610F1AB4AA6300F8AB3B /* MessageListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageListViewController.xib; sourceTree = "<group>"; };
@@ -76,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8708A2411AB729D000A2CAEA /* AVFoundation.framework in Frameworks */,
 				7EC44AAB1AB21895008CADC7 /* libsqlite3.0.dylib in Frameworks */,
 				9C155B30223F3DFA42A4C0EB /* libPods-Habibi.a in Frameworks */,
 			);
@@ -94,6 +103,7 @@
 		52ACB9D1B00C8BD701191F71 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8708A2401AB729D000A2CAEA /* AVFoundation.framework */,
 				7EC44AAA1AB21895008CADC7 /* libsqlite3.0.dylib */,
 				08CFC42DE51F31A62C5C0E11 /* libPods-Habibi.a */,
 			);
@@ -134,6 +144,8 @@
 				879485151AAEF7E800F8B93C /* HomeViewController.xib */,
 				8773610E1AB4AA6300F8AB3B /* MessageListViewController.swift */,
 				8773610F1AB4AA6300F8AB3B /* MessageListViewController.xib */,
+				8708A23A1AB728BC00A2CAEA /* PhraseDetailsViewController.swift */,
+				8708A23B1AB728BC00A2CAEA /* PhraseDetailsViewController.xib */,
 				7EC44AAD1AB21AF1008CADC7 /* DataBaseDemo-Bridging-Header.h */,
 				7EC44AB01AB220D1008CADC7 /* ModelManager.swift */,
 				7EC44AA81AB21705008CADC7 /* Util.swift */,
@@ -172,6 +184,7 @@
 		7EC19F271AA7845D00F1CF2B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8708A23E1AB7294900A2CAEA /* play@2x.png */,
 				8771AABF1AB3612D00B4D6D1 /* logo@2x.png */,
 				7EC19F321AA78DBA00F1CF2B /* gender_female@2x.png */,
 				7EC19F301AA78DB400F1CF2B /* gender_male@2x.png */,
@@ -281,8 +294,10 @@
 			files = (
 				7EC44AAF1AB21D59008CADC7 /* habibi_phrases.db in Resources */,
 				7E9496831AA63C63006A5D7B /* LaunchScreen.xib in Resources */,
+				8708A23F1AB7294900A2CAEA /* play@2x.png in Resources */,
 				7EC19F261AA7800A00F1CF2B /* ViewController.xib in Resources */,
 				7E9496801AA63C63006A5D7B /* Images.xcassets in Resources */,
+				8708A23D1AB728BC00A2CAEA /* PhraseDetailsViewController.xib in Resources */,
 				7EC19F2B1AA784D400F1CF2B /* splash_5s@2x.png in Resources */,
 				8771AAC01AB3612D00B4D6D1 /* logo@2x.png in Resources */,
 				7EC19F311AA78DB400F1CF2B /* gender_male@2x.png in Resources */,
@@ -344,6 +359,7 @@
 				7E94967B1AA63C63006A5D7B /* ViewController.swift in Sources */,
 				7E9496791AA63C63006A5D7B /* AppDelegate.swift in Sources */,
 				7EC44AA91AB21705008CADC7 /* Util.swift in Sources */,
+				8708A23C1AB728BC00A2CAEA /* PhraseDetailsViewController.swift in Sources */,
 				7EC19F2E1AA787E700F1CF2B /* SettingsViewController.swift in Sources */,
 				879485161AAEF7E800F8B93C /* HomeViewController.swift in Sources */,
 				7EC44AB11AB220D1008CADC7 /* ModelManager.swift in Sources */,

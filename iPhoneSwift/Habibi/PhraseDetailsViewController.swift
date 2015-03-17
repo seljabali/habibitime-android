@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class PhraseDetailsViewController: UIViewController {
 
@@ -32,6 +33,8 @@ class PhraseDetailsViewController: UIViewController {
     var catName : NSString!
     
     var appdel = AppDelegate()
+    
+    var player : AVAudioPlayer = AVAudioPlayer()
 
     @IBAction func PlaySoundToMale(sender: UIButton)
     {
@@ -118,8 +121,173 @@ class PhraseDetailsViewController: UIViewController {
     
     @IBAction func playSoundOnClick(sender: UIButton)
     {
-       
+//        NSURL *fileURL;
+//        NSCharacterSet *notAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "] invertedSet];
+//        NSString *resultString = [[self.strHabibiPhrase componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@""];
+//        resultString=[resultString stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+//        
+//        
+//        NSString *fromString;
         
+        
+        var fileURL : NSURL
+        var notAllowedChars : NSCharacterSet = NSCharacterSet (charactersInString: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ")
+        var result : NSArray = self.strHabibiPhrase.componentsSeparatedByCharactersInSet(notAllowedChars)
+        
+        var resultString : NSString = result .componentsJoinedByString("")
+        
+        resultString = resultString .stringByReplacingOccurrencesOfString(" ", withString: "_")
+        
+        var fromString : NSString
+        
+        
+        let my_Gender : NSString =   NSUserDefaults .standardUserDefaults() .objectForKey("my_Gender") as NSString
+        
+        
+        
+        
+//        if([[[NSUserDefaults standardUserDefaults]objectForKey:@"my_Gender"] isEqualToString:@"Male"])
+        if(my_Gender == "Male")
+        {
+            fromString = "_m";
+        }
+        else
+        {
+            fromString = "_f";
+        }
+        
+      //  NSString *toString;
+        var toString : NSString
+        
+        if self.btnMaleSound.selected
+        {
+            toString = "_m";
+        }
+        else
+        {
+            toString = "_f";
+            
+        }
+        
+        
+        
+        //NSString *strGender = [NSString stringWithFormat:@"%@%@",fromString,toString];
+        
+        var strGender : NSString = NSString(format: "%@%@", fromString,toString)
+        
+        
+        //resultString= [resultString stringByAppendingString:strGender];
+        
+        var resultStr : NSString = resultString .stringByAppendingString(strGender).lowercaseString
+        
+//        NSString *resultStr=[resultString lowercaseString];
+//        NSLog (@"Result: %@", resultStr);
+        println(resultStr)
+        
+//        NSString* filePath = [[NSBundle mainBundle] pathForResource:resultString
+//        ofType:@"m4a"];
+        
+        var filePath : NSString = NSBundle.mainBundle().pathForResource(resultString, ofType: "m4a")!
+        
+       // NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+        
+        let fileManager =  NSFileManager.defaultManager()
+        
+        
+//        if ([fileManager fileExistsAtPath:filePath])
+         if fileManager .fileExistsAtPath(filePath)
+        {
+            println("exists")
+            
+        }
+        else
+        {
+         //   NSString *str= [resultStr stringByReplacingCharactersInRange:NSMakeRange(resultStr.length-4,2) withString:[resultStr substringFromIndex:resultString.length-2]];
+            
+            var str : NSString = resultStr .stringByReplacingCharactersInRange(NSMakeRange(resultStr.length-4, 2), withString:resultStr.substringFromIndex(resultString.length-2))
+            
+            NSLog("Result %@", str)
+            
+           // NSLog (@"Result: %@", str);
+            
+          //  filePath = [[NSBundle mainBundle] pathForResource:str ofType:@"m4a"];
+            filePath = NSBundle.mainBundle().pathForResource(str, ofType: "m4a")!
+            
+            
+//            if ([fileManager fileExistsAtPath:filePath])
+            if fileManager .fileExistsAtPath(filePath)
+            {
+                println("result")
+            }
+            else
+            {
+//                NSString *str= [resultStr stringByReplacingCharactersInRange:NSMakeRange(resultStr.length-4,2) withString:@""];
+//                NSLog (@"Result: %@", str);
+                
+                var str : NSString = resultStr .stringByReplacingCharactersInRange(NSMakeRange(resultStr.length-4, 2), withString: "")
+                NSLog("result :- %@", str)
+                
+                
+                //filePath = [[NSBundle mainBundle] pathForResource:[str lowercaseString] ofType:@"m4a"];
+                
+                filePath = NSBundle.mainBundle().pathForResource(str.lowercaseString, ofType: "m4a")!
+                
+                
+                if fileManager.fileExistsAtPath(filePath)
+                {
+                    println("Exists")
+                }
+                else
+                {
+//                    NSString *str1= [str stringByReplacingCharactersInRange:NSMakeRange(str.length-2,2) withString:@""];
+                    var str1 : NSString = str .stringByReplacingCharactersInRange(NSMakeRange(str.length-2, 2), withString: "")
+                    
+//                    NSLog (@"Result: %@", str1);
+                    NSLog("result :- %@", str1)
+                    
+                   // filePath = [[NSBundle mainBundle] pathForResource:str1 ofType:@"m4a"];
+                    
+                    filePath = NSBundle .mainBundle().pathForResource(str1, ofType: "m4a")!
+                    
+                    if (fileManager.fileExistsAtPath(filePath))
+                    {
+                             println("exists")
+                    }
+                    else
+                    {
+                        
+                        println("sound file not available");
+//                        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Message" message:@"Sound file not available" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//                        [alert show];
+//                        alert=nil;
+                        
+                        var alert : UIAlertView = UIAlertView(title: "Message", message: "Sound file not available", delegate: nil, cancelButtonTitle: "OK", otherButtonTitles: "", "")
+                        alert.show()
+                        
+                        
+                    }
+                    
+                }
+                
+                
+            }
+            
+        }
+        
+        if (fileManager.fileExistsAtPath(filePath))
+        {
+            //fileURL = [[NSURL alloc] initFileURLWithPath:filePath];
+            fileURL = NSURL(fileURLWithPath: filePath)!
+            
+//            NSError *error;
+            var error : NSError = NSError()
+            
+//            self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:&error];
+            self.player = AVAudioPlayer(contentsOfURL: fileURL, error: nil)
+            self.player.play()
+            
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()

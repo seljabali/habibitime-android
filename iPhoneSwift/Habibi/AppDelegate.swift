@@ -76,22 +76,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         else
         {
-                //    if([self.window.rootViewController isKindOfClass:[SettingsViewController class]])
-                //    {
-                //
-                //    }
-                //    else
-                //    {
-                //
-                //    //show back button
-                //    UIButton *backbtn=[UIButton buttonWithType:UIButtonTypeCustom];
-                //    [backbtn setFrame:CGRectMake(10, 25, 50, 30)];
-                //    [backbtn setBackgroundColor:[UIColor clearColor]];
-                //    [backbtn setTitle:@"Back" forState:UIControlStateNormal];
-                //    [backbtn addTarget:self action:@selector(backOnClick:) forControlEvents:UIControlEventTouchUpInside];
-                //    [navBar addSubview:backbtn];
-                //    }
-                //    }
             
                 if (self.window?.rootViewController!.isKindOfClass(SettingsViewController))!
                 {

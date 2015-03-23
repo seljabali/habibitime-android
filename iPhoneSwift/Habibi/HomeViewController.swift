@@ -15,8 +15,8 @@ class HomeViewController: UIViewController {
     
     var arrColor = [UIColor(red: 252.0/255.0, green: 116.0/255.0, blue: 95.0/255.0, alpha: 1.0),
                        UIColor(red: 252.0/255.0, green: 217.0/255.0, blue: 108.0/255.0, alpha: 1.0),
-                       UIColor(red: 143.0/255.0, green: 194/255.0, blue: 204/255.0, alpha: 1.0),
-                       UIColor(red: 30.0/255.0, green: 163/255.0, blue: 173.0/255.0, alpha: 1.0),
+                       UIColor(red: 143.0/255.0, green: 194.0/255.0, blue: 204.0/255.0, alpha: 1.0),
+                       UIColor(red: 30.0/255.0, green: 163.0/255.0, blue: 173.0/255.0, alpha: 1.0),
                        UIColor(red: 61.0/255.0, green: 72.0/255.0, blue: 81.0/255.0, alpha: 1.0),]
     
     var arrCategoryList = NSMutableArray()

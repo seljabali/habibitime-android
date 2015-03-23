@@ -15,11 +15,18 @@ class MessageListViewController: UIViewController {
     var catName :String!
     var arrPhraseList = NSMutableArray()
 
+    var arrColor = [UIColor(red: 252.0/255.0, green: 116.0/255.0, blue: 95.0/255.0, alpha: 1.0),
+        UIColor(red: 252.0/255.0, green: 217.0/255.0, blue: 108.0/255.0, alpha: 1.0),
+        UIColor(red: 143.0/255.0, green: 194.0/255.0, blue: 204.0/255.0, alpha: 1.0),
+        UIColor(red: 30.0/255.0, green: 163.0/255.0, blue: 173.0/255.0, alpha: 1.0),
+        UIColor(red: 61.0/255.0, green: 72.0/255.0, blue: 81.0/255.0, alpha: 1.0),]
+    
+    
     @IBOutlet weak var tblMsgList: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
         self.tblMsgList.tableFooterView  = UIView(frame: CGRectZero)
         
         self.automaticallyAdjustsScrollViewInsets = false
@@ -57,7 +64,12 @@ class MessageListViewController: UIViewController {
         
         cell?.textLabel?.text = arrPhraseList [indexPath.row] .objectForKey("native_phrase") as NSString
         cell?.textLabel?.textAlignment = NSTextAlignment.Center
-        cell?.selectionStyle = UITableViewCellSelectionStyle(rawValue: 0)!
+
+        var backgroundView : UIView = UIView(frame: CGRectMake(0, 0, self.tblMsgList.frame.size.width, 100))
+        backgroundView.backgroundColor = self.arrColor [indexPath.row%5]
+        cell?.selectedBackgroundView = backgroundView
+        cell?.backgroundColor =  UIColor(red: 245.0/255.0, green: 245.0/255.0, blue: 245.0/255.0, alpha: 1.0)
+
         
         return cell!
     }

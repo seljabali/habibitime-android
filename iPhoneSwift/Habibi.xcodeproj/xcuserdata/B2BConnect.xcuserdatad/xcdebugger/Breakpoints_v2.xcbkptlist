@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Habibi/AppDelegate.swift"
-            timestampString = "447881621.226874"
+            timestampString = "449003784.552456"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
             landmarkName = "createCustomSplash()"
             landmarkType = "5">
          </BreakpointContent>

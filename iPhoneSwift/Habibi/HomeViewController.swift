@@ -28,8 +28,7 @@ class HomeViewController: UIViewController {
     var lightblueColor :UIColor!
     var darkBlueColor :UIColor!
     var darkGrayColor :UIColor!
-    
-    
+       
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +53,8 @@ class HomeViewController: UIViewController {
         
         self.view .addSubview(appdel.createCustomNavView(true, doneVisible: false))
         
+       
+    
     }
 
     override func didReceiveMemoryWarning() {
@@ -94,14 +95,10 @@ class HomeViewController: UIViewController {
         cell?.contentView.backgroundColor = self.arrColor [indexPath.row%5]
         cell?.selectionStyle = UITableViewCellSelectionStyle(rawValue: 0)!
         
-//        [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
-//        cell.backgroundColor=[UIColor clearColor];
-//        NSLog(@"cell:-- %@",[indexPath description]);
-        
-        
-//        [cell.contentView setBackgroundColor:[self.arrColor objectAtIndex:indexPath.row%5]];
-//        
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if DeviceType.IS_IPHONE_6P
+        {
+            cell?.textLabel?.font = UIFont.systemFontOfSize(20)
+        }
         
         
         
@@ -157,3 +154,5 @@ class HomeViewController: UIViewController {
     }
 
 }
+
+

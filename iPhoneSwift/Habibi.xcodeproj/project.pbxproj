@@ -12,6 +12,7 @@
 		7E9496801AA63C63006A5D7B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E94967F1AA63C63006A5D7B /* Images.xcassets */; };
 		7E9496831AA63C63006A5D7B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E9496811AA63C63006A5D7B /* LaunchScreen.xib */; };
 		7E94968F1AA63C63006A5D7B /* HabibiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E94968E1AA63C63006A5D7B /* HabibiTests.swift */; };
+		7EA98C681AC4935800873943 /* PhraseDetailsViewController-iPhone6P.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EA98C671AC4935800873943 /* PhraseDetailsViewController-iPhone6P.xib */; };
 		7EC19F261AA7800A00F1CF2B /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EC19F251AA7800A00F1CF2B /* ViewController.xib */; };
 		7EC19F2B1AA784D400F1CF2B /* splash_5s@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EC19F2A1AA784D400F1CF2B /* splash_5s@2x.png */; };
 		7EC19F2E1AA787E700F1CF2B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC19F2C1AA787E700F1CF2B /* SettingsViewController.swift */; };
@@ -125,6 +126,7 @@
 		7E9496881AA63C63006A5D7B /* HabibiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HabibiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E94968D1AA63C63006A5D7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E94968E1AA63C63006A5D7B /* HabibiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabibiTests.swift; sourceTree = "<group>"; };
+		7EA98C671AC4935800873943 /* PhraseDetailsViewController-iPhone6P.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "PhraseDetailsViewController-iPhone6P.xib"; sourceTree = "<group>"; };
 		7EC19F251AA7800A00F1CF2B /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		7EC19F2A1AA784D400F1CF2B /* splash_5s@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash_5s@2x.png"; sourceTree = "<group>"; };
 		7EC19F2C1AA787E700F1CF2B /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				8773610F1AB4AA6300F8AB3B /* MessageListViewController.xib */,
 				8708A23A1AB728BC00A2CAEA /* PhraseDetailsViewController.swift */,
 				8708A23B1AB728BC00A2CAEA /* PhraseDetailsViewController.xib */,
+				7EA98C671AC4935800873943 /* PhraseDetailsViewController-iPhone6P.xib */,
 				7EC44AAD1AB21AF1008CADC7 /* DataBaseDemo-Bridging-Header.h */,
 				7EC44AB01AB220D1008CADC7 /* ModelManager.swift */,
 				7EC44AA81AB21705008CADC7 /* Util.swift */,
@@ -557,6 +560,7 @@
 				87B6FD421AB83BD6000C797B /* do_you_miss_me_m.m4a in Resources */,
 				87B6FD771AB83BD6000C797B /* where_are_you_f.m4a in Resources */,
 				87B6FD4D1AB83BD6000C797B /* i_like_your_smile_f.m4a in Resources */,
+				7EA98C681AC4935800873943 /* PhraseDetailsViewController-iPhone6P.xib in Resources */,
 				87B6FD651AB83BD6000C797B /* lets_go_f.m4a in Resources */,
 				8771AAC01AB3612D00B4D6D1 /* logo@2x.png in Resources */,
 				7EC19F311AA78DB400F1CF2B /* gender_male@2x.png in Resources */,

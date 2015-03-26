@@ -70,6 +70,10 @@ class MessageListViewController: UIViewController {
         cell?.selectedBackgroundView = backgroundView
         cell?.backgroundColor =  UIColor(red: 245.0/255.0, green: 245.0/255.0, blue: 245.0/255.0, alpha: 1.0)
 
+        if DeviceType.IS_IPHONE_6P
+        {
+            cell?.textLabel?.font = UIFont.systemFontOfSize(20)
+        }
         
         return cell!
     }
@@ -79,17 +83,34 @@ class MessageListViewController: UIViewController {
     {
         tableView .deselectRowAtIndexPath(indexPath, animated: true)
         
-        let phraseVC : PhraseDetailsViewController = PhraseDetailsViewController(nibName : "PhraseDetailsViewController" , bundle: nil)
-     
-phraseVC.habibiPhrase_id = self.arrPhraseList .objectAtIndex(indexPath.row) .objectForKey("habibi_phrase_id")
-         as NSString
+       
         
-phraseVC.strHabibiPhrase = self.arrPhraseList .objectAtIndex(indexPath.row).objectForKey("native_phrase") as NSString
-        
-        phraseVC.catName = self.catName!
-        
-        
-        self.navigationController?.pushViewController(phraseVC, animated: true)
+        if DeviceType.IS_IPHONE_6P
+        {
+            let phraseVC : PhraseDetailsViewController = PhraseDetailsViewController(nibName : "PhraseDetailsViewController-iPhone6P" , bundle: nil)
+            
+            phraseVC.habibiPhrase_id = self.arrPhraseList .objectAtIndex(indexPath.row) .objectForKey("habibi_phrase_id")
+                as NSString
+            
+            phraseVC.strHabibiPhrase = self.arrPhraseList .objectAtIndex(indexPath.row).objectForKey("native_phrase") as NSString
+            
+            phraseVC.catName = self.catName!
+          
+            self.navigationController?.pushViewController(phraseVC, animated: true)
+        }
+        else
+        {
+            let phraseVC : PhraseDetailsViewController = PhraseDetailsViewController(nibName : "PhraseDetailsViewController" , bundle: nil)
+            
+            phraseVC.habibiPhrase_id = self.arrPhraseList .objectAtIndex(indexPath.row) .objectForKey("habibi_phrase_id")
+                as NSString
+            
+            phraseVC.strHabibiPhrase = self.arrPhraseList .objectAtIndex(indexPath.row).objectForKey("native_phrase") as NSString
+            
+            phraseVC.catName = self.catName!
+            
+            self.navigationController?.pushViewController(phraseVC, animated: true)
+        }
     }
 
 }

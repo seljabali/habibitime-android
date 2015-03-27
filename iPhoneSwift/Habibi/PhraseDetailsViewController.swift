@@ -35,7 +35,37 @@ class PhraseDetailsViewController: UIViewController {
     var appdel = AppDelegate()
     
     var player : AVAudioPlayer = AVAudioPlayer()
+    
 
+    @IBAction func copyBtnOnAction(sender: UIButton)
+    {
+        let btn = sender
+        var pb : UIPasteboard = UIPasteboard.generalPasteboard()
+        var alert : UIAlertView = UIAlertView(title: "Message", message: "", delegate: nil, cancelButtonTitle: "OK")
+
+        switch (btn.tag)
+        {
+            case 1:
+                    pb.string = btnPhraseTranslation1.titleLabel?.text
+                alert.message = NSString(format:"Text has been copied to your clipboard")
+                    
+            case 2:
+                pb.string = btnPhraseTranslation2.titleLabel?.text
+                alert.message = NSString(format:"%@ has been copied to your clipboard", pb.string!)
+
+            case 3:
+                pb.string = btnPhraseTranslation3.titleLabel?.text
+                alert.message = NSString(format:"%@ has been copied to your clipboard", pb.string!)
+                
+            default:
+                pb.string = btnPhraseTranslation1.titleLabel?.text
+
+            
+        }
+        
+        alert.show()
+        
+    }
     @IBAction func PlaySoundToMale(sender: UIButton)
     {
         let btn = sender

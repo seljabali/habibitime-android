@@ -94,7 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             navBar?.addSubview(img!)
 
             
-            var lblName : UILabel? = UILabel(frame: CGRectMake((ScreenSize.SCREEN_WIDTH-100)/2, 20, 100, 40))
+            var lblName : UILabel? = UILabel(frame: CGRectMake(60, 20, 100, 40))
             lblName?.text = "Habibi Time!"
             lblName?.textColor = UIColor.whiteColor()
             navBar?.addSubview(lblName!)
@@ -120,23 +120,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
         }
         
-        
-       
-
-//        if (doneVisible)
-//        {
-//            var doneBtn : UIButton? = UIButton(frame: CGRectMake(270, 25, 50, 30))
-//            doneBtn?.backgroundColor = UIColor.clearColor()
-//            doneBtn?.setTitle("Done", forState: UIControlState.Normal)
-//            doneBtn?.addTarget(self, action: "doneOnClick:", forControlEvents: UIControlEvents.TouchUpInside)
-//            navBar?.addSubview(doneBtn!)
-//
-//        }
-//        else
-//        {
-//            
-//        }
-   
       return navBar!
     }
     

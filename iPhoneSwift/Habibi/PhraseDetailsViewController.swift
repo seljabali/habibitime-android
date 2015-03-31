@@ -176,16 +176,34 @@ class PhraseDetailsViewController: UIViewController {
         
         var toString : NSString
         
-        if self.btnMaleSound.selected
+        let cat_name = self.catName
+
+        if cat_name == "Mood" || cat_name == "Responses"
         {
-            toString = "_m";
+            if fromString == "_m"
+            {
+                fromString = "_f"
+                toString = "_f"
+            }
+            else
+            {
+                fromString = "_m"
+                toString = "_m"
+            }
+            
         }
         else
         {
-            toString = "_f";
-            
+            if self.btnMaleSound.selected
+            {
+                toString = "_m";
+            }
+            else
+            {
+                toString = "_f";
+                
+            }
         }
-        
         
         var strGender : NSString = NSString(format: "%@%@", fromString,toString)
         

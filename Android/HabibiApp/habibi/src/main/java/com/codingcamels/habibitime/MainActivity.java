@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Crashlytics.start(this);
+//        Crashlytics.start(this);
 
         if (isFirstTimeUser(this)) {
             Intent intent = new Intent(this, InstallationActivity.class);

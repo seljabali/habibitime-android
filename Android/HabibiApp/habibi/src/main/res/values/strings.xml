@@ -53,5 +53,9 @@
     <string name="select_to_gender_title">Now select your habibi\'s gender:</string>
     <string name="subtitle">This is to conjugate your phrases. You can change this later.</string>
     <string name="bibi">Bibi</string>
+    <string name="all">All</string>
+    <string name="to_all">M->*, F->*</string>
+    <string name="from_all">*->M, *->F</string>
+    <string name="genderless">Genderless</string>
 
 </resources>

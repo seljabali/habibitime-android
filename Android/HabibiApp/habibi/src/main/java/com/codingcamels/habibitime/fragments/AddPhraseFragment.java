@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -16,19 +15,20 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codingcamels.habibitime.MainActivity;
+import com.codingcamels.habibitime.PhraseBuilder;
 import com.codingcamels.habibitime.R;
 import com.codingcamels.habibitime.datasources.HabibiPhraseDataSource;
-import com.codingcamels.habibitime.datasources.PhraseDataSource;
 import com.codingcamels.habibitime.models.*;
-import com.codingcamels.habibitime.utilities.StringUtils;
+import com.codingcamels.habibitime.views.AddPhrase;
 import com.codingcamels.habibitime.views.AddPhraseGroup;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -36,7 +36,7 @@ import butterknife.InjectView;
 /**
  * Created by samsoom on 1/16/15.
  */
-public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSelectedListener, CompoundButton.OnCheckedChangeListener, View.OnClickListener {
+public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSelectedListener, CompoundButton.OnCheckedChangeListener, View.OnClickListener, AddPhrase.AddPhraseListener {
     @InjectView(R.id.englishEditText)
     EditText englishEditText;
     @InjectView(R.id.fromGenderToGenderPhraseViewGroup)
@@ -61,7 +61,6 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
     private static final int AUDIO_FORMAT = MediaRecorder.OutputFormat.MPEG_4;
 
     private MediaRecorder recorder = null;
-    private LayoutInflater inflater;
     private Category selectedCategory;
 
     private AddPhraseGroup allPhrase;
@@ -80,7 +79,6 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        this.inflater = inflater;
         View view = inflater.inflate(R.layout.fragment_add_phrase, container, false);
         ButterKnife.inject(this, view);
         if (view == null) {
@@ -99,7 +97,7 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
                 uncheckAll();
                 all.setChecked(isChecked);
                 if (isChecked) {
-                    allPhrase = new AddPhraseGroup(getActivity(), AddPhraseGroup.Type.ALL, fromGenderToGenderPhraseViewGroup);
+                    allPhrase = new AddPhraseGroup(getActivity(), AddPhraseFragment.this, AddPhraseGroup.Type.ALL, fromGenderToGenderPhraseViewGroup);
                     fromGenderToGenderPhraseViewGroup.addView(allPhrase);
                     fromGenderToGenderPhraseViewGroup.invalidate();
                 }
@@ -112,7 +110,7 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
                 uncheckAll();
                 toAll.setChecked(isChecked);
                 if (isChecked) {
-                    toAllPhrase = new AddPhraseGroup(getActivity(), AddPhraseGroup.Type.TO_ALL, fromGenderToGenderPhraseViewGroup);
+                    toAllPhrase = new AddPhraseGroup(getActivity(), AddPhraseFragment.this, AddPhraseGroup.Type.TO_ALL, fromGenderToGenderPhraseViewGroup);
                     fromGenderToGenderPhraseViewGroup.addView(toAllPhrase);
                     fromGenderToGenderPhraseViewGroup.invalidate();
                 }
@@ -125,7 +123,7 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
                 uncheckAll();
                 fromAll.setChecked(isChecked);
                 if (isChecked) {
-                    fromAllPhrase = new AddPhraseGroup(getActivity(), AddPhraseGroup.Type.FROM_ALL, fromGenderToGenderPhraseViewGroup);
+                    fromAllPhrase = new AddPhraseGroup(getActivity(), AddPhraseFragment.this, AddPhraseGroup.Type.FROM_ALL, fromGenderToGenderPhraseViewGroup);
                     fromGenderToGenderPhraseViewGroup.addView(fromAllPhrase);
                     fromGenderToGenderPhraseViewGroup.invalidate();
                 }
@@ -138,7 +136,7 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
                 uncheckAll();
                 genderless.setChecked(isChecked);
                 if (isChecked) {
-                    genderlessPhrase = new AddPhraseGroup(getActivity(), AddPhraseGroup.Type.NO_GENDER, fromGenderToGenderPhraseViewGroup);
+                    genderlessPhrase = new AddPhraseGroup(getActivity(), AddPhraseFragment.this, AddPhraseGroup.Type.NO_GENDER, fromGenderToGenderPhraseViewGroup);
                     fromGenderToGenderPhraseViewGroup.addView(genderlessPhrase);
                     fromGenderToGenderPhraseViewGroup.invalidate();
                 }
@@ -148,11 +146,38 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                save();
+                List<Phrase> enteredPhrases = getEnteredPhrases();
+                HabibiPhraseDataSource habibiPhraseDataSource = new HabibiPhraseDataSource(getActivity());
+                habibiPhraseDataSource.open();
+                long result = habibiPhraseDataSource.createHabibiPhrase(selectedCategory, enteredPhrases);
+                habibiPhraseDataSource.close();
+                if (result == -1) {
+                    Toast.makeText(getActivity(), "Error in saving phrase!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         return view;
+    }
+
+    private List<Phrase> getEnteredPhrases() {
+        List<Phrase> enteredPhrases = new ArrayList<Phrase>();
+        if (all.isChecked()) {
+            enteredPhrases.addAll(allPhrase.getPhrases());
+        }
+        if (toAll.isChecked()) {
+            enteredPhrases.addAll(toAllPhrase.getPhrases());
+        }
+        if (fromAll.isChecked()) {
+            enteredPhrases.addAll(fromAllPhrase.getPhrases());
+        }
+        if (genderless.isChecked()) {
+            enteredPhrases.addAll(genderlessPhrase.getPhrases());
+        }
+        enteredPhrases.add(PhraseBuilder.createPhrase().setLanguage(Language.ENGLISH)
+                            .setNativeSpelling(englishEditText.getEditableText().toString())
+                            .build());
+        return enteredPhrases;
     }
 
     private void uncheckAll() {
@@ -164,14 +189,65 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-//        compoundButton.setChecked(b);
+    public void onStartRecording(String soundName) {
+        if (soundName == null || "".equals(soundName)) {
+            Log.e(TAG, "Tried saving empty filename");
+            return;
+        }
+        recorder = new MediaRecorder();
+        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        recorder.setOutputFormat(AUDIO_FORMAT);
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        recorder.setOutputFile(getSoundFilePath(soundName));
+        recorder.setOnErrorListener(errorListener);
+        recorder.setOnInfoListener(infoListener);
+        try {
+            recorder.prepare();
+            recorder.start();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void onClick(View view) {
-//        View.super.onClick();
-//        view.callOnClick();
+    public void onStopRecording() {
+        if (recorder != null) {
+            try {
+                recorder.stop();
+                recorder.reset();
+                recorder.release();
+                recorder = null;
+            } catch (Throwable throwable) {
+                Log.e(TAG, throwable.toString());
+            }
+        }
+    }
+
+    @Override
+    public void onPlaySound(String soundName) {
+        MainActivity.playSound(getActivity(), getSoundFilePath(soundName));
+    }
+
+    private String getSoundDirectory() {
+//        String filepath = Environment.getExternalStorageDirectory().getPath();
+        File filepath = getActivity().getFilesDir();
+        File file = new File(filepath, AUDIO_RECORDER_FOLDER);
+        return file.getAbsolutePath();
+    }
+
+    private String getSoundFilePath(String name) {
+        File file = new File(getSoundDirectory());
+        if (!file.exists()){
+            file.mkdirs();
+        }
+        return file.getAbsolutePath() + "/" + name + AUDIO_EXTENTION;
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//        compoundButton.setChecked(b);
     }
 
     @Override
@@ -185,143 +261,6 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         // Do nothing
-    }
-
-    private void setVisibility(FromToGender fromToGender, boolean visible) {
-        final ViewGroup fromToGenderViewGroup = fromToGender.getViewGroup();
-        if (fromToGenderViewGroup == null) {
-            if (visible) {
-                addPhrase(fromToGender);
-            }
-        } else {
-            fromToGenderViewGroup.setVisibility(visible ? View.VISIBLE : View.GONE);
-        }
-    }
-
-    private void addPhrase(final FromToGender fromToGender) {
-        ViewGroup viewAddArabicPhrase = (ViewGroup) inflater.inflate(R.layout.view_add_arabic_phrase, fromGenderToGenderPhraseViewGroup, false);
-        fromToGender.setViewGroup(viewAddArabicPhrase);
-
-//        TextView title = (TextView) viewAddArabicPhrase.findViewById(R.id.fromGenderToGenderTitle);
-//        title.setText(getTitle(fromToGender));
-        Button btnRecord = (Button) viewAddArabicPhrase.findViewById(R.id.record);
-        btnRecord.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        startRecording(fromToGender);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        stopRecording();
-                        break;
-                }
-                return false;
-            }
-        });
-        Button btnPlay = (Button) viewAddArabicPhrase.findViewById(R.id.play_back);
-        btnPlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity.playSound(getActivity(), getTempSoundFileName(fromToGender));
-            }
-        });
-        fromGenderToGenderPhraseViewGroup.addView(viewAddArabicPhrase);
-    }
-
-    private void startRecording(FromToGender fromToGender) {
-        recorder = new MediaRecorder();
-        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        recorder.setOutputFormat(AUDIO_FORMAT);
-        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-        recorder.setOutputFile(getTempSoundFilePath(fromToGender));
-        recorder.setOnErrorListener(errorListener);
-        recorder.setOnInfoListener(infoListener);
-
-        try {
-            recorder.prepare();
-            recorder.start();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void stopRecording() {
-        if (recorder != null) {
-            recorder.stop();
-            recorder.reset();
-            recorder.release();
-            recorder = null;
-        }
-    }
-
-    private String getTitle(FromToGender fromToGender) {
-//        if (fromToGender.equals(FromToGender.MaleToFemale)) {
-//            if (addFemaleToFemale.isChecked()) {
-//                return FromToGender.MaleToFemale.getName();
-//            } else {
-//                return FromToGender.MaleToFemale.getName()
-//                        + ", "
-//                        + FromToGender.FemaleToFemale.getName();
-//            }
-//        }
-//        if (fromToGender.equals(FromToGender.FemaleToMale)) {
-//            if (addMaleToMale.isChecked()) {
-//                return FromToGender.FemaleToMale.getName();
-//            } else {
-//                return FromToGender.FemaleToMale.getName()
-//                        + ", "
-//                        + FromToGender.MaleToMale.getName();
-//            }
-//        }
-//        return fromToGender.getName();
-        return "";
-    }
-
-    private String getSoundDirectory() {
-        String filepath = Environment.getExternalStorageDirectory().getPath();
-        File file = new File(filepath, AUDIO_RECORDER_FOLDER);
-        return file.getAbsolutePath();
-    }
-
-    private boolean isSoundRecorded(FromToGender fromToGender) {
-        String fileName = getTempSoundFilePath(fromToGender);
-        File file = new File(fileName);
-        return file.exists();
-    }
-
-    private String getTempSoundFilePath(FromToGender fromToGender) {
-        File file = new File(getSoundDirectory());
-        if (!file.exists()){
-            file.mkdirs();
-        }
-        return file.getAbsolutePath() + "/" + fromToGender.getName() + AUDIO_EXTENTION;
-    }
-
-    private String getTempSoundFileName(FromToGender fromToGender) {
-        return fromToGender.getName() + AUDIO_EXTENTION;
-    }
-
-    private String getTempFilenameIfExists(FromToGender fromToGender) {
-        String filePath = getTempSoundFilePath(fromToGender);
-        File file = new File(filePath);
-        if (!file.exists()){
-            return "";
-        }
-        return getTempSoundFileName(fromToGender);
-    }
-
-    private String getFinalSoundFilePath(FromToGender fromToGender, String englishText) {
-        String fileName = getFinalSoundFileName(fromToGender, englishText);
-        File file = new File(getSoundDirectory(), fileName);
-        return file.getAbsolutePath();
-    }
-
-    private String getFinalSoundFileName(FromToGender fromToGender, String englishText) {
-//        return PhraseDataSource.getPhraseSoundFileName(englishText, Language.ARABIC, fromToGender.fromGender, fromToGender.toGender);
-        return "";
     }
 
     private MediaRecorder.OnErrorListener errorListener = new MediaRecorder.OnErrorListener() {
@@ -338,150 +277,10 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
         }
     };
 
-    private void save() {
-        final String englishText = englishEditText.getEditableText().toString();
-        if (StringUtils.isEmpty(englishText)) {
-            Toast.makeText(getActivity(), "Can't save with no English text.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        HabibiPhraseDataSource habibiPhraseDataSource = new HabibiPhraseDataSource(getActivity());
-        habibiPhraseDataSource.open();
-        long habibiId = habibiPhraseDataSource.createHabibiPhrase(selectedCategory);
-        if (habibiId == -1) {
-            Toast.makeText(getActivity(), "Error found when saving Habibi Phrase.", Toast.LENGTH_SHORT).show();
-            habibiPhraseDataSource.close();
-            return;
-        }
-        habibiPhraseDataSource.close();
-
-        PhraseDataSource phraseDataSource = new PhraseDataSource(getActivity());
-        phraseDataSource.open();
-
-        phraseDataSource.createPhrase(habibiId, Language.ENGLISH.getId(), -1, -1, -1, englishText, null, null);
-
-//        if (addNoGender.isChecked()) {
-            moveTempSoundFileToFinalSoundFile(FromToGender.None, englishText);
-            savePhraseToDb(habibiId, phraseDataSource, FromToGender.None, englishText);
-            phraseDataSource.close();
-            return;
-//        }
-//        if (addFemaleToFemale.isChecked()) {
-//            moveTempSoundFileToFinalSoundFile(FromToGender.FemaleToFemale, englishText);
-//            savePhraseToDb(habibiId, phraseDataSource, FromToGender.FemaleToFemale, englishText);
-        }
-//        if (addMaleToMale.isChecked()) {
-//            moveTempSoundFileToFinalSoundFile(FromToGender.MaleToMale, englishText);
-//            savePhraseToDb(habibiId, phraseDataSource, FromToGender.MaleToMale, englishText);
-//        }
-//        savePhraseToDb(habibiId, phraseDataSource, FromToGender.FemaleToMale, englishText);
-//        savePhraseToDb(habibiId, phraseDataSource, FromToGender.MaleToFemale, englishText);
-//        phraseDataSource.close();
-//        getActivity().onBackPressed();
-//    }
-
-    private void moveTempSoundFileToFinalSoundFile(FromToGender fromToGender, String englishText) {
-        if (!isSoundRecorded(fromToGender)) {
-            String exception = "Can't locate sound recorded for " + fromToGender.toString();
-            Toast.makeText(getActivity(), exception, Toast.LENGTH_SHORT).show();
-            Log.e(AddPhraseFragment.TAG, exception);
-            return;
-        }
-        String fromFileName = getTempSoundFilePath(fromToGender);
-        String toFileName = getFinalSoundFilePath(fromToGender, englishText);
-        File fromFile = new File(fromFileName);
-        File toFile = new File(toFileName);
-        boolean copied = fromFile.renameTo(toFile);
-        if (!copied) {
-            String exception = "Couldn't rename soundFileName";
-            Toast.makeText(getActivity(), exception, Toast.LENGTH_SHORT).show();
-            Log.e(AddPhraseFragment.TAG, exception);
-        }
-    }
-
-    private void savePhraseToDb(long habibiId, PhraseDataSource phraseDataSource, FromToGender fromToGender, String englishText) {
-        final String fileName = getFinalSoundFileName(fromToGender, englishText);
-        moveTempSoundFileToFinalSoundFile(fromToGender, englishText);
-        phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(), -1, fromToGender.getFromGenderId(),
-                fromToGender.getToGenderId(), fromToGender.getArabicText(), fromToGender.getPhoneticText(),
-                fromToGender.getArabiziText(), fileName);
-
+    @Override
+    public void onClick(View view) {
+        // do nothing i think
     }
 
 
-
-    private enum FromToGender {
-        MaleToMale(Gender.MALE, Gender.MALE),
-        MaleToFemale(Gender.MALE, Gender.FEMALE),
-        FemaleToMale(Gender.FEMALE, Gender.MALE),
-        FemaleToFemale(Gender.FEMALE, Gender.FEMALE),
-        None(Gender.NONE, Gender.NONE);
-
-        private String name;
-        private ViewGroup viewGroup;
-        private Gender fromGender;
-        private Gender toGender;
-
-        FromToGender(Gender fromGender, Gender toGender) {
-            this.fromGender = fromGender;
-            this.toGender = toGender;
-            if (fromGender == Gender.NONE) {
-                this.name = Gender.NONE.getGenderName();
-            } else {
-                this.name = fromGender.getGenderNameShortened().toUpperCase() + "->" + toGender.getGenderNameShortened().toUpperCase();
-            }
-        }
-
-        public String getName() {
-            return this.name;
-        }
-
-        public void setViewGroup(ViewGroup viewGroup) {
-            this.viewGroup = viewGroup;
-        }
-
-        public ViewGroup getViewGroup() {
-            return viewGroup;
-        }
-
-        public String getArabicText() {
-            String arabicText = "";
-            if (viewGroup != null) {
-                TextView arabicTitleView = (TextView) viewGroup.findViewById(R.id.arabicEditText);
-                if (arabicTitleView != null) {
-                    arabicText = arabicTitleView.getEditableText().toString();
-                }
-            }
-            return arabicText;
-        }
-
-        public String getPhoneticText() {
-            String phoneticText = "";
-            if (viewGroup != null) {
-                TextView phoneticTitleView = (TextView) viewGroup.findViewById(R.id.phoneticEditText);
-                if (phoneticTitleView != null) {
-                    phoneticText = phoneticTitleView.getEditableText().toString();
-                }
-            }
-            return phoneticText;
-        }
-
-        public String getArabiziText() {
-            String arabiziText = "";
-            if (viewGroup != null) {
-                TextView arabiziTitleView = (TextView) viewGroup.findViewById(R.id.arabiziEditText);
-                if (arabiziTitleView != null) {
-                    arabiziText = arabiziTitleView.getEditableText().toString();
-                }
-            }
-            return arabiziText;
-        }
-
-        public int getFromGenderId() {
-            return fromGender.getId();
-        }
-
-        public int getToGenderId() {
-            return toGender.getId();
-        }
-    }
 }

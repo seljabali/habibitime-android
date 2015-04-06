@@ -123,13 +123,6 @@ public class MainActivity extends Activity {
         return file.getAbsolutePath() + "/";
     }
 
-    public static void createExternalSoundDirectory() {
-        String filepath = Environment.getExternalStorageDirectory().getPath();
-        File file = new File(filepath, AUDIO_RECORDER_FOLDER);
-        if (!file.exists()){
-            file.mkdirs();
-        }
-    }
 
     //TODO: Move to separate class
     /**** USER SETTINGS ****/

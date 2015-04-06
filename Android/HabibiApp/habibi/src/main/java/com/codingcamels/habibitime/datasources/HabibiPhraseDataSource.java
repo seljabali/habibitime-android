@@ -10,6 +10,7 @@ import android.util.Log;
 import com.codingcamels.habibitime.MySQLHelper;
 import com.codingcamels.habibitime.models.Category;
 import com.codingcamels.habibitime.models.HabibiPhrase;
+import com.codingcamels.habibitime.models.Phrase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 public class HabibiPhraseDataSource {
 
+    private Context context;
     // Database fields
     private SQLiteDatabase database;
     private MySQLHelper dbHelper;
@@ -26,6 +28,7 @@ public class HabibiPhraseDataSource {
                                     MySQLHelper.COLUMN_CATEGORY};
 
     public HabibiPhraseDataSource(Context context) {
+        this.context = context;
         dbHelper = new MySQLHelper(context);
     }
 
@@ -79,6 +82,19 @@ public class HabibiPhraseDataSource {
         // make sure to close the cursor
         cursor.close();
         return comments;
+    }
+
+    public long createHabibiPhrase(Category category, List<Phrase> phrases) {
+        long id = createHabibiPhrase(category);
+        if (id != -1) {
+            PhraseDataSource phraseDataSource = new PhraseDataSource(context);
+            phraseDataSource.open();
+            for (Phrase phrase : phrases) {
+                phraseDataSource.createPhrase(id, phrase);
+            }
+            phraseDataSource.close();
+        }
+        return id;
     }
 
     private HabibiPhrase cursorToHabibiPhrase(Cursor cursor) {

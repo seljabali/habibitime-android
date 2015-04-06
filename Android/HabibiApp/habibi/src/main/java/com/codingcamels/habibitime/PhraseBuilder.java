@@ -10,7 +10,7 @@ import com.codingcamels.habibitime.models.Phrase;
 public class PhraseBuilder {
     private  Phrase phrase;
 
-    public static PhraseBuilder cratePhrase() {
+    public static PhraseBuilder createPhrase() {
         PhraseBuilder phraseBuilder = new PhraseBuilder();
         return phraseBuilder;
     }
@@ -31,7 +31,7 @@ public class PhraseBuilder {
 
 
     public PhraseBuilder setProperSpelling(String properSpelling) {
-        phrase.setNativePhraseSpelling(properSpelling);
+        phrase.setProperPhoneticPhraseSpelling(properSpelling);
         return this;
     }
 
@@ -51,8 +51,14 @@ public class PhraseBuilder {
     }
 
     public Phrase build() {
+        phrase.setSoundFileName(getFileName());
         return phrase;
     }
-}
 
-// PhraseBuilder.createNew().setPhrase("hala").setPhonetic("niiii").set
+    public String getFileName() {
+        return phrase.getProperPhoneticPhraseSpelling().replace(" ", "_") + "_" +
+                phrase.getLanguage().getLanguageName() + "_" +
+                phrase.getFromGender().getGenderNameShortened() + "_" +
+                phrase.getToGender().getGenderNameShortened() + "_";
+    }
+}

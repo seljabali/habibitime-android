@@ -62,6 +62,12 @@ public class PhraseDataSource {
         dbHelper.close();
     }
 
+    public void createPhrase(long habibiPhraseId, Phrase phrase) {
+        createPhrase(habibiPhraseId, phrase.getLanguage().getId(), -1,
+                phrase.getFromGender().getId(), phrase.getToGender().getId(), phrase.getPhoneticPhraseSpelling(),
+                phrase.getProperPhoneticPhraseSpelling(), phrase.getSoundFileName());
+    }
+
     public void createPhrase(long habibiPhraseId, int language, int dialect, int from_gender,
                              int to_gender, String nativeString, String phoneticString,
                              String properString) {

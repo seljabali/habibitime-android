@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/double_space"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/double_space"
         android:weightSum="1">
 
         <TextView
@@ -63,46 +64,98 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:layout_marginTop="@dimen/double_space">
 
+            <!-- All -->
             <LinearLayout
-                android:id="@+id/addGenderToGenderViewGroup"
+                android:id="@+id/all_view_group"
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <CheckBox
-                    android:id="@+id/copyMaleToMale"
-                    android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight=".25">
+
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/copyMaleToMale"
-                    android:checked="false"/>
+                    android:text="@string/all"/>
 
                 <CheckBox
-                    android:id="@+id/copyFemaleToFemale"
+                    android:id="@+id/all"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/copyFemaleToFemale"
                     android:checked="false"
                     android:layout_marginTop="@dimen/single_space"/>
             </LinearLayout>
 
-            <CheckBox
-                android:id="@+id/addNoGender"
+            <!-- To All -->
+            <LinearLayout
+                android:id="@+id/to_all_view_group"
+                android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/addNoGender"
-                android:checked="false"
-                android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/double_space"/>
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/double_space"
+                android:layout_weight=".25">
 
-            <CheckBox
-                android:id="@+id/addToAllGenders"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:text="@string/to_all"/>
+
+                <CheckBox
+                    android:id="@+id/to_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:layout_marginTop="@dimen/single_space"/>
+            </LinearLayout>
+
+            <!-- From All -->
+            <LinearLayout
+                android:id="@+id/from_all_view_group"
+                android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/addToAllGenders"
-                android:checked="false"
-                android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/double_space"/>
+                android:layout_marginLeft="@dimen/double_space"
+                android:layout_weight=".25">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:text="@string/from_all"/>
+
+                <CheckBox
+                    android:id="@+id/from_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:layout_marginTop="@dimen/single_space"/>
+            </LinearLayout>
+
+            <!-- Genderless -->
+            <LinearLayout
+                android:id="@+id/genderless_view_group"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/double_space"
+                android:layout_weight=".25">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:text="@string/genderless"/>
+
+                <CheckBox
+                    android:id="@+id/genderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:layout_marginTop="@dimen/single_space"/>
+            </LinearLayout>
         </LinearLayout>
 
 

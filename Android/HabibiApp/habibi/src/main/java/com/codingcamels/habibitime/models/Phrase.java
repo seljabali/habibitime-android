@@ -145,4 +145,22 @@ public class Phrase implements Parcelable {
             return new Phrase[size];
         }
     };
+
+    public void setLanguage(Language language) {
+        if (language != null) {
+            setLanguage(language.getId());
+        }
+    }
+
+    public void setFromGender(Gender fromGender) {
+        if (fromGender != null) {
+            setFromGender(fromGender.getId());
+        }
+    }
+
+    public void setToGender(Gender toGender) {
+        if (toGender != null) {
+            setToGender(toGender.getId());
+        }
+    }
 }

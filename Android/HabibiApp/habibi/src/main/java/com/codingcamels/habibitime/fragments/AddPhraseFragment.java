@@ -25,6 +25,7 @@ import com.codingcamels.habibitime.datasources.HabibiPhraseDataSource;
 import com.codingcamels.habibitime.datasources.PhraseDataSource;
 import com.codingcamels.habibitime.models.*;
 import com.codingcamels.habibitime.utilities.StringUtils;
+import com.codingcamels.habibitime.views.AddPhraseGroup;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,19 +36,19 @@ import butterknife.InjectView;
 /**
  * Created by samsoom on 1/16/15.
  */
-public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSelectedListener, CompoundButton.OnCheckedChangeListener, View.OnClickListener {
     @InjectView(R.id.englishEditText)
     EditText englishEditText;
     @InjectView(R.id.fromGenderToGenderPhraseViewGroup)
     ViewGroup fromGenderToGenderPhraseViewGroup;
-    @InjectView(R.id.copyFemaleToFemale)
-    CheckBox addFemaleToFemale;
-    @InjectView(R.id.copyMaleToMale)
-    CheckBox addMaleToMale;
-    @InjectView(R.id.addNoGender)
-    CheckBox addNoGender;
-    @InjectView(R.id.addToAllGenders)
-    CheckBox addAllGenders;
+    @InjectView(R.id.all)
+    CheckBox all;
+    @InjectView(R.id.to_all)
+    CheckBox toAll;
+    @InjectView(R.id.from_all)
+    CheckBox fromAll;
+    @InjectView(R.id.genderless)
+    CheckBox genderless;
     @InjectView(R.id.savePhrase)
     Button btnSave;
     @InjectView(R.id.categorySpinner)
@@ -62,6 +63,11 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
     private MediaRecorder recorder = null;
     private LayoutInflater inflater;
     private Category selectedCategory;
+
+    private AddPhraseGroup allPhrase;
+    private AddPhraseGroup fromAllPhrase;
+    private AddPhraseGroup toAllPhrase;
+    private AddPhraseGroup genderlessPhrase;
 
     public static AddPhraseFragment newInstance() {
         return new AddPhraseFragment();
@@ -86,55 +92,86 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
         categorySpinner.setAdapter(categorySelectionAdapter);
         categorySpinner.setOnItemSelectedListener(this);
 
-        addPhrase(FromToGender.MaleToFemale);
-        addPhrase(FromToGender.FemaleToMale);
 
-        addMaleToMale.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        all.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                setVisibility(FromToGender.MaleToMale, isChecked);
-                setVisibility(FromToGender.None, false);
-                addNoGender.setChecked(false);
-                FromToGender.FemaleToMale.setTitle(getTitle(FromToGender.FemaleToMale));
-            }
-        });
-
-        addFemaleToFemale.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                setVisibility(FromToGender.FemaleToFemale, isChecked);
-                setVisibility(FromToGender.None, false);
-                addNoGender.setChecked(false);
-                FromToGender.MaleToFemale.setTitle(getTitle(FromToGender.MaleToFemale));
-            }
-        });
-        addNoGender.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                uncheckAll();
+                all.setChecked(isChecked);
                 if (isChecked) {
-                    addFemaleToFemale.setChecked(false);
-                    addMaleToMale.setChecked(false);
-                    setVisibility(FromToGender.FemaleToMale, false);
-                    setVisibility(FromToGender.MaleToFemale, false);
-                    setVisibility(FromToGender.MaleToMale, false);
-                    setVisibility(FromToGender.FemaleToFemale, false);
-                    setVisibility(FromToGender.None, true);
-                    addNoGender.setChecked(true);
-                } else {
-                    setVisibility(FromToGender.FemaleToMale, true);
-                    setVisibility(FromToGender.MaleToFemale, true);
-                    setVisibility(FromToGender.None, false);
+                    allPhrase = new AddPhraseGroup(getActivity(), AddPhraseGroup.Type.ALL, fromGenderToGenderPhraseViewGroup);
+                    fromGenderToGenderPhraseViewGroup.addView(allPhrase);
+                    fromGenderToGenderPhraseViewGroup.invalidate();
                 }
             }
         });
+
+        toAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                uncheckAll();
+                toAll.setChecked(isChecked);
+                if (isChecked) {
+                    toAllPhrase = new AddPhraseGroup(getActivity(), AddPhraseGroup.Type.TO_ALL, fromGenderToGenderPhraseViewGroup);
+                    fromGenderToGenderPhraseViewGroup.addView(toAllPhrase);
+                    fromGenderToGenderPhraseViewGroup.invalidate();
+                }
+            }
+        });
+
+        fromAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                uncheckAll();
+                fromAll.setChecked(isChecked);
+                if (isChecked) {
+                    fromAllPhrase = new AddPhraseGroup(getActivity(), AddPhraseGroup.Type.FROM_ALL, fromGenderToGenderPhraseViewGroup);
+                    fromGenderToGenderPhraseViewGroup.addView(fromAllPhrase);
+                    fromGenderToGenderPhraseViewGroup.invalidate();
+                }
+            }
+        });
+
+        genderless.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                uncheckAll();
+                genderless.setChecked(isChecked);
+                if (isChecked) {
+                    genderlessPhrase = new AddPhraseGroup(getActivity(), AddPhraseGroup.Type.NO_GENDER, fromGenderToGenderPhraseViewGroup);
+                    fromGenderToGenderPhraseViewGroup.addView(genderlessPhrase);
+                    fromGenderToGenderPhraseViewGroup.invalidate();
+                }
+            }
+        });
+
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                save();
+//                save();
             }
         });
 
         return view;
+    }
+
+    private void uncheckAll() {
+        all.setChecked(false);
+        toAll.setChecked(false);
+        fromAll.setChecked(false);
+        genderless.setChecked(false);
+        fromGenderToGenderPhraseViewGroup.removeAllViews();
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//        compoundButton.setChecked(b);
+    }
+
+    @Override
+    public void onClick(View view) {
+//        View.super.onClick();
+//        view.callOnClick();
     }
 
     @Override
@@ -165,8 +202,8 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
         ViewGroup viewAddArabicPhrase = (ViewGroup) inflater.inflate(R.layout.view_add_arabic_phrase, fromGenderToGenderPhraseViewGroup, false);
         fromToGender.setViewGroup(viewAddArabicPhrase);
 
-        TextView title = (TextView) viewAddArabicPhrase.findViewById(R.id.fromGenderToGenderTitle);
-        title.setText(getTitle(fromToGender));
+//        TextView title = (TextView) viewAddArabicPhrase.findViewById(R.id.fromGenderToGenderTitle);
+//        title.setText(getTitle(fromToGender));
         Button btnRecord = (Button) viewAddArabicPhrase.findViewById(R.id.record);
         btnRecord.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -221,25 +258,26 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
     }
 
     private String getTitle(FromToGender fromToGender) {
-        if (fromToGender.equals(FromToGender.MaleToFemale)) {
-            if (addFemaleToFemale.isChecked()) {
-                return FromToGender.MaleToFemale.getName();
-            } else {
-                return FromToGender.MaleToFemale.getName()
-                        + ", "
-                        + FromToGender.FemaleToFemale.getName();
-            }
-        }
-        if (fromToGender.equals(FromToGender.FemaleToMale)) {
-            if (addMaleToMale.isChecked()) {
-                return FromToGender.FemaleToMale.getName();
-            } else {
-                return FromToGender.FemaleToMale.getName()
-                        + ", "
-                        + FromToGender.MaleToMale.getName();
-            }
-        }
-        return fromToGender.getName();
+//        if (fromToGender.equals(FromToGender.MaleToFemale)) {
+//            if (addFemaleToFemale.isChecked()) {
+//                return FromToGender.MaleToFemale.getName();
+//            } else {
+//                return FromToGender.MaleToFemale.getName()
+//                        + ", "
+//                        + FromToGender.FemaleToFemale.getName();
+//            }
+//        }
+//        if (fromToGender.equals(FromToGender.FemaleToMale)) {
+//            if (addMaleToMale.isChecked()) {
+//                return FromToGender.FemaleToMale.getName();
+//            } else {
+//                return FromToGender.FemaleToMale.getName()
+//                        + ", "
+//                        + FromToGender.MaleToMale.getName();
+//            }
+//        }
+//        return fromToGender.getName();
+        return "";
     }
 
     private String getSoundDirectory() {
@@ -282,7 +320,8 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
     }
 
     private String getFinalSoundFileName(FromToGender fromToGender, String englishText) {
-        return PhraseDataSource.getPhraseSoundFileName(englishText, Language.ARABIC, fromToGender.fromGender, fromToGender.toGender);
+//        return PhraseDataSource.getPhraseSoundFileName(englishText, Language.ARABIC, fromToGender.fromGender, fromToGender.toGender);
+        return "";
     }
 
     private MediaRecorder.OnErrorListener errorListener = new MediaRecorder.OnErrorListener() {
@@ -320,25 +359,25 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
 
         phraseDataSource.createPhrase(habibiId, Language.ENGLISH.getId(), -1, -1, -1, englishText, null, null);
 
-        if (addNoGender.isChecked()) {
+//        if (addNoGender.isChecked()) {
             moveTempSoundFileToFinalSoundFile(FromToGender.None, englishText);
             savePhraseToDb(habibiId, phraseDataSource, FromToGender.None, englishText);
             phraseDataSource.close();
             return;
+//        }
+//        if (addFemaleToFemale.isChecked()) {
+//            moveTempSoundFileToFinalSoundFile(FromToGender.FemaleToFemale, englishText);
+//            savePhraseToDb(habibiId, phraseDataSource, FromToGender.FemaleToFemale, englishText);
         }
-        if (addFemaleToFemale.isChecked()) {
-            moveTempSoundFileToFinalSoundFile(FromToGender.FemaleToFemale, englishText);
-            savePhraseToDb(habibiId, phraseDataSource, FromToGender.FemaleToFemale, englishText);
-        }
-        if (addMaleToMale.isChecked()) {
-            moveTempSoundFileToFinalSoundFile(FromToGender.MaleToMale, englishText);
-            savePhraseToDb(habibiId, phraseDataSource, FromToGender.MaleToMale, englishText);
-        }
-        savePhraseToDb(habibiId, phraseDataSource, FromToGender.FemaleToMale, englishText);
-        savePhraseToDb(habibiId, phraseDataSource, FromToGender.MaleToFemale, englishText);
-        phraseDataSource.close();
-        getActivity().onBackPressed();
-    }
+//        if (addMaleToMale.isChecked()) {
+//            moveTempSoundFileToFinalSoundFile(FromToGender.MaleToMale, englishText);
+//            savePhraseToDb(habibiId, phraseDataSource, FromToGender.MaleToMale, englishText);
+//        }
+//        savePhraseToDb(habibiId, phraseDataSource, FromToGender.FemaleToMale, englishText);
+//        savePhraseToDb(habibiId, phraseDataSource, FromToGender.MaleToFemale, englishText);
+//        phraseDataSource.close();
+//        getActivity().onBackPressed();
+//    }
 
     private void moveTempSoundFileToFinalSoundFile(FromToGender fromToGender, String englishText) {
         if (!isSoundRecorded(fromToGender)) {
@@ -365,7 +404,10 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
         phraseDataSource.createPhrase(habibiId, Language.ARABIC.getId(), -1, fromToGender.getFromGenderId(),
                 fromToGender.getToGenderId(), fromToGender.getArabicText(), fromToGender.getPhoneticText(),
                 fromToGender.getArabiziText(), fileName);
+
     }
+
+
 
     private enum FromToGender {
         MaleToMale(Gender.MALE, Gender.MALE),
@@ -399,17 +441,6 @@ public class AddPhraseFragment extends Fragment implements AdapterView.OnItemSel
 
         public ViewGroup getViewGroup() {
             return viewGroup;
-        }
-
-        public void setTitle(String title) {
-            if (viewGroup != null) {
-                TextView titleView = (TextView) viewGroup.findViewById(R.id.fromGenderToGenderTitle);
-                if (titleView != null) {
-                    titleView.setText(title);
-                } else {
-                    Log.e("Add Phrase", "We couldn't find title textview for " + name);
-                }
-            }
         }
 
         public String getArabicText() {

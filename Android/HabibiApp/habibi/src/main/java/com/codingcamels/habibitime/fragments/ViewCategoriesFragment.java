@@ -26,7 +26,6 @@ public class ViewCategoriesFragment extends Fragment {
     public static String CATEGORIES_KEY = "categories";
     private ArrayList<Category> categories;
     private ListView listView;
-    private Menu menu;
 
     public static ViewCategoriesFragment newInstance(Activity activity) {
         ViewCategoriesFragment fragment = new ViewCategoriesFragment();

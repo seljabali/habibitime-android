@@ -2,32 +2,58 @@
 <items version="2" >
 
     <item
-        jar="/Users/samsoom/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife/6.0.0/3a10b25b6820e19102e118711afe6a66c0bae123/butterknife-6.0.0.jar"
-        jumboMode="false"
-        revision="19.1.0"
+        is-multidex="true"
+        jar="/Users/habibi/Code/HabibiTime/Android/HabibiApp/habibi/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.0.0"
+        sha1="52c0f13b3a4d1ab990b879a52917eb467d0f96cd">
+        <dex dex="/Users/habibi/Code/HabibiTime/Android/HabibiApp/habibi/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_b3c3e62f813cab4afa9bbfee46b67c60f0ee1ee4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/habibi/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife/6.0.0/3a10b25b6820e19102e118711afe6a66c0bae123/butterknife-6.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.0.0"
         sha1="3a10b25b6820e19102e118711afe6a66c0bae123">
-        <dex dex="/Users/samsoom/Code/7abibiApp/HabibiApp/habibi/build/intermediates/pre-dexed/debug/butterknife-6.0.0-4899beb6569d1500ae55b359f5d50880b24caca5.jar" />
+        <dex dex="/Users/habibi/Code/HabibiTime/Android/HabibiApp/habibi/build/intermediates/transforms/dex/debug/folders/1000/10/butterknife-6.0.0_0fb51b231a26afbeea9a11270849fb90205a344c/classes.dex" />
     </item>
     <item
-        jar="/Users/samsoom/Code/7abibiApp/HabibiApp/habibi/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28">
-        <dex dex="/Users/samsoom/Code/7abibiApp/HabibiApp/habibi/build/intermediates/pre-dexed/debug/classes-e57cc87ea06d288de5fdddab4274e16a3ec83d38.jar" />
-    </item>
-    <item
-        jar="/Users/samsoom/.gradle/caches/modules-2/files-2.1/com.crashlytics.android/crashlytics/1.1.13/e821eafa1bf489a26bdb71f95078c26785b37a1/crashlytics-1.1.13.jar"
-        jumboMode="false"
-        revision="19.1.0"
+        is-multidex="true"
+        jar="/Users/habibi/.gradle/caches/modules-2/files-2.1/com.crashlytics.android/crashlytics/1.1.13/e821eafa1bf489a26bdb71f95078c26785b37a1/crashlytics-1.1.13.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.0.0"
         sha1="0e821eafa1bf489a26bdb71f95078c26785b37a1">
-        <dex dex="/Users/samsoom/Code/7abibiApp/HabibiApp/habibi/build/intermediates/pre-dexed/debug/crashlytics-1.1.13-e68811282e10007f2db3e314c01c2a65a31c1ff1.jar" />
+        <dex dex="/Users/habibi/Code/HabibiTime/Android/HabibiApp/habibi/build/intermediates/transforms/dex/debug/folders/1000/10/crashlytics-1.1.13_2152888aefa528a54431fa4e4ab355d34314ba94/classes.dex" />
     </item>
     <item
-        jar="/Applications/Android SDK/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
-        jumboMode="false"
-        revision="19.1.0"
+        is-multidex="true"
+        jar="/Users/habibi/Code/HabibiTime/Android/HabibiApp/habibi/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.0.0"
+        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28">
+        <dex dex="/Users/habibi/Code/HabibiTime/Android/HabibiApp/habibi/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-19.1.0_431fcb0aac3d3c0c64ddd65032bebd10c29ef555/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Applications/AndroidSDK/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.0.0"
         sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
-        <dex dex="/Users/samsoom/Code/7abibiApp/HabibiApp/habibi/build/intermediates/pre-dexed/debug/support-v4-19.1.0-17a288b9e4fbcfc847fdc6a2bba71f9048041aba.jar" />
+        <dex dex="/Users/habibi/Code/HabibiTime/Android/HabibiApp/habibi/build/intermediates/transforms/dex/debug/folders/1000/10/support-v4-19.1.0_009a90ec37d88fea74563b7b174f90e783712e6b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/habibi/Code/HabibiTime/Android/HabibiApp/habibi/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.0.0"
+        sha1="11f1da9f360623658c71f9f15b444e14e868338c">
+        <dex dex="/Users/habibi/Code/HabibiTime/Android/HabibiApp/habibi/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_234e2a752ebe092e25ad0ff961785dd7f6c0ecf0/classes.dex" />
     </item>
 
 </items>

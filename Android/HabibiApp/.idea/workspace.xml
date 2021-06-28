@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8b082117-c32a-49e9-82c0-878b8e75ed5d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/butterknife_6_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/crashlytics_1_1_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/7abibiTimeKey.jks" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Habibi Time!.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HabibiApp.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/intermediates/model_data.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/codingcamels.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/crashlytics.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/habibi.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/habibi.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/proguard-rules.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/ic_launcher-web.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/MainActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/MySQLHelper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/PhraseBuilder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/adapters/CategoryAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/adapters/PhraseAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/bibi/BibiService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/bibi/CategoryPopUpAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/bibi/PhrasePopUpAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/datasources/CategoryDataSource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/datasources/DialectDataSource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/datasources/GenderDataSource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/datasources/HabibiPhraseDataSource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/datasources/LanguageDataSource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/datasources/PhraseDataSource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/fragments/AddPhraseFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/fragments/SettingsFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/fragments/ViewCategoriesFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/fragments/ViewPhraseFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/fragments/ViewPhrasesFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/installation/InstallationActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/installation/fragments/GenderSelectFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/installation/fragments/WelcomePageFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/models/Category.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/models/Dialect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/models/Gender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/models/HabibiPhrase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/models/Language.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/models/Phrase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/utilities/AndroidUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/utilities/OnSwipeTouchListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/utilities/ShareDialog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/utilities/SoundUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/utilities/StringUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/utilities/StringUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/utilities/Utils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/utilities/ViewUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/utilities/ViewUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/views/AddPhrase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/java/com/codingcamels/habibitime/views/AddPhraseGroup.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/anim/fragment_slide_left_enter.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/anim/fragment_slide_left_exit.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/anim/fragment_slide_right_enter.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/anim/fragment_slide_right_exit.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/anim/slide_in_left.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/anim/slide_out.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/anim/slide_out_right.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/drawable-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/drawable-mdpi/border.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/drawable-mdpi/clipboard.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/drawable-mdpi/gender_female.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/drawable-mdpi/gender_male.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/drawable-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/drawable-mdpi/maximize.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/drawable-mdpi/maximize_transparent.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/drawable-mdpi/minimize.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/drawable-mdpi/minimize_copy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/drawable-mdpi/play.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/drawable-mdpi/plus.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/drawable-mdpi/share.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/drawable-nodpi/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/drawable-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/drawable-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/drawable-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/layout/activity_installation.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/layout/adapter_category_item.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/layout/adapter_phrase_item.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/layout/fragment_add_phrase.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/layout/fragment_install_gender_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/layout/fragment_install_welcome_page.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/layout/fragment_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/layout/fragment_view_categories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/layout/fragment_view_phrase.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/layout/fragment_view_phrases.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/layout/gender_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/layout/view_add_arabic_phrase.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/layout/view_habibi_phrase.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/menu/settings_menu.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/definitely_arabic_na_na.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/definitely_not_arabic_na_na.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/depends_arabic_na_na.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/dictionary_new.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/do_you_love_me_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/do_you_love_me_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/do_you_miss_me_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/do_you_miss_me_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/do_you_want_to_be_my_lover_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/do_you_want_to_be_my_lover_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/i_adore_you_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/i_adore_you_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/i_like_your_eyes_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/i_like_your_eyes_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/i_like_your_hair_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/i_like_your_hair_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/i_like_your_smell_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/i_like_your_smell_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/i_like_your_smile_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/i_like_your_smile_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/i_love_you_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/i_love_you_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/i_want_to_hug_you_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/i_want_to_hug_you_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/i_want_to_kiss_you_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/i_want_to_kiss_you_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/im_excited_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/im_excited_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/im_happy_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/im_happy_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/im_irritated_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/im_irritated_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/im_jealous_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/im_jealous_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/im_lonely_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/im_lonely_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/im_mad_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/im_mad_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/im_missing_you_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/im_missing_you_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/im_sick_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/im_sick_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/laugh_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/lets_go_arabic_na_na.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/maybe_arabic_na_na.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/no_arabic_na_na.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/seriously_arabic_na_na.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/thats_a_cute_shirt_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/thats_a_cute_shirt_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/thats_a_nice_dress_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/thats_a_nice_dress_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/those_are_cute_pants_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/those_are_cute_pants_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/what_are_you_wearing_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/what_are_you_wearing_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/when_am_i_seeing_you_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/when_am_i_seeing_you_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/where_are_you_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/where_are_you_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/will_you_marry_me_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/will_you_marry_me_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/yes_arabic_na_na.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/you_are_beautiful_arabic_f_m.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/raw/you_are_beautiful_arabic_m_f.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/values-v11/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/values-w820dp/dimens.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/values/attrs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/values/dimens.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/values/strings_activity_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/habibi/src/main/res/values/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1uaGkTw6qq38tBNEvAgAZQ3LH3e" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="foldersAlwaysOnTop" value="false" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8b082117-c32a-49e9-82c0-878b8e75ed5d" name="Default Changelist" comment="" />
+      <created>1624896429885</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1624896429885</updated>
+    </task>
+    <servers />
+  </component>
+</project>
